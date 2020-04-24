@@ -5,13 +5,13 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raunstrup.Api", "Raunstrup.Api\Raunstrup.Api.csproj", "{E02CCC95-E0A8-4F07-902A-D3DEF8B7E64F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raunstrup.BuisnessLogic", "Raunstrup.BuisnessLogic\Raunstrup.BuisnessLogic.csproj", "{91A8490F-8F28-47C4-A375-B4641534BD6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raunstrup.BusinessLogic", "Raunstrup.BusinessLogic\Raunstrup.BusinessLogic.csproj", "{91A8490F-8F28-47C4-A375-B4641534BD6F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raunstrup.Contract", "Raunstrup.Contract\Raunstrup.Contract.csproj", "{41896EFB-505A-4028-9E82-5EAFF596E011}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raunstrup.DataAccess", "Raunstrup.DataAccess\Raunstrup.DataAccess.csproj", "{B250F908-B4AE-4687-AA80-1F39BE9F2DBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raunstrup.UI", "Raunstrup.UI\Raunstrup.UI.csproj", "{BCEC4287-6096-4F0B-B4A6-DE3E4DDE7AF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raunstrup.UI", "Raunstrup.UI\Raunstrup.UI.csproj", "{BCEC4287-6096-4F0B-B4A6-DE3E4DDE7AF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

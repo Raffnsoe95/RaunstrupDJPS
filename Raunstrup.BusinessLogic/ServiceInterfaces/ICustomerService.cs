@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Raunstrup.BuisnessLogic.ServiceInterfaces
+namespace Raunstrup.BusinessLogic.ServiceInterfaces
 {
     interface ICustomerService
     {

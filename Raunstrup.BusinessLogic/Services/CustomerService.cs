@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Raunstrup.BuisnessLogic.Services
+namespace Raunstrup.BusinessLogic.Services
 {
     public class CustomerService
     {
