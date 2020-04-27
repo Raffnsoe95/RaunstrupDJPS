@@ -4,5 +4,7 @@ namespace Raunstrup.DataAccess
 {
     public class Customer
     {
+        
+
     }
 }
