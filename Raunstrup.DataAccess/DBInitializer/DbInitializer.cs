@@ -4,6 +4,8 @@ using System.Text;
 using Raunstrup.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
+using Raunstrup.DataAccess.Model;
 
 namespace Raunstrup.DataAccess.DBInitializer
 {
@@ -14,32 +16,44 @@ namespace Raunstrup.DataAccess.DBInitializer
             using (var context = new RaunstrupContext(serviceProvider.GetRequiredService<DbContextOptions<RaunstrupContext>>()))
             {
                 context.Database.EnsureCreated();
-                // Look for any movies.
-                //if (context.Customer.Any())
-                //{
-                //    return;   // DB has been seeded
-                //}
+                //Look for any movies.
+                if (context.Items.Any())
+                    {
+                        return;   // DB has been seeded
+                    }
 
-                //context.Customer.AddRange(
-                //    new Customer
-                //    {
-                //        Title = "When Harry Met Sally",
-                //        ReleaseDate = DateTime.Parse("1989-2-12"),
-                //        Genre = "Romantic Comedy",
-                //        Price = 7.99M,
-                //        Rating = "R"
-                //    },
-
-
-                //    new Movie
-                //    {
-                //        Title = "Ghostbusters ",
-                //        ReleaseDate = DateTime.Parse("1984-3-13"),
-                //        Genre = "Comedy",
-                //        Price = 8.99M,
-                //        Rating = "G"
-                //    }
-                //);
+                context.Items.AddRange(
+                    new Item
+                    {
+                        Name = "Træ",
+                        Price = 7.99M,
+                        Active = true,
+                    },
+                    new Item
+                    {
+                        Name = "Vindu",
+                        Price = 7.99M,
+                        Active = true,
+                    },
+                    new Item
+                    {
+                        Name = "Søm",
+                        Price = 7.99M,
+                        Active = true,
+                    },
+                    new Item
+                    {
+                        Name = "Skruger",
+                        Price = 7.99M,
+                        Active = true,
+                    },
+                    new Item
+                    {
+                        Name = "Isolering",
+                        Price = 7.99M,
+                        Active = true,
+                    }
+                );
                 context.SaveChanges();
             }
         }
