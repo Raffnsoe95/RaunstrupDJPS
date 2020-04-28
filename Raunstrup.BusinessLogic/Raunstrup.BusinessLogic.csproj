@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Raunstrup.DataAccess\Raunstrup.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Raunstrup.DataAccess\Raunstrup.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

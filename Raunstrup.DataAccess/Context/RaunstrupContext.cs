@@ -16,5 +16,8 @@ namespace Raunstrup.DataAccess.Context
 
         //public DbSet<Customer> Movie { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Item> Items { get; set; }
+
+        public DbSet<Customer> customers { get; set; }
     }
 }
