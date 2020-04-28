@@ -4,6 +4,9 @@ using System.Text;
 using Raunstrup.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore.Internal;
+using System.Linq;
+
 
 namespace Raunstrup.DataAccess.DBInitializer
 {
@@ -15,12 +18,12 @@ namespace Raunstrup.DataAccess.DBInitializer
             {
                 context.Database.EnsureCreated();
               //  Look for any customers.
-                if (context.Customer.Any())
+                if (context.customers.Any())
                     {
                         return;   // DB has been seeded
                     }
 
-                context.Customer.AddRange(
+                context.customers.AddRange(
                     new Customer
                     {
                        Name = "Hans Hansen",

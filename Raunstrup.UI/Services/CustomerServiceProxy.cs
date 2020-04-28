@@ -14,9 +14,9 @@ using Raunstrup.Contract.DTOs;
 
 namespace Raunstrup.UI.Services
 {
-    public class CustomerServiceProxy
+    public class CustomerServiceProxy: ICustomerService
     {
-        private const string _moviesRequestUri = "api/Customers";
+        private const string _customerRequestUri = "api/Customers";
 
         public CustomerServiceProxy(HttpClient client)
         {
@@ -34,13 +34,13 @@ namespace Raunstrup.UI.Services
         {
             var json = JsonSerializer.Serialize(customer);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await Client.PostAsync(_customersRequestUri, data).ConfigureAwait(false);
+            var response = await Client.PostAsync(_customerRequestUri, data).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
 
         async Task<CustomerDto> ICustomerService.GetCustomerAsync(int id)
         {
-            var response = await Client.GetAsync($"{_moviesRequestUri}/{id}").ConfigureAwait(false);
+            var response = await Client.GetAsync($"{_customerRequestUri}/{id}").ConfigureAwait(false);
 
             response.EnsureSuccessStatusCode();
 
@@ -55,7 +55,7 @@ namespace Raunstrup.UI.Services
 
         async Task<IEnumerable<CustomerDto>> ICustomerService.GetCustomerAsync()
         {
-            var response = await Client.GetAsync(_moviesRequestUri).ConfigureAwait(false);
+            var response = await Client.GetAsync(_customerRequestUri).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 
             var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
@@ -69,7 +69,7 @@ namespace Raunstrup.UI.Services
 
         async Task ICustomerService.RemoveAsync(int id)
         {
-            var response = await Client.DeleteAsync($"{_customersRequestUri}/{id}").ConfigureAwait(false);
+            var response = await Client.DeleteAsync($"{_customerRequestUri}/{id}").ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
 
@@ -77,9 +77,9 @@ namespace Raunstrup.UI.Services
         {
             var json = JsonSerializer.Serialize(movie);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await Client.PutAsync($"{_moviesRequestUri}/{id}", data).ConfigureAwait(false);
+            var response = await Client.PutAsync($"{_customerRequestUri}/{id}", data).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
     }
 }
-}
+

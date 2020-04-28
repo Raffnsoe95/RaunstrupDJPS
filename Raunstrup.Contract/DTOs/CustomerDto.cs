@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Raunstrup.Contract
+namespace Raunstrup.Contract.DTOs
 {
     public class CustomerDto
     {

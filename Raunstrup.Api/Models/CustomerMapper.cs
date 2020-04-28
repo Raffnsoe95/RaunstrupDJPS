@@ -1,4 +1,5 @@
 ﻿using Raunstrup.Contract;
+using Raunstrup.Contract.DTOs;
 using Raunstrup.DataAccess;
 using System;
 using System.Collections.Generic;
