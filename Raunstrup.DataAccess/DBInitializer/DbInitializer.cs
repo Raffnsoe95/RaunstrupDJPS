@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using Raunstrup.DataAccess.Model;
 using Microsoft.EntityFrameworkCore.Internal;
-using System.Linq;
+
 
 
 namespace Raunstrup.DataAccess.DBInitializer
