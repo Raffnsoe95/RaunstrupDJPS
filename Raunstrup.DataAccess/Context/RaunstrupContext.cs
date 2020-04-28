@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Raunstrup.DataAccess.Model;
 
 namespace Raunstrup.DataAccess.Context
 {
@@ -17,5 +15,6 @@ namespace Raunstrup.DataAccess.Context
         }
 
         //public DbSet<Customer> Movie { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }
