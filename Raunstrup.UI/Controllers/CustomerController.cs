@@ -56,8 +56,10 @@ namespace Raunstrup.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Phone,Address,Email,Active,Rowversion")] CustomerViewModel customerViewModel)
         {
+            
             if (ModelState.IsValid)
             {
+                //skal customerviewmodel.active sættes til true her?
                 _context.Add(customerViewModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

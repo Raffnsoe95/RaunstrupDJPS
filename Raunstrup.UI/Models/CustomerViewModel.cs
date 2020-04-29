@@ -12,17 +12,17 @@ namespace Raunstrup.UI.Models
     {
         public int Id { get; set; }
 
-       
+       [RegularExpression(@"^[a-zA-Z|æ|Æ|ø|Ø|å|Å| ]{2,50}$"), StringLength(50)]
         public string Name { get; set; }
 
-        //[RegularExpression(@"^[0-9]()+*$"), Required, StringLength(30)]//jeg er ikke sikker på om de tegn der står med pink er rigtige
+       [RegularExpression(@"^[0-9|+| |(|)]+$"), StringLength(30)]
         public string Phone { get; set; }
 
-       // [RegularExpression(@"^[0-9][A-Z]+[a-zA-Z""'\s-]*$"), Required, StringLength(30)]
+        [RegularExpression(@"^[a-zA-Z0-9|æ|Æ|ø|Ø|å|Å| |.|,]{2,50}$")]
         public string Address { get; set; }
 
 
-        //der skal være en ordenlig emailtjekker her
+        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$")]
         public string Email { get; set; }
 
         public bool Active { get; set; }
