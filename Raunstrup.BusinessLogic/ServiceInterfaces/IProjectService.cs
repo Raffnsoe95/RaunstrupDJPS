@@ -5,11 +5,11 @@ using Raunstrup.DataAccess;
 
 namespace Raunstrup.BusinessLogic.ServiceInterfaces
 {
-    interface IProjectService
+    public interface IProjectService
     {
         
             IEnumerable<Project> GetAll();
-            Customer Get(int id);
+            Project Get(int id);
             void Create(Project project);
             void Update(Project project);
             void Delete(int id);

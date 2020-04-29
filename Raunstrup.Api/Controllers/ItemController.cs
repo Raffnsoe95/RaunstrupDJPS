@@ -10,7 +10,7 @@ using Raunstrup.BusinessLogic.ServiceInterfaces;
 namespace Raunstrup.Api.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Movies")]
+    [Route("api/Item")]
     //[ApiVersion("1.0")]
     //[ApiVersion("1.1")]
     [ApiController]
@@ -32,7 +32,7 @@ namespace Raunstrup.Api.Controllers
         }
 
         // GET: api/Movies/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         //[ApiVersion("1.1")]
         public ItemDto Get(int id)
         {

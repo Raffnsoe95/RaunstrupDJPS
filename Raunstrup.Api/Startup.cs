@@ -31,11 +31,17 @@ namespace Raunstrup.Api
         {
             services.AddControllers();
             //Try'n Erro
+            //services.AddDbContext<RaunstrupContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("RaunstrupContext")));
             services.AddDbContext<RaunstrupContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("RaunstrupContext")));
+                options.UseInMemoryDatabase(databaseName: "RaunstrupDBAPIInMemory"));
+
             //options.UseSqlite(Configuration.GetConnectionString("MvcMovieContext")));
 
             services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
             //--------------------------------------------------
         }
 
