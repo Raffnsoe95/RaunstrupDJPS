@@ -23,9 +23,9 @@ namespace Raunstrup.BusinessLogic.Services
                 return _context.Projects.ToList();
             }
 
-            Customer IProjectService.Get(int id)
+            Project IProjectService.Get(int id)
             {
-                return _context.customers.Find(id);
+                return _context.Projects.Find(id);
             }
 
             void IProjectService.Create(Project project)

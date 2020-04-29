@@ -39,6 +39,9 @@ namespace Raunstrup.Api
             //options.UseSqlite(Configuration.GetConnectionString("MvcMovieContext")));
 
             services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
             //--------------------------------------------------
         }
 
