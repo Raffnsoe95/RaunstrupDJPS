@@ -5,7 +5,7 @@ using Raunstrup.DataAccess;
 
 namespace Raunstrup.BusinessLogic.ServiceInterfaces
 {
-    interface ICustomerService
+   public interface ICustomerService
     {
         
             IEnumerable<Customer> GetAll();
