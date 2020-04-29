@@ -7,22 +7,29 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Raunstrup.UI.Data;
 using Raunstrup.UI.Models;
+using Raunstrup.UI.Services;
+using Raunstrup.Contract.Services;
+using Raunstrup.Contract.DTOs;
 
 namespace Raunstrup.UI.Controllers
 {
     public class ProjectController : Controller
     {
         private readonly ViewModelContext _context;
+        private readonly IProjectService _projectService;
 
-        public ProjectController(ViewModelContext context)
+        public ProjectController(ViewModelContext context, IProjectService projectService)
         {
             _context = context;
+            _projectService = projectService;
         }
 
         // GET: Project
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Projects.ToListAsync());
+            var projectDtos = await _projectService.GetProjectAsync().ConfigureAwait(false);
+            return View(ProjectMapper.Map(projectDtos));
+            //return View(await _context.Projects.ToListAsync());
         }
 
         // GET: Project/Details/5

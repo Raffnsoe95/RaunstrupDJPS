@@ -28,7 +28,7 @@ namespace Raunstrup.UI.Models
             };
         }
 
-        public static IEnumerable<ProjectDto> Map(IEnumerable<ProjectViewModel> model)
+        public static IEnumerable<ProjectViewModel> Map(IEnumerable<ProjectDto> model)
         {
             return model.Select(x => Map(x)).AsEnumerable();
         }
