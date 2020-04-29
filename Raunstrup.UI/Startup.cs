@@ -14,6 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Raunstrup.UI.Services;
 using Raunstrup.Contract.Services;
+using Raunstrup.BusinessLogic.Services;
+//using Raunstrup.BusinessLogic.ServiceInterfaces;
 
 namespace Raunstrup.UI
 {
@@ -41,6 +43,14 @@ namespace Raunstrup.UI
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            //services.AddDbContext<ViewModelContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<ViewModelContext>(options => options.UseInMemoryDatabase(databaseName: "RaunstrupInMeme"));
+            //options.UseSqlite(Configuration.GetConnectionString("MvcMovieContext")));
+
+            //services.AddScoped<IItemService, ItemService>(); -------------------------------------------------
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
