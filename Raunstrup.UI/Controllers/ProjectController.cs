@@ -40,14 +40,14 @@ namespace Raunstrup.UI.Controllers
                 return NotFound();
             }
 
-            var projectViewModel = await _context.Projects
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var projectViewModel = await _projectService.GetProjectAsync(id.Value).ConfigureAwait(false);
+
             if (projectViewModel == null)
             {
                 return NotFound();
             }
 
-            return View(projectViewModel);
+            return View(ProjectMapper.Map(projectViewModel));
         }
 
         // GET: Project/Create
@@ -65,27 +65,31 @@ namespace Raunstrup.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(projectViewModel);
-                await _context.SaveChangesAsync();
+                await _projectService.AddAsync(ProjectMapper.Map(projectViewModel)).ConfigureAwait(false);
+
                 return RedirectToAction(nameof(Index));
+
+                //_context.Add(projectViewModel);
+                //await _context.SaveChangesAsync();
+                //return RedirectToAction(nameof(Index));
             }
             return View(projectViewModel);
         }
 
         // GET: Project/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
 
-            var projectViewModel = await _context.Projects.FindAsync(id);
+            var projectViewModel = await _projectService.GetProjectAsync(id).ConfigureAwait(false);
             if (projectViewModel == null)
             {
                 return NotFound();
             }
-            return View(projectViewModel);
+            return View(ProjectMapper.Map(projectViewModel));
         }
 
         // POST: Project/Edit/5
@@ -104,8 +108,8 @@ namespace Raunstrup.UI.Controllers
             {
                 try
                 {
-                    _context.Update(projectViewModel);
-                    await _context.SaveChangesAsync();
+                    await _projectService.UpdateAsync(id, ProjectMapper.Map(projectViewModel)).ConfigureAwait(false);
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -118,7 +122,6 @@ namespace Raunstrup.UI.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(projectViewModel);
         }
@@ -131,14 +134,13 @@ namespace Raunstrup.UI.Controllers
                 return NotFound();
             }
 
-            var projectViewModel = await _context.Projects
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var projectViewModel = await _projectService.GetProjectAsync(id.Value).ConfigureAwait(false);
             if (projectViewModel == null)
             {
                 return NotFound();
             }
 
-            return View(projectViewModel);
+            return View(ProjectMapper.Map(projectViewModel));
         }
 
         // POST: Project/Delete/5
@@ -146,9 +148,8 @@ namespace Raunstrup.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var projectViewModel = await _context.Projects.FindAsync(id);
-            _context.Projects.Remove(projectViewModel);
-            await _context.SaveChangesAsync();
+            await _projectService.RemoveAsync(id).ConfigureAwait(false);
+
             return RedirectToAction(nameof(Index));
         }
 
