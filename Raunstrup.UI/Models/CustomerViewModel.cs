@@ -12,13 +12,13 @@ namespace Raunstrup.UI.Models
     {
         public int Id { get; set; }
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
+       
         public string Name { get; set; }
 
-        [RegularExpression(@"^[0-9]()+*$"), Required, StringLength(30)]//jeg er ikke sikker på om de tegn der står med pink er rigtige
+        //[RegularExpression(@"^[0-9]()+*$"), Required, StringLength(30)]//jeg er ikke sikker på om de tegn der står med pink er rigtige
         public string Phone { get; set; }
 
-        [RegularExpression(@"^[0-9][A-Z]+[a-zA-Z""'\s-]*$"), Required, StringLength(30)]
+       // [RegularExpression(@"^[0-9][A-Z]+[a-zA-Z""'\s-]*$"), Required, StringLength(30)]
         public string Address { get; set; }
 
 
