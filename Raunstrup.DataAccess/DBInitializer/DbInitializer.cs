@@ -133,11 +133,11 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Active = true,
                     }
                 );
-                Employee emp1 = new Employee();
-                WorkingHours  workingHours1 =new WorkingHours  { Amount = 3, HourlyPrice = 400 };
-                var Workingóurlist =new List<WorkingHours>();
+               // Employee emp1 = new Employee();
+                //WorkingHours  workingHours1 =new WorkingHours  { Amount = 3, HourlyPrice = 400 };
+                //var Workingóurlist =new List<WorkingHours>();
 
-                Workingóurlist.Add(workingHours1);
+                //Workingóurlist.Add(workingHours1);
                 context.Projects.AddRange(
                     new Project
                     {
@@ -150,8 +150,8 @@ namespace Raunstrup.DataAccess.DBInitializer
                         IsDone = false,
                         IsFixedPrice = false,
                         Price = 0m,
-                        StartDate = new DateTime(2020, 5, 4),
-                        WorkingHours = Workingóurlist
+                        StartDate = new DateTime(2020, 5, 4)
+                        //WorkingHours = Workingóurlist
 
 
                     },
