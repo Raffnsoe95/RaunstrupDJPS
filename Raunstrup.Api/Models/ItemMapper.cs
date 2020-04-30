@@ -13,7 +13,7 @@ namespace Raunstrup.Api.Models
         public static Item Map(ItemDto dto)
         {
             return new Item
-            { Id = dto.Id, Name = dto.Name, Price = dto.Price, Active = dto.Active };
+            { Id = dto.Id, Name = dto.Name, Price = dto.Price, Active = dto.Active, RowVision = dto.RowVision };
         }
 
         public static IEnumerable<ItemDto> Map(IEnumerable<Item> model)
@@ -24,7 +24,7 @@ namespace Raunstrup.Api.Models
         public static ItemDto Map(Item model)
         {
             return new ItemDto
-            { Id = model.Id, Name = model.Name, Price = model.Price, Active = model.Active };
+            { Id = model.Id, Name = model.Name, Price = model.Price, Active = model.Active, RowVision = model.RowVision };
         }
     }
 }

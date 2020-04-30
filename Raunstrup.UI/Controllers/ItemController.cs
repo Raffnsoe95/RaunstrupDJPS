@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Raunstrup.Contract.Services;
 using Raunstrup.UI.Data;
 using Raunstrup.UI.Models;
 
@@ -14,9 +15,12 @@ namespace Raunstrup.UI.Controllers
     {
         private readonly ViewModelContext _context;
 
-        public ItemController(ViewModelContext context)
+        private readonly IItemService _itemService;
+
+        public ItemController(ViewModelContext context, IItemService itemService)
         {
             _context = context;
+            _itemService = itemService;
         }
 
         // GET: Item

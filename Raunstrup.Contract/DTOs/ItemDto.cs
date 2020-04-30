@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace Raunstrup.Contract.DTOs
 {
@@ -13,5 +14,8 @@ namespace Raunstrup.Contract.DTOs
         public decimal Price { get; set; }
 
         public bool Active { get; set; }
+
+        [Timestamp]
+        public byte[] RowVision { get; set; }
     }
 }
