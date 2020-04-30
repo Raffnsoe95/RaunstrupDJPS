@@ -106,35 +106,30 @@ namespace Raunstrup.DataAccess.DBInitializer
                     {
                         Name = "Brian Nielsen",
                         Tlfnr = "67589342",
-                        Salary = 400,
                         Active = true,
                     },
                     new Employee
                     {
                         Name = "Henrik Kofoed",
                         Tlfnr = "78652341",
-                        Salary = 300,
                         Active = true,
                     },
                     new Employee
                     {
                         Name = "Thomas Troelsen",
                         Tlfnr = "+4534782311",
-                        Salary = 200,
                         Active = true,
                     },
                     new Employee
                     {
                         Name = "Rasmus Paludan",
                         Tlfnr = "54672291",
-                        Salary = 400,
                         Active = true,
                     },
                     new Employee
                     {
                         Name = "Flemming Leth",
                         Tlfnr = "23456789",
-                        Salary = 600,
                         Active = true,
                     }
                 );
