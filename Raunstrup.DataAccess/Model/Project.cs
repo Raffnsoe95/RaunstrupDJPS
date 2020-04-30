@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Raunstrup.DataAccess.Model;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Raunstrup.DataAccess
@@ -14,6 +16,8 @@ namespace Raunstrup.DataAccess
         public bool IsFixedPrice { get; set; }
         public bool IsAccepted { get; set; }
         public bool IsDone { get; set; }
+
+        public List<WorkingHours> WorkingHours { get; set; }
 
         [Timestamp]
         public byte[] Rowversion { get; set; }

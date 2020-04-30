@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Raunstrup.Contract.DTOs
@@ -20,6 +21,8 @@ namespace Raunstrup.Contract.DTOs
 
         public bool IsAccepted { get; set; }
         public bool IsDone { get; set; }
+
+        public List<WorkingHoursDto> WorkingHoursDto { get; set; }
 
         [Timestamp]
         public byte[] Rowversion { get; set; }
