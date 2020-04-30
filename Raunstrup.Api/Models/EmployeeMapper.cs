@@ -10,7 +10,7 @@ namespace Raunstrup.Api.Models
         public static Employee Map(EmployeeDto dto)
         {
             return new Employee
-            { Id = dto.Id, Name = dto.Name, Tlfnr = dto.Tlfnr, Salary = dto.Salary, Active = dto.Active };
+            { Id = dto.Id, Name = dto.Name, Tlfnr = dto.Tlfnr, Active = dto.Active };
         }
 
         public static IEnumerable<EmployeeDto> Map(IEnumerable<Employee> model)
@@ -21,7 +21,7 @@ namespace Raunstrup.Api.Models
         public static EmployeeDto Map(Employee model)
         {
             return new EmployeeDto
-            { Id = model.Id, Name = model.Name, Tlfnr = model.Tlfnr, Salary = model.Salary, Active = model.Active };
+            { Id = model.Id, Name = model.Name, Tlfnr = model.Tlfnr, Active = model.Active };
         }
     }
 }
