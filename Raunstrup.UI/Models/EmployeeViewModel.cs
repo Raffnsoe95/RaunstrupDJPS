@@ -7,14 +7,13 @@ namespace Raunstrup.UI.Models
     public class EmployeeViewModel
     {
         public int Id { get; set; }
-        [RegularExpression(@"[A-Z]+[a-zA-Z]"),]
+        [RegularExpression(@"[A-ZØ]+[a-zøA-ZØ]"),]
         public string Name { get; set; }
-        [RegularExpression(@"[0-9()+]"), StringLength(5)]
+        [RegularExpression(@"[0-9()+]"), StringLength(9)]
         public string Tlfnr { get; set; }
         [RegularExpression(@"[0-9].,"), StringLength(5)]
-        public decimal Salary { get; set; }
         public bool Active { get; set; }
-        
-        
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }
