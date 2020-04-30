@@ -14,6 +14,9 @@ namespace Raunstrup.UI.Models
 
         public decimal Price { get; set; }
 
-        public bool Active { get; set; }   
+        public bool Active { get; set; }
+
+        [Timestamp]
+        public byte[] RowVision { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace Raunstrup.UI.Services
 {
     public class ProjectServiceProxy: IProjectService
     {
-        private const string _customerRequestUri = "api/Customers";
+        private const string _customerRequestUri = "api/Project";
 
         public ProjectServiceProxy(HttpClient client)
         {

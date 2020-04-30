@@ -5,31 +5,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Raunstrup.Contract.Services;
 using Raunstrup.UI.Data;
 using Raunstrup.UI.Models;
 
 namespace Raunstrup.UI.Controllers
 {
-    public class ItemController : Controller
+    public class CustomerController : Controller
     {
         private readonly ViewModelContext _context;
 
-        private readonly IItemService _itemService;
-
-        public ItemController(ViewModelContext context, IItemService itemService)
+        public CustomerController(ViewModelContext context)
         {
             _context = context;
-            _itemService = itemService;
         }
 
-        // GET: Item
+        // GET: Customer
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Items.ToListAsync());
+            return View(await _context.customers.ToListAsync());
         }
 
-        // GET: Item/Details/5
+        // GET: Customer/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -37,39 +33,41 @@ namespace Raunstrup.UI.Controllers
                 return NotFound();
             }
 
-            var itemViewModel = await _context.Items
+            var customerViewModel = await _context.customers
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (itemViewModel == null)
+            if (customerViewModel == null)
             {
                 return NotFound();
             }
 
-            return View(itemViewModel);
+            return View(customerViewModel);
         }
 
-        // GET: Item/Create
+        // GET: Customer/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Item/Create
+        // POST: Customer/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,Active")] ItemViewModel itemViewModel)
+        public async Task<IActionResult> Create([Bind("Id,Name,Phone,Address,Email,Active,Rowversion")] CustomerViewModel customerViewModel)
         {
+            
             if (ModelState.IsValid)
             {
-                _context.Add(itemViewModel);
+                //skal customerviewmodel.active sættes til true her?
+                _context.Add(customerViewModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(itemViewModel);
+            return View(customerViewModel);
         }
 
-        // GET: Item/Edit/5
+        // GET: Customer/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,22 +75,22 @@ namespace Raunstrup.UI.Controllers
                 return NotFound();
             }
 
-            var itemViewModel = await _context.Items.FindAsync(id);
-            if (itemViewModel == null)
+            var customerViewModel = await _context.customers.FindAsync(id);
+            if (customerViewModel == null)
             {
                 return NotFound();
             }
-            return View(itemViewModel);
+            return View(customerViewModel);
         }
 
-        // POST: Item/Edit/5
+        // POST: Customer/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Active")] ItemViewModel itemViewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Phone,Address,Email,Active,Rowversion")] CustomerViewModel customerViewModel)
         {
-            if (id != itemViewModel.Id)
+            if (id != customerViewModel.Id)
             {
                 return NotFound();
             }
@@ -101,12 +99,12 @@ namespace Raunstrup.UI.Controllers
             {
                 try
                 {
-                    _context.Update(itemViewModel);
+                    _context.Update(customerViewModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ItemViewModelExists(itemViewModel.Id))
+                    if (!CustomerViewModelExists(customerViewModel.Id))
                     {
                         return NotFound();
                     }
@@ -117,10 +115,10 @@ namespace Raunstrup.UI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(itemViewModel);
+            return View(customerViewModel);
         }
 
-        // GET: Item/Delete/5
+        // GET: Customer/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -128,30 +126,30 @@ namespace Raunstrup.UI.Controllers
                 return NotFound();
             }
 
-            var itemViewModel = await _context.Items
+            var customerViewModel = await _context.customers
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (itemViewModel == null)
+            if (customerViewModel == null)
             {
                 return NotFound();
             }
 
-            return View(itemViewModel);
+            return View(customerViewModel);
         }
 
-        // POST: Item/Delete/5
+        // POST: Customer/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var itemViewModel = await _context.Items.FindAsync(id);
-            _context.Items.Remove(itemViewModel);
+            var customerViewModel = await _context.customers.FindAsync(id);
+            _context.customers.Remove(customerViewModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ItemViewModelExists(int id)
+        private bool CustomerViewModelExists(int id)
         {
-            return _context.Items.Any(e => e.Id == id);
+            return _context.customers.Any(e => e.Id == id);
         }
     }
 }

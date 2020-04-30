@@ -11,7 +11,7 @@ namespace Raunstrup.UI.Models
         public static ItemViewModel Map(ItemDto dto)
         {
             return new ItemViewModel
-            { Id = dto.Id, Name = dto.Name, Price = dto.Price, Active = dto.Active };
+            { Id = dto.Id, Name = dto.Name, Price = dto.Price, Active = dto.Active, RowVision = dto.RowVision };
         }
 
         public static IEnumerable<ItemViewModel> Map(IEnumerable<ItemDto> dtos)
@@ -22,7 +22,7 @@ namespace Raunstrup.UI.Models
         public static ItemDto Map(ItemViewModel view)
         {
             return new ItemDto
-            { Id = view.Id, Name = view.Name, Price = view.Price, Active = view.Active };
+            { Id = view.Id, Name = view.Name, Price = view.Price, Active = view.Active, RowVision = view.RowVision };
         }
     }
 }

@@ -138,6 +138,73 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Active = true,
                     }
                 );
+                context.Projects.AddRange(
+                    new Project
+                    {
+                        Active = true, 
+                        Description = "Nyt tag", 
+                        EndDate = new DateTime(2020, 5, 5), 
+                        IsAccepted = true, 
+                        IsDone = false,
+                        IsFixedPrice = false, 
+                        Price = 0m, 
+                        StartDate = new DateTime(2020, 5, 4)
+
+
+                    },
+                    new Project
+                    {
+                        Active = true,
+                        Description = "Nyt tag",
+                        EndDate = new DateTime(2020, 5, 5),
+                        IsAccepted = true,
+                        IsDone = false,
+                        IsFixedPrice = false,
+                        Price = 0m,
+                        StartDate = new DateTime(2020, 5, 4)
+
+
+                    }, new Project
+                    {
+                        Active = true,
+                        Description = "Nyt tag",
+                        EndDate = new DateTime(2020, 5, 5),
+                        IsAccepted = true,
+                        IsDone = false,
+                        IsFixedPrice = false,
+                        Price = 0m,
+                        StartDate = new DateTime(2020, 5, 4)
+
+
+                    }, new Project
+                    {
+                        Active = true,
+                        Description = "Nyt tag",
+                        EndDate = new DateTime(2020, 5, 5),
+                        IsAccepted = true,
+                        IsDone = false,
+                        IsFixedPrice = false,
+                        Price = 0m,
+                        StartDate = new DateTime(2020, 5, 4)
+
+
+                    }, new Project
+                    {
+                        Active = true,
+                        Description = "Nyt tag",
+                        EndDate = new DateTime(2020, 5, 5),
+                        IsAccepted = true,
+                        IsDone = false,
+                        IsFixedPrice = false,
+                        Price = 0m,
+                        StartDate = new DateTime(2020, 5, 4)
+
+
+                    }
+
+
+
+                );
                 context.SaveChanges();
             }
         }
