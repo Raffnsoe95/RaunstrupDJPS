@@ -59,6 +59,7 @@ namespace Raunstrup.UI.Controllers
             
             if (ModelState.IsValid)
             {
+                
                 //skal customerviewmodel.active sættes til true her?
                 _context.Add(customerViewModel);
                 await _context.SaveChangesAsync();
