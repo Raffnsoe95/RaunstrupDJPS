@@ -21,7 +21,7 @@ namespace Raunstrup.BusinessLogic.Services
 
             IEnumerable<Project> IProjectService.GetAll()
             {
-                return _context.Projects.Include(w=>w.WorkingHours).ToList();
+                return _context.Projects.Include(w=>w.WorkingHours).ThenInclude(w => w.Employee).ToList();
             }
 
             Project IProjectService.Get(int id)
