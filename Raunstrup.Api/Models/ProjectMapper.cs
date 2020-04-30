@@ -12,7 +12,7 @@ namespace Raunstrup.Api.Models
 {
     public static class ProjectMapper
     {
-
+       
         public static Project Map(ProjectDto dto)
         {
             return new Project
@@ -49,7 +49,8 @@ namespace Raunstrup.Api.Models
                 IsFixedPrice = project.IsFixedPrice,
                 Price = project.Price,
                 StartDate = project.StartDate,
-                Rowversion = project.Rowversion
+                Rowversion = project.Rowversion,
+                WorkingHoursDto = WorkingHoursMapper.Map(project.WorkingHours).ToList()
 
             };
         }

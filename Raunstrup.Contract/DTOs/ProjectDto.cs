@@ -6,6 +6,10 @@ namespace Raunstrup.Contract.DTOs
 {
     public class ProjectDto
     {
+        public ProjectDto()
+        {
+            WorkingHoursDto = new List<WorkingHoursDto>();
+        }
         public int Id { get; set; }
 
         public DateTime StartDate { get; set; }

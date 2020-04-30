@@ -7,6 +7,10 @@ namespace Raunstrup.DataAccess
 {
     public class Project
     {
+        public Project()
+        {
+            WorkingHours = new List<WorkingHours>();
+        }
         public int Id { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

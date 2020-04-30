@@ -11,9 +11,11 @@ namespace Raunstrup.DataAccess.Model
         public int Amount { get; set; }
         public int EmployeeId { get; set; }
 
+        public decimal HourlyPrice { get; set; }
+
         public int ProjectId { get; set; }
         public Project Project { get; set; }
-        public Employee Employee { get; set; }
+      //  public Employee Employee { get; set; }
 
         
     }

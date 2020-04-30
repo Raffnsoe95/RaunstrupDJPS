@@ -133,17 +133,25 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Active = true,
                     }
                 );
+                Employee emp1 = new Employee();
+                WorkingHours  workingHours1 =new WorkingHours  { Amount = 3, HourlyPrice = 400 };
+                var Workingóurlist =new List<WorkingHours>();
+
+                Workingóurlist.Add(workingHours1);
                 context.Projects.AddRange(
                     new Project
                     {
-                        Active = true, 
-                        Description = "Nyt tag", 
-                        EndDate = new DateTime(2020, 5, 5), 
-                        IsAccepted = true, 
+
+
+                        Active = true,
+                        Description = "Nyt tag",
+                        EndDate = new DateTime(2020, 5, 5),
+                        IsAccepted = true,
                         IsDone = false,
-                        IsFixedPrice = false, 
-                        Price = 0m, 
-                        StartDate = new DateTime(2020, 5, 4)
+                        IsFixedPrice = false,
+                        Price = 0m,
+                        StartDate = new DateTime(2020, 5, 4),
+                        WorkingHours = Workingóurlist
 
 
                     },
@@ -185,6 +193,7 @@ namespace Raunstrup.DataAccess.DBInitializer
 
                     }, new Project
                     {
+
                         Active = true,
                         Description = "Nyt tag",
                         EndDate = new DateTime(2020, 5, 5),
@@ -199,7 +208,7 @@ namespace Raunstrup.DataAccess.DBInitializer
 
 
 
-                );
+                ) ;
                 context.SaveChanges();
             }
         }

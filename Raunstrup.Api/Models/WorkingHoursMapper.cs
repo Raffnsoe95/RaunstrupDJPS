@@ -17,7 +17,8 @@ namespace Raunstrup.Api.Models
                 Id = dto.Id,
                 Amount = dto.Amount,
                 EmployeeId=dto.EmployeeId,
-                Employee=EmployeeMapper.Map(dto.Employee),
+                HourlyPrice =dto.HourlyPrice,
+                //  Employee=EmployeeMapper.Map(dto.Employee),
                 ProjectId=dto.ProjectId,
                 Project=ProjectMapper.Map(dto.Project)
 
@@ -44,7 +45,8 @@ namespace Raunstrup.Api.Models
                 Id = workingHours.Id,
                 Amount = workingHours.Amount,
                 EmployeeId = workingHours.EmployeeId,
-                Employee = EmployeeMapper.Map(workingHours.Employee),
+                HourlyPrice = workingHours.HourlyPrice,
+              //  Employee = EmployeeMapper.Map(workingHours.Employee),
                 ProjectId = workingHours.ProjectId,
                 Project = ProjectMapper.Map(workingHours.Project)
             };
