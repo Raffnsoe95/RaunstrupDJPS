@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Raunstrup.BusinessLogic.ServiceInterfaces;
 
 using Raunstrup.DataAccess;
@@ -20,7 +21,7 @@ namespace Raunstrup.BusinessLogic.Services
 
             IEnumerable<Project> IProjectService.GetAll()
             {
-                return _context.Projects.ToList();
+                return _context.Projects.Include(w=>w.WorkingHours).ThenInclude(w => w.Employee).ToList();
             }
 
             Project IProjectService.Get(int id)

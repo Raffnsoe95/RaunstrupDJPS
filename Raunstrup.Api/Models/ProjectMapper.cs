@@ -7,11 +7,12 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
+
 namespace Raunstrup.Api.Models
 {
     public static class ProjectMapper
     {
-
+       
         public static Project Map(ProjectDto dto)
         {
             return new Project
@@ -25,7 +26,8 @@ namespace Raunstrup.Api.Models
                 IsFixedPrice = dto.IsFixedPrice,
                 Price = dto.Price,
                 StartDate = dto.StartDate,
-                Rowversion = dto.Rowversion
+                Rowversion = dto.Rowversion,
+                WorkingHours =WorkingHoursMapper.Map(dto.WorkingHoursDto).ToList()
             };
         }
 
@@ -47,7 +49,9 @@ namespace Raunstrup.Api.Models
                 IsFixedPrice = project.IsFixedPrice,
                 Price = project.Price,
                 StartDate = project.StartDate,
-                Rowversion = project.Rowversion
+                Rowversion = project.Rowversion,
+                WorkingHoursDto = WorkingHoursMapper.Map(project.WorkingHours).ToList()
+
             };
         }
     }

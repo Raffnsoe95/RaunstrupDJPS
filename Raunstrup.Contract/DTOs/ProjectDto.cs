@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Raunstrup.Contract.DTOs
 {
     public class ProjectDto
     {
+        public ProjectDto()
+        {
+            WorkingHoursDto = new List<WorkingHoursDto>();
+        }
         public int Id { get; set; }
 
         public DateTime StartDate { get; set; }
@@ -20,6 +25,8 @@ namespace Raunstrup.Contract.DTOs
 
         public bool IsAccepted { get; set; }
         public bool IsDone { get; set; }
+
+        public List<WorkingHoursDto> WorkingHoursDto { get; set; }
 
         [Timestamp]
         public byte[] Rowversion { get; set; }

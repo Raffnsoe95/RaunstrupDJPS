@@ -106,49 +106,52 @@ namespace Raunstrup.DataAccess.DBInitializer
                     {
                         Name = "Brian Nielsen",
                         Tlfnr = "67589342",
-                        Salary = 400,
                         Active = true,
                     },
                     new Employee
                     {
                         Name = "Henrik Kofoed",
                         Tlfnr = "78652341",
-                        Salary = 300,
                         Active = true,
                     },
                     new Employee
                     {
                         Name = "Thomas Troelsen",
                         Tlfnr = "+4534782311",
-                        Salary = 200,
                         Active = true,
                     },
                     new Employee
                     {
                         Name = "Rasmus Paludan",
                         Tlfnr = "54672291",
-                        Salary = 400,
                         Active = true,
                     },
                     new Employee
                     {
                         Name = "Flemming Leth",
                         Tlfnr = "23456789",
-                        Salary = 600,
                         Active = true,
                     }
                 );
+                Employee emp1 = new Employee { Name = "Jørgen Clevin", Active = true, Tlfnr = "1241234" };
+                WorkingHours  workingHours1 =new WorkingHours  { Amount = 3, HourlyPrice = 400, Employee = emp1 };
+                var Workingóurlist =new List<WorkingHours>();
+
+                Workingóurlist.Add(workingHours1);
                 context.Projects.AddRange(
                     new Project
                     {
-                        Active = true, 
-                        Description = "Nyt tag", 
-                        EndDate = new DateTime(2020, 5, 5), 
-                        IsAccepted = true, 
+
+
+                        Active = true,
+                        Description = "Nyt tag",
+                        EndDate = new DateTime(2020, 5, 5),
+                        IsAccepted = true,
                         IsDone = false,
-                        IsFixedPrice = false, 
-                        Price = 0m, 
-                        StartDate = new DateTime(2020, 5, 4)
+                        IsFixedPrice = false,
+                        Price = 0m,
+                        StartDate = new DateTime(2020, 5, 4),
+                        WorkingHours = Workingóurlist
 
 
                     },
@@ -190,6 +193,7 @@ namespace Raunstrup.DataAccess.DBInitializer
 
                     }, new Project
                     {
+
                         Active = true,
                         Description = "Nyt tag",
                         EndDate = new DateTime(2020, 5, 5),
@@ -204,7 +208,7 @@ namespace Raunstrup.DataAccess.DBInitializer
 
 
 
-                );
+                ) ;
                 context.SaveChanges();
             }
         }

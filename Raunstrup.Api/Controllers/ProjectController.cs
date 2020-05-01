@@ -28,7 +28,10 @@ namespace Raunstrup.Api.Controllers
         [HttpGet]
         public IEnumerable<ProjectDto> Get()
         {
-            return _projectService.GetAll().Select(a => ProjectMapper.Map(a));
+
+            var result = _projectService.GetAll().Select(a => ProjectMapper.Map(a)).ToList();
+            return result;
+
         }
 
         // GET: api/Customer/5
