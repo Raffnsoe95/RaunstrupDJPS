@@ -19,7 +19,7 @@ namespace Raunstrup.UI.Services
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json")
                 {
-                    Parameters = { new NameValueHeaderValue("v", "1.1") }
+                    Parameters = { new NameValueHeaderValue("v", "1.0") }
                 });
         }
 
