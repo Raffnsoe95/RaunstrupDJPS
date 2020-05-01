@@ -18,6 +18,7 @@ namespace Raunstrup.DataAccess.Context
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Item> Items { get; set; }
 
+        public DbSet<WorkingHours> WorkingHours { get; set; }
         public DbSet<Customer> customers { get; set; }
         public DbSet<Project> Projects { get; set; }
     }
