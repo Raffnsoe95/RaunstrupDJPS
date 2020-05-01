@@ -6,6 +6,7 @@ using Raunstrup.BusinessLogic.ServiceInterfaces;
 
 using Raunstrup.DataAccess;
 using Raunstrup.DataAccess.Context;
+using Raunstrup.DataAccess.Model;
 
 namespace Raunstrup.BusinessLogic.Services
 {
@@ -21,8 +22,13 @@ namespace Raunstrup.BusinessLogic.Services
 
             IEnumerable<Project> IProjectService.GetAll()
             {
-                return _context.Projects.Include(w=>w.WorkingHours).ThenInclude(w => w.Employee).ToList();
+                return _context.Projects
+                .Include(w=>w.WorkingHours)
+                .ThenInclude(e=>e.Employee)
+                .ToList();
             }
+
+        
 
             Project IProjectService.Get(int id)
             {
@@ -46,6 +52,12 @@ namespace Raunstrup.BusinessLogic.Services
                 _context.Projects.Remove(_context.Projects.Find(id));
                 _context.SaveChanges();
             }
+        
+    IEnumerable<WorkingHours> GetWorkingHoursfromProject(Project project)
+        {
+            return _context.WorkingHours.Where(p => p.ProjectId == project.Id);
+                
         }
+    }
     }
 

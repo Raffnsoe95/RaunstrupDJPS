@@ -14,7 +14,7 @@ namespace Raunstrup.DataAccess.Model
         public string Tlfnr { get; set; }
         public bool Active { get; set; }
 
-        public List<WorkingHours> WorkingHours { get; set; }
+        
 
         [Timestamp]
         public byte[] RowVersion { get; set; }

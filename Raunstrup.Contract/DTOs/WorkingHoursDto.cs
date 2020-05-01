@@ -12,7 +12,7 @@ namespace Raunstrup.Contract.DTOs
         public decimal HourlyPrice { get; set; }
 
         public int ProjectId { get; set; }
-        public ProjectDto Project { get; set; }
+       
         public EmployeeDto Employee { get; set; }
 
         

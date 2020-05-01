@@ -136,6 +136,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                 Employee emp1 = new Employee { Name = "Jørgen Clevin", Active = true, Tlfnr = "1241234" };
                 WorkingHours  workingHours1 =new WorkingHours  { Amount = 3, HourlyPrice = 400, Employee = emp1 };
                 var Workingóurlist =new List<WorkingHours>();
+                
 
                 Workingóurlist.Add(workingHours1);
                 context.Projects.AddRange(
