@@ -12,7 +12,7 @@ namespace Raunstrup.UI.Models
             { Id = dto.Id, Name = dto.Name, Tlfnr = dto.Tlfnr, Active = dto.Active };
         }
 
-        public static IEnumerable<EmployeeDto> Map(IEnumerable<EmployeeViewModel> model)
+        public static IEnumerable<EmployeeViewModel> Map(IEnumerable<EmployeeDto> model)
         {
             return model.Select(x => Map(x)).AsEnumerable();
         }

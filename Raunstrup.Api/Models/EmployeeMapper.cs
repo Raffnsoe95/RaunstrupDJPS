@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using Raunstrup.Contract;
 using Raunstrup.Contract.DTOs;
+using Raunstrup.DataAccess;
 using Raunstrup.DataAccess.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Raunstrup.Api.Models
 {

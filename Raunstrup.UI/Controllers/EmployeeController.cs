@@ -7,22 +7,30 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Raunstrup.UI.Data;
 using Raunstrup.UI.Models;
+using Raunstrup.UI.Services;
+using Raunstrup.Contract.Services;
+using Raunstrup.Contract.DTOs;
+
 
 namespace Raunstrup.UI
 {
     public class EmployeeController : Controller
     {
         private readonly ViewModelContext _context;
+        private readonly IEmployeeservice _employeeService;
 
-        public EmployeeController(ViewModelContext context)
+        public EmployeeController(ViewModelContext context, IEmployeeservice employeeService)
         {
             _context = context;
+            _employeeService = employeeService;
+
         }
 
         // GET: Employee
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Employees.ToListAsync());
+            var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
+            return View(EmployeeMapper.Map(employeeDtos));
         }
 
         // GET: Employee/Details/5
@@ -32,9 +40,9 @@ namespace Raunstrup.UI
             {
                 return NotFound();
             }
-
-            var employeeViewModel = await _context.Employees
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var employeeViewModel = await _employeeService.GetEmployeesAsync(id.Value).ConfigureAwait(false);
+            //////var employeeViewModel = await _context.Employees
+            //////    .FirstOrDefaultAsync(m => m.Id == id);
             if (employeeViewModel == null)
             {
                 return NotFound();
@@ -58,9 +66,12 @@ namespace Raunstrup.UI
         {
             if (ModelState.IsValid)
             {
-                _context.Add(employeeViewModel);
-                await _context.SaveChangesAsync();
+                await _employeeService.AddAsync(EmployeeMapper.Map(employeeViewModel)).ConfigureAwait(false);
+
                 return RedirectToAction(nameof(Index));
+                //_context.Add(employeeViewModel);
+                //await _context.SaveChangesAsync();
+                //return RedirectToAction(nameof(Index));
             }
             return View(employeeViewModel);
         }
@@ -68,10 +79,10 @@ namespace Raunstrup.UI
         // GET: Employee/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
 
             var employeeViewModel = await _context.Employees.FindAsync(id);
             if (employeeViewModel == null)
@@ -97,8 +108,8 @@ namespace Raunstrup.UI
             {
                 try
                 {
-                    _context.Update(employeeViewModel);
-                    await _context.SaveChangesAsync();
+                    await _employeeService.UpdateAsync(id, EmployeeMapper.Map(employeeViewModel)).ConfigureAwait(false);
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -111,7 +122,6 @@ namespace Raunstrup.UI
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(employeeViewModel);
         }
@@ -124,8 +134,7 @@ namespace Raunstrup.UI
                 return NotFound();
             }
 
-            var employeeViewModel = await _context.Employees
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var employeeViewModel = await _employeeService.GetEmployeesAsync(id.Value).ConfigureAwait(false);
             if (employeeViewModel == null)
             {
                 return NotFound();
@@ -139,9 +148,8 @@ namespace Raunstrup.UI
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var employeeViewModel = await _context.Employees.FindAsync(id);
-            _context.Employees.Remove(employeeViewModel);
-            await _context.SaveChangesAsync();
+            await _employeeService.RemoveAsync(id).ConfigureAwait(false);
+
             return RedirectToAction(nameof(Index));
         }
 

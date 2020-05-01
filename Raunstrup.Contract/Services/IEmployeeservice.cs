@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Raunstrup.Contract.DTOs;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
-using Raunstrup.Contract.DTOs;
 
 namespace Raunstrup.Contract.Services
 {
-    public interface IEmployeeservices
+    public interface IEmployeeservice
     {
         Task<IEnumerable<EmployeeDto>> GetEmployeesAsync();
         Task<EmployeeDto> GetEmployeesAsync(int id);

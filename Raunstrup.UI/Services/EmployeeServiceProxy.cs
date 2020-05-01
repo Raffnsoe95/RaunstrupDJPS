@@ -9,7 +9,7 @@ using Raunstrup.Contract.Services;
 
 namespace Raunstrup.UI.Services
 {
-    public class EmployeeServiceProxy: IEmployeeservices
+    public class EmployeeServiceProxy: IEmployeeservice
     {
         private const string _employeesRequestUri = "api/Employee";
 
@@ -25,7 +25,7 @@ namespace Raunstrup.UI.Services
 
         public HttpClient Client { get; }
 
-        async Task IEmployeeservices.AddAsync(EmployeeDto employee)
+        async Task IEmployeeservice.AddAsync(EmployeeDto employee)
         {
             var json = JsonSerializer.Serialize(employee);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
@@ -33,7 +33,7 @@ namespace Raunstrup.UI.Services
             response.EnsureSuccessStatusCode();
         }
 
-        async Task<EmployeeDto> IEmployeeservices.GetEmployeesAsync(int id)
+        async Task<EmployeeDto> IEmployeeservice.GetEmployeesAsync(int id)
         {
             var response = await Client.GetAsync($"{_employeesRequestUri}/{id}").ConfigureAwait(false);
 
@@ -48,7 +48,7 @@ namespace Raunstrup.UI.Services
             return await JsonSerializer.DeserializeAsync<EmployeeDto>(stream, options).ConfigureAwait(false);
         }
 
-        async Task<IEnumerable<EmployeeDto>> IEmployeeservices.GetEmployeesAsync()
+        async Task<IEnumerable<EmployeeDto>> IEmployeeservice.GetEmployeesAsync()
         {
             var response = await Client.GetAsync(_employeesRequestUri).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
@@ -62,13 +62,13 @@ namespace Raunstrup.UI.Services
             return await JsonSerializer.DeserializeAsync<IEnumerable<EmployeeDto>>(stream, options).ConfigureAwait(false);
         }
 
-        async Task IEmployeeservices.RemoveAsync(int id)
+        async Task IEmployeeservice.RemoveAsync(int id)
         {
             var response = await Client.DeleteAsync($"{_employeesRequestUri}/{id}").ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
 
-        async Task IEmployeeservices.UpdateAsync(int id, EmployeeDto employee)
+        async Task IEmployeeservice.UpdateAsync(int id, EmployeeDto employee)
         {
             var json = JsonSerializer.Serialize(employee);
             var data = new StringContent(json, Encoding.UTF8, "application/json");

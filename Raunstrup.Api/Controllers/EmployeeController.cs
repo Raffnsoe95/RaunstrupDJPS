@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Raunstrup.Api.Models;
 using Raunstrup.Contract.DTOs;
 using Raunstrup.BusinessLogic.ServiceInterfaces;
-using Raunstrup.DataAccess.Model;
+
 
 namespace Raunstrup.Api.Controllers
 {
@@ -14,7 +15,7 @@ namespace Raunstrup.Api.Controllers
     //[ApiVersion("1.0")]
     //[ApiVersion("1.1")]
     [ApiController]
-    public class EmployeeController
+    public class EmployeeController: ControllerBase
     {
         private readonly IEmployeeService _employeeService;
 
