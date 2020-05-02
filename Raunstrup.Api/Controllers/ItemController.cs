@@ -24,14 +24,14 @@ namespace Raunstrup.Api.Controllers
             _itemService = itemService;
         }
 
-        // GET: api/Movies
+        // GET: api/Items
         [HttpGet]
         public IEnumerable<ItemDto> Get()
         {
             return _itemService.GetAll().Select(a => ItemMapper.Map(a));
         }
 
-        // GET: api/Movies/5
+        // GET: api/Items/5
         [HttpGet("{id}")]
         //[ApiVersion("1.1")]
         public ItemDto Get(int id)
@@ -39,14 +39,14 @@ namespace Raunstrup.Api.Controllers
             return ItemMapper.Map(_itemService.Get(id));
         }
 
-        // POST: api/Movies
+        // POST: api/Items
         [HttpPost]
         public void Post([FromBody] ItemDto value)
         {
             _itemService.Create(ItemMapper.Map(value));
         }
 
-        // PUT: api/Movies/5
+        // PUT: api/Items/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] ItemDto value)
         {

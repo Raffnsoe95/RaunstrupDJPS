@@ -27,7 +27,8 @@ namespace Raunstrup.Api.Models
                 Price = dto.Price,
                 StartDate = dto.StartDate,
                 Rowversion = dto.Rowversion,
-                WorkingHours =WorkingHoursMapper.Map(dto.WorkingHoursDtos).ToList()
+                WorkingHours = WorkingHoursMapper.Map(dto.WorkingHoursDtos).ToList(),
+                UsedItems = ProjectItemMapper.Map(dto.UsedItemsDtos).ToList()
             };
         }
 
@@ -50,7 +51,8 @@ namespace Raunstrup.Api.Models
                 Price = project.Price,
                 StartDate = project.StartDate,
                 Rowversion = project.Rowversion,
-                WorkingHoursDtos = WorkingHoursMapper.Map(project.WorkingHours).ToList()
+                WorkingHoursDtos = WorkingHoursMapper.Map(project.WorkingHours).ToList(),
+                UsedItemsDtos = ProjectItemMapper.Map(project.UsedItems).ToList()
 
             };
         }

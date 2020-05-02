@@ -26,25 +26,21 @@ namespace Raunstrup.UI.Controllers
         // GET: Item
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Items.ToListAsync());
+            // Hent data
+            var itemsDtos = await _itemService.GetItemsAsync().ConfigureAwait(false);
+            return View(ItemMapper.Map(itemsDtos));
         }
 
         // GET: Item/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var itemViewModel = await _context.Items
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (itemViewModel == null)
-            {
-                return NotFound();
-            }
+            var item = await _itemService.GetItemAsync(id.Value).ConfigureAwait(false);
 
-            return View(itemViewModel);
+            if (item == null) return NotFound();
+
+            return View(ItemMapper.Map(item));
         }
 
         // GET: Item/Create
@@ -58,31 +54,27 @@ namespace Raunstrup.UI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,Active")] ItemViewModel itemViewModel)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,Active")]
+            ItemViewModel item)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(itemViewModel);
-                await _context.SaveChangesAsync();
+                await _itemService.AddAsync(ItemMapper.Map(item)).ConfigureAwait(false);
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(itemViewModel);
+
+            return View(item);
         }
 
         // GET: Item/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var itemViewModel = await _context.Items.FindAsync(id);
-            if (itemViewModel == null)
-            {
-                return NotFound();
-            }
-            return View(itemViewModel);
+            var item = await _itemService.GetItemAsync(id.Value).ConfigureAwait(false);
+            if (item == null) return NotFound();
+            return View(ItemMapper.Map(item));
         }
 
         // POST: Item/Edit/5
@@ -90,52 +82,28 @@ namespace Raunstrup.UI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Active")] ItemViewModel itemViewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Active")]ItemViewModel item)
         {
-            if (id != itemViewModel.Id)
-            {
-                return NotFound();
-            }
+            if (id != item.Id) return NotFound();
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(itemViewModel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ItemViewModelExists(itemViewModel.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                await _itemService.UpdateAsync(id, ItemMapper.Map(item)).ConfigureAwait(false);
                 return RedirectToAction(nameof(Index));
             }
-            return View(itemViewModel);
+
+            return View(item);
         }
 
         // GET: Item/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var itemViewModel = await _context.Items
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (itemViewModel == null)
-            {
-                return NotFound();
-            }
+            var item = await _itemService.GetItemAsync(id.Value).ConfigureAwait(false);
+            if (item == null) return NotFound();
 
-            return View(itemViewModel);
+            return View(ItemMapper.Map(item));
         }
 
         // POST: Item/Delete/5
@@ -143,9 +111,8 @@ namespace Raunstrup.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var itemViewModel = await _context.Items.FindAsync(id);
-            _context.Items.Remove(itemViewModel);
-            await _context.SaveChangesAsync();
+            await _itemService.RemoveAsync(id).ConfigureAwait(false);
+
             return RedirectToAction(nameof(Index));
         }
 
