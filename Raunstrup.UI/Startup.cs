@@ -44,6 +44,10 @@ namespace Raunstrup.UI
             {
                 client.BaseAddress = new Uri(Configuration["BaseUrl"]);
             });
+            services.AddHttpClient<ICustomerService, CustomerServiceProxy>(client =>
+            {
+                client.BaseAddress = new Uri(Configuration["BaseUrl"]);
+            });
             //--------------------
 
 

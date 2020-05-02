@@ -7,22 +7,30 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Raunstrup.UI.Data;
 using Raunstrup.UI.Models;
+using Raunstrup.UI.Services;
+using Raunstrup.Contract.Services;
+using Raunstrup.Contract.DTOs;
 
 namespace Raunstrup.UI.Controllers
 {
     public class CustomerController : Controller
     {
         private readonly ViewModelContext _context;
+        private readonly ICustomerService _customerService;
 
-        public CustomerController(ViewModelContext context)
+        public CustomerController(ViewModelContext context, ICustomerService customerService)
         {
             _context = context;
+            _customerService = customerService;
         }
 
         // GET: Customer
         public async Task<IActionResult> Index()
         {
-            return View(await _context.customers.ToListAsync());
+            //Det her funker ikke af en eller anden grund
+            var customerDtos = await _customerService.GetCustomerAsync().ConfigureAwait(false);
+            return View(CustomerMapper.Map(customerDtos));
+            // return View(await _context.customers.ToListAsync());
         }
 
         // GET: Customer/Details/5

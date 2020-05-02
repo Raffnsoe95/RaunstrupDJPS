@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Raunstrup.Contract.DTOs
 {
@@ -15,7 +16,7 @@ namespace Raunstrup.Contract.DTOs
         public string Email { get; set; }
 
         public bool Active { get; set; }
-
+        [Timestamp]
         public byte[] Rowversion { get; set; }
     }
 }

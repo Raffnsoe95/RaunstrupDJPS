@@ -24,7 +24,8 @@ namespace Raunstrup.UI.Models
                 IsFixedPrice = dto.IsFixedPrice,
                 Price = dto.Price,
                 StartDate = dto.StartDate,
-                Rowversion = dto.Rowversion
+                Rowversion = dto.Rowversion,
+                WorkingHours = WorkingHoursMapper.Map(dto.WorkingHoursDtos).ToList()
             };
         }
 

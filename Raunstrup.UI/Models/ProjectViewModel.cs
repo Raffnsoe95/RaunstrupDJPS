@@ -22,6 +22,8 @@ namespace Raunstrup.UI.Models
         public bool IsAccepted { get; set; }
         public bool IsDone { get; set; }
 
+        public List<WorkingHoursViewModel> WorkingHours { get; set; }
+
         [Timestamp]
         public byte[] Rowversion { get; set; }
     }
