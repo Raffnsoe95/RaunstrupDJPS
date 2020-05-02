@@ -24,7 +24,8 @@ namespace Raunstrup.UI.Models
                 IsFixedPrice = dto.IsFixedPrice,
                 Price = dto.Price,
                 StartDate = dto.StartDate,
-                Rowversion = dto.Rowversion
+                Rowversion = dto.Rowversion,
+                //UsedItems = ProjectMapper.Map(dto.UsedItemsDtos)
             };
         }
 
@@ -46,7 +47,8 @@ namespace Raunstrup.UI.Models
                 IsFixedPrice = project.IsFixedPrice,
                 Price = project.Price,
                 StartDate = project.StartDate,
-                Rowversion = project.Rowversion
+                Rowversion = project.Rowversion,
+                //UsedItemsDtos = ProjectMapper.Map(project.UsedItems).ToList()
             };
         }
     }

@@ -9,6 +9,7 @@ namespace Raunstrup.Contract.DTOs
         public ProjectDto()
         {
             WorkingHoursDtos = new List<WorkingHoursDto>();
+            UsedItemsDtos = new List<ProjectItemDto>();
         }
         public int Id { get; set; }
 
@@ -27,6 +28,8 @@ namespace Raunstrup.Contract.DTOs
         public bool IsDone { get; set; }
 
         public List<WorkingHoursDto> WorkingHoursDtos { get; set; }
+
+        public List<ProjectItemDto> UsedItemsDtos { get; set; }
 
         [Timestamp]
         public byte[] Rowversion { get; set; }

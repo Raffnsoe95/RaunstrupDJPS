@@ -20,11 +20,6 @@ namespace Raunstrup.Api.Models
                 HourlyPrice =dto.HourlyPrice,
                 Employee=EmployeeMapper.Map(dto.Employee),
                 ProjectId=dto.ProjectId
-               
-
-                
-                
-            
             };
         }
 

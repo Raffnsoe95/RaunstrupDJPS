@@ -10,19 +10,35 @@ namespace Raunstrup.UI.Models
 {
     public class ProjectViewModel
     {
+        public ProjectViewModel() 
+        {
+            UsedItems = new List<ProjectItemViewModel>();
+        }
+
+
         public int Id { get; set; }
+
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime StartDate { get; set; }
+
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime EndDate { get; set; }
+
         public decimal Price { get; set; }
+
         public string Description { get; set; }
+
         public bool Active { get; set; }
+
         public bool IsFixedPrice { get; set; }
+
         public bool IsAccepted { get; set; }
+
         public bool IsDone { get; set; }
 
         [Timestamp]
         public byte[] Rowversion { get; set; }
+
+        public List<ProjectItemViewModel> UsedItems { get; set; }
     }
 }
