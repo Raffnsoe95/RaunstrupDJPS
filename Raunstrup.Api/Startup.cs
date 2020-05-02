@@ -31,9 +31,7 @@ namespace Raunstrup.Api
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-
         {
-           
             services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             //Try'n Erro
             //services.AddDbContext<RaunstrupContext>(options =>

@@ -15,8 +15,6 @@ namespace Raunstrup.Api.Controllers
     //[ApiVersion("1.1")]
     [ApiController]
     public class CustomerController : ControllerBase
-
-
     {
         private readonly ICustomerService _customerService;
 
