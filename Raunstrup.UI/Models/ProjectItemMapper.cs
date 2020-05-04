@@ -17,7 +17,7 @@ namespace Raunstrup.UI.Models
                 Id = dto.Id,
                 Amount = dto.Amount,
                 Price = dto.Price,
-                //Item = ItemMapper.Map(dto.Item),
+                Item = ItemMapper.Map(dto.Item),
                 ProjectId = dto.ProjectId
             };
         }
@@ -34,7 +34,7 @@ namespace Raunstrup.UI.Models
                 Id = view.Id,
                 Amount = view.Amount,
                 Price = view.Price,
-                //Item = ItemMapper.Map(view.Item),
+                Item = ItemMapper.Map(view.Item),
                 ProjectId = view.ProjectId
             };
         }
