@@ -43,7 +43,7 @@ namespace Raunstrup.Api.Models
                 EmployeeId = workingHours.EmployeeId,
                 HourlyPrice = workingHours.HourlyPrice,
                 Employee = EmployeeMapper.Map(workingHours.Employee),
-                ProjectId = workingHours.ProjectId
+                ProjectId = workingHours.ProjectId,
                 //Project = ProjectMapper.Map(workingHours.Project)
             };
         }

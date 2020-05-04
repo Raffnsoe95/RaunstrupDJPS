@@ -25,8 +25,7 @@ namespace Raunstrup.UI.Models
                 Price = dto.Price,
                 StartDate = dto.StartDate,
                 Rowversion = dto.Rowversion,
-                //UsedItems = ProjectMapper.Map(dto.UsedItemsDtos)
-                Rowversion = dto.Rowversion,
+                //UsedItems = ProjectMapper.Map(dto.UsedItemsDtos).ToList(),
                 WorkingHours = WorkingHoursMapper.Map(dto.WorkingHoursDtos).ToList()
             };
         }
