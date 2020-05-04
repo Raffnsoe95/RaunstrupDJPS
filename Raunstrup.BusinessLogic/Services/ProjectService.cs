@@ -25,6 +25,8 @@ namespace Raunstrup.BusinessLogic.Services
                 return _context.Projects
                 .Include(w=>w.WorkingHours)
                 .ThenInclude(e=>e.Employee)
+                .Include(w => w.ProjectDrivings)
+                .ThenInclude(e=>e.Employee)
                 .ToList();
             }
 
@@ -32,8 +34,13 @@ namespace Raunstrup.BusinessLogic.Services
 
             Project IProjectService.Get(int id)
             {
-                return _context.Projects.Find(id);
-            }
+                return _context.Projects
+                .Include(w => w.WorkingHours)
+                .ThenInclude(e => e.Employee)
+                .Include(w => w.ProjectDrivings)
+                .ThenInclude(e => e.Employee)
+                .FirstOrDefault(x => x.Id == id);
+        }
 
             void IProjectService.Create(Project project)
             {
