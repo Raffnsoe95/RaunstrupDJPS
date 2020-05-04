@@ -15,7 +15,7 @@ namespace Raunstrup.Api.Controllers
     //[ApiVersion("1.0")]
     //[ApiVersion("1.1")]
     [ApiController]
-    public class EmployeeController: ControllerBase
+    public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeService _employeeService;
 
@@ -58,6 +58,11 @@ namespace Raunstrup.Api.Controllers
         public void Delete(int id)
         {
             _employeeService.Delete(id);
+        }
+        [HttpPost("AddProjectEmployeeToProject", Name = "AddProjectEmployeeToProject")]
+        public void AddProjectEmployeeToProject([FromBody] ProjectEmployeeDto value)
+        {
+            _employeeService.Create(ProjectEmployeeMapper.Map(value));
         }
     }
 }

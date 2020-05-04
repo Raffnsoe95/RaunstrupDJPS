@@ -25,5 +25,7 @@ namespace Raunstrup.DataAccess.Context
         public DbSet<Project> Projects { get; set; }
 
         public DbSet<ProjectDriving> projectDrivings { get; set; }
+        public DbSet<ProjectEmployee> ProjectEmployees { get; set; }
+
     }
 }

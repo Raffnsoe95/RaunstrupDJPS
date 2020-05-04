@@ -12,5 +12,6 @@ namespace Raunstrup.BusinessLogic.ServiceInterfaces
         void Create(Employee employee);
         void Update(Employee employee);
         void Delete(int id);
+        void Create(ProjectEmployee projectEmployee);
     }
 }

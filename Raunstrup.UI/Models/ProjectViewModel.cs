@@ -37,6 +37,7 @@ namespace Raunstrup.UI.Models
         public bool IsDone { get; set; }
 
         public List<WorkingHoursViewModel> WorkingHours { get; set; }
+        public List<ProjectEmployeeViewModel> ProjectEmployees { get; set; }
 
         [Timestamp]
         public byte[] Rowversion { get; set; }

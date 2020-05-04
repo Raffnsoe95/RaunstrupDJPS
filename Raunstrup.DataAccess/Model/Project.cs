@@ -38,5 +38,7 @@ namespace Raunstrup.DataAccess
 
         public List<ProjectItem> UsedItems { get; set; }
         public List<ProjectDriving> ProjectDrivings { get; set; }
+
+        public List<ProjectEmployee> ProjectEmployees { get; set; }
     }
 }

@@ -157,5 +157,25 @@ namespace Raunstrup.UI
         {
             return _context.Employees.Any(e => e.Id == id);
         }
+        // GET: Employee
+        public async Task<IActionResult> AddProjectEmployee(int id)
+        { 
+            var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
+            return View(EmployeeMapper.Map(employeeDtos));
+        }
+        public async Task<IActionResult> AddProjectEmployeeToProject(int id, int projectid)
+        {
+            if (ModelState.IsValid)
+            {
+                await _employeeService.AddAsync(id,projectid).ConfigureAwait(false);
+
+                
+                //_context.Add(employeeViewModel);
+                //await _context.SaveChangesAsync();
+                //return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction("AddProjectEmployee",new {id=projectid});
+        }
+
     }
 }
