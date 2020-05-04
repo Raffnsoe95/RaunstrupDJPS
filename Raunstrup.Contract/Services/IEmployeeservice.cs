@@ -12,5 +12,10 @@ namespace Raunstrup.Contract.Services
         Task AddAsync(EmployeeDto employee);
         Task UpdateAsync(int id, EmployeeDto employee);
         Task RemoveAsync(int id);
+
+        Task AddAsync(int id, int projectid);
+        
+        
+
     }
 }

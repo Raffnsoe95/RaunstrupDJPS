@@ -134,12 +134,16 @@ namespace Raunstrup.DataAccess.DBInitializer
                     }
                 );
                 Employee emp1 = new Employee { Name = "Jørgen Clevin", Active = true, Tlfnr = "1241234" };
+                Employee emp2 = new Employee { Name = "Brian Jørgensen", Active = true, Tlfnr = "1241234" };
                 WorkingHours  workingHours1 =new WorkingHours  { Amount = 3, HourlyPrice = 400, Employee = emp1 };
                 var Workingóurlist =new List<WorkingHours>();
                 ProjectDriving projectDriving = new ProjectDriving { Amount = 2, Employee = emp1, UnitPrice = 2 };
-                
+                ProjectEmployee projectEmployee = new ProjectEmployee { Employee = emp1, EmployeeName = "Jørgen Clevin" };
+                ProjectEmployee projectEmployee2 = new ProjectEmployee { Employee = emp2, EmployeeName = "Jørgen Clevin" };
+
 
                 Workingóurlist.Add(workingHours1);
+             
                 context.Projects.AddRange(
                     new Project
                     {
@@ -154,7 +158,8 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Price = 0m,
                         StartDate = new DateTime(2020, 5, 4),
                         WorkingHours = Workingóurlist,
-                        ProjectDrivings = new List<ProjectDriving> { projectDriving}
+                        ProjectDrivings = new List<ProjectDriving> { projectDriving},
+                        ProjectEmployees = new List<ProjectEmployee> { projectEmployee, projectEmployee2 }
 
 
                     },

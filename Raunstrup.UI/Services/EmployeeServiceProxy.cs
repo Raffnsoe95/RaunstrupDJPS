@@ -75,6 +75,14 @@ namespace Raunstrup.UI.Services
             var response = await Client.PutAsync($"{_employeesRequestUri}/{id}", data).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
+        async Task IEmployeeservice.AddAsync(int id, int projectid)
+        {
+            var projectEmployee = new ProjectEmployeeDto{EmployeeId=id, ProjectId = projectid};
+            var json = JsonSerializer.Serialize(projectEmployee);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await Client.PostAsync(_employeesRequestUri+ "/AddProjectEmployeeToProject", data).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+        }
 
     }
 }

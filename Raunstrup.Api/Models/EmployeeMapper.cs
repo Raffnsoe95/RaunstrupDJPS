@@ -13,6 +13,10 @@ namespace Raunstrup.Api.Models
     {
         public static Employee Map(EmployeeDto dto)
         {
+            if(dto==null)
+            {
+                return null;
+            }
             return new Employee
             { Id = dto.Id, Name = dto.Name, Tlfnr = dto.Tlfnr, Active = dto.Active };
         }
