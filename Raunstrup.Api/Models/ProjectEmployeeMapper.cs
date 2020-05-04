@@ -14,6 +14,7 @@ namespace Raunstrup.Api.Models
             return new ProjectEmployee
             {
                 //Id = dto.Id,
+                EmployeeId = dto.EmployeeId,
                 EmployeeName = dto.EmployeeName,
                 Employee = EmployeeMapper.Map(dto.Employee),
                 ProjectId = dto.ProjectId
