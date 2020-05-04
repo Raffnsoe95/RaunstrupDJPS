@@ -136,6 +136,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                 Employee emp1 = new Employee { Name = "Jørgen Clevin", Active = true, Tlfnr = "1241234" };
                 WorkingHours  workingHours1 =new WorkingHours  { Amount = 3, HourlyPrice = 400, Employee = emp1 };
                 var Workingóurlist =new List<WorkingHours>();
+                ProjectDriving projectDriving = new ProjectDriving { Amount = 2, Employee = emp1, UnitPrice = 2 };
                 
 
                 Workingóurlist.Add(workingHours1);
@@ -152,7 +153,8 @@ namespace Raunstrup.DataAccess.DBInitializer
                         IsFixedPrice = false,
                         Price = 0m,
                         StartDate = new DateTime(2020, 5, 4),
-                        WorkingHours = Workingóurlist
+                        WorkingHours = Workingóurlist,
+                        ProjectDrivings = new List<ProjectDriving> { projectDriving}
 
 
                     },

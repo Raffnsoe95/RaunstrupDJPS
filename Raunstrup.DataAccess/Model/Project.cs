@@ -37,5 +37,6 @@ namespace Raunstrup.DataAccess
         public List<WorkingHours> WorkingHours { get; set; }
 
         public List<ProjectItem> UsedItems { get; set; }
+        public List<ProjectDriving> ProjectDrivings { get; set; }
     }
 }

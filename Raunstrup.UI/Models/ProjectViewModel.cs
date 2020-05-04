@@ -42,5 +42,7 @@ namespace Raunstrup.UI.Models
         public byte[] Rowversion { get; set; }
 
         public List<ProjectItemViewModel> UsedItems { get; set; }
+
+        public List<ProjectDrivingViewModel> ProjectDrivings { get; set; }
     }
 }

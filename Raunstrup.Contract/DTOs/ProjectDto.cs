@@ -31,6 +31,8 @@ namespace Raunstrup.Contract.DTOs
 
         public List<ProjectItemDto> UsedItemsDtos { get; set; }
 
+        public List<ProjectDrivingDto> ProjectDrivingDtos { get; set; }
+
         [Timestamp]
         public byte[] Rowversion { get; set; }
     }
