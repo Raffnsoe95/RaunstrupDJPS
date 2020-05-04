@@ -12,7 +12,6 @@ namespace Raunstrup.Api.Models
 {
     public static class ProjectMapper
     {
-       
         public static Project Map(ProjectDto dto)
         {
             return new Project

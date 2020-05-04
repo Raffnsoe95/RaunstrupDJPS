@@ -1,4 +1,5 @@
-﻿using Raunstrup.DataAccess.Model;
+﻿using Raunstrup.Contract.DTOs;
+using Raunstrup.DataAccess.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace Raunstrup.UI.Models
 
         public decimal Price { get; set; }
 
-        public Item Item { get; set; }
+        public ItemViewModel Item { get; set; }
 
         public int ProjectId { get; set; }
     }
