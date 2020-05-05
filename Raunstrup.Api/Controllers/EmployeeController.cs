@@ -64,5 +64,11 @@ namespace Raunstrup.Api.Controllers
         {
             _employeeService.Create(ProjectEmployeeMapper.Map(value));
         }
+
+        [HttpPost("AddProjectDrivingToProject", Name = "AddProjectDrivingToProject")]
+        public void AddProjectDrivingToProject([FromBody] ProjectDrivingDto value)
+        {
+            _employeeService.Create(ProjectDrivingMapper.Map(value));
+        }
     }
 }
