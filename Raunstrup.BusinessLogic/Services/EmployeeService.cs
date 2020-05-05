@@ -49,18 +49,8 @@ namespace Raunstrup.BusinessLogic.Services
         }
         void IEmployeeService.Create(ProjectEmployee projectEmployee)
         {
-            Project project =
-                _context.Projects
-                .Include(w => w.WorkingHours)
-                .ThenInclude(e => e.Employee)
-                .Include(w => w.ProjectDrivings)
-                .ThenInclude(e => e.Employee)
-                .Include(w => w.ProjectEmployees)
-                .ThenInclude(e => e.Employee)
-                .FirstOrDefault(x => x.Id == projectEmployee.ProjectId);
-            project.ProjectEmployees.Add(projectEmployee);
 
-            //_context.ProjectEmployees.Add(projectEmployee);
+            _context.ProjectEmployees.Add(projectEmployee);
             _context.SaveChanges();
         }
     }
