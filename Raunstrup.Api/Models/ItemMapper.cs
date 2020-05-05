@@ -12,6 +12,11 @@ namespace Raunstrup.Api.Models
     {
         public static Item Map(ItemDto dto)
         {
+            if (dto == null)
+            {
+                return null;
+            }
+
             return new Item
             { Id = dto.Id, Name = dto.Name, Price = dto.Price, Active = dto.Active, RowVision = dto.RowVision };
         }

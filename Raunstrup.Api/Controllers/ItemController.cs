@@ -59,5 +59,11 @@ namespace Raunstrup.Api.Controllers
         {
             _itemService.Delete(id);
         }
+
+        [HttpPost("AddProjectItemToProject", Name = "AddProjectItemToProject")]
+        public void AddProjectItemToProject([FromBody] ProjectItemDto value)
+        {
+            _itemService.Create(ProjectItemMapper.Map(value));
+        }
     }
 }
