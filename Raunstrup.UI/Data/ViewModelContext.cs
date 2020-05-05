@@ -25,6 +25,8 @@ namespace Raunstrup.UI.Data
         public DbSet<CustomerViewModel> customers { get; set; }
 
         public DbSet<ProjectViewModel> Projects { get; set; }
+
+        public DbSet<WorkingHoursViewModel> WorkingHours { get; set; }
     }
 }
 
