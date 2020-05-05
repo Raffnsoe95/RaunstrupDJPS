@@ -10,7 +10,7 @@ using Raunstrup.BusinessLogic.ServiceInterfaces;
 namespace Raunstrup.Api.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Customers")]
+    [Route("api/WorkingHours")]
     //[ApiVersion("1.0")]
     //[ApiVersion("1.1")]
     [ApiController]
@@ -26,7 +26,7 @@ namespace Raunstrup.Api.Controllers
         [HttpGet]
         public IEnumerable<WorkingHoursDto> Get()
         {
-            return _workinghoursService.GetAll().Select(a => WorkingHoursMapper.Map(a));
+            return _workinghoursService.GetAll().Select(a => WorkingHoursMapper.Map(a)).ToList();
         }
 
         // GET: api/WorkingHours/5
