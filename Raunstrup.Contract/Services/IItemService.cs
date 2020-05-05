@@ -17,5 +17,7 @@ namespace Raunstrup.Contract.Services
         Task UpdateAsync(int id, ItemDto item);
 
         Task RemoveAsync(int id);
+
+        Task AddAsync(int id, int projectid);
     }
 }

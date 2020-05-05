@@ -16,5 +16,8 @@ namespace Raunstrup.BusinessLogic.ServiceInterfaces
         void Update(Item item);
 
         void Delete(int id);
+
+        void Create(ProjectItem projectItem);
+        
     }
 }

@@ -8,15 +8,15 @@ namespace Raunstrup.DataAccess.Model
     public class WorkingHours
     {
         public int Id { get; set; }
+
         public int Amount { get; set; }
+
         public int EmployeeId { get; set; }
 
         public decimal HourlyPrice { get; set; }
 
         public int ProjectId { get; set; }
        
-        public Employee Employee { get; set; }
-
-        
+        public Employee Employee { get; set; }  
     }
 }

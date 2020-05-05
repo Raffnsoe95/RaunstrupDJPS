@@ -14,7 +14,8 @@ namespace Raunstrup.Api.Models
             return new ProjectDriving
             {
                 Id = dto.Id,
-                Amount = dto.Amount,
+                Amount = dto.Amount, 
+                UnitPrice = dto.UnitPrice,
                 EmployeeId = dto.EmployeeId,
                 Employee = EmployeeMapper.Map(dto.Employee),
                 ProjectId = dto.ProjectId
@@ -37,6 +38,7 @@ namespace Raunstrup.Api.Models
             {
                 Id = projectDriving.Id,
                 Amount = projectDriving.Amount,
+                UnitPrice = projectDriving.UnitPrice,
                 EmployeeId = projectDriving.EmployeeId,
                 Employee = EmployeeMapper.Map(projectDriving.Employee),
                 ProjectId = projectDriving.ProjectId
