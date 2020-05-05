@@ -120,5 +120,20 @@ namespace Raunstrup.UI.Controllers
         {
             return _context.Items.Any(e => e.Id == id);
         }
+
+        public async Task<IActionResult> AddProjectItem(int id)
+        {
+            var itemDtos = await _itemService.GetItemsAsync().ConfigureAwait(false);
+            return View(ItemMapper.Map(itemDtos));
+        }
+
+        public async Task<IActionResult> AddProjectItemToProject(int id, int projectid)
+        {
+            if (ModelState.IsValid)
+            {
+                await _itemService.AddAsync(id, projectid).ConfigureAwait(false);
+            }
+            return RedirectToAction("AddProjectItem", new { id = projectid });
+        }
     }
 }

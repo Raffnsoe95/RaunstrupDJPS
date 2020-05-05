@@ -47,9 +47,9 @@ namespace Raunstrup.BusinessLogic.Services
             _context.Employees.Remove(_context.Employees.Find(id));
             _context.SaveChanges();
         }
+
         void IEmployeeService.Create(ProjectEmployee projectEmployee)
         {
-
             _context.ProjectEmployees.Add(projectEmployee);
             _context.SaveChanges();
         }
