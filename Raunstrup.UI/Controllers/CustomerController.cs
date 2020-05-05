@@ -41,14 +41,14 @@ namespace Raunstrup.UI.Controllers
                 return NotFound();
             }
 
-            var customerViewModel = await _context.customers
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var customerViewModel = await _customerService.GetCustomerAsync(id.Value).ConfigureAwait(false);
+
             if (customerViewModel == null)
             {
                 return NotFound();
             }
 
-            return View(customerViewModel);
+            return View(CustomerMapper.Map(customerViewModel));
         }
 
         // GET: Customer/Create
@@ -64,32 +64,28 @@ namespace Raunstrup.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Phone,Address,Email,Active,Rowversion")] CustomerViewModel customerViewModel)
         {
-            
+
             if (ModelState.IsValid)
             {
-                
-                //skal customerviewmodel.active sættes til true her?
-                _context.Add(customerViewModel);
-                await _context.SaveChangesAsync();
+                await _customerService.AddAsync(CustomerMapper.Map(customerViewModel)).ConfigureAwait(false);
+
                 return RedirectToAction(nameof(Index));
+                //_context.Add(employeeViewModel);
+                //await _context.SaveChangesAsync();
+                //return RedirectToAction(nameof(Index));
             }
             return View(customerViewModel);
         }
 
         // GET: Customer/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customerViewModel = await _context.customers.FindAsync(id);
+            var customerViewModel = await _customerService.GetCustomerAsync(id).ConfigureAwait(false);
             if (customerViewModel == null)
             {
                 return NotFound();
             }
-            return View(customerViewModel);
+            return View(CustomerMapper.Map(customerViewModel));
         }
 
         // POST: Customer/Edit/5
@@ -108,8 +104,8 @@ namespace Raunstrup.UI.Controllers
             {
                 try
                 {
-                    _context.Update(customerViewModel);
-                    await _context.SaveChangesAsync();
+                    await _customerService.UpdateAsync(id, CustomerMapper.Map(customerViewModel)).ConfigureAwait(false);
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -122,7 +118,6 @@ namespace Raunstrup.UI.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(customerViewModel);
         }

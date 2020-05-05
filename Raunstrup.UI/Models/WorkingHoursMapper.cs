@@ -11,7 +11,13 @@ namespace Raunstrup.UI.Models
         public static WorkingHoursViewModel Map(WorkingHoursDto dto)
         {
             return new WorkingHoursViewModel
-            { Id = dto.Id,Amount = dto.Amount, EmployeeId = dto.EmployeeId, HourlyPrice = dto.HourlyPrice, ProjectId=dto.ProjectId, Employee=EmployeeMapper.Map( dto.Employee) };
+            { Id = dto.Id,
+                Amount = dto.Amount, 
+                EmployeeId = dto.EmployeeId, 
+                HourlyPrice = dto.HourlyPrice, 
+                ProjectId=dto.ProjectId, 
+                Employee=EmployeeMapper.Map(dto.Employee),
+                 Rowversion=dto.Rowversion};
         }
 
         public static IEnumerable<WorkingHoursViewModel> Map(IEnumerable<WorkingHoursDto> model)
@@ -22,7 +28,13 @@ namespace Raunstrup.UI.Models
         public static WorkingHoursDto Map(WorkingHoursViewModel model)
         {
             return new WorkingHoursDto
-            { Id = model.Id, Amount = model.Amount, EmployeeId = model.EmployeeId, HourlyPrice = model.HourlyPrice, ProjectId = model.ProjectId, Employee =EmployeeMapper.Map( model.Employee) };
+            { Id = model.Id, 
+                Amount = model.Amount, 
+                EmployeeId = model.EmployeeId, 
+                HourlyPrice = model.HourlyPrice, 
+                ProjectId = model.ProjectId, 
+                Employee =EmployeeMapper.Map( model.Employee),
+                Rowversion=model.Rowversion};
 
         }
     }

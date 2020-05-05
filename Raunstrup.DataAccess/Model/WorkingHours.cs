@@ -17,6 +17,8 @@ namespace Raunstrup.DataAccess.Model
 
         public int ProjectId { get; set; }
        
-        public Employee Employee { get; set; }  
+        public Employee Employee { get; set; }
+
+        public byte[] Rowversion { get; set; }
     }
 }

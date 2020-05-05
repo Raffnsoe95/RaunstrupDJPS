@@ -26,7 +26,10 @@ namespace Raunstrup.Api.Controllers
         [HttpGet]
         public IEnumerable<WorkingHoursDto> Get()
         {
-            return _workinghoursService.GetAll().Select(a => WorkingHoursMapper.Map(a)).ToList();
+            return _workinghoursService.GetAll()
+                .Select(a => WorkingHoursMapper
+                .Map(a))
+                .ToList();
         }
 
         // GET: api/WorkingHours/5
