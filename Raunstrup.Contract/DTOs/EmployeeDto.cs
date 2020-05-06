@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace Raunstrup.Contract.DTOs
 {
@@ -12,6 +13,7 @@ namespace Raunstrup.Contract.DTOs
         public bool Active { get; set; }
         [Timestamp]
         public byte[] RowVersion { get; set; }
-
+        public TypeDto Type { get; set; }
+        public List<SpecialtyDto> Specialties { get; set; }
     }
 }
