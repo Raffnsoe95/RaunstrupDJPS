@@ -154,6 +154,14 @@ namespace Raunstrup.UI.Controllers
         {
             return _context.WorkingHours.Any(e => e.Id == id);
         }
+
+        public IActionResult AddWorkingHours(int id)
+        {
+            WorkingHoursViewModel workingHours = new WorkingHoursViewModel { ProjectId=id, EmployeeId = 3 };
+        
+            return View(workingHours);
+
+        }
     }
 }
 
