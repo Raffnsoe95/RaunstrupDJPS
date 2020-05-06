@@ -143,6 +143,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                 Employee emp2 = new Employee { Name = "Brian Jørgensen", Active = true, Tlfnr = "1241234" };
                 
                 WorkingHours  workingHours1 =new WorkingHours  { Amount = 3, HourlyPrice = 400, Employee = emp1 };
+                WorkingHours workingHours2 = new WorkingHours { Amount = 6, HourlyPrice = 600, Employee = emp1 };
                 var Workingóurlist =new List<WorkingHours>();
                 ProjectDriving projectDriving = new ProjectDriving { Amount = 2, Employee = emp1, UnitPrice = 2 };
                 ProjectEmployee projectEmployee = new ProjectEmployee { Employee = emp1, EmployeeName = "Jørgen Clevin" };
@@ -151,7 +152,8 @@ namespace Raunstrup.DataAccess.DBInitializer
 
 
                 Workingóurlist.Add(workingHours1);
-             
+                Workingóurlist.Add(workingHours2);
+
                 context.Projects.AddRange(
                     new Project
                     {
