@@ -133,7 +133,7 @@ namespace Raunstrup.UI.Controllers
             {
                 await _itemService.AddAssignedItemAsync(id, projectid,5,799).ConfigureAwait(false);
             }
-            return RedirectToAction("AddProjectItem", new { id = projectid });
+            return RedirectToAction("AddAssignedProjectItem", new { id = projectid });
         }
 
         public async Task<IActionResult> AddUsedProjectItem(int id)
@@ -148,7 +148,7 @@ namespace Raunstrup.UI.Controllers
             {
                 await _itemService.AddUsedItemAsync(id, projectid, 5, 799).ConfigureAwait(false);
             }
-            return RedirectToAction("AddProjectItem", new { id = projectid });
+            return RedirectToAction("AddUsedProjectItem", new { id = projectid });
         }
     }
 }

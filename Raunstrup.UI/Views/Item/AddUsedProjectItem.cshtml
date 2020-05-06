@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Raunstrup.UI.Models.ItemViewModel>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Item til Project</h1>
+
+<p>
+    <!--<a asp-action="Create">Tilføj Item til Project</a>-->
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Navn
+            </th>
+            <th>
+                Pris
+            </th>
+            <th>
+                Aktiv
+            </th>
+            <th>
+                Amount
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+
+                <label></label>
+
+                <input  />
+                
+            </td>
+            <td>
+                <a asp-action="AddUsedProjectItemToProject" asp-route-id="@item.Id" asp-route-projectid="@ViewContext.ModelState["id"].AttemptedValue" asp-controller="Item">Indberet</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

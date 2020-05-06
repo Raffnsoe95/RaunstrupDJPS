@@ -13,6 +13,7 @@ namespace Raunstrup.UI.Models
         public ProjectViewModel() 
         {
             UsedItems = new List<ProjectUsedItemViewModel>();
+            AssignedItems = new List<ProjectAssignedItemViewModel>();
         }
 
 

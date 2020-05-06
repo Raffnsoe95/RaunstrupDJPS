@@ -28,6 +28,7 @@ namespace Raunstrup.Api.Models
                 Rowversion = dto.Rowversion,
                 WorkingHours = WorkingHoursMapper.Map(dto.WorkingHoursDtos).ToList(),
                 UsedItems = ProjectUsedItemMapper.Map(dto.UsedItemsDtos).ToList(),
+                AssignedItems = ProjectAssignedItemMapper.Map(dto.AssignedItemDtos).ToList(),
                 ProjectDrivings = ProjectDrivingMapper.Map(dto.ProjectDrivingDtos).ToList(),
                 ProjectEmployees = ProjectEmployeeMapper.Map(dto.ProjectEmployeeDtos).ToList()
             };
@@ -54,10 +55,9 @@ namespace Raunstrup.Api.Models
                 Rowversion = project.Rowversion,
                 WorkingHoursDtos = WorkingHoursMapper.Map(project.WorkingHours).ToList(),
                 UsedItemsDtos = ProjectUsedItemMapper.Map(project.UsedItems).ToList(),
+                //AssignedItems = ProjectAssignedItemMapper.Map(project.AssignedItems).ToList(),
                 ProjectDrivingDtos = ProjectDrivingMapper.Map(project.ProjectDrivings).ToList(),
                 ProjectEmployeeDtos = ProjectEmployeeMapper.Map(project.ProjectEmployees).ToList()
-
-
             };
         }
     }

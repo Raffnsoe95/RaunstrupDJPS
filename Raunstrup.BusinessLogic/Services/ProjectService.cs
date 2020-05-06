@@ -52,7 +52,7 @@ namespace Raunstrup.BusinessLogic.Services
                 .Include(w => w.AssignedItems)
                 .ThenInclude(e => e.Item)
                 .FirstOrDefault(x => x.Id == id);
-        }
+            }
 
             void IProjectService.Create(Project project)
             {
@@ -71,12 +71,12 @@ namespace Raunstrup.BusinessLogic.Services
                 _context.Projects.Remove(_context.Projects.Find(id));
                 _context.SaveChanges();
             }
-        
-    IEnumerable<WorkingHours> GetWorkingHoursfromProject(Project project)
-        {
-            return _context.WorkingHours.Where(p => p.ProjectId == project.Id);
-                
-        }
+
+        //IEnumerable<WorkingHours> GetWorkingHoursfromProject(Project project)
+        //{
+        //    return _context.WorkingHours.Where(p => p.ProjectId == project.Id);
+
+        //}
     }
-    }
+}
 
