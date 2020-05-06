@@ -140,7 +140,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                 var Workingóurlist =new List<WorkingHours>();
                 ProjectDriving projectDriving = new ProjectDriving { Amount = 2, Employee = emp1, UnitPrice = 2 };
                 ProjectEmployee projectEmployee = new ProjectEmployee { Employee = emp1, EmployeeName = "Jørgen Clevin" };
-                ProjectEmployee projectEmployee2 = new ProjectEmployee { Employee = emp2, EmployeeName = "Jørgen Clevin" };
+                ProjectEmployee projectEmployee2 = new ProjectEmployee { Employee = emp2};
                 
 
 
