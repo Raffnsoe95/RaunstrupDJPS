@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Raunstrup.DataAccess.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -7,6 +8,10 @@ namespace Raunstrup.Contract.DTOs
 {
    public class WorkingHoursDto
     {
+        //public WorkingHoursDto()
+        //{
+        //    Employee = new EmployeeDto();
+        //}
         public int Id { get; set; }
         public int Amount { get; set; }
         public int EmployeeId { get; set; }

@@ -45,7 +45,7 @@ namespace Raunstrup.Api
             services.AddScoped<IProjectService, ProjectService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IEmployeeService, EmployeeService>();
-           // services.AddScoped<IWorkingHoursService, WorkingHoursService>();
+            services.AddScoped<IWorkingHoursService, WorkingHoursService>();
             services.AddApiVersioningAndExplorer();
             services.AddSwaggerGeneration();
             //--------------------------------------------------
