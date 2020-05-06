@@ -9,7 +9,7 @@ namespace Raunstrup.Contract.DTOs
         public ProjectDto()
         {
             WorkingHoursDtos = new List<WorkingHoursDto>();
-            UsedItemsDtos = new List<ProjectItemDto>();
+            UsedItemsDtos = new List<ProjectUsedItemDto>();
         }
         public int Id { get; set; }
 
@@ -29,7 +29,7 @@ namespace Raunstrup.Contract.DTOs
 
         public List<WorkingHoursDto> WorkingHoursDtos { get; set; }
 
-        public List<ProjectItemDto> UsedItemsDtos { get; set; }
+        public List<ProjectUsedItemDto> UsedItemsDtos { get; set; }
 
         public List<ProjectDrivingDto> ProjectDrivingDtos { get; set; }
         public List<ProjectEmployeeDto> ProjectEmployeeDtos { get; set; }

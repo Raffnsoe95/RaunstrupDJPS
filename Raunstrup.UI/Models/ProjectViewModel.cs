@@ -12,7 +12,7 @@ namespace Raunstrup.UI.Models
     {
         public ProjectViewModel() 
         {
-            UsedItems = new List<ProjectItemViewModel>();
+            UsedItems = new List<ProjectUsedItemViewModel>();
         }
 
 
@@ -36,13 +36,16 @@ namespace Raunstrup.UI.Models
 
         public bool IsDone { get; set; }
 
-        public List<WorkingHoursViewModel> WorkingHours { get; set; }
-        public List<ProjectEmployeeViewModel> ProjectEmployees { get; set; }
-
         [Timestamp]
         public byte[] Rowversion { get; set; }
 
-        public List<ProjectItemViewModel> UsedItems { get; set; }
+        public List<WorkingHoursViewModel> WorkingHours { get; set; }
+
+        public List<ProjectEmployeeViewModel> ProjectEmployees { get; set; }
+
+        public List<ProjectAssignedItemViewModel> AssignedItems { get; set; }
+
+        public List<ProjectUsedItemViewModel> UsedItems { get; set; }
 
         public List<ProjectDrivingViewModel> ProjectDrivings { get; set; }
     }

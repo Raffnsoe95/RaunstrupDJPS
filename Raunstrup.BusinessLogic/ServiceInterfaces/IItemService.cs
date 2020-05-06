@@ -17,7 +17,9 @@ namespace Raunstrup.BusinessLogic.ServiceInterfaces
 
         void Delete(int id);
 
-        void Create(ProjectItem projectItem);
+        void CreateUsedItems(ProjectUsedItem projectUsedItem);
+
+        void CreateAssignedItems(ProjectAssignedItem projectAssignedItem);
         
     }
 }

@@ -28,6 +28,10 @@ namespace Raunstrup.Api.Models
 
         public static ItemDto Map(Item model)
         {
+            if (model==null)
+            {
+                return null;
+            }
             return new ItemDto
             { Id = model.Id, Name = model.Name, Price = model.Price, Active = model.Active, RowVision = model.RowVision };
         }

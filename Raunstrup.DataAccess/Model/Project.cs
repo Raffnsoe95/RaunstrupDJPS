@@ -10,7 +10,7 @@ namespace Raunstrup.DataAccess
         public Project()
         {
             WorkingHours = new List<WorkingHours>();
-            UsedItems = new List<ProjectItem>();
+            UsedItems = new List<ProjectUsedItem>();
         }
 
         public int Id { get; set; }
@@ -36,7 +36,9 @@ namespace Raunstrup.DataAccess
 
         public List<WorkingHours> WorkingHours { get; set; }
 
-        public List<ProjectItem> UsedItems { get; set; }
+        public List<ProjectUsedItem> UsedItems { get; set; }
+
+        public List<ProjectAssignedItem> AssignedItems { get; set; }
 
         public List<ProjectDriving> ProjectDrivings { get; set; }
 

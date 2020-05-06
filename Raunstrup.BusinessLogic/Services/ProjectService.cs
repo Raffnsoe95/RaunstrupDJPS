@@ -27,8 +27,12 @@ namespace Raunstrup.BusinessLogic.Services
                 .ThenInclude(e=>e.Employee)
                 .Include(w => w.ProjectDrivings)
                 .ThenInclude(e=>e.Employee)
-                 .Include(w => w.ProjectEmployees)
+                .Include(w => w.ProjectEmployees)
                 .ThenInclude(e => e.Employee)
+                .Include(w => w.UsedItems)
+                .ThenInclude(e => e.Item)
+                .Include(w => w.AssignedItems)
+                .ThenInclude(e => e.Item)
                 .ToList();
             }
 
@@ -43,6 +47,10 @@ namespace Raunstrup.BusinessLogic.Services
                 .ThenInclude(e => e.Employee)
                 .Include(w => w.ProjectEmployees)
                 .ThenInclude(e => e.Employee)
+                .Include(w => w.UsedItems)
+                .ThenInclude(e => e.Item)
+                .Include(w => w.AssignedItems)
+                .ThenInclude(e => e.Item)
                 .FirstOrDefault(x => x.Id == id);
         }
 
