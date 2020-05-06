@@ -40,15 +40,15 @@ namespace Raunstrup.UI
             {
                 return NotFound();
             }
-            var employeeViewModel = await _employeeService.GetEmployeesAsync(id.Value).ConfigureAwait(false);
+            var employeeDto = await _employeeService.GetEmployeesAsync(id.Value).ConfigureAwait(false);
             //////var employeeViewModel = await _context.Employees
             //////    .FirstOrDefaultAsync(m => m.Id == id);
-            if (employeeViewModel == null)
+            if (employeeDto == null)
             {
                 return NotFound();
             }
 
-            return View(employeeViewModel);
+            return View(EmployeeMapper.Map(employeeDto));
         }
 
         // GET: Employee/Create

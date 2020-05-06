@@ -9,6 +9,10 @@ namespace Raunstrup.DataAccess.Model
 {
     public class Employee
     {
+        public Employee()
+        {
+            Specialties = new List<Specialty>();
+        }
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -19,5 +23,7 @@ namespace Raunstrup.DataAccess.Model
 
         [Timestamp]
         public byte[] RowVersion { get; set; }
+        public EmployeeType Type { get; set; }
+        public List<Specialty> Specialties { get; set; }
     }
 }

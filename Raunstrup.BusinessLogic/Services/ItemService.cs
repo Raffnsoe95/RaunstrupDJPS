@@ -46,9 +46,15 @@ namespace Raunstrup.BusinessLogic.Services
             _context.SaveChanges();
         }
 
-        void IItemService.Create(ProjectItem projectItem)
+        void IItemService.CreateUsedItems(ProjectUsedItem projectUsedItem)
         {
-            _context.ProjectItems.Add(projectItem);
+            _context.ProjectUsedItems.Add(projectUsedItem);
+            _context.SaveChanges();
+        }
+
+        void IItemService.CreateAssignedItems(ProjectAssignedItem projectAssignedItem)
+        {
+            _context.ProjectAssignedItems.Add(projectAssignedItem);
             _context.SaveChanges();
         }
     }

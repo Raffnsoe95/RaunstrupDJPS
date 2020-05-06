@@ -101,36 +101,42 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Active = true,
                     }
                 );
+
+
+                var type = new EmployeeType { HourlyPrice = 200, Title = "Tømrer" };
+                var specialty = new Specialty { Bonus = 100, Title = "Velux" };
                 context.Employees.AddRange(
                     new Employee
                     {
                         Name = "Brian Nielsen",
                         Tlfnr = "67589342",
                         Active = true,
+                        Type = type,
+                        Specialties = new List<Specialty> { specialty }
                     },
                     new Employee
                     {
                         Name = "Henrik Kofoed",
                         Tlfnr = "78652341",
-                        Active = true,
+                        Active = true
                     },
                     new Employee
                     {
                         Name = "Thomas Troelsen",
                         Tlfnr = "+4534782311",
-                        Active = true,
+                        Active = true
                     },
                     new Employee
                     {
                         Name = "Rasmus Paludan",
                         Tlfnr = "54672291",
-                        Active = true,
+                        Active = true
                     },
                     new Employee
                     {
                         Name = "Flemming Leth",
                         Tlfnr = "23456789",
-                        Active = true,
+                        Active = true
                     }
                 );
                 Employee emp1 = new Employee { Name = "Jørgen Clevin", Active = true, Tlfnr = "1241234" };

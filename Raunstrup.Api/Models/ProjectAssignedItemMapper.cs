@@ -1,44 +1,48 @@
-﻿using Raunstrup.Contract.DTOs;
-using Raunstrup.DataAccess.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Raunstrup.Contract.DTOs;
+using Raunstrup.DataAccess.Model;
 
 namespace Raunstrup.Api.Models
 {
-    public class ProjectItemMapper
+    public class ProjectAssignedItemMapper
     {
-        public static ProjectItem Map(ProjectItemDto dto)
+        public static ProjectAssignedItem Map(ProjectAssignedItemDto dto)
         {
-            return new ProjectItem
+            return new ProjectAssignedItem
             {
                 Id = dto.Id,
                 Amount = dto.Amount,
                 Price = dto.Price,
+                IsUsed = dto.IsUsed,
                 Item = ItemMapper.Map(dto.Item),
+                ItemID = dto.ItemID,
                 ProjectId = dto.ProjectId
             };
         }
 
-        public static IEnumerable<ProjectItemDto> Map(IEnumerable<ProjectItem> model)
+        public static IEnumerable<ProjectAssignedItemDto> Map(IEnumerable<ProjectAssignedItem> model)
         {
             return model.Select(x => Map(x)).AsEnumerable();
         }
 
-        public static IEnumerable<ProjectItem> Map(IEnumerable<ProjectItemDto> model)
+        public static IEnumerable<ProjectAssignedItem> Map(IEnumerable<ProjectAssignedItemDto> model)
         {
             return model.Select(x => Map(x)).AsEnumerable();
         }
 
-        public static ProjectItemDto Map(ProjectItem projectItem)
+        public static ProjectAssignedItemDto Map(ProjectAssignedItem projectItem)
         {
-            return new ProjectItemDto
+            return new ProjectAssignedItemDto
             {
                 Id = projectItem.Id,
                 Amount = projectItem.Amount,
                 Price = projectItem.Price,
+                IsUsed = projectItem.IsUsed,
                 Item = ItemMapper.Map(projectItem.Item),
+                ItemID = projectItem.ItemID,
                 ProjectId = projectItem.ProjectId
             };
         }
