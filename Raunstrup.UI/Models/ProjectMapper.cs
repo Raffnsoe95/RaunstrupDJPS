@@ -13,6 +13,7 @@ namespace Raunstrup.UI.Models
 
         public static ProjectViewModel Map(ProjectDto dto)
         {
+            
             return new ProjectViewModel
             {
                 Id = dto.Id,

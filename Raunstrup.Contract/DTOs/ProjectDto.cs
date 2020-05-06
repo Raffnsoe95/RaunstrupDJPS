@@ -9,6 +9,9 @@ namespace Raunstrup.Contract.DTOs
         public ProjectDto()
         {
             WorkingHoursDtos = new List<WorkingHoursDto>();
+            UsedItemsDtos = new List<ProjectItemDto>();
+            ProjectDrivingDtos = new List<ProjectDrivingDto>();
+            ProjectEmployeeDtos = new List<ProjectEmployeeDto>();
             UsedItemsDtos = new List<ProjectUsedItemDto>();
             AssignedItemDtos = new List<ProjectAssignedItemDto>();
         }
