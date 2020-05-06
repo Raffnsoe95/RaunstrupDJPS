@@ -13,27 +13,25 @@ using Raunstrup.Contract.DTOs;
 
 namespace Raunstrup.UI.Controllers
 {
-    public class CustomerController : Controller
+    public class WorkingHoursController : Controller
     {
         private readonly ViewModelContext _context;
-        private readonly ICustomerService _customerService;
+        private readonly IWorkingHoursService _workingHoursService;
 
-        public CustomerController(ViewModelContext context, ICustomerService customerService)
+        public WorkingHoursController(ViewModelContext context, IWorkingHoursService workingHoursService)
         {
             _context = context;
-            _customerService = customerService;
+            _workingHoursService = workingHoursService;
         }
 
-        // GET: Customer
+        // GET: WorkingHours
         public async Task<IActionResult> Index()
         {
-            //Det her funker ikke af en eller anden grund
-            var customerDtos = await _customerService.GetCustomerAsync().ConfigureAwait(false);
-            return View(CustomerMapper.Map(customerDtos));
-            // return View(await _context.customers.ToListAsync());
+            var WorkingHoursDtos = await _workingHoursService.GetWorkingHoursAsync().ConfigureAwait(false);
+            return View(WorkingHoursMapper.Map(WorkingHoursDtos));
         }
 
-        // GET: Customer/Details/5
+        // GET: WorkingHours/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -41,61 +39,59 @@ namespace Raunstrup.UI.Controllers
                 return NotFound();
             }
 
-            var customerViewModel = await _customerService.GetCustomerAsync(id.Value).ConfigureAwait(false);
+            var workingHoursViewModel = await _workingHoursService.GetWorkingHoursAsync(id.Value).ConfigureAwait(false);
 
-            if (customerViewModel == null)
+            if (workingHoursViewModel == null)
             {
                 return NotFound();
             }
 
-            return View(CustomerMapper.Map(customerViewModel));
+            return View(WorkingHoursMapper.Map(workingHoursViewModel));
         }
 
-        // GET: Customer/Create
+        // GET: WorkingHours/Create
         public IActionResult Create()
         {
             return View();
         }
+    
 
-        // POST: Customer/Create
+        // POST: WorkingHours/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Phone,Address,Email,Active,Rowversion")] CustomerViewModel customerViewModel)
+        public async Task<IActionResult> Create([Bind("Id,Amount,EmployeeId,HourlyPrice,ProjectId")] WorkingHoursViewModel workingHoursViewModel)
         {
-
             if (ModelState.IsValid)
             {
-                await _customerService.AddAsync(CustomerMapper.Map(customerViewModel)).ConfigureAwait(false);
+                await _workingHoursService.AddAsync(WorkingHoursMapper.Map(workingHoursViewModel)).ConfigureAwait(false);
 
                 return RedirectToAction(nameof(Index));
-                //_context.Add(employeeViewModel);
-                //await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
             }
-            return View(customerViewModel);
+           // ViewData["EmployeeId"] = new SelectList(_context.Set<Employee>(), "Id", "Id", workingHours.EmployeeId);
+            return View(workingHoursViewModel);
         }
 
-        // GET: Customer/Edit/5
+        // GET: WorkingHours/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            var customerViewModel = await _customerService.GetCustomerAsync(id).ConfigureAwait(false);
-            if (customerViewModel == null)
+            var WorkingHoursViewModel = await _workingHoursService.GetWorkingHoursAsync(id).ConfigureAwait(false);
+            if (WorkingHoursViewModel == null)
             {
                 return NotFound();
             }
-            return View(CustomerMapper.Map(customerViewModel));
+            return View(WorkingHoursMapper.Map(WorkingHoursViewModel));
         }
 
-        // POST: Customer/Edit/5
+        // POST: WorkingHours/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Phone,Address,Email,Active,Rowversion")] CustomerViewModel customerViewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Amount,EmployeeId,HourlyPrice,ProjectId")] WorkingHoursViewModel workingHoursViewModel)
         {
-            if (id != customerViewModel.Id)
+            if (id != workingHoursViewModel.Id)
             {
                 return NotFound();
             }
@@ -104,12 +100,12 @@ namespace Raunstrup.UI.Controllers
             {
                 try
                 {
-                    await _customerService.UpdateAsync(id, CustomerMapper.Map(customerViewModel)).ConfigureAwait(false);
-                    return RedirectToAction(nameof(Index));
+                    _context.Update(workingHoursViewModel);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CustomerViewModelExists(customerViewModel.Id))
+                    if (!WorkingHoursExists(workingHoursViewModel.Id))
                     {
                         return NotFound();
                     }
@@ -118,11 +114,13 @@ namespace Raunstrup.UI.Controllers
                         throw;
                     }
                 }
+                return RedirectToAction(nameof(Index));
             }
-            return View(customerViewModel);
+            //ViewData["EmployeeId"] = new SelectList(_context.Set<Employee>(), "Id", "Id", workingHoursViewModel.EmployeeId);
+            return View(workingHoursViewModel);
         }
 
-        // GET: Customer/Delete/5
+        // GET: WorkingHours/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,30 +128,32 @@ namespace Raunstrup.UI.Controllers
                 return NotFound();
             }
 
-            var customerViewModel = await _context.customers
+            var workingHours = await _context.WorkingHours
+                .Include(w => w.Employee)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (customerViewModel == null)
+            if (workingHours == null)
             {
                 return NotFound();
             }
 
-            return View(customerViewModel);
+            return View(workingHours);
         }
 
-        // POST: Customer/Delete/5
+        // POST: WorkingHours/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var customerViewModel = await _context.customers.FindAsync(id);
-            _context.customers.Remove(customerViewModel);
+            var workingHours = await _context.WorkingHours.FindAsync(id);
+            _context.WorkingHours.Remove(workingHours);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CustomerViewModelExists(int id)
+        private bool WorkingHoursExists(int id)
         {
-            return _context.customers.Any(e => e.Id == id);
+            return _context.WorkingHours.Any(e => e.Id == id);
         }
     }
 }
+

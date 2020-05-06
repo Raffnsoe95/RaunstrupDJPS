@@ -45,5 +45,11 @@ namespace Raunstrup.BusinessLogic.Services
             _context.Items.Remove(_context.Items.Find(id));
             _context.SaveChanges();
         }
+
+        void IItemService.Create(ProjectItem projectItem)
+        {
+            _context.ProjectItems.Add(projectItem);
+            _context.SaveChanges();
+        }
     }
 }

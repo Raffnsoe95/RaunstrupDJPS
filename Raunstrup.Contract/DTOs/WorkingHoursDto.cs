@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Raunstrup.Contract.DTOs
@@ -14,6 +15,9 @@ namespace Raunstrup.Contract.DTOs
         public int ProjectId { get; set; }
        
         public EmployeeDto Employee { get; set; }
+
+        [Timestamp]
+        public byte[] Rowversion { get; set; }
 
         
     }

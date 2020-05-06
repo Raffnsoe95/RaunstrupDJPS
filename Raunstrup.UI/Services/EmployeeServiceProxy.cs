@@ -83,6 +83,13 @@ namespace Raunstrup.UI.Services
             var response = await Client.PostAsync(_employeesRequestUri+ "/AddProjectEmployeeToProject", data).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
+        async Task IEmployeeservice.AddAsync(ProjectDrivingDto projectDriving)
+        {
+            var json = JsonSerializer.Serialize(projectDriving);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await Client.PostAsync(_employeesRequestUri + "/AddProjectDrivingToProject", data).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+        }
 
     }
 }

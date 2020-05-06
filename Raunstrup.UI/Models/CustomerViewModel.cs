@@ -12,13 +12,13 @@ namespace Raunstrup.UI.Models
     {
         public int Id { get; set; }
 
-       [RegularExpression(@"^[a-zA-Z|æ|Æ|ø|Ø|å|Å| ]{2,50}$"), StringLength(50)]
+       [RegularExpression(@"^([\w{L}|æ|Æ|ø|Ø|å|Å| |.|,|-]*?)\s+([\w{L}|æ|Æ|ø|Ø|å|Å| |.|,|-]*)$"), StringLength(50)]
         public string Name { get; set; }
 
        [RegularExpression(@"^[0-9|+| |(|)]+$"), StringLength(30)]
         public string Phone { get; set; }
 
-        [RegularExpression(@"^[a-zA-Z0-9|æ|Æ|ø|Ø|å|Å| |.|,]{2,50}$")]
+        [RegularExpression(@"^[a-zA-Z0-9|æ|Æ|ø|Ø|å|Å| |.|,]{5,80}$")]
         public string Address { get; set; }
 
 
