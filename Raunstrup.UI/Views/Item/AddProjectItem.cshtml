@@ -21,6 +21,9 @@
             <th>
                 Aktiv
             </th>
+            <th>
+                Amount
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -37,7 +40,12 @@
                 @Html.DisplayFor(modelItem => item.Active)
             </td>
             <td>
-                <a asp-action="AddProjectItemToProject" asp-route-id="@item.Id" asp-route-projectid="@ViewContext.ModelState["Id"].AttemptedValue" asp-controller="Item">Tilføj</a>
+                <label>5</label>
+                <!--<input asp-for="Price" />-->
+
+            </td>
+            <td>
+                <a asp-action="AddProjectItemToProject" asp-route-id="@item.Id" asp-route-projectid="@ViewContext.ModelState["id"].AttemptedValue" asp-controller="Item">Tilføj</a>
             </td>
         </tr>
 }
