@@ -13,6 +13,7 @@ namespace Raunstrup.Contract.DTOs
             ProjectEmployeeDtos = new List<ProjectEmployeeDto>();
             UsedItemsDtos = new List<ProjectUsedItemDto>();
             AssignedItemDtos = new List<ProjectAssignedItemDto>();
+            
         }
         public int Id { get; set; }
 
@@ -31,6 +32,8 @@ namespace Raunstrup.Contract.DTOs
 
         public bool IsDone { get; set; }
 
+        public int CustomerId { get; set; }
+
         [Timestamp]
         public byte[] Rowversion { get; set; }
 
@@ -43,5 +46,6 @@ namespace Raunstrup.Contract.DTOs
         public List<ProjectDrivingDto> ProjectDrivingDtos { get; set; }
 
         public List<ProjectEmployeeDto> ProjectEmployeeDtos { get; set; }
+        public CustomerDto CustomerDto { get; set; }
     }
 }

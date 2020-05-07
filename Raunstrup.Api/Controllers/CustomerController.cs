@@ -17,9 +17,11 @@ namespace Raunstrup.Api.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _customerService;
+        private readonly IProjectService _projectService;
 
-        public CustomerController(ICustomerService movieService)
+        public CustomerController(ICustomerService movieService, IProjectService projectService)
         {
+            _projectService = projectService;
             _customerService = movieService;
         }
         // GET: api/Customer
@@ -56,5 +58,11 @@ namespace Raunstrup.Api.Controllers
         {
             _customerService.Delete(id);
         }
+        [HttpPut("AddCustomerToProject", Name = "AddCustomerToProject")]
+        public void AddCustomerToProject([FromBody] ProjectDto value)
+        {
+            _projectService.AddCustomerToProject(ProjectMapper.Map(value));
+        }
+
     }
 }

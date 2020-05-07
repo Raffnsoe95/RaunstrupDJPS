@@ -14,6 +14,10 @@ namespace Raunstrup.Api.Models
 
         public static Customer Map(CustomerDto dto)
         {
+            if (dto == null)
+            {
+                return null;
+            }
             return new Customer
             { Id = dto.Id, Name = dto.Name , Phone = dto.Phone, Address = dto.Address, Email = dto.Email, Active=dto.Active, Rowversion=dto.Rowversion };
         }

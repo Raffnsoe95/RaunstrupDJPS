@@ -17,6 +17,7 @@ namespace Raunstrup.UI.Models
             WorkingHours = new List<WorkingHoursViewModel>();
             UsedItems = new List<ProjectUsedItemViewModel>();
             AssignedItems = new List<ProjectAssignedItemViewModel>();
+            
         }
 
         public int Id { get; set; }
@@ -45,7 +46,6 @@ namespace Raunstrup.UI.Models
         public List<WorkingHoursViewModel> WorkingHours { get; set; }
 
         public List<ProjectEmployeeViewModel> ProjectEmployees { get; set; }
-
         public CustomerViewModel Customer { get; set; }
 
         public int CustomerId { get; set; }

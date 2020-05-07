@@ -26,10 +26,12 @@ namespace Raunstrup.UI.Models
                 Price = dto.Price,
                 StartDate = dto.StartDate,
                 Rowversion = dto.Rowversion,
-                //UsedItems = ProjectMapper.Map(dto.UsedItemsDtos).ToList(),
+                CustomerId = dto.CustomerId,
+                //UsedItems = ProjectMapper.Map(dto.UsedItemsDtos)
                 WorkingHours = WorkingHoursMapper.Map(dto.WorkingHoursDtos).ToList(),
                 ProjectDrivings = ProjectDrivingMapper.Map(dto.ProjectDrivingDtos).ToList(),
-                ProjectEmployees = ProjectEmployeeMapper.Map(dto.ProjectEmployeeDtos).ToList()
+                ProjectEmployees = ProjectEmployeeMapper.Map(dto.ProjectEmployeeDtos).ToList(),
+                Customer = CustomerMapper.Map(dto.CustomerDto)
 
             };
         }
@@ -53,8 +55,10 @@ namespace Raunstrup.UI.Models
                 Price = project.Price,
                 StartDate = project.StartDate,
                 Rowversion = project.Rowversion,
+                CustomerId = project.CustomerId,
                 //UsedItemsDtos = ProjectMapper.Map(project.UsedItems).ToList()
-                ProjectEmployeeDtos = ProjectEmployeeMapper.Map(project.ProjectEmployees).ToList()
+                ProjectEmployeeDtos = ProjectEmployeeMapper.Map(project.ProjectEmployees).ToList(),
+                CustomerDto = CustomerMapper.Map(project.Customer)
             };
         }
     }
