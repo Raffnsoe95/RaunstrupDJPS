@@ -7,7 +7,9 @@
 <h1>Create</h1>
 
 <h4>WorkingHoursViewModel</h4>
-@Model.EmployeeId
+EmployeeID: @Model.EmployeeId
+ProjectID: @Model.ProjectId
+HourlyPrice: @Model.HourlyPrice
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -18,20 +20,21 @@
                 <input asp-for="Amount" class="form-control" />
                 <span asp-validation-for="Amount" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="EmployeeId" class="control-label"></label>
-                <input asp-for="EmployeeId" />
-            </div>
-            <div class="form-group">
+                <input asp-for="EmployeeId" disabled/>
+            </div>*@
+            @*<div class="form-group">
                 <label asp-for="HourlyPrice" class="control-label"></label>
-                <input asp-for="HourlyPrice" class="form-control" />
+                <input asp-for="HourlyPrice" class="form-control" value="@Model.HourlyPrice" disabled/>
                 <span asp-validation-for="HourlyPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            </div>*@
+            
+            @*<div class="form-group">
                 <label asp-for="ProjectId" class="control-label"></label>
                 <input asp-for="ProjectId" class="form-control" />
                 <span asp-validation-for="ProjectId" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

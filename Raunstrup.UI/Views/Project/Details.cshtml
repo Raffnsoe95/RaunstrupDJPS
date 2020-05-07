@@ -75,7 +75,7 @@
         <dd class="col-sm-10">
             @foreach (var item in @Model.ProjectDrivings)
             {
-                <li>@item.Employee.Name @item.Amount</li>
+                @item.Employee.Name @item.Amount
             }
         </dd>
         <dt class="col-sm-2">
@@ -84,7 +84,7 @@
         <dd class="col-sm-10">
             @foreach (var item in @Model.UsedItems)
             {
-                <li>@item.Item</li>
+                @item.Item
             }
         </dd>
         <dt class="col-sm-2">
@@ -94,7 +94,7 @@
             @foreach (var item in @Model.WorkingHours)
             {
 
-                <li>@item.Employee.Name  @item.Amount</li>
+                @item.Employee.Name  @item.Amount
             }
         </dd>
         <dt class="col-sm-2">
@@ -103,7 +103,7 @@
         <dd class="col-sm-10">
             
             
-                <li>@Model.Customer.Name</li>
+                @Model.Customer.Name
             
         </dd>
         <dt class="col-sm-2">

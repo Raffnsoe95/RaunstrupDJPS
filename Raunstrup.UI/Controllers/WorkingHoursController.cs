@@ -10,6 +10,7 @@ using Raunstrup.UI.Models;
 using Raunstrup.UI.Services;
 using Raunstrup.Contract.Services;
 using Raunstrup.Contract.DTOs;
+using Microsoft.CodeAnalysis;
 
 namespace Raunstrup.UI.Controllers
 {
@@ -17,11 +18,13 @@ namespace Raunstrup.UI.Controllers
     {
         private readonly ViewModelContext _context;
         private readonly IWorkingHoursService _workingHoursService;
+        private readonly IProjectService _projectService;
 
-        public WorkingHoursController(ViewModelContext context, IWorkingHoursService workingHoursService)
+        public WorkingHoursController(ViewModelContext context, IWorkingHoursService workingHoursService, IProjectService projectService)
         {
             _context = context;
             _workingHoursService = workingHoursService;
+            _projectService = projectService;
         }
 
         // GET: WorkingHours
@@ -52,7 +55,7 @@ namespace Raunstrup.UI.Controllers
         // GET: WorkingHours/Create
         public IActionResult Create(int id)
         {
-            var WorkingHours = new WorkingHoursViewModel { ProjectId = id, EmployeeId = 1 };
+            var WorkingHours = new WorkingHoursViewModel { ProjectId = id, EmployeeId = 1, HourlyPrice=300 };
             return View(WorkingHours);
         }
     
@@ -68,7 +71,10 @@ namespace Raunstrup.UI.Controllers
             {
                 await _workingHoursService.AddAsync(WorkingHoursMapper.Map(workingHoursViewModel)).ConfigureAwait(false);
 
-                return RedirectToAction(nameof(Index));
+                //ProjectViewModel projectViewModel =  ProjectMapper.Map(await _projectService.GetProjectAsync(workingHoursViewModel.ProjectId));
+                
+               // return RedirectToAction(nameof(Index));
+                return View(workingHoursViewModel);
             }
            // ViewData["EmployeeId"] = new SelectList(_context.Set<Employee>(), "Id", "Id", workingHours.EmployeeId);
             return View(workingHoursViewModel);

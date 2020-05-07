@@ -142,18 +142,18 @@ namespace Raunstrup.DataAccess.DBInitializer
                 Employee emp1 = new Employee { Name = "Jørgen Clevin", Active = true, Phone = "1241234" };
                 Employee emp2 = new Employee { Name = "Brian Jørgensen", Active = true, Phone = "1241234" };
                 Customer cus1 = new Customer { Name = "Hans Hushaj", Phone = "32345676", Address = "Hammerhajvej 34", Email = "Hammer@haj.dk", Active = true, };
-                
-                WorkingHours  workingHours1 =new WorkingHours  { Amount = 3, HourlyPrice = 400, Employee = emp1 };
-                WorkingHours workingHours2 = new WorkingHours { Amount = 6, HourlyPrice = 600, Employee = emp1 };
-                var Workingóurlist =new List<WorkingHours>();
+
+                //WorkingHours workingHours1 = new WorkingHours { Amount = 3, HourlyPrice = 400, Employee = emp1 };
+                //WorkingHours workingHours2 = new WorkingHours { Amount = 6, HourlyPrice = 600, Employee = emp1 };
+                //var Workingóurlist = new List<WorkingHours>();
                 ProjectDriving projectDriving = new ProjectDriving { Amount = 2, Employee = emp1, UnitPrice = 2 };
                 ProjectEmployee projectEmployee = new ProjectEmployee { Employee = emp1, EmployeeName = "Jørgen Clevin" };
 
                 ProjectEmployee projectEmployee2 = new ProjectEmployee { Employee = emp2};
                 
 
-                Workingóurlist.Add(workingHours1);
-                Workingóurlist.Add(workingHours2);
+               // Workingóurlist.Add(workingHours1);
+               //Workingóurlist.Add(workingHours2);
 
                 context.Projects.AddRange(
                     new Project
@@ -168,8 +168,8 @@ namespace Raunstrup.DataAccess.DBInitializer
                         IsFixedPrice = false,
                         Price = 0m,
                         StartDate = new DateTime(2020, 5, 4),
-                        WorkingHours = Workingóurlist,
-                        ProjectDrivings = new List<ProjectDriving> { projectDriving },
+                      //  WorkingHours = Workingóurlist,
+                         ProjectDrivings = new List<ProjectDriving> { projectDriving },
                         ProjectEmployees = new List<ProjectEmployee> { projectEmployee, projectEmployee2 },
                         Customer = cus1
 
@@ -187,6 +187,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Price = 0m,
                         StartDate = new DateTime(2020, 5, 4),
                         Customer = cus1
+
 
 
                     }, new Project
