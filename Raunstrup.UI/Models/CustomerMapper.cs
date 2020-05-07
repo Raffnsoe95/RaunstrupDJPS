@@ -13,6 +13,8 @@ namespace Raunstrup.UI.Models
 
         public static CustomerViewModel Map(CustomerDto dto)
         {
+            if (dto == null)
+                return null;
             return new CustomerViewModel
             { Id=dto.Id, Name=dto.Name, Phone=dto.Phone, Address=dto.Address, Email=dto.Email, Active=dto.Active, Rowversion=dto.Rowversion};
         }
@@ -24,6 +26,8 @@ namespace Raunstrup.UI.Models
 
         public static CustomerDto Map(CustomerViewModel view)
         {
+            if (view == null)
+                return null;
             return new CustomerDto
             { Id = view.Id, Name = view.Name, Phone = view.Phone, Address = view.Address, Email = view.Email, Active = view.Active, Rowversion = view.Rowversion };
         }

@@ -109,7 +109,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                     new Employee
                     {
                         Name = "Brian Nielsen",
-                        Tlfnr = "67589342",
+                        Phone = "67589342",
                         Active = true,
                         Type = type,
                         Specialties = new List<Specialty> { specialty }
@@ -117,39 +117,40 @@ namespace Raunstrup.DataAccess.DBInitializer
                     new Employee
                     {
                         Name = "Henrik Kofoed",
-                        Tlfnr = "78652341",
+                        Phone = "78652341",
                         Active = true
                     },
                     new Employee
                     {
                         Name = "Thomas Troelsen",
-                        Tlfnr = "+4534782311",
+                        Phone = "+4534782311",
                         Active = true
                     },
                     new Employee
                     {
                         Name = "Rasmus Paludan",
-                        Tlfnr = "54672291",
+                        Phone = "54672291",
                         Active = true
                     },
                     new Employee
                     {
                         Name = "Flemming Leth",
-                        Tlfnr = "23456789",
+                        Phone = "23456789",
                         Active = true
                     }
                 );
-                Employee emp1 = new Employee { Name = "Jørgen Clevin", Active = true, Tlfnr = "1241234" };
-                Employee emp2 = new Employee { Name = "Brian Jørgensen", Active = true, Tlfnr = "1241234" };
+                Employee emp1 = new Employee { Name = "Jørgen Clevin", Active = true, Phone = "1241234" };
+                Employee emp2 = new Employee { Name = "Brian Jørgensen", Active = true, Phone = "1241234" };
+                Customer cus1 = new Customer { Name = "Hans Hushaj", Phone = "32345676", Address = "Hammerhajvej 34", Email = "Hammer@haj.dk", Active = true, };
                 
                 WorkingHours  workingHours1 =new WorkingHours  { Amount = 3, HourlyPrice = 400, Employee = emp1 };
                 WorkingHours workingHours2 = new WorkingHours { Amount = 6, HourlyPrice = 600, Employee = emp1 };
                 var Workingóurlist =new List<WorkingHours>();
                 ProjectDriving projectDriving = new ProjectDriving { Amount = 2, Employee = emp1, UnitPrice = 2 };
                 ProjectEmployee projectEmployee = new ProjectEmployee { Employee = emp1, EmployeeName = "Jørgen Clevin" };
+
                 ProjectEmployee projectEmployee2 = new ProjectEmployee { Employee = emp2};
                 
-
 
                 Workingóurlist.Add(workingHours1);
                 Workingóurlist.Add(workingHours2);
@@ -168,9 +169,10 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Price = 0m,
                         StartDate = new DateTime(2020, 5, 4),
                         WorkingHours = Workingóurlist,
-                        ProjectDrivings = new List<ProjectDriving> { projectDriving},
+                        ProjectDrivings = new List<ProjectDriving> { projectDriving },
                         ProjectEmployees = new List<ProjectEmployee> { projectEmployee, projectEmployee2 },
-                        
+                        Customer = cus1
+
 
 
                     },
@@ -183,7 +185,8 @@ namespace Raunstrup.DataAccess.DBInitializer
                         IsDone = false,
                         IsFixedPrice = false,
                         Price = 0m,
-                        StartDate = new DateTime(2020, 5, 4)
+                        StartDate = new DateTime(2020, 5, 4),
+                        Customer = cus1
 
 
                     }, new Project
@@ -195,8 +198,8 @@ namespace Raunstrup.DataAccess.DBInitializer
                         IsDone = false,
                         IsFixedPrice = false,
                         Price = 0m,
-                        StartDate = new DateTime(2020, 5, 4)
-
+                        StartDate = new DateTime(2020, 5, 4),
+                        Customer = cus1
 
                     }, new Project
                     {
