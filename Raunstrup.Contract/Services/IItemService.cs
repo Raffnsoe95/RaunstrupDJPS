@@ -18,6 +18,6 @@ namespace Raunstrup.Contract.Services
 
         Task RemoveAsync(int id);
 
-        Task AddAsync(int id, int projectid);
+        Task AddAsync(List<ProjectItemDto> itemViewModels);
     }
 }

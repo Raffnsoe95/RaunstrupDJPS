@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Raunstrup.UI.Models;
 
 namespace Raunstrup.UI.Services
 {
@@ -77,13 +78,18 @@ namespace Raunstrup.UI.Services
             response.EnsureSuccessStatusCode();
         }
 
-        async Task IItemService.AddAsync(int id, int projectid)
+        async Task IItemService.AddAsync(List<ProjectItemDto> itemViewModels)
         {
-            var projectItem = new ProjectItemDto { Id = id, ProjectId = projectid };
-            var json = JsonSerializer.Serialize(projectItem);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await Client.PostAsync(_itemsRequestUri + "/AddProjectItemToProject", data).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
+            //var projectItem = new ProjectItemDto { Id = id, ProjectId = projectid };
+
+            foreach(var item in itemViewModels)
+            {
+                    var json = JsonSerializer.Serialize(item);
+                    var data = new StringContent(json, Encoding.UTF8, "application/json");
+                    var response = await Client.PostAsync(_itemsRequestUri + "/AddProjectItemToProject", data).ConfigureAwait(false);
+                    response.EnsureSuccessStatusCode();
+                
+            }
         }
     }
 }

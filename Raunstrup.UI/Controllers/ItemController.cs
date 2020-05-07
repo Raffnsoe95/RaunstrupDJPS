@@ -124,16 +124,19 @@ namespace Raunstrup.UI.Controllers
         public async Task<IActionResult> AddProjectItem(int id)
         {
             var itemDtos = await _itemService.GetItemsAsync().ConfigureAwait(false);
-            return View(ItemMapper.Map(itemDtos));
+            var items = ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList();
+            return View(ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList());
         }
 
-        public async Task<IActionResult> AddProjectItemToProject(int id, int projectid)
+        public async Task<IActionResult> AddProjectItemToProject(List<ItemViewModel> items)
         {
+            var projectItems = items.Where(x => x.Amount > 0).Select(x => new ProjectItemViewModel() { Amount = x.Amount, Price = x.Price, ProjectId = x.projectID, ItemId = x.Id });
+
             if (ModelState.IsValid)
             {
-                await _itemService.AddAsync(id, projectid).ConfigureAwait(false);
+                await _itemService.AddAsync(ProjectItemMapper.Map(projectItems).ToList()).ConfigureAwait(false);
             }
-            return RedirectToAction("AddProjectItem", new { id = projectid });
+            return RedirectToAction("AddProjectItem", new { id = 2});
         }
     }
 }
