@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Raunstrup.Contract.DTOs;
+using Raunstrup.DataAccess.Model;
 using Raunstrup.DataAccess;
+
 
 namespace Raunstrup.BusinessLogic.ServiceInterfaces
 {
@@ -13,6 +16,7 @@ namespace Raunstrup.BusinessLogic.ServiceInterfaces
             void Create(Customer customer);
             void Update(Customer customer);
             void Delete(int id);
-        
+            void AddCustomerToProject(Customer Customer);
+
     }
 }

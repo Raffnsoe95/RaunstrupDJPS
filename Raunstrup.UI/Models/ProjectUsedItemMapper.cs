@@ -7,47 +7,37 @@ using System.Threading.Tasks;
 
 namespace Raunstrup.UI.Models
 {
-    public class ProjectItemMapper
+    public class ProjectUsedItemMapper
     {
-
-        public static ProjectItemViewModel Map(ProjectItemDto dto)
+        public static ProjectUsedItemViewModel Map(ProjectUsedItemDto dto)
         {
-            return new ProjectItemViewModel
+            return new ProjectUsedItemViewModel
             {
                 Id = dto.Id,
                 Amount = dto.Amount,
                 Price = dto.Price,
                 Item = ItemMapper.Map(dto.Item),
+                ItemID = dto.ItemID,
                 ProjectId = dto.ProjectId
             };
         }
 
-        public static IEnumerable<ProjectItemViewModel> Map(IEnumerable<ProjectItemDto> model)
+        public static IEnumerable<ProjectUsedItemViewModel> Map(IEnumerable<ProjectUsedItemDto> model)
         {
             return model.Select(x => Map(x)).AsEnumerable();
         }
 
-        public static IEnumerable<ProjectItemDto> Map(IEnumerable<ProjectItemViewModel> model)
+        public static ProjectUsedItemDto Map(ProjectUsedItemViewModel view)
         {
-            return model.Select(x => Map(x)).AsEnumerable();
-        }
-
-        public static ProjectItemDto Map(ProjectItemViewModel view)
-        {
-            return new ProjectItemDto
+            return new ProjectUsedItemDto
             {
                 Id = view.Id,
                 Amount = view.Amount,
                 Price = view.Price,
                 Item = ItemMapper.Map(view.Item),
+                ItemID = view.ItemID,
                 ProjectId = view.ProjectId
             };
-        }
-
-        
-
-        
-
-        
+        }  
     }
 }

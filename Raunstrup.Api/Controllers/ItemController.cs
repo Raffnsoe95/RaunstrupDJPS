@@ -60,10 +60,16 @@ namespace Raunstrup.Api.Controllers
             _itemService.Delete(id);
         }
 
-        [HttpPost("AddProjectItemToProject", Name = "AddProjectItemToProject")]
-        public void AddProjectItemToProject([FromBody] ProjectItemDto value)
+        [HttpPost("AddUsedProjectItemToProject", Name = "AddUsedProjectItemToProject")]
+        public void AddUsedProjectItemToProject([FromBody] ProjectUsedItemDto value)
         {
-            _itemService.Create(ProjectItemMapper.Map(value));
+            _itemService.CreateUsedItems(ProjectUsedItemMapper.Map(value));
+        }
+
+        [HttpPost("AddAssignedProjectItemToProject", Name = "AddAssignedProjectItemToProject")]
+        public void AddAssignedProjectItemToProject([FromBody] ProjectAssignedItemDto value)
+        {
+            _itemService.CreateAssignedItems(ProjectAssignedItemMapper.Map(value));
         }
     }
 }

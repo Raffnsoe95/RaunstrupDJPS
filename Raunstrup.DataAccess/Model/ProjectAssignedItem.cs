@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Raunstrup.DataAccess.Model
 {
-    public class ProjectItem
+    public class ProjectAssignedItem
     {
         public int Id { get; set; }
 
@@ -12,7 +12,11 @@ namespace Raunstrup.DataAccess.Model
 
         public decimal Price { get; set; }
 
+        public bool IsUsed { get; set; }
+
         public Item Item { get; set; }
+
+        public int ItemID { get; set; }
 
         public int ProjectId { get; set; }
     }

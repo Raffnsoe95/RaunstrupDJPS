@@ -21,7 +21,7 @@ namespace Raunstrup.Api.Models
             {
                 Id = dto.Id,
                 Name = dto.Name,
-                Tlfnr = dto.Tlfnr,
+                Phone = dto.Phone,
                 Active = dto.Active,
                 Specialties = SpecialtyMapper.Map(dto.Specialties).ToList(), 
                 Type = TypeMapper.Map(dto.Type),
@@ -44,7 +44,7 @@ namespace Raunstrup.Api.Models
             { 
                 Id = model.Id,
                 Name = model.Name,
-                Tlfnr = model.Tlfnr,
+                Phone = model.Phone,
                 Active = model.Active,
                 Specialties = SpecialtyMapper.Map(model.Specialties).ToList(),
                 Type = TypeMapper.Map(model.Type),

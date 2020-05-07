@@ -26,10 +26,13 @@ namespace Raunstrup.Api.Models
                 Price = dto.Price,
                 StartDate = dto.StartDate,
                 Rowversion = dto.Rowversion,
+                CustomerId = dto.CustomerId,
                 WorkingHours = WorkingHoursMapper.Map(dto.WorkingHoursDtos).ToList(),
-                UsedItems = ProjectItemMapper.Map(dto.UsedItemsDtos).ToList(),
+                UsedItems = ProjectUsedItemMapper.Map(dto.UsedItemsDtos).ToList(),
+                AssignedItems = ProjectAssignedItemMapper.Map(dto.AssignedItemDtos).ToList(),
                 ProjectDrivings = ProjectDrivingMapper.Map(dto.ProjectDrivingDtos).ToList(),
-                ProjectEmployees = ProjectEmployeeMapper.Map(dto.ProjectEmployeeDtos).ToList()
+                ProjectEmployees = ProjectEmployeeMapper.Map(dto.ProjectEmployeeDtos).ToList(),
+                Customer = CustomerMapper.Map(dto.CustomerDto)
             };
         }
 
@@ -52,12 +55,13 @@ namespace Raunstrup.Api.Models
                 Price = project.Price,
                 StartDate = project.StartDate,
                 Rowversion = project.Rowversion,
+                CustomerId = project.CustomerId,
                 WorkingHoursDtos = WorkingHoursMapper.Map(project.WorkingHours).ToList(),
-                UsedItemsDtos = ProjectItemMapper.Map(project.UsedItems).ToList(),
+                UsedItemsDtos = ProjectUsedItemMapper.Map(project.UsedItems).ToList(),
+                AssignedItemDtos = ProjectAssignedItemMapper.Map(project.AssignedItems).ToList(),
                 ProjectDrivingDtos = ProjectDrivingMapper.Map(project.ProjectDrivings).ToList(),
-                ProjectEmployeeDtos = ProjectEmployeeMapper.Map(project.ProjectEmployees).ToList()
-
-
+                ProjectEmployeeDtos = ProjectEmployeeMapper.Map(project.ProjectEmployees).ToList(),
+                CustomerDto = CustomerMapper.Map(project.Customer)
             };
         }
     }
