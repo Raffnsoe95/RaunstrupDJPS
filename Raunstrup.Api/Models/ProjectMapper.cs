@@ -55,7 +55,7 @@ namespace Raunstrup.Api.Models
                 Rowversion = project.Rowversion,
                 WorkingHoursDtos = WorkingHoursMapper.Map(project.WorkingHours).ToList(),
                 UsedItemsDtos = ProjectUsedItemMapper.Map(project.UsedItems).ToList(),
-                //AssignedItems = ProjectAssignedItemMapper.Map(project.AssignedItems).ToList(),
+                AssignedItemDtos = ProjectAssignedItemMapper.Map(project.AssignedItems).ToList(),
                 ProjectDrivingDtos = ProjectDrivingMapper.Map(project.ProjectDrivings).ToList(),
                 ProjectEmployeeDtos = ProjectEmployeeMapper.Map(project.ProjectEmployees).ToList()
             };
