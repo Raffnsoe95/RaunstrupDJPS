@@ -38,6 +38,7 @@ namespace Raunstrup.UI.Services
             response.EnsureSuccessStatusCode();
         }
 
+     
         async Task<ProjectDto> IProjectService.GetProjectAsync(int id)
         {
             var response = await Client.GetAsync($"{_customerRequestUri}/{id}").ConfigureAwait(false);

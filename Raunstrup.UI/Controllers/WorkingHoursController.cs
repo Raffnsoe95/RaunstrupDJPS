@@ -69,7 +69,7 @@ namespace Raunstrup.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _workingHoursService.AddAsync(WorkingHoursMapper.Map(workingHoursViewModel)).ConfigureAwait(false);
+                 await _workingHoursService.AddAsync(WorkingHoursMapper.Map(workingHoursViewModel)) .ConfigureAwait(false);
 
                 //ProjectViewModel projectViewModel =  ProjectMapper.Map(await _projectService.GetProjectAsync(workingHoursViewModel.ProjectId));
                 
