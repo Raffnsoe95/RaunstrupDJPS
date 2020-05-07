@@ -143,15 +143,15 @@ namespace Raunstrup.UI.Controllers
             return View(ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList());
         }
 
-        public async Task<IActionResult> AddUsedProjectItemToProject(int id, int projectid)
+        public async Task<IActionResult> AddUsedProjectItemToProject(List<ItemViewModel> items)
         {
-            var projectItems = items.Where(x => x.Amount > 0).Select(x => new ProjectItemViewModel() { Amount = x.Amount, Price = x.Price, ProjectId = x.projectID, ItemId = x.Id });
+            var projectItems = items.Where(x => x.Amount > 0).Select(x => new ProjectUsedItemViewModel() { Amount = x.Amount, Price = x.Price, ProjectId = x.projectID, ItemID = x.Id });
 
             if (ModelState.IsValid)
             {
-                await _itemService.AddUsedItemAsync(id, projectid, 5, 799).ConfigureAwait(false);
+                await _itemService.AddUsedItemAsync(ProjectUsedItemMapper.Map(projectItems).ToList()).ConfigureAwait(false);
             }
-            return RedirectToAction("AddUsedProjectItem", new { id = projectid });
+            return RedirectToAction("AddUsedProjectItem", new { id = items[0].projectID });
         }
     }
 }
