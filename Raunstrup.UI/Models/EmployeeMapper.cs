@@ -12,7 +12,15 @@ namespace Raunstrup.UI.Models
             { return null; }
 
             return new EmployeeViewModel
-            { Id = dto.Id, Name = dto.Name, Tlfnr = dto.Tlfnr, Active = dto.Active };
+            { 
+                Id = dto.Id,
+                Name = dto.Name,
+                Tlfnr = dto.Tlfnr,
+                Active = dto.Active,
+                Specialties = SpecialtyMapper.Map(dto.Specialties).ToList(),
+                Type = TypeMapper.Map(dto.Type),
+                RowVersion = dto.RowVersion
+            };
         }
 
         public static IEnumerable<EmployeeViewModel> Map(IEnumerable<EmployeeDto> model)
@@ -26,7 +34,15 @@ namespace Raunstrup.UI.Models
             { return null; }
 
             return new EmployeeDto
-            { Id = model.Id, Name = model.Name, Tlfnr = model.Tlfnr, Active = model.Active };
+            { 
+                Id = model.Id,
+                Name = model.Name,
+                Tlfnr = model.Tlfnr,
+                Active = model.Active,
+                Specialties = SpecialtyMapper.Map(model.Specialties).ToList(),
+                Type = TypeMapper.Map(model.Type),
+                RowVersion = model.RowVersion
+            };
         }
     }
 }

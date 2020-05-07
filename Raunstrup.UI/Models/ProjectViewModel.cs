@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.RegularExpressions;
+using Raunstrup.DataAccess.Model;
 
 namespace Raunstrup.UI.Models
 {
@@ -12,9 +13,11 @@ namespace Raunstrup.UI.Models
     {
         public ProjectViewModel() 
         {
-            UsedItems = new List<ProjectItemViewModel>();
+            ProjectEmployees = new List<ProjectEmployeeViewModel>();
+            WorkingHours = new List<WorkingHoursViewModel>();
+            UsedItems = new List<ProjectUsedItemViewModel>();
+            AssignedItems = new List<ProjectAssignedItemViewModel>();
         }
-
 
         public int Id { get; set; }
 
@@ -36,13 +39,20 @@ namespace Raunstrup.UI.Models
 
         public bool IsDone { get; set; }
 
-        public List<WorkingHoursViewModel> WorkingHours { get; set; }
-        public List<ProjectEmployeeViewModel> ProjectEmployees { get; set; }
-
         [Timestamp]
         public byte[] Rowversion { get; set; }
 
-        public List<ProjectItemViewModel> UsedItems { get; set; }
+        public List<WorkingHoursViewModel> WorkingHours { get; set; }
+
+        public List<ProjectEmployeeViewModel> ProjectEmployees { get; set; }
+
+        public CustomerViewModel Customer { get; set; }
+
+        public int CustomerId { get; set; }
+
+        public List<ProjectAssignedItemViewModel> AssignedItems { get; set; }
+
+        public List<ProjectUsedItemViewModel> UsedItems { get; set; }
 
         public List<ProjectDrivingViewModel> ProjectDrivings { get; set; }
     }

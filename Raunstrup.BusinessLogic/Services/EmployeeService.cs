@@ -22,12 +22,18 @@ namespace Raunstrup.BusinessLogic.Services
 
         IEnumerable<Employee> IEmployeeService.GetAll()
         {
-            return _context.Employees.ToList();
+            return _context.Employees
+            .Include(e => e.Type)
+            .Include(e => e.Specialties)
+                .ToList();
         }
 
         Employee IEmployeeService.Get(int id)
         {
-            return _context.Employees.Find(id);
+            return _context.Employees
+            .Include(e => e.Type)
+            .Include(e => e.Specialties)
+            .FirstOrDefault(x => x.Id == id);
         }
 
         void IEmployeeService.Create(Employee employee)

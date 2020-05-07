@@ -95,9 +95,10 @@
 </div>
 <div>
 
-    <a asp-action="Create" asp-route-id="@Model.Id" asp-controller="ProjectDriving">Indberet kørsel</a> | 
+    <a asp-action="Create" asp-route-id="@Model.Id" asp-controller="ProjectDriving">Indberet kørsel</a> |
     <a asp-action="AddProjectEmployee" asp-route-id="@Model.Id" asp-controller="Employee">Tilknyt medarbejder</a> |
-    <a asp-action="AddProjectItem" asp-route-id="@Model.Id" asp-controller="Item">TilFøj Item</a> |
+    <a asp-action="AddAssignedProjectItem" asp-route-id="@Model.Id" asp-controller="Item">TilFøj Item</a> |
+    <a asp-action="AddUsedProjectItem" asp-route-id="@Model.Id" asp-controller="Item">Indberet Item</a> |
 
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>

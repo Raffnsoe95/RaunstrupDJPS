@@ -121,19 +121,34 @@ namespace Raunstrup.UI.Controllers
             return _context.Items.Any(e => e.Id == id);
         }
 
-        public async Task<IActionResult> AddProjectItem(int id)
+        public async Task<IActionResult> AddAssignedProjectItem(int id)
         {
             var itemDtos = await _itemService.GetItemsAsync().ConfigureAwait(false);
             return View(ItemMapper.Map(itemDtos));
         }
 
-        public async Task<IActionResult> AddProjectItemToProject(int id, int projectid)
+        public async Task<IActionResult> AddAssignedProjectItemToProject(int id, int projectid)
         {
             if (ModelState.IsValid)
             {
-                await _itemService.AddAsync(id, projectid).ConfigureAwait(false);
+                await _itemService.AddAssignedItemAsync(id, projectid,5,799).ConfigureAwait(false);
             }
-            return RedirectToAction("AddProjectItem", new { id = projectid });
+            return RedirectToAction("AddAssignedProjectItem", new { id = projectid });
+        }
+
+        public async Task<IActionResult> AddUsedProjectItem(int id)
+        {
+            var itemDtos = await _itemService.GetItemsAsync().ConfigureAwait(false);
+            return View(ItemMapper.Map(itemDtos));
+        }
+
+        public async Task<IActionResult> AddUsedProjectItemToProject(int id, int projectid)
+        {
+            if (ModelState.IsValid)
+            {
+                await _itemService.AddUsedItemAsync(id, projectid, 5, 799).ConfigureAwait(false);
+            }
+            return RedirectToAction("AddUsedProjectItem", new { id = projectid });
         }
     }
 }

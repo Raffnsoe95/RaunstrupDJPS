@@ -7,6 +7,10 @@ namespace Raunstrup.DataAccess.Model
 {
     public class WorkingHours
     {
+        public WorkingHours()
+        {
+            Employee = new Employee();
+        }
         public int Id { get; set; }
 
         public int Amount { get; set; }

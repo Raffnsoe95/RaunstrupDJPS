@@ -101,42 +101,49 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Active = true,
                     }
                 );
+
+
+                var type = new EmployeeType { HourlyPrice = 200, Title = "Tømrer" };
+                var specialty = new Specialty { Bonus = 100, Title = "Velux" };
                 context.Employees.AddRange(
                     new Employee
                     {
                         Name = "Brian Nielsen",
                         Tlfnr = "67589342",
                         Active = true,
+                        Type = type,
+                        Specialties = new List<Specialty> { specialty }
                     },
                     new Employee
                     {
                         Name = "Henrik Kofoed",
                         Tlfnr = "78652341",
-                        Active = true,
+                        Active = true
                     },
                     new Employee
                     {
                         Name = "Thomas Troelsen",
                         Tlfnr = "+4534782311",
-                        Active = true,
+                        Active = true
                     },
                     new Employee
                     {
                         Name = "Rasmus Paludan",
                         Tlfnr = "54672291",
-                        Active = true,
+                        Active = true
                     },
                     new Employee
                     {
                         Name = "Flemming Leth",
                         Tlfnr = "23456789",
-                        Active = true,
+                        Active = true
                     }
                 );
                 Employee emp1 = new Employee { Name = "Jørgen Clevin", Active = true, Tlfnr = "1241234" };
                 Employee emp2 = new Employee { Name = "Brian Jørgensen", Active = true, Tlfnr = "1241234" };
                 
                 WorkingHours  workingHours1 =new WorkingHours  { Amount = 3, HourlyPrice = 400, Employee = emp1 };
+                WorkingHours workingHours2 = new WorkingHours { Amount = 6, HourlyPrice = 600, Employee = emp1 };
                 var Workingóurlist =new List<WorkingHours>();
                 ProjectDriving projectDriving = new ProjectDriving { Amount = 2, Employee = emp1, UnitPrice = 2 };
                 ProjectEmployee projectEmployee = new ProjectEmployee { Employee = emp1, EmployeeName = "Jørgen Clevin" };
@@ -145,7 +152,8 @@ namespace Raunstrup.DataAccess.DBInitializer
 
 
                 Workingóurlist.Add(workingHours1);
-             
+                Workingóurlist.Add(workingHours2);
+
                 context.Projects.AddRange(
                     new Project
                     {

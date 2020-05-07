@@ -18,6 +18,8 @@ namespace Raunstrup.Contract.Services
 
         Task RemoveAsync(int id);
 
-        Task AddAsync(int id, int projectid);
+        Task AddAssignedItemAsync(int id, int projectid, int amount, decimal price);
+
+        Task AddUsedItemAsync(int id, int projectid, int amount, decimal price);  
     }
 }

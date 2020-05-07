@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Raunstrup.Contract.DTOs
 {
-    public class ProjectItemDto
+    public class ProjectUsedItemDto
     {
         public int Id { get; set; }
 
@@ -13,7 +13,11 @@ namespace Raunstrup.Contract.DTOs
 
         public decimal Price { get; set; }
 
+        public bool IsUsed { get; set; }
+
         public ItemDto Item { get; set; }
+
+        public int ItemID { get; set; }
 
         public int ProjectId { get; set; }
     }

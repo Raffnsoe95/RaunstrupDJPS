@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Raunstrup.UI.Models.ItemViewModel>
 
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -21,6 +22,9 @@
             <th>
                 Aktiv
             </th>
+            <th>
+                Amount
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -37,7 +41,14 @@
                 @Html.DisplayFor(modelItem => item.Active)
             </td>
             <td>
-                <a asp-action="AddProjectItemToProject" asp-route-id="@item.Id" asp-route-projectid="@ViewContext.ModelState["Id"].AttemptedValue" asp-controller="Item">Tilføj</a>
+
+                <label></label>
+
+                <input  />
+                
+            </td>
+            <td>
+                <a asp-action="AddUsedProjectItemToProject" asp-route-id="@item.Id" asp-route-projectid="@ViewContext.ModelState["id"].AttemptedValue" asp-controller="Item">Indberet</a>
             </td>
         </tr>
 }
