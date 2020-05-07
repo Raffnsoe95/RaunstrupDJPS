@@ -50,9 +50,10 @@ namespace Raunstrup.UI.Controllers
         }
 
         // GET: WorkingHours/Create
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
-            return View();
+            var WorkingHours = new WorkingHoursViewModel { ProjectId = id, EmployeeId = 1 };
+            return View(WorkingHours);
         }
     
 
