@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Raunstrup.UI.Models.ItemViewModel>
+﻿@model List<Raunstrup.UI.Models.ItemViewModel>
 
 
 @{
@@ -54,3 +54,23 @@
 }
     </tbody>
 </table>
+
+<form method="post" asp-action="AddProjectItemToProject">
+    <table class="table">
+        @for (var i = 0; i < Model.Count(); i++)
+        {
+        <tr>
+            @*<td><input name="[@i].Id" value="@Model[i].Id" /></td>
+        <td><input name="[@i].Name" value="@Model[i].Name" /></td>
+        <td><input name="[@i].Price" value="@Model[i].Price" /></td>*@
+            <td><input type="text" asp-for="@Model[i].Id" /></td>
+            <td><input type="text" asp-for="@Model[i].Name" /></td>
+            <td><input type="text" asp-for="@Model[i].Price" /></td>
+            <td><input type="text" asp-for="@Model[i].projectID" /></td>
+            <td><input type="text" asp-for="@Model[i].Amount" /></td>
+        </tr>
+        }
+    </table>
+    <button>Update</button>
+</form>
+

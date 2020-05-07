@@ -15,6 +15,8 @@ namespace Raunstrup.UI.Models
 
         public decimal Price { get; set; }
 
+        public int ItemId { get; set; }
+
         public ItemViewModel Item { get; set; }
 
         public int ItemID { get; set; }
