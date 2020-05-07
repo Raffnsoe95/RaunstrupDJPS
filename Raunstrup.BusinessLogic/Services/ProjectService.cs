@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Raunstrup.BusinessLogic.ServiceInterfaces;
 
 using Raunstrup.DataAccess;
@@ -33,6 +34,8 @@ namespace Raunstrup.BusinessLogic.Services
                 .ThenInclude(e => e.Item)
                 .Include(w => w.AssignedItems)
                 .ThenInclude(e => e.Item)
+                .Include(w => w.Customer)
+                
                 .ToList();
             }
 
@@ -51,7 +54,9 @@ namespace Raunstrup.BusinessLogic.Services
                 .ThenInclude(e => e.Item)
                 .Include(w => w.AssignedItems)
                 .ThenInclude(e => e.Item)
+                .Include(w => w.Customer)
                 .FirstOrDefault(x => x.Id == id);
+
             }
 
             void IProjectService.Create(Project project)
@@ -62,11 +67,34 @@ namespace Raunstrup.BusinessLogic.Services
 
             void IProjectService.Update(Project project)
             {
+
                 _context.Projects.Update(project);
                 _context.SaveChanges();
             }
+        void IProjectService.AddCustomerToProject(Project project)
+        {
 
-            void IProjectService.Delete(int id)
+
+            Project tempProject =
+                 _context.Projects
+                .Include(w => w.WorkingHours)
+                .ThenInclude(e => e.Employee)
+                .Include(w => w.ProjectDrivings)
+                .ThenInclude(e => e.Employee)
+                .Include(w => w.ProjectEmployees)
+                .ThenInclude(e => e.Employee)
+                .Include(w => w.UsedItems)
+                .ThenInclude(e => e.Item)
+                .Include(w => w.AssignedItems)
+                .ThenInclude(e => e.Item)
+                .Include(w => w.Customer)
+                .FirstOrDefault(x => x.Id == project.Id);
+            tempProject.CustomerId = project.CustomerId;
+            _context.Projects.Update(tempProject);
+            _context.SaveChanges();
+        }
+
+        void IProjectService.Delete(int id)
             {
                 _context.Projects.Remove(_context.Projects.Find(id));
                 _context.SaveChanges();

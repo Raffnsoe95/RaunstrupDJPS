@@ -15,7 +15,7 @@ namespace Raunstrup.UI.Models
         [RegularExpression(@"[A-ZØ]+[a-zøA-ZØ]"),StringLength(200)]
         public string Name { get; set; }
         [RegularExpression(@"[0-9()+]"), StringLength(9)]
-        public string Tlfnr { get; set; }
+        public string Phone { get; set; }
         public bool Active { get; set; }
         [Timestamp]
         public byte[] RowVersion { get; set; }

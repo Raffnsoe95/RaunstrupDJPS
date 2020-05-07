@@ -70,6 +70,43 @@
           
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProjectDrivings)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var item in @Model.ProjectDrivings)
+            {
+                <li>@item.Employee.Name @item.Amount</li>
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UsedItems)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var item in @Model.UsedItems)
+            {
+                <li>@item.Item</li>
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.WorkingHours)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var item in @Model.WorkingHours)
+            {
+
+                <li>@item.Employee.Name  @item.Amount</li>
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer)
+        </dt>
+        <dd class="col-sm-10">
+            
+            
+                <li>@Model.Customer.Name</li>
+            
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Rowversion)
         </dt>
         <dd class="col-sm-10">
@@ -81,6 +118,7 @@
 
     <a asp-action="Create" asp-route-id="@Model.Id" asp-controller="ProjectDriving">Indberet kørsel</a> |
     <a asp-action="AddProjectEmployee" asp-route-id="@Model.Id" asp-controller="Employee">Tilknyt medarbejder</a> |
+    <a asp-action="AddProjectCustomer" asp-route-id="@Model.Id" asp-controller="Customer">Tilknyt Kunde</a> |
     <a asp-action="AddAssignedProjectItem" asp-route-id="@Model.Id" asp-controller="Item">TilFøj Item</a> |
     <a asp-action="AddUsedProjectItem" asp-route-id="@Model.Id" asp-controller="Item">Indberet Item</a> |
     <a asp-action="Create" asp-route-id="@Model.Id" asp-controller="WorkingHours">Indberet WorkingHours</a> |

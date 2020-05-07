@@ -6,17 +6,18 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Raunstrup.Contract.DTOs;
 using Raunstrup.Contract.Services;
-
-
+using Raunstrup.UI.Models;
 
 namespace Raunstrup.UI.Services
 {
     public class CustomerServiceProxy: ICustomerService
     {
         private const string _customerRequestUri = "api/Customers";
+        private IProjectService projectService;
 
-        public CustomerServiceProxy(HttpClient client)
+        public CustomerServiceProxy(HttpClient client, IProjectService projectService)
         {
+            this.projectService = projectService;
             Client = client;
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json")
@@ -75,6 +76,15 @@ namespace Raunstrup.UI.Services
             var json = JsonSerializer.Serialize(movie);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await Client.PutAsync($"{_customerRequestUri}/{id}", data).ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+        }
+        async Task ICustomerService.AddAsync(int id, int projectid)
+        {
+            ProjectDto project = await projectService.GetProjectAsync(projectid);
+            project.CustomerId = id;
+            var json = JsonSerializer.Serialize(project);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await Client.PutAsync(_customerRequestUri + "/AddCustomerToProject", data).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
     }

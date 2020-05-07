@@ -62,7 +62,7 @@ namespace Raunstrup.UI
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Tlfnr,Salary,Active")] EmployeeViewModel employeeViewModel)
+        public async Task<IActionResult> Create([Bind("Id,Name,Phone,Salary,Active")] EmployeeViewModel employeeViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace Raunstrup.UI
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Tlfnr,Salary,Active")] EmployeeViewModel employeeViewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Phone,Salary,Active")] EmployeeViewModel employeeViewModel)
         {
             if (id != employeeViewModel.Id)
             {

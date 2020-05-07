@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Raunstrup.BusinessLogic.ServiceInterfaces;
-
 using Raunstrup.DataAccess;
 using Raunstrup.DataAccess.Context;
-
+using Raunstrup.DataAccess.Model;
 namespace Raunstrup.BusinessLogic.Services
 {
     public class CustomerService:ICustomerService
@@ -45,6 +44,11 @@ namespace Raunstrup.BusinessLogic.Services
                 _context.customers.Remove(_context.customers.Find(id));
                 _context.SaveChanges();
             }
+        void ICustomerService.AddCustomerToProject(Customer Customer)
+        {
+            _context.Customer.Add(Customer);
+            _context.SaveChanges();
         }
+    }
     }
 
