@@ -32,7 +32,7 @@ namespace Raunstrup.DataAccess
 
         public bool IsDone { get; set; }
 
-        public int CustomerId { get; set; }  
+        public int? CustomerId { get; set; }  
 
         [Timestamp]
         public byte[] Rowversion { get; set; }
@@ -46,6 +46,7 @@ namespace Raunstrup.DataAccess
         public List<ProjectDriving> ProjectDrivings { get; set; }
 
         public List<ProjectEmployee> ProjectEmployees { get; set; }
+        
         public Customer Customer { get; set; }
     }
 }

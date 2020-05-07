@@ -48,7 +48,7 @@ namespace Raunstrup.UI.Models
         public List<ProjectEmployeeViewModel> ProjectEmployees { get; set; }
         public CustomerViewModel Customer { get; set; }
 
-        public int CustomerId { get; set; }
+        public int? CustomerId { get; set; }
 
         public List<ProjectAssignedItemViewModel> AssignedItems { get; set; }
 
