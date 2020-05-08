@@ -36,6 +36,7 @@ namespace Raunstrup.BusinessLogic.Services
                 .ThenInclude(e => e.Item)
                 .Include(w => w.Customer)
                 
+                
                 .ToList();
             }
 
@@ -43,18 +44,20 @@ namespace Raunstrup.BusinessLogic.Services
 
             Project IProjectService.Get(int id)
             {
-                return _context.Projects
-                .Include(w => w.WorkingHours)
-                .ThenInclude(e => e.Employee)
-                .Include(w => w.ProjectDrivings)
-                .ThenInclude(e => e.Employee)
-                .Include(w => w.ProjectEmployees)
-                .ThenInclude(e => e.Employee)
-                .Include(w => w.UsedItems)
-                .ThenInclude(e => e.Item)
-                .Include(w => w.AssignedItems)
-                .ThenInclude(e => e.Item)
-                .Include(w => w.Customer)
+            return _context.Projects
+            .Include(w => w.WorkingHours)
+            .ThenInclude(e => e.Employee)
+            .Include(w => w.ProjectDrivings)
+            .ThenInclude(e => e.Employee)
+            .Include(w => w.ProjectEmployees)
+            .ThenInclude(e => e.Employee)
+            .Include(w => w.UsedItems)
+            .ThenInclude(e => e.Item)
+            .Include(w => w.AssignedItems)
+            .ThenInclude(e => e.Item)
+            .Include(w=> w.Customer)
+            
+
                 .FirstOrDefault(x => x.Id == id);
 
             }
