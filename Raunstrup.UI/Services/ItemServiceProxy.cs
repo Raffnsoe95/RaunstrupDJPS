@@ -78,13 +78,15 @@ namespace Raunstrup.UI.Services
             response.EnsureSuccessStatusCode();
         }
 
-        async Task IItemService.AddAssignedItemAsync(int id, int projectid,int amount,decimal price)
+        async Task IItemService.AddAssignedItemAsync(List<ProjectAssignedItemDto> items)
         {
-            var projectItem = new ProjectAssignedItemDto { ItemID = id, ProjectId = projectid, Amount=amount,Price=price,};
-            var json = JsonSerializer.Serialize(projectItem);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await Client.PostAsync(_itemsRequestUri + "/AddAssignedProjectItemToProject", data).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
+            foreach (var projectItem in items)
+            {
+                var json = JsonSerializer.Serialize(projectItem);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await Client.PostAsync(_itemsRequestUri + "/AddAssignedProjectItemToProject", data).ConfigureAwait(false);
+                response.EnsureSuccessStatusCode();
+            }
         }
 
         async Task IItemService.AddUsedItemAsync(List<ProjectUsedItemDto> items)
