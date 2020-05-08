@@ -7,6 +7,9 @@
 <h1>Create</h1>
 
 <h4>WorkingHoursViewModel</h4>
+EmployeeID: @Model.EmployeeId
+ProjectID: @Model.ProjectId
+HourlyPrice: @Model.HourlyPrice
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,15 +22,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="EmployeeId" class="control-label"></label>
-
-                <input asp-for="EmployeeId" class="form-control">
-                ID:<input asp-for="WorkingHoursId" class="form-control">
+                <input asp-for="EmployeeId" disabled/>
             </div>
             <div class="form-group">
                 <label asp-for="HourlyPrice" class="control-label"></label>
-                <input asp-for="HourlyPrice" class="form-control" />
+                <input asp-for="HourlyPrice" class="form-control" value="@Model.HourlyPrice" disabled/>
                 <span asp-validation-for="HourlyPrice" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
                 <label asp-for="ProjectId" class="control-label"></label>
                 <input asp-for="ProjectId" class="form-control" />

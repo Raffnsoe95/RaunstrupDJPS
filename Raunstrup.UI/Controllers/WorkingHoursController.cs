@@ -53,9 +53,9 @@ namespace Raunstrup.UI.Controllers
         }
 
         // GET: WorkingHours/Create
-        public IActionResult Create(int id)
+        public IActionResult Create(int Id)
         {
-            var WorkingHours = new WorkingHoursViewModel { ProjectId = id, EmployeeId = 1, HourlyPrice=300 };
+            var WorkingHours = new WorkingHoursViewModel { ProjectId = Id, EmployeeId = 1, HourlyPrice=300};
             return View(WorkingHours);
         }
     
@@ -65,7 +65,7 @@ namespace Raunstrup.UI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Amount,EmployeeId,HourlyPrice,ProjectId")] WorkingHoursViewModel workingHoursViewModel)
+        public async Task<IActionResult> Create( WorkingHoursViewModel workingHoursViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +98,7 @@ namespace Raunstrup.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Amount,EmployeeId,HourlyPrice,ProjectId")] WorkingHoursViewModel workingHoursViewModel)
         {
-            if (id != workingHoursViewModel.Id)
+            if (id != workingHoursViewModel.WorkingHoursId)
             {
                 return NotFound();
             }
@@ -112,7 +112,7 @@ namespace Raunstrup.UI.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!WorkingHoursExists(workingHoursViewModel.Id))
+                    if (!WorkingHoursExists(workingHoursViewModel.WorkingHoursId))
                     {
                         return NotFound();
                     }
@@ -137,7 +137,7 @@ namespace Raunstrup.UI.Controllers
 
             var workingHours = await _context.WorkingHours
                 .Include(w => w.Employee)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.WorkingHoursId == id);
             if (workingHours == null)
             {
                 return NotFound();
@@ -159,7 +159,7 @@ namespace Raunstrup.UI.Controllers
 
         private bool WorkingHoursExists(int id)
         {
-            return _context.WorkingHours.Any(e => e.Id == id);
+            return _context.WorkingHours.Any(e => e.WorkingHoursId == id);
         }
 
         public IActionResult AddWorkingHours(int id)

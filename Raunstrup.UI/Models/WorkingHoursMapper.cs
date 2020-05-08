@@ -11,7 +11,7 @@ namespace Raunstrup.UI.Models
         public static WorkingHoursViewModel Map(WorkingHoursDto dto)
         {
             return new WorkingHoursViewModel
-            { Id = dto.Id,
+            { WorkingHoursId = dto.Id,
                 Amount = dto.Amount, 
                 EmployeeId = dto.EmployeeId, 
                 HourlyPrice = dto.HourlyPrice, 
@@ -28,7 +28,7 @@ namespace Raunstrup.UI.Models
         public static WorkingHoursDto Map(WorkingHoursViewModel model)
         {
             return new WorkingHoursDto
-            { Id = model.Id, 
+            { Id = model.WorkingHoursId, 
                 Amount = model.Amount, 
                 EmployeeId = model.EmployeeId, 
                 HourlyPrice = model.HourlyPrice, 
