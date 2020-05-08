@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Raunstrup.DataAccess.Model;
 
 namespace Raunstrup.UI.Data
 {
@@ -29,6 +30,8 @@ namespace Raunstrup.UI.Data
         public DbSet<ProjectDrivingViewModel> projectDrivings { get; set; }
 
         public DbSet<WorkingHoursViewModel> WorkingHours { get; set; }
+
+        public DbSet<Raunstrup.DataAccess.Model.WorkingHours> WorkingHours_1 { get; set; }
     }
 }
 

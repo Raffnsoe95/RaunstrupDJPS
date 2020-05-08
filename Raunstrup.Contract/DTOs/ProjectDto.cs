@@ -32,7 +32,7 @@ namespace Raunstrup.Contract.DTOs
 
         public bool IsDone { get; set; }
 
-        public int CustomerId { get; set; }
+        public int? CustomerId { get; set; }
 
         [Timestamp]
         public byte[] Rowversion { get; set; }

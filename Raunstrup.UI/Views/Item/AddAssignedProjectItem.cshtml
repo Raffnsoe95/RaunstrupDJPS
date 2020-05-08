@@ -1,11 +1,10 @@
-﻿@model IEnumerable<Raunstrup.UI.Models.ItemViewModel>
-
+﻿@model List<Raunstrup.UI.Models.ItemViewModel>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Item til Project</h1>
+<h1>Tilføj Item til Project</h1>
 
 <p>
     <!--<a asp-action="Create">Tilføj Item til Project</a>-->
@@ -20,37 +19,61 @@
                 Pris
             </th>
             <th>
-                Aktiv
-            </th>
-            <th>
                 Amount
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Active)
-            </td>
-            <td>
+        @*foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Active)
+                    </td>
+                    <td>
 
-                <label></label>
+                        <label></label>
 
-                <input  />
-                
-            </td>
-            <td>
-                <a asp-action="AddAssignedProjectItemToProject" asp-route-id="@item.Id" asp-route-projectid="@ViewContext.ModelState["id"].AttemptedValue" asp-controller="Item">Tilføj</a>
-            </td>
-        </tr>
-}
+                        <input  />
+
+                    </td>
+                    <td>
+                        <a asp-action="AddAssignedProjectItemToProject" asp-route-id="@item.Id" asp-route-projectid="@ViewContext.ModelState["id"].AttemptedValue" asp-controller="Item">Tilføj</a>
+                    </td>
+                </tr>
+        }*@
     </tbody>
 </table>
+
+<form method="post" asp-action="AddAssignedProjectItemToProject">
+
+    <a><label>Søg Efter Vare</label></a>
+    <a><input type="text" /></a>
+
+    <table class="table">
+
+        @for (var i = 0; i < Model.Count(); i++)
+        {
+    <tr>
+        @*<td><input name="[@i].Id" value="@Model[i].Id" /></td>
+        <td><input name="[@i].Name" value="@Model[i].Name" /></td>
+        <td><input name="[@i].Price" value="@Model[i].Price" /></td>*@
+
+
+        <td><input type="text" asp-for="@Model[i].Id" hidden/></td>
+        <td><input type="text" asp-for="@Model[i].Name" /></td>
+        <td><input type="text" asp-for="@Model[i].Price" /></td>
+        <td><input type="text" asp-for="@Model[i].projectID" hidden /></td>
+        <td><input type="text" asp-for="@Model[i].Amount" /></td>
+    </tr>
+        }
+    </table>
+    <button>Update</button>
+</form>
+

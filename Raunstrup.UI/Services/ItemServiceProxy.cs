@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Raunstrup.UI.Models;
 
 namespace Raunstrup.UI.Services
 {
@@ -77,22 +78,27 @@ namespace Raunstrup.UI.Services
             response.EnsureSuccessStatusCode();
         }
 
-        async Task IItemService.AddAssignedItemAsync(int id, int projectid,int amount,decimal price)
+        async Task IItemService.AddAssignedItemAsync(List<ProjectAssignedItemDto> items)
         {
-            var projectItem = new ProjectAssignedItemDto { ItemID = id, ProjectId = projectid, Amount=amount,Price=price,};
-            var json = JsonSerializer.Serialize(projectItem);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await Client.PostAsync(_itemsRequestUri + "/AddAssignedProjectItemToProject", data).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
+            foreach (var projectItem in items)
+            {
+                var json = JsonSerializer.Serialize(projectItem);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await Client.PostAsync(_itemsRequestUri + "/AddAssignedProjectItemToProject", data).ConfigureAwait(false);
+                response.EnsureSuccessStatusCode();
+            }
         }
 
-        async Task IItemService.AddUsedItemAsync(int id, int projectid, int amount, decimal price)
+        async Task IItemService.AddUsedItemAsync(List<ProjectUsedItemDto> items)
         {
-            var projectItem = new ProjectUsedItemDto { ItemID = id, ProjectId = projectid, Amount = amount, Price = price, IsUsed = true };
-            var json = JsonSerializer.Serialize(projectItem);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await Client.PostAsync(_itemsRequestUri + "/AddUsedProjectItemToProject", data).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
+            foreach(var projectItem in items)
+            {
+                //var projectItem = new ProjectUsedItemDto { ItemID = id, ProjectId = projectid, Amount = amount, Price = price, IsUsed = true };
+                var json = JsonSerializer.Serialize(projectItem);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await Client.PostAsync(_itemsRequestUri + "/AddUsedProjectItemToProject", data).ConfigureAwait(false);
+                response.EnsureSuccessStatusCode();
+            }
         }
     }
 }

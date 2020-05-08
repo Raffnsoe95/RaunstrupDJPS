@@ -50,9 +50,10 @@ namespace Raunstrup.UI.Controllers
         }
 
         // GET: WorkingHours/Create
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
-            return View();
+            var WorkingHours = new WorkingHoursViewModel { ProjectId = id, EmployeeId = 1 };
+            return View(WorkingHours);
         }
     
 
@@ -153,6 +154,14 @@ namespace Raunstrup.UI.Controllers
         private bool WorkingHoursExists(int id)
         {
             return _context.WorkingHours.Any(e => e.Id == id);
+        }
+
+        public IActionResult AddWorkingHours(int id)
+        {
+            WorkingHoursViewModel workingHours = new WorkingHoursViewModel { ProjectId=id, EmployeeId = 3 };
+        
+            return View(workingHours);
+
         }
     }
 }

@@ -10,6 +10,8 @@ namespace Raunstrup.UI.Models
     {
         public static ItemViewModel Map(ItemDto dto)
         {
+            if (dto == null)
+            { return null; }            
             return new ItemViewModel
             { Id = dto.Id, Name = dto.Name, Price = dto.Price, Active = dto.Active, RowVision = dto.RowVision };
         }
@@ -21,6 +23,8 @@ namespace Raunstrup.UI.Models
 
         public static ItemDto Map(ItemViewModel view)
         {
+            if (view == null)
+            { return null; }
             return new ItemDto
             { Id = view.Id, Name = view.Name, Price = view.Price, Active = view.Active, RowVision = view.RowVision };
         }
