@@ -43,26 +43,27 @@ namespace Raunstrup.Api.Models
 
         public static ProjectDto Map(Project project)
         {
-            return new ProjectDto
-            {
-                Id = project.Id,
-                Active = project.Active,
-                Description = project.Description,
-                EndDate = project.EndDate,
-                IsAccepted = project.IsAccepted,
-                IsDone = project.IsDone,
-                IsFixedPrice = project.IsFixedPrice,
-                Price = project.Price,
-                StartDate = project.StartDate,
-                Rowversion = project.Rowversion,
-                CustomerId = project.CustomerId,
-                WorkingHoursDtos = WorkingHoursMapper.Map(project.WorkingHours).ToList(),
-                UsedItemsDtos = ProjectUsedItemMapper.Map(project.UsedItems).ToList(),
-                //AssignedItems = ProjectAssignedItemMapper.Map(project.AssignedItems).ToList(),
-                ProjectDrivingDtos = ProjectDrivingMapper.Map(project.ProjectDrivings).ToList(),
-                ProjectEmployeeDtos = ProjectEmployeeMapper.Map(project.ProjectEmployees).ToList(),
-                CustomerDto = CustomerMapper.Map(project.Customer)
-            };
+            
+                return new ProjectDto
+                {
+                    Id = project.Id,
+                    Active = project.Active,
+                    Description = project.Description,
+                    EndDate = project.EndDate,
+                    IsAccepted = project.IsAccepted,
+                    IsDone = project.IsDone,
+                    IsFixedPrice = project.IsFixedPrice,
+                    Price = project.Price,
+                    StartDate = project.StartDate,
+                    Rowversion = project.Rowversion,
+                    CustomerId = project.CustomerId,
+                    WorkingHoursDtos = WorkingHoursMapper.Map(project.WorkingHours).ToList(),
+                    UsedItemsDtos = ProjectUsedItemMapper.Map(project.UsedItems).ToList(),
+                    //AssignedItems = ProjectAssignedItemMapper.Map(project.AssignedItems).ToList(),
+                    ProjectDrivingDtos = ProjectDrivingMapper.Map(project.ProjectDrivings).ToList(),
+                    ProjectEmployeeDtos = ProjectEmployeeMapper.Map(project.ProjectEmployees).ToList(),
+                    CustomerDto = CustomerMapper.Map(project.Customer)
+                };
         }
     }
 }
