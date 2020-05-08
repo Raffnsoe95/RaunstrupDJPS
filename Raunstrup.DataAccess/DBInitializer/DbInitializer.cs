@@ -105,6 +105,8 @@ namespace Raunstrup.DataAccess.DBInitializer
 
                 var type = new EmployeeType { HourlyPrice = 200, Title = "Tømrer" };
                 var specialty = new Specialty { Bonus = 100, Title = "Velux" };
+                Employee emp1 = new Employee { Name = "Jørgen Clevin", Active = true, Phone = "1241234" };
+                Employee emp2 = new Employee { Name = "Brian Jørgensen", Active = true, Phone = "1241234" };
                 context.Employees.AddRange(
                     new Employee
                     {
@@ -112,25 +114,29 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Phone = "67589342",
                         Active = true,
                         Type = type,
-                        Specialties = new List<Specialty> { specialty }
+                        Specialties = new List<Specialty> { specialty },
+                        Manager = emp1
                     },
                     new Employee
                     {
                         Name = "Henrik Kofoed",
                         Phone = "78652341",
-                        Active = true
+                        Active = true,
+                        Manager = emp1
                     },
                     new Employee
                     {
                         Name = "Thomas Troelsen",
                         Phone = "+4534782311",
-                        Active = true
+                        Active = true,
+                        Manager = emp2
                     },
                     new Employee
                     {
                         Name = "Rasmus Paludan",
                         Phone = "54672291",
-                        Active = true
+                        Active = true,
+                        Manager = emp2
                     },
                     new Employee
                     {
@@ -139,8 +145,6 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Active = true
                     }
                 );
-                Employee emp1 = new Employee { Name = "Jørgen Clevin", Active = true, Phone = "1241234" };
-                Employee emp2 = new Employee { Name = "Brian Jørgensen", Active = true, Phone = "1241234" };
                 Customer cus1 = new Customer { Name = "Hans Hushaj", Phone = "32345676", Address = "Hammerhajvej 34", Email = "Hammer@haj.dk", Active = true, };
 
                 //WorkingHours workingHours1 = new WorkingHours { Amount = 3, HourlyPrice = 400, Employee = emp1 };

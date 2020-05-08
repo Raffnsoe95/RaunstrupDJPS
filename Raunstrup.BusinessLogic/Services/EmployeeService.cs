@@ -33,6 +33,7 @@ namespace Raunstrup.BusinessLogic.Services
             return _context.Employees
             .Include(e => e.Type)
             .Include(e => e.Specialties)
+            .Include(e => e.Manager)
             .FirstOrDefault(x => x.Id == id);
         }
 

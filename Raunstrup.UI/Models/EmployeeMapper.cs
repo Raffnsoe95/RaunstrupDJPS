@@ -19,11 +19,17 @@ namespace Raunstrup.UI.Models
                 Active = dto.Active,
                 Specialties = SpecialtyMapper.Map(dto.Specialties).ToList(),
                 Type = TypeMapper.Map(dto.Type),
+                ManagerID = dto.ManagerID,
+                Manager = EmployeeMapper.Map(dto.Manager),
                 RowVersion = dto.RowVersion
             };
         }
 
         public static IEnumerable<EmployeeViewModel> Map(IEnumerable<EmployeeDto> model)
+        {
+            return model.Select(x => Map(x)).AsEnumerable();
+        }
+        public static IEnumerable<EmployeeDto> Map(IEnumerable<EmployeeViewModel> model)
         {
             return model.Select(x => Map(x)).AsEnumerable();
         }
@@ -41,6 +47,8 @@ namespace Raunstrup.UI.Models
                 Active = model.Active,
                 Specialties = SpecialtyMapper.Map(model.Specialties).ToList(),
                 Type = TypeMapper.Map(model.Type),
+                ManagerID = model.ManagerID,
+                Manager = EmployeeMapper.Map(model.Manager),
                 RowVersion = model.RowVersion
             };
         }

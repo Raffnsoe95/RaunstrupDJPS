@@ -21,5 +21,7 @@ namespace Raunstrup.UI.Models
         public byte[] RowVersion { get; set; }
         public TypeViewModel Type { get; set; }
         public List<SpecialtyViewModel> Specialties { get; set; }
+        public int? ManagerID { get; set; }
+        public EmployeeViewModel Manager { get; set; }
     }
 }

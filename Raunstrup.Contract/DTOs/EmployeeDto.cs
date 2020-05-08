@@ -15,5 +15,7 @@ namespace Raunstrup.Contract.DTOs
         public byte[] RowVersion { get; set; }
         public TypeDto Type { get; set; }
         public List<SpecialtyDto> Specialties { get; set; }
+        public int? ManagerID { get; set; }
+        public EmployeeDto Manager { get; set; }
     }
 }

@@ -23,7 +23,13 @@ namespace Raunstrup.DataAccess.Model
 
         [Timestamp]
         public byte[] RowVersion { get; set; }
+
         public EmployeeType Type { get; set; }
+
         public List<Specialty> Specialties { get; set; }
+
+        public int? ManagerID { get; set; }
+
+        public Employee Manager { get; set; }
     }
 }

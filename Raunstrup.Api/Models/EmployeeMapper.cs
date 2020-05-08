@@ -24,7 +24,9 @@ namespace Raunstrup.Api.Models
                 Phone = dto.Phone,
                 Active = dto.Active,
                 Specialties = SpecialtyMapper.Map(dto.Specialties).ToList(), 
-                Type = TypeMapper.Map(dto.Type),
+                Type = TypeMapper.Map(dto.Type), 
+                ManagerID = dto.ManagerID,
+                Manager = EmployeeMapper.Map(dto.Manager),
                 RowVersion = dto.RowVersion
             };
         }
@@ -40,6 +42,10 @@ namespace Raunstrup.Api.Models
 
         public static EmployeeDto Map(Employee model)
         {
+            if (model == null)
+            {
+                return null;
+            }
             return new EmployeeDto
             { 
                 Id = model.Id,
@@ -48,6 +54,8 @@ namespace Raunstrup.Api.Models
                 Active = model.Active,
                 Specialties = SpecialtyMapper.Map(model.Specialties).ToList(),
                 Type = TypeMapper.Map(model.Type),
+                ManagerID = model.ManagerID,
+                Manager = EmployeeMapper.Map(model.Manager),
                 RowVersion = model.RowVersion
             };
         }
