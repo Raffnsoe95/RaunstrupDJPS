@@ -27,11 +27,13 @@ namespace Raunstrup.UI.Controllers
         // GET: Customer
         public async Task<IActionResult> Index()
         {
-            //Det her funker ikke af en eller anden grund
+            
             var customerDtos = await _customerService.GetCustomerAsync().ConfigureAwait(false);
             return View(CustomerMapper.Map(customerDtos));
-            // return View(await _context.customers.ToListAsync());
+           
         }
+
+     
 
         // GET: Customer/Details/5
         public async Task<IActionResult> Details(int? id)
