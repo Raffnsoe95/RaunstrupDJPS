@@ -15,5 +15,7 @@ namespace Raunstrup.Contract.Services
         Task UpdateAsync(int id, CustomerDto customer);
         Task RemoveAsync(int id);
         Task AddAsync(int id, int projectid);
+
+        IEnumerable<CustomerDto> GetFilterdCustomers(IEnumerable<CustomerDto> customerDtos, string searchString);
     }
 }

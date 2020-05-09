@@ -9,6 +9,13 @@
 <p>
     <a asp-action="Create">Opret ny kunde</a>
 </p>
+<form asp-controller="Customer" asp-action="Index">
+    <p>
+        Søg på kundenavn: <input type="text" name="SearchString">
+        <input type="submit" value="Søg" />
+    </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -19,20 +26,20 @@
                 Adresse
             </th>
             <th>
-               Telefonnummer
+                Telefonnummer
             </th>
             <th>
-               Email
+                Email
             </th>
             <th>
-               Aktiv
+                Aktiv
             </th>
-           
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)

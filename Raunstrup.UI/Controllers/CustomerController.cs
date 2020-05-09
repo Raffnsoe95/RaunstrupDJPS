@@ -25,11 +25,17 @@ namespace Raunstrup.UI.Controllers
         }
 
         // GET: Customer
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             
+
             var customerDtos = await _customerService.GetCustomerAsync().ConfigureAwait(false);
-            return View(CustomerMapper.Map(customerDtos));
+
+            IEnumerable<CustomerDto> filterdCustomersDtos =  _customerService.GetFilterdCustomers(customerDtos, searchString);
+
+           
+
+            return View(CustomerMapper.Map(filterdCustomersDtos));
            
         }
 

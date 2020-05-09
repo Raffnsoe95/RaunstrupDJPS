@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -53,8 +55,12 @@ namespace Raunstrup.UI.Services
 
         async Task<IEnumerable<CustomerDto>> ICustomerService.GetCustomerAsync()
         {
+            
+
             var response = await Client.GetAsync(_customerRequestUri).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
+
+
 
             var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
@@ -86,6 +92,20 @@ namespace Raunstrup.UI.Services
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await Client.PutAsync(_customerRequestUri + "/AddCustomerToProject", data).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
+        }
+    
+    IEnumerable<CustomerDto> ICustomerService.GetFilterdCustomers(IEnumerable<CustomerDto> customerDtos, string searchString)
+        {
+
+            
+            var filterdCustomersDtos = from m in customerDtos
+                                       select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                 filterdCustomersDtos = filterdCustomersDtos.Where(s => s.Name.ToUpper().Contains(searchString.ToUpper()));
+            }
+            return  filterdCustomersDtos;
         }
     }
 }
