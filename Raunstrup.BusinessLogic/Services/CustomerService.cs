@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Raunstrup.BusinessLogic.ServiceInterfaces;
 using Raunstrup.DataAccess;
 using Raunstrup.DataAccess.Context;
@@ -19,17 +20,23 @@ namespace Raunstrup.BusinessLogic.Services
 
             IEnumerable<Customer> ICustomerService.GetAll()
             {
-                return _context.customers.ToList();
+                return _context.customers
+                .Include(c=>c.CustomerDiscountType)
+            .ToList();
             }
 
             Customer ICustomerService.Get(int id)
             {
-                return _context.customers.Find(id);
-            }
+            return _context.customers
+           .Include(e => e.CustomerDiscountType)
+           .FirstOrDefault(x => x.Id == id);
 
-            void ICustomerService.Create(Customer movie)
+
+        }
+
+            void ICustomerService.Create(Customer customer)
             {
-                _context.customers.Add(movie);
+                _context.customers.Add(customer);
                 _context.SaveChanges();
             }
 

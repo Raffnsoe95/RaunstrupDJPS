@@ -16,7 +16,7 @@ namespace Raunstrup.UI.Models
             if (dto == null)
                 return null;
             return new CustomerViewModel
-            { Id=dto.Id, Name=dto.Name, Phone=dto.Phone, Address=dto.Address, Email=dto.Email, Active=dto.Active, Rowversion=dto.Rowversion};
+            { Id=dto.Id, Name=dto.Name, Phone=dto.Phone, Address=dto.Address, Email=dto.Email, Active=dto.Active, Rowversion=dto.Rowversion, CustomerDiscountType=CustomerDiscountTypeMapper.Map( dto.CustomerDiscountType)};
         }
 
         public static IEnumerable<CustomerViewModel> Map(IEnumerable<CustomerDto> dtos)
@@ -29,7 +29,7 @@ namespace Raunstrup.UI.Models
             if (view == null)
                 return null;
             return new CustomerDto
-            { Id = view.Id, Name = view.Name, Phone = view.Phone, Address = view.Address, Email = view.Email, Active = view.Active, Rowversion = view.Rowversion };
+            { Id = view.Id, Name = view.Name, Phone = view.Phone, Address = view.Address, Email = view.Email, Active = view.Active, Rowversion = view.Rowversion, CustomerDiscountType=CustomerDiscountTypeMapper.Map( view.CustomerDiscountType) };
         }
     }
 }

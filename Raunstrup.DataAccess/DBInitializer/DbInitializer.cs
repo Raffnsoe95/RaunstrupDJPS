@@ -24,6 +24,24 @@ namespace Raunstrup.DataAccess.DBInitializer
                 {
                     return;   // DB has been seeded
                 }
+                var NormalCustomer = new CustomerDiscountType
+                {
+                    Name = "Normal",
+                    DiscountPercent = 0,
+                    Active = true
+                };
+                var BonusCustomer = new CustomerDiscountType
+                {
+                    Name = "Bonus",
+                    DiscountPercent = 10,
+                    Active = true
+                };
+                var SuperCustomer = new CustomerDiscountType
+                {
+                    Name = "Super",
+                    DiscountPercent = 15,
+                    Active = true
+                };
 
                 context.customers.AddRange(
                     new Customer
@@ -32,7 +50,8 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Phone = "12345678",
                         Address = "Hansvej 1, 1111 Hansby",
                         Email = "Hans@gmail.com",
-                        Active = true
+                        Active = true,
+                        CustomerDiscountType= BonusCustomer
                     },
 
 
@@ -42,7 +61,9 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Phone = "87654321",
                         Address = "Olevej 2, 2222 Oleby",
                         Email = "Ole@gmail.com",
-                        Active = true
+                        Active = true,
+                        CustomerDiscountType = SuperCustomer
+
                     },
                      new Customer
                      {
@@ -50,7 +71,8 @@ namespace Raunstrup.DataAccess.DBInitializer
                          Phone = "12121212",
                          Address = "Bentvej 3, 3333 Bentby",
                          Email = "Bent@gmail.com",
-                         Active = true
+                         Active = true,
+                         CustomerDiscountType = NormalCustomer
                      },
                       new Customer
                       {
@@ -58,7 +80,9 @@ namespace Raunstrup.DataAccess.DBInitializer
                           Phone = "141414141",
                           Address = "Erikvej 4, 4444 Erikeby",
                           Email = "Erik@gmail.com",
-                          Active = true
+                          Active = true,
+                          CustomerDiscountType = BonusCustomer
+
                       },
                        new Customer
                        {
@@ -66,7 +90,8 @@ namespace Raunstrup.DataAccess.DBInitializer
                            Phone = "565656565",
                            Address = "Knudvej 5, 5555 Knudby",
                            Email = "Knud@gmail.com",
-                           Active = true
+                           Active = true,
+                           CustomerDiscountType = NormalCustomer
                        }
                 );
                 context.Items.AddRange(
@@ -102,7 +127,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                     }
                 );
 
-
+                
                 var department = new Department { Name = "Vejle" };
                 var type = new EmployeeType { HourlyPrice = 200, Title = "Tømrer" };
                 var specialty = new Specialty { Bonus = 100, Title = "Velux" };
@@ -150,7 +175,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Active = true
                     }
                 );
-                Customer cus1 = new Customer { Name = "Hans Hushaj", Phone = "32345676", Address = "Hammerhajvej 34", Email = "Hammer@haj.dk", Active = true, };
+                Customer cus1 = new Customer { Name = "Hans Hushaj", Phone = "32345676", Address = "Hammerhajvej 34", Email = "Hammer@haj.dk", Active = true,CustomerDiscountType=NormalCustomer };
 
                 //WorkingHours workingHours1 = new WorkingHours { Amount = 3, HourlyPrice = 400, Employee = emp1 };
                 //WorkingHours workingHours2 = new WorkingHours { Amount = 6, HourlyPrice = 600, Employee = emp1 };

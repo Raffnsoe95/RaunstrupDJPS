@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Raunstrup.DataAccess.Model;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Raunstrup.DataAccess
@@ -16,6 +17,8 @@ namespace Raunstrup.DataAccess
         public string Email { get; set; }
 
         public bool Active { get; set; }
+
+        public CustomerDiscountType CustomerDiscountType { get; set; }
 
         [Timestamp]
         public byte[] Rowversion { get; set; }

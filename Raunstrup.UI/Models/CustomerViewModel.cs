@@ -32,6 +32,8 @@ namespace Raunstrup.UI.Models
 
         public bool Active { get; set; }
 
+        public CustomerDiscountTypeViewModel CustomerDiscountType { get; set; }
+
         public byte[] Rowversion {get; set;}
     }
 }
