@@ -25,6 +25,7 @@ namespace Raunstrup.BusinessLogic.Services
             return _context.Employees
             .Include(e => e.Type)
             .Include(e => e.Specialties)
+            .Include(e => e.Department)
                 .ToList();
         }
 
@@ -34,6 +35,7 @@ namespace Raunstrup.BusinessLogic.Services
             .Include(e => e.Type)
             .Include(e => e.Specialties)
             .Include(e => e.Manager)
+            .Include(e => e.Department)
             .FirstOrDefault(x => x.Id == id);
         }
 

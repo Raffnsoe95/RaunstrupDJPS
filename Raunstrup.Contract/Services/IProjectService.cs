@@ -10,9 +10,13 @@ namespace Raunstrup.Contract.Services
    public interface IProjectService
     {
         Task<IEnumerable<ProjectDto >> GetProjectAsync();
+
         Task<ProjectDto> GetProjectAsync(int id);
+
         Task AddAsync(ProjectDto project);
+
         Task UpdateAsync(int id, ProjectDto project);
+
         Task RemoveAsync(int id);
     }
 }

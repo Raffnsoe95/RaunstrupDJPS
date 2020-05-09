@@ -27,6 +27,7 @@ namespace Raunstrup.Api.Models
                 Type = TypeMapper.Map(dto.Type), 
                 ManagerID = dto.ManagerID,
                 Manager = EmployeeMapper.Map(dto.Manager),
+                Department = DepartmentMapper.Map(dto.Department),
                 RowVersion = dto.RowVersion
             };
         }
@@ -35,6 +36,7 @@ namespace Raunstrup.Api.Models
         {
             return model.Select(x => Map(x)).AsEnumerable();
         }
+
         public static IEnumerable<Employee> Map(IEnumerable<EmployeeDto> model)
         {
             return model.Select(x => Map(x)).AsEnumerable();
@@ -56,6 +58,7 @@ namespace Raunstrup.Api.Models
                 Type = TypeMapper.Map(model.Type),
                 ManagerID = model.ManagerID,
                 Manager = EmployeeMapper.Map(model.Manager),
+                Department = DepartmentMapper.Map(model.Department),
                 RowVersion = model.RowVersion
             };
         }

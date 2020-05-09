@@ -19,20 +19,20 @@ namespace Raunstrup.DataAccess.DBInitializer
             using (var context = new RaunstrupContext(serviceProvider.GetRequiredService<DbContextOptions<RaunstrupContext>>()))
             {
                 context.Database.EnsureCreated();
-              //  Look for any customers.
+                //  Look for any customers.
                 if (context.customers.Any())
-                    {
-                        return;   // DB has been seeded
-                    }
+                {
+                    return;   // DB has been seeded
+                }
 
                 context.customers.AddRange(
                     new Customer
                     {
-                       Name = "Hans Hansen",
-                        Phone="12345678",
-                        Address="Hansvej 1, 1111 Hansby",
-                        Email="Hans@gmail.com",
-                        Active=true
+                        Name = "Hans Hansen",
+                        Phone = "12345678",
+                        Address = "Hansvej 1, 1111 Hansby",
+                        Email = "Hans@gmail.com",
+                        Active = true
                     },
 
 
@@ -103,6 +103,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                 );
 
 
+                var department = new Department { Name = "Vejle" };
                 var type = new EmployeeType { HourlyPrice = 200, Title = "Tømrer" };
                 var specialty = new Specialty { Bonus = 100, Title = "Velux" };
                 Employee emp1 = new Employee { Name = "Jørgen Clevin", Active = true, Phone = "1241234" };
@@ -115,28 +116,32 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Active = true,
                         Type = type,
                         Specialties = new List<Specialty> { specialty },
-                        Manager = emp1
+                        Manager = emp1,
+                        Department = department
                     },
                     new Employee
                     {
                         Name = "Henrik Kofoed",
                         Phone = "78652341",
                         Active = true,
-                        Manager = emp1
+                        Manager = emp1,
+                        Department = department
                     },
                     new Employee
                     {
                         Name = "Thomas Troelsen",
                         Phone = "+4534782311",
                         Active = true,
-                        Manager = emp2
+                        Manager = emp2,
+                        Department = department
                     },
                     new Employee
                     {
                         Name = "Rasmus Paludan",
                         Phone = "54672291",
                         Active = true,
-                        Manager = emp2
+                        Manager = emp2,
+                        Department = department
                     },
                     new Employee
                     {
@@ -153,11 +158,11 @@ namespace Raunstrup.DataAccess.DBInitializer
                 ProjectDriving projectDriving = new ProjectDriving { Amount = 2, Employee = emp1, UnitPrice = 2 };
                 ProjectEmployee projectEmployee = new ProjectEmployee { Employee = emp1, EmployeeName = "Jørgen Clevin" };
 
-                ProjectEmployee projectEmployee2 = new ProjectEmployee { Employee = emp2};
-                
+                ProjectEmployee projectEmployee2 = new ProjectEmployee { Employee = emp2 };
 
-               // Workingóurlist.Add(workingHours1);
-               //Workingóurlist.Add(workingHours2);
+
+                // Workingóurlist.Add(workingHours1);
+                //Workingóurlist.Add(workingHours2);
 
                 context.Projects.AddRange(
                     new Project
@@ -172,8 +177,8 @@ namespace Raunstrup.DataAccess.DBInitializer
                         IsFixedPrice = false,
                         Price = 0m,
                         StartDate = new DateTime(2020, 5, 4),
-                      //  WorkingHours = Workingóurlist,
-                         ProjectDrivings = new List<ProjectDriving> { projectDriving },
+                        //  WorkingHours = Workingóurlist,
+                        ProjectDrivings = new List<ProjectDriving> { projectDriving },
                         ProjectEmployees = new List<ProjectEmployee> { projectEmployee, projectEmployee2 },
                         Customer = cus1
 
@@ -231,11 +236,9 @@ namespace Raunstrup.DataAccess.DBInitializer
                         StartDate = new DateTime(2020, 5, 4)
 
 
-                    }
-
-
-
-                ) ;
+                    }  
+                    
+                );
                 context.SaveChanges();
             }
         }

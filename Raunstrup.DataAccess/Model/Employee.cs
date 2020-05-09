@@ -31,5 +31,7 @@ namespace Raunstrup.DataAccess.Model
         public int? ManagerID { get; set; }
 
         public Employee Manager { get; set; }
+
+        public Department Department { get; set; }
     }
 }

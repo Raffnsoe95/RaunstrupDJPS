@@ -40,6 +40,7 @@ namespace Raunstrup.DataAccess.Context
         public DbSet<ProjectDriving> projectDrivings { get; set; }
 
         public DbSet<ProjectEmployee> ProjectEmployees { get; set; }
+
         public DbSet<Customer> Customer { get; set; }
 
         public DbSet<ProjectUsedItem> ProjectUsedItems { get; set; }

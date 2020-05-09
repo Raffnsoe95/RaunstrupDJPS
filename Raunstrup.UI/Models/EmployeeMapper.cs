@@ -21,7 +21,8 @@ namespace Raunstrup.UI.Models
                 Type = TypeMapper.Map(dto.Type),
                 ManagerID = dto.ManagerID,
                 Manager = EmployeeMapper.Map(dto.Manager),
-                RowVersion = dto.RowVersion
+                RowVersion = dto.RowVersion,
+                Department = DepartmentMapper.Map(dto.Department)
             };
         }
 
@@ -49,6 +50,7 @@ namespace Raunstrup.UI.Models
                 Type = TypeMapper.Map(model.Type),
                 ManagerID = model.ManagerID,
                 Manager = EmployeeMapper.Map(model.Manager),
+                Department = DepartmentMapper.Map(model.Department),
                 RowVersion = model.RowVersion
             };
         }

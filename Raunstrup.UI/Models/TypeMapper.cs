@@ -44,12 +44,6 @@ namespace Raunstrup.UI.Models
                 HourlyPrice = type.HourlyPrice,
                 Title = type.Title
             };
-        }
-
-        
-
-        
-
-        
+        } 
     }
 }
