@@ -163,23 +163,28 @@ namespace Raunstrup.UI.Controllers
         {
             return _context.customers.Any(e => e.Id == id);
         }
-        public async Task<IActionResult> AddProjectCustomer(int id)
+        public async Task<IActionResult> AddProjectCustomer(int id, string searchString)
         {
             var customerDtos = await _customerService.GetCustomerAsync().ConfigureAwait(false);
-            return View(CustomerMapper.Map(customerDtos));
+
+            IEnumerable<CustomerDto> filterdCustomersDtos = _customerService.GetFilterdCustomers(customerDtos, searchString);
+
+            return View(CustomerMapper.Map(filterdCustomersDtos));
         }
         public async Task<IActionResult> AddProjectCustomerToProject(int id, int projectid)
         {
             if (ModelState.IsValid)
             {
-                await _customerService.AddAsync(id, projectid).ConfigureAwait(false);
-
+                 await _customerService.AddAsync(id, projectid).ConfigureAwait(false);
 
                 //_context.Add(employeeViewModel);
                 //await _context.SaveChangesAsync();
                 //return RedirectToAction(nameof(Index));
+
             }
+           
             return RedirectToAction("AddProjectCustomer", new { id = projectid });
+            
         }
     }
 }

@@ -55,14 +55,19 @@ namespace Raunstrup.UI.Services
 
         async Task<IEnumerable<CustomerDto>> ICustomerService.GetCustomerAsync()
         {
-            
+         
 
-            var response = await Client.GetAsync(_customerRequestUri).ConfigureAwait(false);
+           var response = await Client.GetAsync(_customerRequestUri).ConfigureAwait(false);
+
+          
             response.EnsureSuccessStatusCode();
 
-
+            
+ 
 
             var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+
+          
 
             var options = new JsonSerializerOptions
             {
@@ -97,7 +102,7 @@ namespace Raunstrup.UI.Services
     IEnumerable<CustomerDto> ICustomerService.GetFilterdCustomers(IEnumerable<CustomerDto> customerDtos, string searchString)
         {
 
-            
+
             var filterdCustomersDtos = from m in customerDtos
                                        select m;
 
