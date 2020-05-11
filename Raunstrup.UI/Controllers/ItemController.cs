@@ -135,7 +135,10 @@ namespace Raunstrup.UI.Controllers
                 Amount = x.Amount, 
                 Price = x.Price, 
                 ProjectId = x.projectID, 
-                ItemID = x.Id 
+                ItemID = x.Id,
+                
+              
+                
             });
 
 
@@ -159,7 +162,9 @@ namespace Raunstrup.UI.Controllers
             {   Amount = x.Amount, 
                 Price = x.Price, 
                 ProjectId = x.projectID, 
-                ItemID = x.Id 
+                ItemID = x.Id,
+              
+                
             });
 
             if (ModelState.IsValid)

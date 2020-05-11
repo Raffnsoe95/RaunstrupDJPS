@@ -22,5 +22,6 @@ namespace Raunstrup.UI.Models
         public int ItemID { get; set; }
 
         public int ProjectId { get; set; }
+        
     }
 }

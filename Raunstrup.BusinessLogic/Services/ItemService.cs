@@ -2,6 +2,7 @@
 using Raunstrup.BusinessLogic.ServiceInterfaces;
 using Raunstrup.DataAccess.Context;
 using Raunstrup.DataAccess.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,16 @@ namespace Raunstrup.BusinessLogic.Services
 
         IEnumerable<Item> IItemService.GetAll()
         {
-            return _context.Items.ToList();
+            
+            return _context.Items.Include(e => e.Discount).ToList();
+            
+            
         }
 
         Item IItemService.Get(int id)
         {
             return _context.Items.Find(id);
+            
         }
 
         void IItemService.Create(Item item)
@@ -57,5 +62,6 @@ namespace Raunstrup.BusinessLogic.Services
             _context.ProjectAssignedItems.Add(projectAssignedItem);
             _context.SaveChanges();
         }
+   
     }
 }

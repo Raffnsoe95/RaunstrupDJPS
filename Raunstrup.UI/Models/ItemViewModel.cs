@@ -20,6 +20,8 @@ namespace Raunstrup.UI.Models
 
         public int Amount { get; set; }
 
+        public ItemDiscountTypeViewModel Discount { get; set; }
+
         [Timestamp]
         public byte[] RowVision { get; set; }
     }

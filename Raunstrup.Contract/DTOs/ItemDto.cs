@@ -14,6 +14,8 @@ namespace Raunstrup.Contract.DTOs
         public decimal Price { get; set; }
 
         public bool Active { get; set; }
+        //discount - Sim
+        public ItemDiscountTypeDto Discounts { get; set; }
 
         [Timestamp]
         public byte[] RowVision { get; set; }

@@ -17,7 +17,7 @@ namespace Raunstrup.DataAccess.Context
         //protected override void OnModelCreating(ModelBuilder modelBuilder) 
         //{
         //    modelBuilder.Entity<Project>().HasMany(c => c.UsedItems).has
-                
+
         //    //    .Map(m =>
         //    //{
         //    //    m.ToTable("ProjectItem");
