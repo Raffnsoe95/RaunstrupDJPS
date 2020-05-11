@@ -8,7 +8,15 @@
 
 <p>
     <a asp-action="Create">Opret Ny</a>
+
+
 </p>
+<form asp-controller="Item" asp-action="Index">
+    <p>
+        Søg på varenavn: <input type="text" name="SearchString">
+        <input type="submit" value="Søg" />
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>

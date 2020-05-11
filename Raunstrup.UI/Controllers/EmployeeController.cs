@@ -27,11 +27,17 @@ namespace Raunstrup.UI
         }
 
         // GET: Employee
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
 
-            return View(EmployeeMapper.Map(employeeDtos));
+            
+            IEnumerable<EmployeeDto> filterdEmployeeDtos = _employeeService.GetFilterdEmployees(employeeDtos, searchString);
+
+
+            return View(EmployeeMapper.Map(filterdEmployeeDtos));
+
+           
         }
 
         // GET: Employee/Details/5
@@ -163,10 +169,12 @@ namespace Raunstrup.UI
             return _context.Employees.Any(e => e.Id == id);
         }
         // GET: Employee
-        public async Task<IActionResult> AddProjectEmployee(int id)
+        public async Task<IActionResult> AddProjectEmployee(int id, string searchString)
         { 
             var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
-            return View(EmployeeMapper.Map(employeeDtos));
+            IEnumerable<EmployeeDto> filterdEmployeeDtos = _employeeService.GetFilterdEmployees(employeeDtos, searchString);
+
+            return View(EmployeeMapper.Map(filterdEmployeeDtos));
         }
         public async Task<IActionResult> AddProjectEmployeeToProject(int id, int projectid)
         {
