@@ -20,6 +20,8 @@ namespace Raunstrup.BusinessLogic.ServiceInterfaces
         void CreateUsedItems(ProjectUsedItem projectUsedItem);
 
         void CreateAssignedItems(ProjectAssignedItem projectAssignedItem);
+
+        //void AddDiscountToItem(Discount discount);
         
     }
 }

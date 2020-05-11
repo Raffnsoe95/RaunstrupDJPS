@@ -17,7 +17,7 @@ namespace Raunstrup.DataAccess.Context
         //protected override void OnModelCreating(ModelBuilder modelBuilder) 
         //{
         //    modelBuilder.Entity<Project>().HasMany(c => c.UsedItems).has
-                
+
         //    //    .Map(m =>
         //    //{
         //    //    m.ToTable("ProjectItem");
@@ -48,5 +48,7 @@ namespace Raunstrup.DataAccess.Context
         public DbSet<ProjectAssignedItem> ProjectAssignedItems { get; set; }
 
         public DbSet<CustomerDiscountType> CustomerDiscountTypes { get; set; }
-    }
+
+        //public DbSet<ItemDiscountType> Discount { get; set; }
+        }
 }

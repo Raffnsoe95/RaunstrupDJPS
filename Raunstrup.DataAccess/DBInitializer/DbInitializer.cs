@@ -51,7 +51,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Address = "Hansvej 1, 1111 Hansby",
                         Email = "Hans@gmail.com",
                         Active = true,
-                        CustomerDiscountType= BonusCustomer
+                        CustomerDiscountType = BonusCustomer
                     },
 
 
@@ -93,25 +93,56 @@ namespace Raunstrup.DataAccess.DBInitializer
                            Active = true,
                            CustomerDiscountType = NormalCustomer
                        }
+
+
                 );
+                var Discount1 = new ItemDiscountType
+                {
+                    DiscountPercentage = 5,
+                    StartDate = new DateTime(2020,2,20),
+                    EndDate = new DateTime(2020, 3, 20)
+                    
+                    
+                };
+                var Discount2 = new ItemDiscountType
+                {
+                    DiscountPercentage = 15,
+                    StartDate = new DateTime(2020, 4, 20),
+                    EndDate = new DateTime(2020, 5, 20),
+                    Amount = 10
+                    
+                };
+                var Discount3 = new ItemDiscountType
+                {
+                    DiscountPercentage = 30,
+                    StartDate = new DateTime(2020, 6, 20),
+                    EndDate = new DateTime(2020, 7, 20),
+                    Amount = 20
+                    
+                };
+
                 context.Items.AddRange(
                     new Item
                     {
                         Name = "Træ",
                         Price = 7.99M,
                         Active = true,
+                        Discount = Discount1,
+                        
                     },
                     new Item
                     {
                         Name = "Vindu",
                         Price = 7.99M,
                         Active = true,
+                        Discount = Discount2,
                     },
                     new Item
                     {
                         Name = "Søm",
                         Price = 7.99M,
                         Active = true,
+                        Discount = Discount3,
                     },
                     new Item
                     {
@@ -124,6 +155,8 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Name = "Isolering",
                         Price = 7.99M,
                         Active = true,
+                        
+                       
                     }
                 );
 
