@@ -53,7 +53,7 @@ namespace Raunstrup.UI
             {
                 client.BaseAddress = new Uri(Configuration["BaseUrl"]);
             });
-            //--------------------
+            //---------------------
 
 
             //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
