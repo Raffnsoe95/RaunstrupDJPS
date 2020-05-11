@@ -5,7 +5,12 @@
 }
 
 <h1>Index</h1>
-
+<form asp-controller="Employee" asp-action="Index">
+    <p>
+        Søg på mederabejdernavn: <input type="text" name="SearchString">
+        <input type="submit" value="Søg" />
+    </p>
+</form>
 <p>
     <a asp-action="Create">Create New</a>
 </p>

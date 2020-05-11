@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -90,6 +92,18 @@ namespace Raunstrup.UI.Services
             var response = await Client.PostAsync(_employeesRequestUri + "/AddProjectDrivingToProject", data).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
+        IEnumerable<EmployeeDto> IEmployeeservice.GetFilterdEmployees(IEnumerable<EmployeeDto> EmployeeDtos, string searchString)
+        {
 
+
+            var filterdEmployeeDtos = from m in EmployeeDtos
+                                      select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                filterdEmployeeDtos = filterdEmployeeDtos.Where(s => s.Name.ToUpper().Contains(searchString.ToUpper()));
+            }
+            return filterdEmployeeDtos;
+        }
     }
 }
