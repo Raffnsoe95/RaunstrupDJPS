@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Raunstrup.UI.Services;
 using Raunstrup.Contract.Services;
 using Raunstrup.BusinessLogic.Services;
+using Raunstrup.UI.UserManagement;
 //using Raunstrup.BusinessLogic.ServiceInterfaces;
 
 namespace Raunstrup.UI
@@ -57,8 +58,32 @@ namespace Raunstrup.UI
 
             //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase(databaseName: "RaunstrupDBVieModelInMemory"));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
+
+
+
+            services.AddDbContext<UserManagementContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("UserDatabaseConnection")));
+
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<UserManagementContext>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Default Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 4;
+                options.Password.RequiredUniqueChars = 1;
+            });
+
+
             services.AddRazorPages();
 
             //services.AddDbContext<ViewModelContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));

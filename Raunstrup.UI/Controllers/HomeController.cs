@@ -5,21 +5,38 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Raunstrup.Contract.Services;
 using Raunstrup.UI.Models;
+
 
 namespace Raunstrup.UI.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IEmployeeservice _employeeService;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(ILogger<HomeController> logger, IEmployeeservice employeeservice)
         {
             _logger = logger;
+            _employeeService = employeeservice;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                string bruger = User.Identity.Name;
+                int id = Convert.ToInt32(bruger.Substring(0,1));
+
+                //EmployeeViewModel employeeViewModel = EmployeeMapper.Map(_employeeService.GetEmployeesAsync(id));
+                var employeeDto = await _employeeService.GetEmployeesAsync(id).ConfigureAwait(false);
+
+                return View(EmployeeMapper.Map(employeeDto));
+
+            }
+
             return View();
         }
 

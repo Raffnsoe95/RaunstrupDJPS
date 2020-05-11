@@ -163,7 +163,9 @@ namespace Raunstrup.DataAccess.DBInitializer
                 
                 var department = new Department { Name = "Vejle" };
                 var type = new EmployeeType { HourlyPrice = 200, Title = "Tømrer" };
+                var type1 = new EmployeeType { HourlyPrice = 0, Title = "musse" };
                 var specialty = new Specialty { Bonus = 100, Title = "Velux" };
+                
                 Employee emp1 = new Employee { Name = "Jørgen Clevin", Active = true, Phone = "1241234",Department = department };
                 Employee emp2 = new Employee { Name = "Brian Jørgensen", Active = true, Phone = "1241234",Department = department };
                 context.Employees.AddRange(
@@ -206,6 +208,15 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Name = "Flemming Leth",
                         Phone = "23456789",
                         Active = true,
+                        Department = department
+                    },
+                    new Employee
+                    {
+                        Name = "Susanne",
+                        Phone = "67589372",
+                        Active = true,
+                        Type = type1,
+                        
                         Department = department
                     }
                 );

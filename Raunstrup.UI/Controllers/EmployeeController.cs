@@ -10,7 +10,7 @@ using Raunstrup.UI.Models;
 using Raunstrup.UI.Services;
 using Raunstrup.Contract.Services;
 using Raunstrup.Contract.DTOs;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Raunstrup.UI
 {
@@ -30,6 +30,7 @@ namespace Raunstrup.UI
         public async Task<IActionResult> Index()
         {
             var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
+
             return View(EmployeeMapper.Map(employeeDtos));
         }
 
@@ -62,6 +63,10 @@ namespace Raunstrup.UI
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
+        //------------------------------------
+        [Authorize(Roles = "Admin,SuperUser")]
+        //-----------------------------
         public async Task<IActionResult> Create([Bind("Id,Name,Phone,Salary,Active")] EmployeeViewModel employeeViewModel)
         {
             if (ModelState.IsValid)

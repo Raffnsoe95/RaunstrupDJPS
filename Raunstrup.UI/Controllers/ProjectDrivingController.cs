@@ -53,7 +53,7 @@ namespace Raunstrup.UI.Controllers
         {
             //ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id");
 
-            var projectDriving = new ProjectDrivingViewModel { ProjectId = id, EmployeeId = 1 };
+            var projectDriving = new ProjectDrivingViewModel { ProjectId = id, EmployeeId = Convert.ToInt32(User.Identity.Name.Split('@')[0])};
             return View(projectDriving);
         }
 
