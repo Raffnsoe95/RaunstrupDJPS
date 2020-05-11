@@ -47,6 +47,6 @@ namespace Raunstrup.DataAccess.Context
 
         public DbSet<ProjectAssignedItem> ProjectAssignedItems { get; set; }
 
-        public DbSet<CustomerDiscountType> CustomerDiscountTypes { get; set; }
+        //public DbSet<CustomerDiscountType> CustomerDiscountTypes { get; set; }
     }
 }
