@@ -1,10 +1,10 @@
-﻿@model Raunstrup.UI.Models.CustomerViewModel
+﻿@model Raunstrup.UI.Models.CECustomerViewModel
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Opret ny kunde</h1>
+<h1>Opret ny cecustomerviewmodel</h1>
 
 
 <hr />
@@ -32,17 +32,18 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-           
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Active" value="true" /> @Html.DisplayNameFor(model => model.Active)
-                </label>
-            </div>
+            <select id="mySelect" asp-for="SelectedCustomerDiscountViewModel" asp-items="@(new SelectList(Model.CustomerDiscountTypeViewModels, "Id", "Name"))" />
 
-            <div class="form-group">
-                <input type="submit" value="Opret" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Active" value="true" /> @Html.DisplayNameFor(model => model.Active)
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Opret" class="btn btn-primary" />
+                </div>
+</form>
     </div>
 </div>
 

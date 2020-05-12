@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Raunstrup.Api.Models;
 using Raunstrup.Contract.DTOs;
 using Raunstrup.BusinessLogic.ServiceInterfaces;
+using Raunstrup.DataAccess.Model;
 
 namespace Raunstrup.Api.Controllers
 {
@@ -63,6 +64,20 @@ namespace Raunstrup.Api.Controllers
         {
             _projectService.AddCustomerToProject(ProjectMapper.Map(value));
         }
+
+
+        [HttpGet("search/{searchString}", Name = "GetFilteredCustomers")]
+        public IEnumerable<CustomerDto> GetFilteredCustomers(string searchString)
+        {
+            return _customerService.GetFilteredCustomers(searchString).Select(a => CustomerMapper.Map(a));
+        }
+    /// en metode der henter en liste af customerdiscounttypes
+    [HttpGet("GetAllCustomerDiscountType")]
+    public IEnumerable<CustomerDiscountTypeDto> GetAllCustomerDiscountType()
+        {
+            return _customerService.GetAllCustomerDiscountType().Select(a => CustomerMapper.Map(a));
+        }
+
 
     }
 }

@@ -31,5 +31,19 @@ namespace Raunstrup.UI.Models
             return new CustomerDto
             { Id = view.Id, Name = view.Name, Phone = view.Phone, Address = view.Address, Email = view.Email, Active = view.Active, Rowversion = view.Rowversion, CustomerDiscountType=CustomerDiscountTypeMapper.Map( view.CustomerDiscountType) };
         }
+
+        public static CECustomerViewModel Map(CustomerDiscountTypeDto dto)
+        {
+            if (dto == null)
+                return null;
+            return new CECustomerViewModel
+            { Id = dto.Id, Name = dto.Name };
+        }
+
+        public static IEnumerable< CECustomerViewModel> Map(IEnumerable< CustomerDiscountTypeDto> dto)
+        {
+            return dto.Select(x => Map(x)).AsEnumerable();
+        }
+
     }
 }

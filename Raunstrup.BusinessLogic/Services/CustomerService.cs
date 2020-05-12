@@ -56,6 +56,19 @@ namespace Raunstrup.BusinessLogic.Services
             _context.Customer.Add(Customer);
             _context.SaveChanges();
         }
+
+        IEnumerable<Customer> ICustomerService.GetFilteredCustomers(string searchString)
+        {
+            return _context.customers
+                .Where(f=>f.Name.ToUpper().Contains(searchString.ToUpper()))
+                .Where(a=>a.Active==true)
+                .Include(c => c.CustomerDiscountType)
+            .ToList();
+        }
+        IEnumerable<CustomerDiscountType> ICustomerService.GetAllCustomerDiscountType()
+        {
+            return _context.CustomerDiscountTypes.ToList();
+        }
     }
     }
 

@@ -18,5 +18,8 @@ namespace Raunstrup.BusinessLogic.ServiceInterfaces
             void Delete(int id);
             void AddCustomerToProject(Customer Customer);
 
+        IEnumerable<Customer> GetFilteredCustomers(string searchString);
+
+        IEnumerable<CustomerDiscountType> GetAllCustomerDiscountType();
     }
 }

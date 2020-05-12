@@ -51,7 +51,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Address = "Hansvej 1, 1111 Hansby",
                         Email = "Hans@gmail.com",
                         Active = true,
-                        CustomerDiscountType = BonusCustomer
+                        CustomerDiscountType = SuperCustomer
                     },
 
 

@@ -62,8 +62,8 @@ namespace Raunstrup.UI.Services
           
             response.EnsureSuccessStatusCode();
 
-            
- 
+           
+
 
             var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
@@ -74,6 +74,29 @@ namespace Raunstrup.UI.Services
                 PropertyNameCaseInsensitive = true
             };
             return await JsonSerializer.DeserializeAsync<IEnumerable<CustomerDto>>(stream, options).ConfigureAwait(false);
+        }
+
+        async Task<IEnumerable<CustomerDiscountTypeDto>> ICustomerService.GetAllCustomerDiscountType()
+        {
+
+
+            var response = await Client.GetAsync(_customerRequestUri+ "/GetAllCustomerDiscountType").ConfigureAwait(false);
+
+
+            response.EnsureSuccessStatusCode();
+
+
+
+
+            var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+
+
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            return await JsonSerializer.DeserializeAsync<IEnumerable<CustomerDiscountTypeDto>>(stream, options).ConfigureAwait(false);
         }
 
         async Task ICustomerService.RemoveAsync(int id)
@@ -98,19 +121,28 @@ namespace Raunstrup.UI.Services
             var response = await Client.PutAsync(_customerRequestUri + "/AddCustomerToProject", data).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
-    
-    IEnumerable<CustomerDto> ICustomerService.GetFilterdCustomers(IEnumerable<CustomerDto> customerDtos, string searchString)
+
+        async Task<IEnumerable<CustomerDto>> ICustomerService.GetFilteredCustomers(string searchString)
         {
 
 
-            var filterdCustomersDtos = from m in customerDtos
-                                       select m;
+            var response = await Client.GetAsync(_customerRequestUri+ $"/search/{searchString}").ConfigureAwait(false);
 
-            if (!String.IsNullOrEmpty(searchString))
+
+            response.EnsureSuccessStatusCode();
+
+
+
+
+            var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+
+
+
+            var options = new JsonSerializerOptions
             {
-                 filterdCustomersDtos = filterdCustomersDtos.Where(s => s.Name.ToUpper().Contains(searchString.ToUpper()));
-            }
-            return  filterdCustomersDtos;
+                PropertyNameCaseInsensitive = true
+            };
+            return await JsonSerializer.DeserializeAsync<IEnumerable<CustomerDto>>(stream, options).ConfigureAwait(false);
         }
     }
 }
