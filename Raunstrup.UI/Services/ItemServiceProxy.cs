@@ -100,5 +100,19 @@ namespace Raunstrup.UI.Services
                 response.EnsureSuccessStatusCode();
             }
         }
+
+        IEnumerable<ItemDto> IItemService.GetFilterdItem(IEnumerable<ItemDto> ItemDtos, string searchString)
+        {
+
+
+            var filterdItemsDtos = from m in ItemDtos
+                                   select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                filterdItemsDtos = filterdItemsDtos.Where(s => s.Name.ToUpper().Contains(searchString.ToUpper()));
+            }
+            return filterdItemsDtos;
+        }
     }
 }

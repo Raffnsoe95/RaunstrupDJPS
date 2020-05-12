@@ -5,7 +5,12 @@
 }
 
 <h1>Tilføj Item til Project</h1>
-
+<form asp-controller="Item" asp-action="AddAssignedProjectItem">
+    <p>
+        Søg på varenavn: <input type="text" name="SearchString">
+        <input type="submit" value="Søg" />
+    </p>
+</form>
 <p>
     <!--<a asp-action="Create">Tilføj Item til Project</a>-->
 </p>
@@ -53,25 +58,17 @@
 
 <form method="post" asp-action="AddAssignedProjectItemToProject">
 
-    <a><label>Søg Efter Vare</label></a>
-    <a><input type="text" /></a>
-
     <table class="table">
 
-        @for (var i = 0; i < Model.Count(); i++)
+       @for (var i = 0; i < Model.Count(); i++)
         {
-    <tr>
-        @*<td><input name="[@i].Id" value="@Model[i].Id" /></td>
-        <td><input name="[@i].Name" value="@Model[i].Name" /></td>
-        <td><input name="[@i].Price" value="@Model[i].Price" /></td>*@
-
-
-        <td><input type="text" asp-for="@Model[i].Id" hidden/></td>
-        <td><input type="text" asp-for="@Model[i].Name" /></td>
-        <td><input type="text" asp-for="@Model[i].Price" /></td>
-        <td><input type="text" asp-for="@Model[i].projectID" hidden /></td>
-        <td><input type="text" asp-for="@Model[i].Amount" /></td>
-    </tr>
+           <tr>
+             <td><input type="text" asp-for="@Model[i].Id" hidden/></td>
+             <td><input type="text" asp-for="@Model[i].Name" /></td>
+             <td><input type="text" asp-for="@Model[i].Price" /></td>
+             <td><input type="text" asp-for="@Model[i].projectID" hidden /></td>
+             <td><input type="text" asp-for="@Model[i].Amount" /></td>
+           </tr>
         }
     </table>
     <button>Update</button>

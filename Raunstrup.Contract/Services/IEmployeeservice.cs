@@ -20,5 +20,7 @@ namespace Raunstrup.Contract.Services
         Task AddAsync(int id, int projectid);
 
         Task AddAsync(ProjectDrivingDto projectDriving);
+
+        IEnumerable<EmployeeDto> GetFilterdEmployees(IEnumerable<EmployeeDto> employeeDtos, string searchString);
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Raunstrup.Contract.DTOs;
 using Raunstrup.Contract.Services;
 using Raunstrup.UI.Data;
 using Raunstrup.UI.Models;
@@ -24,11 +25,13 @@ namespace Raunstrup.UI.Controllers
         }
 
         // GET: Item
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             // Hent data
             var itemsDtos = await _itemService.GetItemsAsync().ConfigureAwait(false);
-            return View(ItemMapper.Map(itemsDtos));
+            IEnumerable<ItemDto> filterdCustomersDtos = _itemService.GetFilterdItem(itemsDtos, searchString);
+
+            return View(ItemMapper.Map(filterdCustomersDtos));
         }
 
         // GET: Item/Details/5
@@ -125,6 +128,7 @@ namespace Raunstrup.UI.Controllers
         {
             var itemDtos = await _itemService.GetItemsAsync().ConfigureAwait(false);
             var items = ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList();
+
             return View(ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList());
         }
 
@@ -135,10 +139,7 @@ namespace Raunstrup.UI.Controllers
                 Amount = x.Amount, 
                 Price = x.Price, 
                 ProjectId = x.projectID, 
-                ItemID = x.Id,
-                
-              
-                
+                ItemID = x.Id,  
             });
 
 
