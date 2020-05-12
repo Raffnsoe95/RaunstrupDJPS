@@ -64,10 +64,10 @@
         <dd class="col-sm-10">
             @foreach (var item in @Model.ProjectEmployees)
             {
-              @item.Employee.Name
-                
+                @item.Employee.Name
+
             }
-          
+
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ProjectDrivings)
@@ -94,17 +94,17 @@
             @foreach (var item in @Model.WorkingHours)
             {
 
-                @item.Employee.Name  @item.Amount
+                @item.Employee.Name @item.Amount
             }
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Customer)
         </dt>
         <dd class="col-sm-10">
-            
-            
+
+
             @(Model.Customer?.Name)
-            
+
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Rowversion)
