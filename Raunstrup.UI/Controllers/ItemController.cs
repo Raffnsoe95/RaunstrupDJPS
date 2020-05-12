@@ -139,10 +139,7 @@ namespace Raunstrup.UI.Controllers
                 Amount = x.Amount, 
                 Price = x.Price, 
                 ProjectId = x.projectID, 
-                ItemID = x.Id,
-                
-              
-                
+                ItemID = x.Id,  
             });
 
 
