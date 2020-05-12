@@ -13,10 +13,12 @@ namespace Raunstrup.UI.Models
         }
         public int Id { get; set; }
 
-        [RegularExpression(@"[A-ZØ]+[a-zøA-ZØ]"),StringLength(200)]
+        //[RegularExpression(@"[A-ZØ]+[a-zøA-ZØ]"),StringLength(200)]
+        //[Required(ErrorMessage = "Skal udfyldes")]
         public string Name { get; set; }
 
-        [RegularExpression(@"[0-9()+]"), StringLength(9)]
+        //[Required(ErrorMessage = "Skal udfyldes")]
+        //[RegularExpression(@"[0-9()+]"), StringLength(9)]
         public string Phone { get; set; }
 
         public bool Active { get; set; }
