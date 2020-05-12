@@ -3,22 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.RegularExpressions;
-using Raunstrup.DataAccess.Model;
 
 namespace Raunstrup.UI.Models
 {
-    public class ProjectViewModel
+    public class ProjectDetailsViewModel
     {
-        public ProjectViewModel() 
+        public ProjectDetailsViewModel()
         {
             ProjectEmployees = new List<ProjectEmployeeViewModel>();
             WorkingHours = new List<WorkingHoursViewModel>();
             UsedItems = new List<ProjectUsedItemViewModel>();
             AssignedItems = new List<ProjectAssignedItemViewModel>();
             ProjectDrivings = new List<ProjectDrivingViewModel>();
-            
+
         }
 
         public int Id { get; set; }

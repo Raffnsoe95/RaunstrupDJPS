@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Raunstrup.UI.Models
 {
-    public static class ProjectMapper
+    public static class ProjectDetailsMapper
     {
 
-        public static ProjectViewModel Map(ProjectDto dto)
+        public static ProjectDetailsViewModel Map(ProjectDto dto)
         {
-            
-            return new ProjectViewModel
+
+            return new ProjectDetailsViewModel
             {
                 Id = dto.Id,
                 Active = dto.Active,
@@ -27,23 +27,31 @@ namespace Raunstrup.UI.Models
                 StartDate = dto.StartDate,
                 Rowversion = dto.Rowversion,
                 CustomerId = dto.CustomerId,
-                //UsedItems = ProjectMapper.Map(dto.UsedItemsDtos)
+                Customer = CustomerMapper.Map(dto.CustomerDto),
+
                 WorkingHours = WorkingHoursMapper.Map(dto.WorkingHoursDtos).ToList(),
                 ProjectDrivings = ProjectDrivingMapper.Map(dto.ProjectDrivingDtos).ToList(),
                 ProjectEmployees = ProjectEmployeeMapper.Map(dto.ProjectEmployeeDtos).ToList(),
-                AssignedItems = ProjectAssignedItemMapper.Map(dto.AssignedItemDtos).ToList(),
-                UsedItems = ProjectUsedItemMapper.Map(dto.UsedItemsDtos).ToList(),
-                Customer = CustomerMapper.Map(dto.CustomerDto)
+
+                //used items summed up
+                UsedItems = ProjectUsedItemMapper.Map(dto.UsedItemsDtos).GroupBy(PUI => PUI.ItemId)
+                    .Select(PUI => new ProjectUsedItemViewModel
+                    {
+                        Amount = PUI.Sum(c => c.Amount),
+                        Item = PUI.First().Item,
+                        Price = PUI.First().Price,
+                        ProjectId = PUI.First().ProjectId
+                    }).ToList()
 
             };
         }
 
-        public static IEnumerable<ProjectViewModel> Map(IEnumerable<ProjectDto> model)
+        public static IEnumerable<ProjectDetailsViewModel> Map(IEnumerable<ProjectDto> model)
         {
             return model.Select(x => Map(x)).AsEnumerable();
         }
 
-        public static ProjectDto Map(ProjectViewModel project)
+        public static ProjectDto Map(ProjectDetailsViewModel project)
         {
             return new ProjectDto
             {

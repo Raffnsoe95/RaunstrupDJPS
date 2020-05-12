@@ -48,7 +48,7 @@ namespace Raunstrup.UI.Controllers
                 return NotFound();
             }
 
-            return View(ProjectMapper.Map(projectViewModel));
+            return View(ProjectDetailsMapper.Map(projectViewModel));
         }
 
         // GET: Project/Create
