@@ -149,14 +149,14 @@ namespace Raunstrup.UI.Controllers
                 return NotFound();
             }
 
-            var customerViewModel = await _context.customers
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (customerViewModel == null)
+            var customer = await _customerService.GetCustomerAsync(id.Value).ConfigureAwait(false);
+              //  .FirstOrDefaultAsync(m => m.Id == id);
+            if (customer== null)
             {
                 return NotFound();
             }
 
-            return View(customerViewModel);
+            return View(CustomerMapper.Map(customer));
         }
 
         // POST: Customer/Delete/5
@@ -164,10 +164,15 @@ namespace Raunstrup.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var customerViewModel = await _context.customers.FindAsync(id);
-            _context.customers.Remove(customerViewModel);
-            await _context.SaveChangesAsync();
+            await _customerService.RemoveAsync(id).ConfigureAwait(false);
+
             return RedirectToAction(nameof(Index));
+
+            //var customerViewModel = await _context.customers.FindAsync(id);
+
+            //_context.customers.Remove(customerViewModel);
+            //await _context.SaveChangesAsync();
+            //return RedirectToAction(nameof(Index));
         }
 
         private bool CustomerViewModelExists(int id)
