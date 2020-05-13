@@ -35,12 +35,8 @@ namespace Raunstrup.BusinessLogic.Services
                 .Include(w => w.AssignedItems)
                 .ThenInclude(e => e.Item)
                 .Include(w => w.Customer)
-                
-                
                 .ToList();
             }
-
-        
 
             Project IProjectService.Get(int id)
             {
@@ -61,7 +57,6 @@ namespace Raunstrup.BusinessLogic.Services
             
 
                 .FirstOrDefault(x => x.Id == id);
-
             }
 
             void IProjectService.Create(Project project)
@@ -72,15 +67,21 @@ namespace Raunstrup.BusinessLogic.Services
 
             void IProjectService.Update(Project project)
             {
-
                 _context.Projects.Update(project);
                 _context.SaveChanges();
             }
+
+            void IProjectService.Delete(int id)
+            {
+                Project tmpProject = _context.Projects.Find(id);
+                tmpProject.Active = false;
+                _context.Projects.Update(tmpProject);
+                _context.SaveChanges();
+            }
+
         void IProjectService.AddCustomerToProject(Project project)
         {
-
-
-            Project tempProject =
+                Project tempProject =
                  _context.Projects
                 .Include(w => w.WorkingHours)
                 .ThenInclude(e => e.Employee)
@@ -94,22 +95,10 @@ namespace Raunstrup.BusinessLogic.Services
                 .ThenInclude(e => e.Item)
                 .Include(w => w.Customer)
                 .FirstOrDefault(x => x.Id == project.Id);
-            tempProject.CustomerId = project.CustomerId;
-            _context.Projects.Update(tempProject);
-            _context.SaveChanges();
-        }
-
-        void IProjectService.Delete(int id)
-            {
-                _context.Projects.Remove(_context.Projects.Find(id));
+                tempProject.CustomerId = project.CustomerId;
+                _context.Projects.Update(tempProject);
                 _context.SaveChanges();
-            }
-
-        //IEnumerable<WorkingHours> GetWorkingHoursfromProject(Project project)
-        //{
-        //    return _context.WorkingHours.Where(p => p.ProjectId == project.Id);
-
-        //}
+        }
     }
 }
 
