@@ -43,94 +43,94 @@ namespace Raunstrup.UI.Controllers
         }
 
         // GET: Item/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null) return NotFound();
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null) return NotFound();
 
-            var item = await _itemService.GetItemAsync(id.Value).ConfigureAwait(false);
+        //    var item = await _itemService.GetItemAsync(id.Value).ConfigureAwait(false);
 
-            if (item == null) return NotFound();
+        //    if (item == null) return NotFound();
 
-            return View(ItemMapper.Map(item));
-        }
+        //    return View(ItemMapper.Map(item));
+        //}
 
-        // GET: Item/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        //// GET: Item/Create
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // POST: Item/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,Active")]
-            ItemViewModel item)
-        {
-            if (ModelState.IsValid)
-            {
-                await _itemService.AddAsync(ItemMapper.Map(item)).ConfigureAwait(false);
+        //// POST: Item/Create
+        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,Name,Price,Active")]
+        //    ItemViewModel item)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        await _itemService.AddAsync(ItemMapper.Map(item)).ConfigureAwait(false);
 
-                return RedirectToAction(nameof(Index));
-            }
+        //        return RedirectToAction(nameof(Index));
+        //    }
 
-            return View(item);
-        }
+        //    return View(item);
+        //}
 
-        // GET: Item/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null) return NotFound();
+        //// GET: Item/Edit/5
+        //public async Task<IActionResult> Edit(int? id)
+        //{
+        //    if (id == null) return NotFound();
 
-            var item = await _itemService.GetItemAsync(id.Value).ConfigureAwait(false);
-            if (item == null) return NotFound();
-            return View(ItemMapper.Map(item));
-        }
+        //    var item = await _itemService.GetItemAsync(id.Value).ConfigureAwait(false);
+        //    if (item == null) return NotFound();
+        //    return View(ItemMapper.Map(item));
+        //}
 
-        // POST: Item/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Active")]ItemViewModel item)
-        {
-            if (id != item.Id) return NotFound();
+        //// POST: Item/Edit/5
+        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,Active")]ItemViewModel item)
+        //{
+        //    if (id != item.Id) return NotFound();
 
-            if (ModelState.IsValid)
-            {
-                await _itemService.UpdateAsync(id, ItemMapper.Map(item)).ConfigureAwait(false);
-                return RedirectToAction(nameof(Index));
-            }
+        //    if (ModelState.IsValid)
+        //    {
+        //        await _itemService.UpdateAsync(id, ItemMapper.Map(item)).ConfigureAwait(false);
+        //        return RedirectToAction(nameof(Index));
+        //    }
 
-            return View(item);
-        }
+        //    return View(item);
+        //}
 
-        // GET: Item/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null) return NotFound();
+        //// GET: Item/Delete/5
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null) return NotFound();
 
-            var item = await _itemService.GetItemAsync(id.Value).ConfigureAwait(false);
-            if (item == null) return NotFound();
+        //    var item = await _itemService.GetItemAsync(id.Value).ConfigureAwait(false);
+        //    if (item == null) return NotFound();
 
-            return View(ItemMapper.Map(item));
-        }
+        //    return View(ItemMapper.Map(item));
+        //}
 
-        // POST: Item/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            await _itemService.RemoveAsync(id).ConfigureAwait(false);
+        //// POST: Item/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    await _itemService.RemoveAsync(id).ConfigureAwait(false);
 
-            return RedirectToAction(nameof(Index));
-        }
+        //    return RedirectToAction(nameof(Index));
+        //}
 
-        private bool ItemViewModelExists(int id)
-        {
-            return _context.Items.Any(e => e.Id == id);
-        }
+        //private bool ItemViewModelExists(int id)
+        //{
+        //    return _context.Items.Any(e => e.Id == id);
+        //}
 
         public async Task<IActionResult> AddAssignedProjectItem(int id, string searchString)
         {
@@ -157,7 +157,7 @@ namespace Raunstrup.UI.Controllers
                 Amount = x.Amount, 
                 Price = x.Price, 
                 ProjectId = x.projectID, 
-                ItemID = x.Id,  
+                ItemId = x.Id,  
             });
 
 
@@ -192,7 +192,7 @@ namespace Raunstrup.UI.Controllers
             {   Amount = x.Amount, 
                 Price = x.Price, 
                 ProjectId = x.projectID, 
-                ItemID = x.Id,
+                ItemId = x.Id,
               
                 
             });

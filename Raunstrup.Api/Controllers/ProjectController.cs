@@ -15,8 +15,6 @@ namespace Raunstrup.Api.Controllers
     //[ApiVersion("1.1")]
     [ApiController]
     public class ProjectController : ControllerBase
-
-
     {
         private readonly IProjectService _projectService;
 
@@ -28,10 +26,8 @@ namespace Raunstrup.Api.Controllers
         [HttpGet]
         public IEnumerable<ProjectDto> Get()
         {
-
             var result = _projectService.GetAll().Select(a => ProjectMapper.Map(a)).ToList();
             return result;
-
         }
 
         // GET: api/Customer/5
@@ -61,8 +57,6 @@ namespace Raunstrup.Api.Controllers
         {
             _projectService.Delete(id);
         }
-    
-       
-    
+
     }
 }

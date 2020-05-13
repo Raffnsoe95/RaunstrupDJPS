@@ -31,6 +31,8 @@ namespace Raunstrup.UI.Models
                 WorkingHours = WorkingHoursMapper.Map(dto.WorkingHoursDtos).ToList(),
                 ProjectDrivings = ProjectDrivingMapper.Map(dto.ProjectDrivingDtos).ToList(),
                 ProjectEmployees = ProjectEmployeeMapper.Map(dto.ProjectEmployeeDtos).ToList(),
+                AssignedItems = ProjectAssignedItemMapper.Map(dto.AssignedItemDtos).ToList(),
+                UsedItems = ProjectUsedItemMapper.Map(dto.UsedItemsDtos).ToList(),
                 Customer = CustomerMapper.Map(dto.CustomerDto)
 
             };

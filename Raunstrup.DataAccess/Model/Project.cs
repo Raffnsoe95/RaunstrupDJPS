@@ -12,6 +12,8 @@ namespace Raunstrup.DataAccess
             WorkingHours = new List<WorkingHours>();
             UsedItems = new List<ProjectUsedItem>();
             AssignedItems = new List<ProjectAssignedItem>();
+            ProjectDrivings = new List<ProjectDriving>();
+            ProjectEmployees = new List<ProjectEmployee>();
         }
 
         public int Id { get; set; }

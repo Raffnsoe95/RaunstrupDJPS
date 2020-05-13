@@ -25,6 +25,7 @@ namespace Raunstrup.Api.Controllers
             _projectService = projectService;
             _customerService = movieService;
         }
+
         // GET: api/Customer
         [HttpGet]
         public IEnumerable<CustomerDto> Get()
@@ -59,25 +60,24 @@ namespace Raunstrup.Api.Controllers
         {
             _customerService.Delete(id);
         }
+
         [HttpPut("AddCustomerToProject", Name = "AddCustomerToProject")]
         public void AddCustomerToProject([FromBody] ProjectDto value)
         {
             _projectService.AddCustomerToProject(ProjectMapper.Map(value));
         }
 
-
         [HttpGet("search/{searchString}", Name = "GetFilteredCustomers")]
         public IEnumerable<CustomerDto> GetFilteredCustomers(string searchString)
         {
             return _customerService.GetFilteredCustomers(searchString).Select(a => CustomerMapper.Map(a));
         }
-    /// en metode der henter en liste af customerdiscounttypes
-    [HttpGet("GetAllCustomerDiscountType")]
-    public IEnumerable<CustomerDiscountTypeDto> GetAllCustomerDiscountType()
+
+        // en metode der henter en liste af customerdiscounttypes
+        [HttpGet("GetAllCustomerDiscountType")]
+        public IEnumerable<CustomerDiscountTypeDto> GetAllCustomerDiscountType()
         {
             return _customerService.GetAllCustomerDiscountType().Select(a => CustomerMapper.Map(a));
         }
-
-
     }
 }
