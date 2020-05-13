@@ -1,6 +1,7 @@
 ﻿using Raunstrup.Contract;
 using Raunstrup.Contract.DTOs;
 using Raunstrup.DataAccess;
+using Raunstrup.DataAccess.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,5 +37,22 @@ namespace Raunstrup.Api.Models
             return new CustomerDto
             { Id = model.Id, Name = model.Name, Phone = model.Phone, Address = model.Address, Email=model.Email, Active=model.Active, Rowversion=model.Rowversion, CustomerDiscountType=CustomerDiscountTypeMapper.Map( model.CustomerDiscountType) };
         }
+    
+    public static IEnumerable<CustomerDiscountTypeDto> Map (IEnumerable<CustomerDiscountType> model)
+        {
+            return model.Select(x => Map(x)).AsEnumerable();
+        }
+
+
+        public static CustomerDiscountTypeDto Map(CustomerDiscountType model)
+        {
+            if (model == null)
+            {
+                return null;
+            }
+            return new CustomerDiscountTypeDto
+            { Id = model.Id, Name = model.Name, DiscountPercent=model.DiscountPercent, CustomerId=model.CustomerID, Rowversion = model.Rowversion  };
+        }
+
     }
 }

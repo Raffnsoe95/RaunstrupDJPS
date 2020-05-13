@@ -32,6 +32,8 @@ namespace Raunstrup.UI.Data
         public DbSet<WorkingHoursViewModel> WorkingHours { get; set; }
 
         public DbSet<Raunstrup.DataAccess.Model.WorkingHours> WorkingHours_1 { get; set; }
+
+        public DbSet<Raunstrup.DataAccess.Model.CustomerDiscountType> CustomerDiscountTypes { get; set; }
     }
 }
 

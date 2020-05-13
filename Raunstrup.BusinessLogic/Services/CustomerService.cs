@@ -21,6 +21,7 @@ namespace Raunstrup.BusinessLogic.Services
             IEnumerable<Customer> ICustomerService.GetAll()
             {
                 return _context.customers
+                .Where(a=>a.Active==true)
                 .Include(c=>c.CustomerDiscountType)
             .ToList();
             }
@@ -48,13 +49,28 @@ namespace Raunstrup.BusinessLogic.Services
 
             void ICustomerService.Delete(int id)
             {
-                _context.customers.Remove(_context.customers.Find(id));
-                _context.SaveChanges();
+                Customer tmpCustomer=_context.customers.Find(id);
+            tmpCustomer.Active = false;
+            _context.customers.Update(tmpCustomer);
+            _context.SaveChanges();
             }
         void ICustomerService.AddCustomerToProject(Customer Customer)
         {
             _context.Customer.Add(Customer);
             _context.SaveChanges();
+        }
+
+        IEnumerable<Customer> ICustomerService.GetFilteredCustomers(string searchString)
+        {
+            return _context.customers
+                .Where(f=>f.Name.ToUpper().Contains(searchString.ToUpper()))
+                .Where(a=>a.Active==true)
+                .Include(c => c.CustomerDiscountType)
+            .ToList();
+        }
+        IEnumerable<CustomerDiscountType> ICustomerService.GetAllCustomerDiscountType()
+        {
+            return _context.CustomerDiscountTypes.ToList();
         }
     }
     }

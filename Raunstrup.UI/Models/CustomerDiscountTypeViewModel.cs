@@ -16,5 +16,7 @@ namespace Raunstrup.UI.Models
 
         public bool Active { get; set; }
         public int CustomerId { get; set; }
+
+        public byte[] Rowversion { get; set; }
     }
 }

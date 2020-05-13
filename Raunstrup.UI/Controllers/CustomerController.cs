@@ -29,14 +29,21 @@ namespace Raunstrup.UI.Controllers
 
         public async Task<IActionResult> Index(string searchString)
         {
+            
 
-            var customerDtos = await _customerService.GetCustomerAsync().ConfigureAwait(false);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var customerDtos = await _customerService.GetFilteredCustomers(searchString).ConfigureAwait(false);
+                return View(CustomerMapper.Map(customerDtos));
+            }
+            else
+            {
+                var customerDtos = await _customerService.GetCustomerAsync().ConfigureAwait(false);
+                return View(CustomerMapper.Map(customerDtos));
+            }
 
 
-            IEnumerable<CustomerDto> filterdCustomersDtos = _customerService.GetFilterdCustomers(customerDtos, searchString);
-
-
-            return View(CustomerMapper.Map(filterdCustomersDtos));
+            
 
         }
 
@@ -60,9 +67,13 @@ namespace Raunstrup.UI.Controllers
         }
 
         // GET: Customer/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            //den her modtager en liste af customerdiscounttyper
+            var cECustomerViewModel = await _customerService.GetAllCustomerDiscountType().ConfigureAwait(false);
+
+            //de skal laves om til CEcustomerviewmodels
+            return View(CustomerMapper.Map(cECustomerViewModel));
         }
 
         // POST: Customer/Create
@@ -138,14 +149,14 @@ namespace Raunstrup.UI.Controllers
                 return NotFound();
             }
 
-            var customerViewModel = await _context.customers
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (customerViewModel == null)
+            var customer = await _customerService.GetCustomerAsync(id.Value).ConfigureAwait(false);
+              //  .FirstOrDefaultAsync(m => m.Id == id);
+            if (customer== null)
             {
                 return NotFound();
             }
 
-            return View(customerViewModel);
+            return View(CustomerMapper.Map(customer));
         }
 
         // POST: Customer/Delete/5
@@ -153,10 +164,15 @@ namespace Raunstrup.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var customerViewModel = await _context.customers.FindAsync(id);
-            _context.customers.Remove(customerViewModel);
-            await _context.SaveChangesAsync();
+            await _customerService.RemoveAsync(id).ConfigureAwait(false);
+
             return RedirectToAction(nameof(Index));
+
+            //var customerViewModel = await _context.customers.FindAsync(id);
+
+            //_context.customers.Remove(customerViewModel);
+            //await _context.SaveChangesAsync();
+            //return RedirectToAction(nameof(Index));
         }
 
         private bool CustomerViewModelExists(int id)
@@ -167,7 +183,7 @@ namespace Raunstrup.UI.Controllers
         {
             var customerDtos = await _customerService.GetCustomerAsync().ConfigureAwait(false);
 
-            IEnumerable<CustomerDto> filterdCustomersDtos = _customerService.GetFilterdCustomers(customerDtos, searchString);
+            IEnumerable<CustomerDto> filterdCustomersDtos = await _customerService.GetFilteredCustomers(searchString);
 
             return View(CustomerMapper.Map(filterdCustomersDtos));
         }
