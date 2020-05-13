@@ -73,11 +73,17 @@ namespace Raunstrup.Api.Controllers
             return _customerService.GetFilteredCustomers(searchString).Select(a => CustomerMapper.Map(a));
         }
 
-        // en metode der henter en liste af customerdiscounttypes
+        
         [HttpGet("GetAllCustomerDiscountType")]
         public IEnumerable<CustomerDiscountTypeDto> GetAllCustomerDiscountType()
         {
             return _customerService.GetAllCustomerDiscountType().Select(a => CustomerMapper.Map(a));
+        }
+
+        [HttpGet("getcustomerdiscounttype/{Id}", Name = "getcustomerdiscounttype")]
+        public CustomerDiscountTypeDto CustomerDiscountType(int id)
+        {
+            return CustomerMapper.Map(_customerService.CustomerDiscountType(id));
         }
     }
 }

@@ -76,28 +76,7 @@ namespace Raunstrup.UI.Services
             return await JsonSerializer.DeserializeAsync<IEnumerable<CustomerDto>>(stream, options).ConfigureAwait(false);
         }
 
-        async Task<IEnumerable<CustomerDiscountTypeDto>> ICustomerService.GetAllCustomerDiscountType()
-        {
-
-
-            var response = await Client.GetAsync(_customerRequestUri + "/GetAllCustomerDiscountType").ConfigureAwait(false);
-
-
-            response.EnsureSuccessStatusCode();
-
-
-
-
-            var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-
-
-
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            };
-            return await JsonSerializer.DeserializeAsync<IEnumerable<CustomerDiscountTypeDto>>(stream, options).ConfigureAwait(false);
-        }
+     
 
         async Task ICustomerService.RemoveAsync(int id)
         {
@@ -144,8 +123,51 @@ namespace Raunstrup.UI.Services
             };
             return await JsonSerializer.DeserializeAsync<IEnumerable<CustomerDto>>(stream, options).ConfigureAwait(false);
         }
+        //metode der kalder metoden fra api-controlleren som henter listen over alle customerdiscounttype 
+        async Task<IEnumerable<CustomerDiscountTypeDto>> ICustomerService.GetAllCustomerDiscountType()
+        {
+
+
+            var response = await Client.GetAsync(_customerRequestUri + "/GetAllCustomerDiscountType").ConfigureAwait(false);
+
+
+            response.EnsureSuccessStatusCode();
+
+
+
+
+            var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+
+
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            return await JsonSerializer.DeserializeAsync<IEnumerable<CustomerDiscountTypeDto>>(stream, options).ConfigureAwait(false);
+        }
+
+
+        async Task<CustomerDiscountTypeDto> ICustomerService.GetCustomerDiscountTypeAsync(int id)
+        {
+            var response = await Client.GetAsync(_customerRequestUri+$"/getcustomerdiscounttype/{id}").ConfigureAwait(false);
+
+            response.EnsureSuccessStatusCode();
+
+            var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            return await JsonSerializer.DeserializeAsync<CustomerDiscountTypeDto>(stream, options).ConfigureAwait(false);
+        }
+
     }
-    //metode der kalder metoden fra api-controlleren som henter listen over alle customerdiscounttype 
+ 
+
+   
+
 
     //i controlleren kalder jeg denne metode så jeg kan få listen ind på cecustomerviewmodellen
 }

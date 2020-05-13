@@ -37,7 +37,7 @@ namespace Raunstrup.UI.Models
             if (dto == null)
                 return null;
             return new CustomerDiscountTypeViewModel
-            { Id = dto.Id, Name = dto.Name };
+            { Id = dto.Id, Name = dto.Name, Active=dto.active, DiscountPercent=dto.DiscountPercent, Rowversion=dto.Rowversion };
         }
 
 
@@ -46,10 +46,12 @@ namespace Raunstrup.UI.Models
             return dtos.Select(x => Map(x)).AsEnumerable();
         }
 
-        //public static IEnumerable< CECustomerViewModel> Map(IEnumerable< CustomerDiscountTypeDto> dto)
-        //{
-        //    return dto.Select(x => Map(x)).AsEnumerable();
-        //}
-
+        public static CustomerViewModel Map(CECustomerViewModel view)
+        {
+            if (view == null)
+                return null;
+            return new CustomerViewModel
+            { Id = view.Id, Name = view.Name, Phone = view.Phone, Address = view.Address, Email = view.Email, Active = view.Active, Rowversion = view.Rowversion, CustomerDiscountType = view.CustomerDiscountType
+            };
     }
-}
+}}

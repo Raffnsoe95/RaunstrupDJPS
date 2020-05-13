@@ -21,5 +21,7 @@ namespace Raunstrup.BusinessLogic.ServiceInterfaces
         IEnumerable<Customer> GetFilteredCustomers(string searchString);
 
         IEnumerable<CustomerDiscountType> GetAllCustomerDiscountType();
+
+        CustomerDiscountType CustomerDiscountType(int id);
     }
 }
