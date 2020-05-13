@@ -46,7 +46,9 @@ namespace Raunstrup.BusinessLogic.Services
             {
             return _context.Projects
             .Include(w => w.WorkingHours)
-            .ThenInclude(e => e.Employee)
+            .ThenInclude(e => e.Employee).ThenInclude(e => e.Type)
+            .Include(w => w.WorkingHours)
+            .ThenInclude(e => e.Employee).ThenInclude(e => e.Specialties)
             .Include(w => w.ProjectDrivings)
             .ThenInclude(e => e.Employee)
             .Include(w => w.ProjectEmployees)

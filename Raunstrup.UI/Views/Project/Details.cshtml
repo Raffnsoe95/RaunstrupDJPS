@@ -64,39 +64,11 @@
         <dd class="col-sm-10">
             @foreach (var item in @Model.ProjectEmployees)
             {
-            @item.Employee.Name
+                @item.Employee.Name
 
             }
-
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ProjectDrivings)
-        </dt>
-        <dd class="col-sm-10">
-            @foreach (var item in @Model.ProjectDrivings)
-            {
-            @item.Employee.Name  @item.Amount
-            }
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UsedItems)
-        </dt>
-        <dd class="col-sm-10">
-            @foreach (var item in @Model.UsedItems)
-            {
-            @item.Item.Name  @item.Amount
-            }
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.WorkingHours)
-        </dt>
-        <dd class="col-sm-10">
-            @foreach (var item in @Model.WorkingHours)
-            {
-
-            @item.Employee.Name  @item.Amount
-            }
-        </dd>
+        
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Customer)
         </dt>
@@ -113,6 +85,137 @@
             @Html.DisplayFor(model => model.Rowversion)
         </dd>
     </dl>
+
+    <h5>Afregning for Kørsel</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Antal
+                </th>
+                <th>
+                    Stk. pris
+                </th>
+                <th>
+                    Total
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ProjectDrivings)
+            {
+                <tr>
+                    <td>
+                        @item.Amount
+                    </td>
+                    <td>
+                        @item.UnitPrice
+                    </td>
+                    <td>
+                        @(item.Amount * item.UnitPrice)
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="2">
+                    <b>Total:</b>
+                <td>
+                    @Model.ProjectDrivings.Sum(WH => WH.Amount * WH.UnitPrice)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h5>Arbejdstimer brugt</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Medarbejder
+                </th>
+                <th>
+                    Timer arbejdet
+                </th>
+                <th>
+                    Timepris
+                </th>
+                <th>
+                    Total
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.WorkingHours)
+            {
+                <tr>
+                    <td>
+                        @item.Employee.Name
+                    </td>
+                    <td>
+                        @item.Amount
+                    </td>
+                    <td>
+                        @item.HourlyPrice
+                    </td>
+                    <td>
+                        @(item.Amount * item.HourlyPrice)
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="3">
+                    <b>Total:</b>
+                <td>
+                    @Model.WorkingHours.Sum(WH => WH.Amount * WH.HourlyPrice)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h5>Materialer Allokeret</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Vare
+                </th>
+                <th>
+                    Antal
+                </th>
+                <th>
+                    Pris
+                </th>
+                <th>
+                    Total
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.AssignedItems)
+            {
+                <tr>
+                    <td>
+                        @item.Item.Name
+                    </td>
+                    <td>
+                        @item.Amount
+                    </td>
+                    <td>
+                        @item.Price
+                    </td>
+                    <td>
+                        @(item.Amount * item.Price)
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="3">
+                    <b>Total:</b>
+                <td>
+                    @Model.AssignedItems.Sum(UI => UI.Amount * UI.Price)
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
     <h5>Materialer Brugt</h5>
     <table class="table">
@@ -133,29 +236,30 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.UsedItems) {
+            @foreach (var item in Model.UsedItems)
+            {
+                <tr>
+                    <td>
+                        @item.Item.Name
+                    </td>
+                    <td>
+                        @item.Amount
+                    </td>
+                    <td>
+                        @item.Price
+                    </td>
+                    <td>
+                        @(item.Amount * item.Price)
+                    </td>
+                </tr>
+            }
             <tr>
+                <td colspan="3">
+                    <b>Total:</b>
                 <td>
-                    @item.Item.Name
-                </td>
-                <td>
-                    @item.Amount
-                </td>
-                <td>
-                    @item.Price
-                </td>
-                <td>
-                    @(item.Amount * item.Price)
+                    @Model.UsedItems.Sum(UI => UI.Amount * UI.Price)
                 </td>
             </tr>
-}
-        <tr>
-            <td colspan="3">
-                <b>Total:</b>
-            <td>
-                @Model.UsedItems.Sum(UI => UI.Amount * UI.Price)
-            </td>
-        </tr>
         </tbody>
     </table>
 </div>

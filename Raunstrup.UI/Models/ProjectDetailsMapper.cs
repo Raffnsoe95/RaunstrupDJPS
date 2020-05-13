@@ -29,9 +29,42 @@ namespace Raunstrup.UI.Models
                 CustomerId = dto.CustomerId,
                 Customer = CustomerMapper.Map(dto.CustomerDto),
 
-                WorkingHours = WorkingHoursMapper.Map(dto.WorkingHoursDtos).ToList(),
-                ProjectDrivings = ProjectDrivingMapper.Map(dto.ProjectDrivingDtos).ToList(),
+                //ProjectDrivings = ProjectDrivingMapper.Map(dto.ProjectDrivingDtos).ToList(),
+
+                ProjectDrivings = ProjectDrivingMapper.Map(dto.ProjectDrivingDtos).GroupBy(PD => PD.UnitPrice)
+                    .Select(PD => new ProjectDrivingViewModel
+                    {
+                        Amount = PD.Sum(a => a.Amount),
+                        EmployeeId = PD.First().EmployeeId,
+                        Employee = PD.First().Employee,
+                        ProjectId = PD.First().ProjectId,
+                        UnitPrice = PD.First().UnitPrice
+                    }).ToList(),
+
                 ProjectEmployees = ProjectEmployeeMapper.Map(dto.ProjectEmployeeDtos).ToList(),
+
+                //working hours summed up by employee 
+                WorkingHours = WorkingHoursMapper.Map(dto.WorkingHoursDtos)
+                .GroupBy(WH => WH.EmployeeId)
+                    .Select(WH => new WorkingHoursViewModel
+                    {
+                        Amount = WH.Sum(a => a.Amount),
+                        EmployeeId = WH.First().EmployeeId,
+                        Employee = WH.First().Employee,
+                        ProjectId = WH.First().ProjectId,
+                        HourlyPrice = WH.First().Employee.Type.HourlyPrice + WH.First().Employee.Specialties.Sum(b => b.Bonus),
+                        WorkingHoursId = WH.First().WorkingHoursId
+                    }).ToList(),
+
+                //assigned items summed up
+                AssignedItems = ProjectAssignedItemMapper.Map(dto.AssignedItemDtos).GroupBy(PAI => PAI.ItemId)
+                    .Select(PAI => new ProjectAssignedItemViewModel
+                    {
+                        Amount = PAI.Sum(c => c.Amount),
+                        Item = PAI.First().Item,
+                        Price = PAI.First().Price,
+                        ProjectId = PAI.First().ProjectId
+                    }).ToList(),
 
                 //used items summed up
                 UsedItems = ProjectUsedItemMapper.Map(dto.UsedItemsDtos).GroupBy(PUI => PUI.ItemId)
