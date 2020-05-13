@@ -98,10 +98,11 @@ namespace Raunstrup.BusinessLogic.Services
         }
 
         void IProjectService.Delete(int id)
-            {
+        {
+
                 _context.Projects.Remove(_context.Projects.Find(id));
                 _context.SaveChanges();
-            }
+        }
 
         //IEnumerable<WorkingHours> GetWorkingHoursfromProject(Project project)
         //{
