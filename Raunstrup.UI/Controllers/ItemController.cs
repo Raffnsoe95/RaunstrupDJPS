@@ -27,11 +27,19 @@ namespace Raunstrup.UI.Controllers
         // GET: Item
         public async Task<IActionResult> Index(string searchString)
         {
-            // Hent data
-            var itemsDtos = await _itemService.GetItemsAsync().ConfigureAwait(false);
-            IEnumerable<ItemDto> filterdCustomersDtos = _itemService.GetFilterdItem(itemsDtos, searchString);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var filterdCustomersDtos = await _itemService.GetFilteredItemsAsync(searchString).ConfigureAwait(false);
 
-            return View(ItemMapper.Map(filterdCustomersDtos));
+                return View(ItemMapper.Map(filterdCustomersDtos));
+            }
+            else
+            {
+                var itemsDtos = await _itemService.GetItemsAsync().ConfigureAwait(false);
+                return View(ItemMapper.Map(itemsDtos));
+
+            }
+
         }
 
         // GET: Item/Details/5
@@ -124,12 +132,22 @@ namespace Raunstrup.UI.Controllers
             return _context.Items.Any(e => e.Id == id);
         }
 
-        public async Task<IActionResult> AddAssignedProjectItem(int id)
+        public async Task<IActionResult> AddAssignedProjectItem(int id, string searchString)
         {
-            var itemDtos = await _itemService.GetItemsAsync().ConfigureAwait(false);
-            var items = ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var filteredItemDtos = await _itemService.GetFilteredItemsAsync(searchString).ConfigureAwait(false);
+                var items = ItemMapper.Map(filteredItemDtos).Select(x => { x.projectID = id; return x; }).ToList();
+                return View(ItemMapper.Map(filteredItemDtos).Select(x => { x.projectID = id; return x; }).ToList());
 
-            return View(ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList());
+            }
+            else
+            {
+                var itemDtos = await _itemService.GetItemsAsync().ConfigureAwait(false);
+                var items = ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList();
+                return View(ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList());
+
+            }
         }
 
         public async Task<IActionResult> AddAssignedProjectItemToProject(List<ItemViewModel> items)
@@ -150,11 +168,22 @@ namespace Raunstrup.UI.Controllers
             return RedirectToAction("AddAssignedProjectItem", new { id = items[0].projectID });
         }
 
-        public async Task<IActionResult> AddUsedProjectItem(int id)
+        public async Task<IActionResult> AddUsedProjectItem(int id, string searchString)
         {
-            var itemDtos = await _itemService.GetItemsAsync().ConfigureAwait(false);
-            var items = ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList();
-            return View(ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList());
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var filteredItemDtos = await _itemService.GetFilteredItemsAsync(searchString).ConfigureAwait(false);
+                var items = ItemMapper.Map(filteredItemDtos).Select(x => { x.projectID = id; return x; }).ToList();
+                return View(ItemMapper.Map(filteredItemDtos).Select(x => { x.projectID = id; return x; }).ToList());
+
+            }
+            else
+            {
+                var itemDtos = await _itemService.GetItemsAsync().ConfigureAwait(false);
+                var items = ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList();
+                return View(ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList());
+
+            }
         }
 
         public async Task<IActionResult> AddUsedProjectItemToProject(List<ItemViewModel> items)

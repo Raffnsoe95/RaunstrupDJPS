@@ -32,18 +32,24 @@ namespace Raunstrup.UI.Models
             { Id = view.Id, Name = view.Name, Phone = view.Phone, Address = view.Address, Email = view.Email, Active = view.Active, Rowversion = view.Rowversion, CustomerDiscountType=CustomerDiscountTypeMapper.Map( view.CustomerDiscountType) };
         }
 
-        public static CECustomerViewModel Map(CustomerDiscountTypeDto dto)
+        public static CustomerDiscountTypeViewModel Map(CustomerDiscountTypeDto dto)
         {
             if (dto == null)
                 return null;
-            return new CECustomerViewModel
+            return new CustomerDiscountTypeViewModel
             { Id = dto.Id, Name = dto.Name };
         }
 
-        public static IEnumerable< CECustomerViewModel> Map(IEnumerable< CustomerDiscountTypeDto> dto)
+
+        public static IEnumerable<CustomerDiscountTypeViewModel> Map(IEnumerable<CustomerDiscountTypeDto> dtos)
         {
-            return dto.Select(x => Map(x)).AsEnumerable();
+            return dtos.Select(x => Map(x)).AsEnumerable();
         }
+
+        //public static IEnumerable< CECustomerViewModel> Map(IEnumerable< CustomerDiscountTypeDto> dto)
+        //{
+        //    return dto.Select(x => Map(x)).AsEnumerable();
+        //}
 
     }
 }
