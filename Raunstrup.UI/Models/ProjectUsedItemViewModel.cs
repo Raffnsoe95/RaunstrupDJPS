@@ -14,12 +14,10 @@ namespace Raunstrup.UI.Models
         public int Amount { get; set; }
 
         public decimal Price { get; set; }
-
-        public int ItemId { get; set; }
-
+        
         public ItemViewModel Item { get; set; }
 
-        public int ItemID { get; set; }
+        public int ItemId { get; set; }
 
         public int ProjectId { get; set; }
         

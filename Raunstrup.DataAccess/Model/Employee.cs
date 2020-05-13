@@ -24,6 +24,7 @@ namespace Raunstrup.DataAccess.Model
         [Timestamp]
         public byte[] RowVersion { get; set; }
 
+        public int? TypeId { get; set; }
         public EmployeeType Type { get; set; }
 
         public List<Specialty> Specialties { get; set; }
@@ -32,6 +33,7 @@ namespace Raunstrup.DataAccess.Model
 
         public Employee Manager { get; set; }
 
+        public int? DepartmentId { get; set; }
         public Department Department { get; set; }
     }
 }
