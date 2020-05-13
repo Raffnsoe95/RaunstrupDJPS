@@ -226,7 +226,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                 //WorkingHours workingHours2 = new WorkingHours { Amount = 6, HourlyPrice = 600, Employee = emp1 };
                 //var Workingóurlist = new List<WorkingHours>();
                 ProjectDriving projectDriving = new ProjectDriving { Amount = 2, Employee = emp1, UnitPrice = 2 };
-                ProjectEmployee projectEmployee = new ProjectEmployee { Employee = emp1, EmployeeName = "Jørgen Clevin" };
+                ProjectEmployee projectEmployee = new ProjectEmployee { Employee = emp1, EmployeeName = "Jørgen Clevin", EstWorkingHours = 80};
 
                 ProjectEmployee projectEmployee2 = new ProjectEmployee { Employee = emp2 };
 

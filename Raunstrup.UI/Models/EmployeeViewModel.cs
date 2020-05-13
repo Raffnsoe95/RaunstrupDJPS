@@ -23,6 +23,8 @@ namespace Raunstrup.UI.Models
 
         public bool Active { get; set; }
 
+        public int EstWorkingHours { get; set; }
+
         [Timestamp]
         public byte[] RowVersion { get; set; }
 

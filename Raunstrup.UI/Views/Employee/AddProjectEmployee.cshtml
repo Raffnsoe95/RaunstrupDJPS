@@ -24,6 +24,9 @@
                 @Html.DisplayNameFor(model => model.Phone)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.EstWorkingHours)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Active)
             </th>
             <th></th>
@@ -39,11 +42,14 @@
                 @Html.DisplayFor(modelItem => item.Phone)
             </td>
             <td>
+                <input type="text" asp-for="@item.EstWorkingHours" />
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Active)
             </td>
             <td>
                 <a asp-action="AddProjectEmployeeToProject" asp-route-id="@item.Id" asp-route-projectid="@ViewContext.ModelState["id"].AttemptedValue" asp-controller="Employee">Tilknyt</a> |
-                
+
             </td>
         </tr>
 }

@@ -11,7 +11,7 @@ namespace Raunstrup.UI.Models
             public static ProjectEmployeeViewModel Map(ProjectEmployeeDto dto)
         {
             return new ProjectEmployeeViewModel
-            { EmployeeId = dto.EmployeeId, EmployeeName = dto.EmployeeName, ProjectId = dto.ProjectId, Employee = EmployeeMapper.Map(dto.Employee) };
+            { EmployeeId = dto.EmployeeId, EmployeeName = dto.EmployeeName, EstWorkingHours = dto.EstWorkingHours, ProjectId = dto.ProjectId, Employee = EmployeeMapper.Map(dto.Employee) };
         }
 
         public static IEnumerable<ProjectEmployeeViewModel> Map(IEnumerable<ProjectEmployeeDto> model)
@@ -26,7 +26,7 @@ namespace Raunstrup.UI.Models
         public static ProjectEmployeeDto Map(ProjectEmployeeViewModel model)
         {
             return new ProjectEmployeeDto
-            {EmployeeId = model.EmployeeId, EmployeeName = model.EmployeeName, ProjectId = model.ProjectId, Employee = EmployeeMapper.Map(model.Employee) };
+            {EmployeeId = model.EmployeeId, EmployeeName = model.EmployeeName, EstWorkingHours = model.EstWorkingHours, ProjectId = model.ProjectId, Employee = EmployeeMapper.Map(model.Employee) };
 
         }
     }

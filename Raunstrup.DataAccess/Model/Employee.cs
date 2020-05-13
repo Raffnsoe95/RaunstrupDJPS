@@ -19,6 +19,8 @@ namespace Raunstrup.DataAccess.Model
 
         public string Phone { get; set; }
 
+        public int EstWorkingHours { get; set; }
+
         public bool Active { get; set; }
 
         [Timestamp]
