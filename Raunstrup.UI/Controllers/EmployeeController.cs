@@ -11,6 +11,7 @@ using Raunstrup.UI.Services;
 using Raunstrup.Contract.Services;
 using Raunstrup.Contract.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.CodeAnalysis;
 
 namespace Raunstrup.UI.Controllers
 {
@@ -172,9 +173,9 @@ namespace Raunstrup.UI.Controllers
         public async Task<IActionResult> AddProjectEmployee(int id, string searchString)
         { 
             var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
-            IEnumerable<EmployeeDto> filterdEmployeeDtos = await _employeeService.GetFilteredEmployeesAsync(searchString);
+            IEnumerable<EmployeeDto> filteredEmployeeDtos = await _employeeService.GetFilteredEmployeesAsync(searchString);
 
-            return View(EmployeeMapper.MapEst(filterdEmployeeDtos).ToList());
+            return View(EmployeeMapper.MapEst(filteredEmployeeDtos).ToList());
         }
         //public async Task<IActionResult> AddProjectEmployeeToProject(int id, int projectid)
         //{
@@ -199,15 +200,32 @@ namespace Raunstrup.UI.Controllers
             return View(EmployeeMapper.MapEst(employeeDtos).Select(x => { x.Id = id; return x; }).ToList());
         }
 
+        //public async Task<IActionResult> AddProjectEmployeeToProject(List<EstWorkingHoursEmployeeViewModel> items)
+        //{
+        //    var projectEmployees = items.Where(x => x.EstWorkingHours > 0).Select(x => new ProjectEmployeeViewModel()
+        //    {
+        //        Id =x.Id,
+        //        EstWorkingHours =x.EstWorkingHours,
+        //        ProjectId =x.projectId
+                
+               
+        //    });
+
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        await _employeeService.AddProjectEmployeeAsync(ProjectEmployeeMapper.Map(projectEmployees).ToList()).ConfigureAwait(false);
+        //    }
+        //    return RedirectToAction("AddProjectEmployeeToProject", new { id = items[0].projectId });
+        //}
         public async Task<IActionResult> AddProjectEmployeeToProject(List<EstWorkingHoursEmployeeViewModel> items)
         {
             var projectEmployees = items.Where(x => x.EstWorkingHours > 0).Select(x => new ProjectEmployeeViewModel()
             {
-                Id =x.Id,
-                EstWorkingHours =x.EstWorkingHours,
-                ProjectId =x.projectId
-                
-               
+                 EmployeeName= x.Name,
+                 ProjectId = x.projectId,
+                 EstWorkingHours = x.EstWorkingHours,
+                 
             });
 
 
@@ -215,7 +233,7 @@ namespace Raunstrup.UI.Controllers
             {
                 await _employeeService.AddProjectEmployeeAsync(ProjectEmployeeMapper.Map(projectEmployees).ToList()).ConfigureAwait(false);
             }
-            return RedirectToAction("AddProjectEmployeeToProject", new { id = items[0].projectId });
+            return RedirectToAction("AddAssignedProjectItem", new { id = items[0].projectId });
         }
 
 
