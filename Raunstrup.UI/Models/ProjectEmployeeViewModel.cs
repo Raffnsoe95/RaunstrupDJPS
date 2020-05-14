@@ -13,6 +13,7 @@ namespace Raunstrup.UI.Models
         //public int EmployeeId { get; set; }
         public string EmployeeName { get; set; }
         public int EmployeeId { get; set; }
+        public int EstWorkingHours { get; set; }
         public EmployeeViewModel Employee { get; set; }
         public ProjectViewModel Project { get; set; }
         public int ProjectId { get; set; }

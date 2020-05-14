@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Raunstrup.UI.Models
 {
-    public class EmployeeViewModel
+    public class EstWorkingHoursEmployeeViewModel
     {
-        public EmployeeViewModel()
+        public EstWorkingHoursEmployeeViewModel()
         {
             Specialties = new List<SpecialtyViewModel>();
         }
@@ -22,7 +22,11 @@ namespace Raunstrup.UI.Models
         public string Phone { get; set; }
 
         public bool Active { get; set; }
+
         public int projectId { get; set; }
+
+        public int EstWorkingHours { get; set; }
+
         [Timestamp]
         public byte[] RowVersion { get; set; }
 
@@ -35,5 +39,7 @@ namespace Raunstrup.UI.Models
         public EmployeeViewModel Manager { get; set; }
 
         public DepartmentViewModel Department { get; set; }
+
+        
     }
 }

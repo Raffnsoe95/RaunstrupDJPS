@@ -15,34 +15,47 @@ namespace Raunstrup.UI.UserManagement
             // Set password with the Secret Manager tool.
             // dotnet user-secrets set SeedUserPW <pw>
 
-            var adminUserEmail = configuration["AdminUserEmail"];
-            var adminUserPw = configuration["AdminUserPw"];
+            //var adminUserEmail = configuration["AdminUserEmail"];
+            //var adminUserPw = configuration["AdminUserPw"];
             await using var context = serviceProvider.GetRequiredService<UserManagementContext>();
 
-            var adminId = await EnsureUserAsync(serviceProvider, adminUserEmail, adminUserPw).ConfigureAwait(false);
+            var adminId = await EnsureUserAsync(serviceProvider, "admin", "admin").ConfigureAwait(false);
             await EnsureRoleAsync(serviceProvider, adminId, "Admin").ConfigureAwait(false);
 
-            var superUserEmail = configuration["SuperUserEmail"];
-            var superUserPw = configuration["SuperUserPw"];
-            var superUserId = await EnsureUserAsync(serviceProvider, superUserEmail, superUserPw).ConfigureAwait(false);
-            await EnsureRoleAsync(serviceProvider, superUserId, "SuperUser").ConfigureAwait(false);
+            //var superUserEmail = configuration["SuperUserEmail"];
+            //var superUserPw = configuration["SuperUserPw"];
+            //var superUserId = await EnsureUserAsync(serviceProvider, superUserEmail, superUserPw).ConfigureAwait(false);
+            //await EnsureRoleAsync(serviceProvider, superUserId, "SuperUser").ConfigureAwait(false);
 
-            var userEmail = configuration["UserEmail"];
-            var userPw = configuration["UserPw"];
-            var userId = await EnsureUserAsync(serviceProvider, userEmail, userPw).ConfigureAwait(false);
-            await EnsureRoleAsync(serviceProvider, userId, "User").ConfigureAwait(false);
+            //var userEmail = configuration["UserEmail"];
+            //var userPw = configuration["UserPw"];
+            //var userId = await EnsureUserAsync(serviceProvider, userEmail, userPw).ConfigureAwait(false);
+            //await EnsureRoleAsync(serviceProvider, userId, "User").ConfigureAwait(false);
 
-            var userId8 = await EnsureUserAsync(serviceProvider, "8@bruger.com", "bruger8").ConfigureAwait(false);
-            await EnsureRoleAsync(serviceProvider, userId8, "SuperUser").ConfigureAwait(false);
 
-            var userId1 = await EnsureUserAsync(serviceProvider,"1@bruger.com", "bruger1").ConfigureAwait(false);
+            var userId1 = await EnsureUserAsync(serviceProvider,"1", "bruger1").ConfigureAwait(false);
             await EnsureRoleAsync(serviceProvider, userId1, "User").ConfigureAwait(false);
 
-            var userId2 = await EnsureUserAsync(serviceProvider, "2@bruger.com", "bruger2").ConfigureAwait(false);
+            var userId2 = await EnsureUserAsync(serviceProvider, "2", "bruger2").ConfigureAwait(false);
             await EnsureRoleAsync(serviceProvider, userId2, "User").ConfigureAwait(false);
 
             var userId3 = await EnsureUserAsync(serviceProvider, "3", "bruger3").ConfigureAwait(false);
             await EnsureRoleAsync(serviceProvider, userId3, "User").ConfigureAwait(false);
+
+            var userId4 = await EnsureUserAsync(serviceProvider, "4", "bruger4").ConfigureAwait(false);
+            await EnsureRoleAsync(serviceProvider, userId4, "User").ConfigureAwait(false);
+
+            var userId5 = await EnsureUserAsync(serviceProvider, "5", "bruger5").ConfigureAwait(false);
+            await EnsureRoleAsync(serviceProvider, userId5, "User").ConfigureAwait(false);
+
+            var userId6 = await EnsureUserAsync(serviceProvider, "6", "bruger6").ConfigureAwait(false);
+            await EnsureRoleAsync(serviceProvider, userId6, "User").ConfigureAwait(false);
+
+            var userId7 = await EnsureUserAsync(serviceProvider, "7", "bruger7").ConfigureAwait(false);
+            await EnsureRoleAsync(serviceProvider, userId7, "User").ConfigureAwait(false);
+
+            var userId8 = await EnsureUserAsync(serviceProvider, "8", "bruger8").ConfigureAwait(false);
+            await EnsureRoleAsync(serviceProvider, userId8, "SuperUser").ConfigureAwait(false);
         }
 
         private static async Task<string> EnsureUserAsync(IServiceProvider serviceProvider,
