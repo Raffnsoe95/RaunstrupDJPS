@@ -16,6 +16,8 @@ namespace Raunstrup.Contract.DTOs
         public string Email { get; set; }
 
         public CustomerDiscountTypeDto CustomerDiscountType { get; set; }
+
+        public int? CustomerDiscountTypeId { get; set; }
         public bool Active { get; set; }
         [Timestamp]
         public byte[] Rowversion { get; set; }

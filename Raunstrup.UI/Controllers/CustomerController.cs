@@ -200,11 +200,20 @@ namespace Raunstrup.UI.Controllers
         }
         public async Task<IActionResult> AddProjectCustomer(int id, string searchString)
         {
-            var customerDtos = await _customerService.GetCustomerAsync().ConfigureAwait(false);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                IEnumerable<CustomerDto> filterdCustomersDtos = await _customerService.GetFilteredCustomers(searchString);
+                return View(CustomerMapper.Map(filterdCustomersDtos));
+            }
+            else
+            {
+                var customerDtos = await _customerService.GetCustomerAsync().ConfigureAwait(false);
+                return View(CustomerMapper.Map(customerDtos));
+            }
+            
 
-            IEnumerable<CustomerDto> filterdCustomersDtos = await _customerService.GetFilteredCustomers(searchString);
-
-            return View(CustomerMapper.Map(filterdCustomersDtos));
+            
+            
         }
         public async Task<IActionResult> AddProjectCustomerToProject(int id, int projectid)
         {
