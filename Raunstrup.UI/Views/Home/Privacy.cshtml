@@ -5,110 +5,63 @@
 
 
 
-<section class="my-5">
+<h1>Kontaks Os</h1>
+<br />
 
-    <!-- Section heading -->
-    <h2 class="h1-responsive font-weight-bold my-5">Kontakt Os</h2>
+<section>
 
+    <form>
 
-    
+        <article class="row">
 
-    <!-- Grid row -->
-    <div class="row">
+            <!-- Your Name -->
+            <div class="col-md-6">
 
-        <!-- Grid column -->
-        <div class="col-md-9 mb-md-0 mb-5">
+                <p class="md-form mb-0">
+                    <label for="contact-name" class="">Dit Navn</label>
+                    <input type="text" id="contact-name" class="form-control" placeholder="Hans">
+                </p>
 
-            <form action="mailto:RaikoPrivate@Hotmail.com" method="post" enctype="text/plain">
+            </div>
+            <!-- Your Name -->
 
-                <!-- Grid row -->
-                <div class="row">
+            <!-- Your Email -->
+            <div class="col-md-6">
 
-                    <!-- Your Name -->
-                    <div class="col-md-6">
-                        <div class="md-form mb-0">
-                            <label for="contact-name" class="">Dit Navn</label>
-                            <input type="text" id="contact-name" class="form-control">
-                        </div>
-                    </div>
-                    <!-- Your Name -->
-                    <!-- Your Email -->
-                    <div class="col-md-6">
-                        <div class="md-form mb-0">
-                            <label for="contact-email" class="">Din Email</label>
-                            <input type="text" id="contact-email" class="form-control">
-                        </div>
-                    </div>
-                    <!-- Your Email -->
+                <p class="md-form mb-0">
+                    <label for="contact-email">Din Email</label>
+                    <input type="text" id="contact-email" class="form-control" placeholder="Exempel@hotmail.com">
+                </p>
 
-                </div>
+            </div>
+            <!-- Your Email -->
 
-                <div class="row">
+        </article>
 
-                    <!-- Subject -->
-                    <div class="col-md-12">
-                        <div class="md-form mb-0">
-                            <br />
-                            <label for="contact-Subject" class="">Emne</label>
-                            <input type="text" id="contact-Subject" class="form-control">
-                        </div>
-                    </div>
-                    <!-- Subject -->
+        <article>
 
-                </div>
+            <!--Your Subject-->
+            <label for="emne">Emne</label>
+            <p>
+                <input type="text" id="emne" name="emne" placeholder="Tag" class="form-control">
+            </p>
+            <!--Your Subject-->
 
-                <div class="row">
+            <!--Your Message-->
+            <label for="contact-message">Meddelse</label>
+            <p>
+                <textarea id="contact-message" placeholder="Jeg vil gerne have lavet tag" class="form-control md-textarea" rows="3"></textarea>
+            </p>
+            <!--Your Message-->
 
-                    <!-- Message -->
-                    <div class="col-md-12">
-                        <div class="md-form">
-                            <br />
-                            <label for="contact-message">Meddelse</label>
-                            <textarea id="contact-message" class="form-control md-textarea" rows="3"></textarea>
-                        </div>
-                    </div>
-                    <!-- Message -->
+            <!--Send Button-->
+            <p>
+                <button type="button" class="btn btn-primary">Send</button>
+            </p>
+            <!--Send Button-->
 
-                </div>
-                <!-- Grid row -->
+        </article>
 
-
-                <div class="text-center text-md-left">
-                    <br />
-                    <indput class="btn btn-primary btn-md"> Send </indput>
-                    
-                </div>
-
-            </form>
-
-        </div>
-        <!-- Grid column -->
-        <!-- Grid column -->
-        <div class="col-md-3 text-center">
-            <ul class="list-unstyled mb-0">
-                <li>
-                    <h3>Kontakt info</h3>
-                </li>
-                <li>
-                    <i class="fas fa-map-marker-alt fa-2x blue-text"></i>
-                    <p>By: Vejle</p>
-                </li>
-                <li>
-                    <i class="fas fa-phone fa-2x mt-4 blue-text"></i>
-                    <p>Tlf: +4553375951</p>
-                </li>
-                <li>
-                    <i class="fas fa-envelope fa-2x mt-4 blue-text"></i>
-                    <p class="mb-0">Email: RaikoPrivate@hotmail.com</p>
-                </li>
-            </ul>
-        </div>
-        <!-- Grid column -->
-
-    </div>
-    <!-- Grid row -->
+    </form>
 
 </section>
-
-
-
