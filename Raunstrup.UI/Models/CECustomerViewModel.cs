@@ -30,6 +30,7 @@ namespace Raunstrup.UI.Models
 
         public bool Active { get; set; }
 
+        [Required(ErrorMessage = "Skal udfyldes")]
         public int SelectedCustomerDiscountViewModel { get; set; }
 
         public List<CustomerDiscountTypeViewModel> CustomerDiscountTypeViewModels { get; set; }

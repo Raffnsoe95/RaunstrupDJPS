@@ -168,7 +168,7 @@ namespace Raunstrup.UI.Controllers
         {
             return _context.Employees.Any(e => e.Id == id);
         }
-        // GET: Employee
+        // GET: Employee 
         public async Task<IActionResult> AddProjectEmployee(int id, string searchString)
         {
             if (!String.IsNullOrEmpty(searchString))
