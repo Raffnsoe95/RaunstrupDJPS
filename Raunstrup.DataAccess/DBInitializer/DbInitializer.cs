@@ -52,6 +52,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Email = "Hans@gmail.com",
                         Active = true,
                         CustomerDiscountType = NormalCustomer
+                         
                     },
 
 
@@ -63,6 +64,9 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Email = "Ole@gmail.com",
                         Active = true,
                         CustomerDiscountType = SuperCustomer
+                        
+
+                       
 
                     },
                      new Customer
