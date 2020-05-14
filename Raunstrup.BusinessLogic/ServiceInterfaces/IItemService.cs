@@ -21,7 +21,9 @@ namespace Raunstrup.BusinessLogic.ServiceInterfaces
 
         void CreateAssignedItems(ProjectAssignedItem projectAssignedItem);
 
+        IEnumerable<Item> GetFilteredItems(string searchString);
+
         //void AddDiscountToItem(Discount discount);
-        
+
     }
 }

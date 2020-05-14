@@ -1,6 +1,70 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
+﻿@model Raunstrup.UI.Models.ContactViewModel
+@*@{
+        ViewData["Title"] = "Privacy Policy";
+    }*@
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<h1>Kontaks Os</h1>
+<br />
+
+<section>
+
+    <form asp-action="Create">
+
+        <article class="row">
+
+            <!-- Your Name -->
+            <div class="col-md-6">
+
+                <p class="md-form mb-0">
+                    <label asp-for="Name" class="">Dit Navn</label>
+                    <input asp-for="Name" type="text" id="contact-name" class="form-control" placeholder="Hans">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </p>
+
+            </div>
+            <!-- Your Name -->
+
+            <!-- Your Email -->
+            <div class="col-md-6">
+
+                <p class="md-form mb-0">
+                    <label asp-for="Email">Din Email</label>
+                    <input asp-for="Email" type="text" class="form-control" placeholder="Exempel@hotmail.com">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </p>
+
+            </div>
+            <!-- Your Email -->
+
+        </article>
+
+        <article>
+
+            <!--Your Subject-->            
+            <p>
+                <label asp-for="Subject">Emne</label>
+                <input asp-for="Subject" type="text" class="form-control" placeholder="Tag">
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </p>
+            <!--Your Subject-->
+
+            <!--Your Message-->
+            <p>
+                <label asp-for="Message">Meddelse</label>
+                <textarea asp-for="Message" class="form-control md-textarea" rows="8" placeholder="Jeg vil gerne have lavet tag"></textarea>
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </p>
+            <!--Your Message-->
+
+            <!--Send Button-->
+            <p>
+                <button type="submit" class="btn btn-primary">Send</button>
+            </p>
+            <!--Send Button-->
+
+        </article>
+
+    </form>
+
+</section>

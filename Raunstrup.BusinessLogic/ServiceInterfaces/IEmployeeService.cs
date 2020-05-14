@@ -22,5 +22,7 @@ namespace Raunstrup.BusinessLogic.ServiceInterfaces
         void CreateProjectEmployee(ProjectEmployee projectEmployee);
 
         void Create(ProjectDriving projectDriving);
+
+        IEnumerable<Employee> GetFilteredEmployees(string searchString);
     }
 }

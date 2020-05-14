@@ -19,5 +19,9 @@ namespace Raunstrup.Contract.Services
         Task<IEnumerable<CustomerDto>> GetFilteredCustomers(string searchString);
 
          Task<IEnumerable<CustomerDiscountTypeDto>> GetAllCustomerDiscountType();
+
+        Task<CustomerDiscountTypeDto> GetCustomerDiscountTypeAsync(int id);
+
+
     }
 }

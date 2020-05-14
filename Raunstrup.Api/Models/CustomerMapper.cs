@@ -20,7 +20,14 @@ namespace Raunstrup.Api.Models
                 return null;
             }
             return new Customer
-            { Id = dto.Id, Name = dto.Name , Phone = dto.Phone, Address = dto.Address, Email = dto.Email, Active=dto.Active, Rowversion=dto.Rowversion, CustomerDiscountType=CustomerDiscountTypeMapper.Map( dto.CustomerDiscountType) };
+            { Id = dto.Id, 
+                Name = dto.Name , 
+                Phone = dto.Phone, 
+                Address = dto.Address, 
+                Email = dto.Email, 
+                Active=dto.Active, 
+                Rowversion=dto.Rowversion, 
+                CustomerDiscountType=CustomerDiscountTypeMapper.Map( dto.CustomerDiscountType) };
         }
 
         public static IEnumerable<CustomerDto> Map(IEnumerable<Customer> model)
@@ -35,7 +42,16 @@ namespace Raunstrup.Api.Models
                 return null;
             }
             return new CustomerDto
-            { Id = model.Id, Name = model.Name, Phone = model.Phone, Address = model.Address, Email=model.Email, Active=model.Active, Rowversion=model.Rowversion, CustomerDiscountType=CustomerDiscountTypeMapper.Map( model.CustomerDiscountType) };
+            { Id = model.Id,
+                Name = model.Name, 
+                Phone = model.Phone, 
+                Address = model.Address, 
+                Email=model.Email, 
+                Active=model.Active, 
+                Rowversion=model.Rowversion, 
+                CustomerDiscountType=CustomerDiscountTypeMapper.Map(model.CustomerDiscountType),
+            CustomerDiscountTypeId=model.CustomerDiscountTypeId
+            };
         }
     
     public static IEnumerable<CustomerDiscountTypeDto> Map (IEnumerable<CustomerDiscountType> model)
@@ -51,7 +67,13 @@ namespace Raunstrup.Api.Models
                 return null;
             }
             return new CustomerDiscountTypeDto
-            { Id = model.Id, Name = model.Name, DiscountPercent=model.DiscountPercent, CustomerId=model.CustomerID, Rowversion = model.Rowversion  };
+            { Id = model.Id, 
+                Name = model.Name, 
+                DiscountPercent=model.DiscountPercent, 
+                CustomerId=model.CustomerID, 
+                Rowversion = model.Rowversion,
+           
+            };
         }
 
     }

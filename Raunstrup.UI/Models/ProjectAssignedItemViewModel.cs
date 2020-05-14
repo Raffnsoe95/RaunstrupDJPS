@@ -15,7 +15,7 @@ namespace Raunstrup.UI.Models
 
         public ItemViewModel Item { get; set; }
 
-        public int ItemID { get; set; }
+        public int ItemId { get; set; }
 
         public int ProjectId { get; set; }
     }

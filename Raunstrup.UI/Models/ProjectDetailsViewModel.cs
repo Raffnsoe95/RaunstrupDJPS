@@ -3,22 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.RegularExpressions;
-using Raunstrup.DataAccess.Model;
 
 namespace Raunstrup.UI.Models
 {
-    public class ProjectViewModel
+    public class ProjectDetailsViewModel
     {
-        public ProjectViewModel() 
+        public ProjectDetailsViewModel()
         {
             ProjectEmployees = new List<ProjectEmployeeViewModel>();
             WorkingHours = new List<WorkingHoursViewModel>();
             UsedItems = new List<ProjectUsedItemViewModel>();
             AssignedItems = new List<ProjectAssignedItemViewModel>();
             ProjectDrivings = new List<ProjectDrivingViewModel>();
-            
+
         }
 
         public int Id { get; set; }
@@ -31,6 +28,8 @@ namespace Raunstrup.UI.Models
 
         public decimal Price { get; set; }
 
+        public double ESTdriving { get; set; }
+
         public string Description { get; set; }
 
         public bool Active { get; set; }
@@ -41,17 +40,14 @@ namespace Raunstrup.UI.Models
 
         public bool IsDone { get; set; }
 
-        public double ESTdriving { get; set; }
-
-        public int? CustomerId { get; set; }
-
         public byte[] Rowversion { get; set; }
 
         public List<WorkingHoursViewModel> WorkingHours { get; set; }
 
         public List<ProjectEmployeeViewModel> ProjectEmployees { get; set; }
-
         public CustomerViewModel Customer { get; set; }
+
+        public int? CustomerId { get; set; }
 
         public List<ProjectAssignedItemViewModel> AssignedItems { get; set; }
 

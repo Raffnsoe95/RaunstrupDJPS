@@ -71,7 +71,11 @@ namespace Raunstrup.Api.Controllers
         {
             _itemService.CreateAssignedItems(ProjectAssignedItemMapper.Map(value));
         }
-        
-        
+
+        [HttpGet("search/{searchString}", Name = "GetFilteredItems")]
+        public IEnumerable<ItemDto> GetFilteredCustomers(string searchString)
+        {
+            return _itemService.GetFilteredItems(searchString).Select(a => ItemMapper.Map(a));
+        }
     }
 }

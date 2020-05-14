@@ -6,7 +6,7 @@
 
 <h1>Opret ny cecustomerviewmodel</h1>
 
-
+@Model.CustomerDiscountTypeViewModels.Count
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -32,18 +32,21 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <select id="mySelect" asp-for="SelectedCustomerDiscountViewModel" asp-items="@(new SelectList(Model.CustomerDiscountTypeViewModels, "Id", "Name"))" />
+            @*SelectedCustomerDiscountViewModel*@
+            <select id="mySelect" asp-for="SelectedCustomerDiscountViewModel" asp-items="@(new SelectList(Model.CustomerDiscountTypeViewModels, "Id", "Name"))">
+                <option disabled selected>Vælg kundetype</option>
+               
+            </select>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Active" checked hidden />
+                </label>
+            </div>
 
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="Active" value="true" /> @Html.DisplayNameFor(model => model.Active)
-                    </label>
-                </div>
-
-                <div class="form-group">
-                    <input type="submit" value="Opret" class="btn btn-primary" />
-                </div>
-</form>
+            <div class="form-group">
+                <input type="submit" value="Opret" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
 </div>
 

@@ -32,6 +32,8 @@ namespace Raunstrup.Contract.DTOs
 
         public bool IsDone { get; set; }
 
+        public double ESTdriving { get; set; }
+
         public int? CustomerId { get; set; }
 
         [Timestamp]

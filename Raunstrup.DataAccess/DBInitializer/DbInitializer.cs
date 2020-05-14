@@ -51,7 +51,8 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Address = "Hansvej 1, 1111 Hansby",
                         Email = "Hans@gmail.com",
                         Active = true,
-                        CustomerDiscountType = SuperCustomer
+                        CustomerDiscountType = NormalCustomer
+                         
                     },
 
 
@@ -63,6 +64,9 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Email = "Ole@gmail.com",
                         Active = true,
                         CustomerDiscountType = SuperCustomer
+                        
+
+                       
 
                     },
                      new Customer
@@ -91,7 +95,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                            Address = "Knudvej 5, 5555 Knudby",
                            Email = "Knud@gmail.com",
                            Active = true,
-                           CustomerDiscountType = NormalCustomer
+                           CustomerDiscountType = SuperCustomer
                        }
 
 
@@ -166,8 +170,8 @@ namespace Raunstrup.DataAccess.DBInitializer
                 var type1 = new EmployeeType { HourlyPrice = 0, Title = "musse" };
                 var specialty = new Specialty { Bonus = 100, Title = "Velux" };
                 
-                Employee emp1 = new Employee { Name = "Jørgen Clevin", Active = true, Phone = "1241234",Department = department };
-                Employee emp2 = new Employee { Name = "Brian Jørgensen", Active = true, Phone = "1241234",Department = department };
+                Employee emp1 = new Employee { Name = "Jørgen Clevin", Active = true, Phone = "1241234",Department = department, Type = type, Specialties = new List<Specialty> { specialty } };
+                Employee emp2 = new Employee { Name = "Brian Jørgensen", Active = true, Phone = "1241234",Department = department, Type = type };
                 context.Employees.AddRange(
                     new Employee
                     {
@@ -185,7 +189,8 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Phone = "78652341",
                         Active = true,
                         Manager = emp1,
-                        Department = department
+                        Department = department,
+                        Type = type
                     },
                     new Employee
                     {
@@ -193,7 +198,8 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Phone = "+4534782311",
                         Active = true,
                         Manager = emp2,
-                        Department = department
+                        Department = department,
+                        Type = type
                     },
                     new Employee
                     {
@@ -201,14 +207,16 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Phone = "54672291",
                         Active = true,
                         Manager = emp2,
-                        Department = department
+                        Department = department,
+                        Type = type
                     },
                     new Employee
                     {
                         Name = "Flemming Leth",
                         Phone = "23456789",
                         Active = true,
-                        Department = department
+                        Department = department,
+                        Type = type
                     },
                     new Employee
                     {
@@ -225,14 +233,32 @@ namespace Raunstrup.DataAccess.DBInitializer
                 //WorkingHours workingHours1 = new WorkingHours { Amount = 3, HourlyPrice = 400, Employee = emp1 };
                 //WorkingHours workingHours2 = new WorkingHours { Amount = 6, HourlyPrice = 600, Employee = emp1 };
                 //var Workingóurlist = new List<WorkingHours>();
-                ProjectDriving projectDriving = new ProjectDriving { Amount = 2, Employee = emp1, UnitPrice = 2 };
-                ProjectEmployee projectEmployee = new ProjectEmployee { Employee = emp1, EmployeeName = "Jørgen Clevin", EstWorkingHours = 80};
+                ProjectDriving projectDriving1 = new ProjectDriving { Amount = 25, Employee = emp1, UnitPrice = 2 };
+                ProjectDriving projectDriving2 = new ProjectDriving { Amount = 25, Employee = emp1, UnitPrice = 2 };
+                ProjectDriving projectDriving3 = new ProjectDriving { Amount = 2, Employee = emp1, UnitPrice = 795 };
+                ProjectEmployee projectEmployee = new ProjectEmployee { Employee = emp1, EmployeeName = "Jørgen Clevin" };
+                var usedItem1 = new ProjectUsedItem { Amount = 10, ItemID = 1, Price = 7.99m };
+                var usedItem2 = new ProjectUsedItem { Amount = 10, ItemID = 1, Price = 7.99m };
+                var usedItem3 = new ProjectUsedItem { Amount = 10, ItemID = 1, Price = 7.99m };
+                var usedItem4 = new ProjectUsedItem { Amount = 10, ItemID = 2, Price = 7.99m };
+                var usedItem5 = new ProjectUsedItem { Amount = 10, ItemID = 2, Price = 7.99m };
+                var usedItem6 = new ProjectUsedItem { Amount = 10, ItemID = 2, Price = 7.99m };
+
+                var assignedItem1 = new ProjectAssignedItem { Amount = 20, ItemID = 1, Price = 7.99m };
+                var assignedItem2 = new ProjectAssignedItem { Amount = 20, ItemID = 1, Price = 7.99m };
+                var assignedItem3 = new ProjectAssignedItem { Amount = 20, ItemID = 1, Price = 7.99m };
+                var assignedItem4 = new ProjectAssignedItem { Amount = 20, ItemID = 2, Price = 7.99m };
+                var assignedItem5 = new ProjectAssignedItem { Amount = 20, ItemID = 2, Price = 7.99m };
+                var assignedItem6 = new ProjectAssignedItem { Amount = 20, ItemID = 2, Price = 7.99m };
+
+                var workingHours1 = new WorkingHours { Employee = emp1, Amount = 10 };
+                var workingHours2 = new WorkingHours { Employee = emp1, Amount = 10 };
+                var workingHours3 = new WorkingHours { Employee = emp2, Amount = 10 };
+                var workingHours4 = new WorkingHours { Employee = emp2, Amount = 10 };
 
                 ProjectEmployee projectEmployee2 = new ProjectEmployee { Employee = emp2 };
 
 
-                // Workingóurlist.Add(workingHours1);
-                //Workingóurlist.Add(workingHours2);
 
                 context.Projects.AddRange(
                     new Project
@@ -247,9 +273,13 @@ namespace Raunstrup.DataAccess.DBInitializer
                         IsFixedPrice = false,
                         Price = 0m,
                         StartDate = new DateTime(2020, 5, 4),
+                        ESTdriving = 20.5,
                         //  WorkingHours = Workingóurlist,
-                        ProjectDrivings = new List<ProjectDriving> { projectDriving },
+                        ProjectDrivings = new List<ProjectDriving> { projectDriving1, projectDriving2, projectDriving3 },
                         ProjectEmployees = new List<ProjectEmployee> { projectEmployee, projectEmployee2 },
+                        UsedItems = new List<ProjectUsedItem> { usedItem1, usedItem2, usedItem3, usedItem4, usedItem5, usedItem6 },
+                        AssignedItems = new List<ProjectAssignedItem> { assignedItem1, assignedItem2, assignedItem3, assignedItem4, assignedItem5, assignedItem6 },
+                        WorkingHours = new List<WorkingHours> { workingHours1, workingHours2, workingHours3, workingHours4 },
                         Customer = cus1
 
 
@@ -265,6 +295,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                         IsFixedPrice = false,
                         Price = 0m,
                         StartDate = new DateTime(2020, 5, 4),
+                        ESTdriving = 30.5,
                         Customer = cus1
 
 
@@ -279,6 +310,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                         IsFixedPrice = false,
                         Price = 0m,
                         StartDate = new DateTime(2020, 5, 4),
+                        ESTdriving = 45.8,
                         Customer = cus1
 
                     }, new Project
@@ -290,7 +322,8 @@ namespace Raunstrup.DataAccess.DBInitializer
                         IsDone = false,
                         IsFixedPrice = false,
                         Price = 0m,
-                        StartDate = new DateTime(2020, 5, 4)
+                        StartDate = new DateTime(2020, 5, 4),
+                        ESTdriving = 78.9
 
 
                     }, new Project
@@ -303,7 +336,8 @@ namespace Raunstrup.DataAccess.DBInitializer
                         IsDone = false,
                         IsFixedPrice = false,
                         Price = 0m,
-                        StartDate = new DateTime(2020, 5, 4)
+                        StartDate = new DateTime(2020, 5, 4),
+                        ESTdriving = 1547.8
 
 
                     }  
