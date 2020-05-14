@@ -9,6 +9,8 @@ namespace Raunstrup.BusinessLogic.ServiceInterfaces
     { 
         IEnumerable<Project> GetAll();
 
+        IEnumerable<Project> GetAll(int employeeId);
+
         Project Get(int id);
 
         void Create(Project project);
