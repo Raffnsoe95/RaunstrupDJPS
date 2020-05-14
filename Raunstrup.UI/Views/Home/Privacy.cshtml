@@ -1,16 +1,15 @@
-﻿@*@{
-    ViewData["Title"] = "Privacy Policy";
-}*@
+﻿@model Raunstrup.UI.Models.ContactViewModel
+@*@{
+        ViewData["Title"] = "Privacy Policy";
+    }*@
 <h1>@ViewData["Title"]</h1>
-
-
 
 <h1>Kontaks Os</h1>
 <br />
 
 <section>
 
-    <form>
+    <form asp-action="Create">
 
         <article class="row">
 
@@ -18,8 +17,9 @@
             <div class="col-md-6">
 
                 <p class="md-form mb-0">
-                    <label for="contact-name" class="">Dit Navn</label>
-                    <input type="text" id="contact-name" class="form-control" placeholder="Hans">
+                    <label asp-for="Name" class="">Dit Navn</label>
+                    <input asp-for="Name" type="text" id="contact-name" class="form-control" placeholder="Hans">
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </p>
 
             </div>
@@ -29,8 +29,9 @@
             <div class="col-md-6">
 
                 <p class="md-form mb-0">
-                    <label for="contact-email">Din Email</label>
-                    <input type="text" id="contact-email" class="form-control" placeholder="Exempel@hotmail.com">
+                    <label asp-for="Email">Din Email</label>
+                    <input asp-for="Email" type="text" class="form-control" placeholder="Exempel@hotmail.com">
+                    <span asp-validation-for="Email" class="text-danger"></span>
                 </p>
 
             </div>
@@ -40,23 +41,25 @@
 
         <article>
 
-            <!--Your Subject-->
-            <label for="emne">Emne</label>
+            <!--Your Subject-->            
             <p>
-                <input type="text" id="emne" name="emne" placeholder="Tag" class="form-control">
+                <label asp-for="Subject">Emne</label>
+                <input asp-for="Subject" type="text" class="form-control" placeholder="Tag">
+                <span asp-validation-for="Subject" class="text-danger"></span>
             </p>
             <!--Your Subject-->
 
             <!--Your Message-->
-            <label for="contact-message">Meddelse</label>
             <p>
-                <textarea id="contact-message" placeholder="Jeg vil gerne have lavet tag" class="form-control md-textarea" rows="8"></textarea>
+                <label asp-for="Message">Meddelse</label>
+                <textarea asp-for="Message" class="form-control md-textarea" rows="8" placeholder="Jeg vil gerne have lavet tag"></textarea>
+                <span asp-validation-for="Message" class="text-danger"></span>
             </p>
             <!--Your Message-->
 
             <!--Send Button-->
             <p>
-                <button type="button" class="btn btn-primary">Send</button>
+                <button type="submit" class="btn btn-primary">Send</button>
             </p>
             <!--Send Button-->
 
