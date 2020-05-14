@@ -25,6 +25,7 @@ namespace Raunstrup.UI.Models
                 IsFixedPrice = dto.IsFixedPrice,
                 Price = dto.Price,
                 StartDate = dto.StartDate,
+                ESTdriving = dto.ESTdriving,
                 Rowversion = dto.Rowversion,
                 CustomerId = dto.CustomerId,
                 //UsedItems = ProjectMapper.Map(dto.UsedItemsDtos)
@@ -56,6 +57,7 @@ namespace Raunstrup.UI.Models
                 IsFixedPrice = project.IsFixedPrice,
                 Price = project.Price,
                 StartDate = project.StartDate,
+                ESTdriving = project.ESTdriving,
                 Rowversion = project.Rowversion,
                 CustomerId = project.CustomerId,
                 //UsedItemsDtos = ProjectMapper.Map(project.UsedItems).ToList()
