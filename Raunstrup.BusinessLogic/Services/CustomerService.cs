@@ -37,6 +37,8 @@ namespace Raunstrup.BusinessLogic.Services
 
             void ICustomerService.Create(Customer customer)
             {
+            CustomerDiscountType customerDiscountType = _context.CustomerDiscountTypes.Find(customer.CustomerDiscountTypeId);
+            customer.CustomerDiscountType = customerDiscountType;
                 _context.customers
                 .Add(customer);
                 _context.SaveChanges();
@@ -44,13 +46,19 @@ namespace Raunstrup.BusinessLogic.Services
 
             void ICustomerService.Update(Customer customer)
             {
-                _context.customers.Update(customer);
+            CustomerDiscountType customerDiscountType = _context.CustomerDiscountTypes.Find(customer.CustomerDiscountTypeId);
+            customer.CustomerDiscountType = customerDiscountType;
+
+            _context.customers.Update(customer);
                 _context.SaveChanges();
             }
 
             void ICustomerService.Delete(int id)
             {
-                Customer tmpCustomer=_context.customers.Find(id);
+            
+
+            Customer tmpCustomer=_context.customers.Find(id);
+
             tmpCustomer.Active = false;
             _context.customers.Update(tmpCustomer);
             _context.SaveChanges();

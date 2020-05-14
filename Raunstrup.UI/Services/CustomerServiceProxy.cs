@@ -84,9 +84,9 @@ namespace Raunstrup.UI.Services
             response.EnsureSuccessStatusCode();
         }
 
-        async Task ICustomerService.UpdateAsync(int id, CustomerDto movie)
+        async Task ICustomerService.UpdateAsync(int id, CustomerDto customer)
         {
-            var json = JsonSerializer.Serialize(movie);
+            var json = JsonSerializer.Serialize(customer);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await Client.PutAsync($"{_customerRequestUri}/{id}", data).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
