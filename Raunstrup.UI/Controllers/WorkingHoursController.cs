@@ -55,7 +55,7 @@ namespace Raunstrup.UI.Controllers
         // GET: WorkingHours/Create
         public IActionResult Create(int Id)
         {
-            var WorkingHours = new WorkingHoursViewModel { ProjectId = Id, EmployeeId = 1, HourlyPrice=300};
+            var WorkingHours = new WorkingHoursViewModel { ProjectId = Id, EmployeeId = Convert.ToInt32(User.Identity.Name.Split('@')[0]), HourlyPrice=300};
             return View(WorkingHours);
         }
     

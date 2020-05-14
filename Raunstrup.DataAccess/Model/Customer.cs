@@ -20,6 +20,8 @@ namespace Raunstrup.DataAccess
 
         public CustomerDiscountType CustomerDiscountType { get; set; }
 
+        public int? CustomerDiscountTypeId { get; set; }
+
         [Timestamp]
         public byte[] Rowversion { get; set; }
 
