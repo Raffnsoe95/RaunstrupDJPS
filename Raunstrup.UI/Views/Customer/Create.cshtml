@@ -32,11 +32,14 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            
-            <select id="mySelect" asp-for="SelectedCustomerDiscountViewModel" asp-items="@(new SelectList(Model.CustomerDiscountTypeViewModels, "Id", "Name"))">
-                <option disabled selected>Vælg kundetype</option>
-               
-            </select>
+            <div>
+                <label asp-for="SelectedCustomerDiscountViewModel" class="control-label">Vælg kundetype</label>
+                <br />
+                <select id="mySelect" asp-for="SelectedCustomerDiscountViewModel" asp-items="@(new SelectList(Model.CustomerDiscountTypeViewModels, "Id", "Name"))">
+                    @*<option disabled selected>Vælg kundetype</option>*@
+
+                </select>
+            </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Active" checked hidden />

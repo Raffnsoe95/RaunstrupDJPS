@@ -46,6 +46,8 @@ namespace Raunstrup.BusinessLogic.Services
 
             void ICustomerService.Update(Customer customer)
             {
+            
+
             CustomerDiscountType customerDiscountType = _context.CustomerDiscountTypes.Find(customer.CustomerDiscountTypeId);
             customer.CustomerDiscountType = customerDiscountType;
 
