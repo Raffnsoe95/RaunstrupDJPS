@@ -170,11 +170,19 @@ namespace Raunstrup.UI.Controllers
         }
         // GET: Employee
         public async Task<IActionResult> AddProjectEmployee(int id, string searchString)
-        { 
-            var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
-            IEnumerable<EmployeeDto> filterdEmployeeDtos = await _employeeService.GetFilteredEmployeesAsync(searchString);
+        {
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                IEnumerable<EmployeeDto> filterdEmployeeDtos = await _employeeService.GetFilteredEmployeesAsync(searchString);
+                return View(EmployeeMapper.MapEst(filterdEmployeeDtos).ToList());
+            }
+            else {
+                var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
 
-            return View(EmployeeMapper.MapEst(filterdEmployeeDtos).ToList());
+
+                return View(EmployeeMapper.MapEst(employeeDtos).ToList());
+            }
+          
         }
         //public async Task<IActionResult> AddProjectEmployeeToProject(int id, int projectid)
         //{
