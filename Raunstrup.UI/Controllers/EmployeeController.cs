@@ -32,7 +32,7 @@ namespace Raunstrup.UI.Controllers
             var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
 
             
-            IEnumerable<EmployeeDto> filterdEmployeeDtos = _employeeService.GetFilterdEmployees(employeeDtos, searchString);
+            IEnumerable<EmployeeDto> filterdEmployeeDtos = await _employeeService.GetFilteredEmployeesAsync(searchString);
 
 
             return View(EmployeeMapper.Map(filterdEmployeeDtos));
@@ -172,7 +172,7 @@ namespace Raunstrup.UI.Controllers
         public async Task<IActionResult> AddProjectEmployee(int id, string searchString)
         { 
             var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
-            IEnumerable<EmployeeDto> filterdEmployeeDtos = _employeeService.GetFilterdEmployees(employeeDtos, searchString);
+            IEnumerable<EmployeeDto> filterdEmployeeDtos = await _employeeService.GetFilteredEmployeesAsync(searchString);
 
             return View(EmployeeMapper.MapEst(filterdEmployeeDtos).ToList());
         }
