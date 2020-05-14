@@ -29,6 +29,12 @@
             @Html.DisplayFor(model => model.Price)
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ESTdriving)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ESTdriving)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Description)
         </dt>
         <dd class="col-sm-10">
@@ -62,13 +68,14 @@
             @Html.DisplayNameFor(model => model.ProjectEmployees)
         </dt>
         <dd class="col-sm-10">
+            @*//bruges i specialities*@
             @foreach (var item in @Model.ProjectEmployees)
             {
-                @item.Employee.Name
+                @item.Employee.Name @item.EstWorkingHours
 
             }
         </dd>
-        
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Customer)
         </dt>

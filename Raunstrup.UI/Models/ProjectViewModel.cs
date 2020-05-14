@@ -41,14 +41,17 @@ namespace Raunstrup.UI.Models
 
         public bool IsDone { get; set; }
 
+        public double ESTdriving { get; set; }
+
+        public int? CustomerId { get; set; }
+
         public byte[] Rowversion { get; set; }
 
         public List<WorkingHoursViewModel> WorkingHours { get; set; }
 
         public List<ProjectEmployeeViewModel> ProjectEmployees { get; set; }
-        public CustomerViewModel Customer { get; set; }
 
-        public int? CustomerId { get; set; }
+        public CustomerViewModel Customer { get; set; }
 
         public List<ProjectAssignedItemViewModel> AssignedItems { get; set; }
 

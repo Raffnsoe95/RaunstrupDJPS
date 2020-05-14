@@ -83,7 +83,7 @@ namespace Raunstrup.Api.Controllers
         [HttpGet("getcustomerdiscounttype/{Id}", Name = "getcustomerdiscounttype")]
         public CustomerDiscountTypeDto CustomerDiscountType(int id)
         {
-            return CustomerMapper.Map(_customerService.CustomerDiscountType(id));
+            return CustomerMapper.Map(_customerService.GetCustomerDiscountType(id));
         }
     }
 }

@@ -28,6 +28,8 @@ namespace Raunstrup.UI.Models
 
         public decimal Price { get; set; }
 
+        public double ESTdriving { get; set; }
+
         public string Description { get; set; }
 
         public bool Active { get; set; }

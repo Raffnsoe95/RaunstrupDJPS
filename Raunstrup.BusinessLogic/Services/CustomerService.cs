@@ -74,11 +74,11 @@ namespace Raunstrup.BusinessLogic.Services
             return _context.CustomerDiscountTypes.ToList();
         }
 
-        CustomerDiscountType ICustomerService.CustomerDiscountType(int id)
+        CustomerDiscountType ICustomerService.GetCustomerDiscountType(int id)
         {
-            return _context.CustomerDiscountTypes
+            return _context.CustomerDiscountTypes.Find(id);
            
-           .FirstOrDefault(x => x.Id == id);
+           
 
 
         }

@@ -79,7 +79,7 @@ namespace Raunstrup.UI.Services
         }
         async Task IEmployeeservice.AddAsync(int id, int projectid)
         {
-            var projectEmployee = new ProjectEmployeeDto{EmployeeId=id, ProjectId = projectid};
+            var projectEmployee = new ProjectEmployeeDto{Id=id, ProjectId = projectid};
             var json = JsonSerializer.Serialize(projectEmployee);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await Client.PostAsync(_employeesRequestUri+ "/AddProjectEmployeeToProject", data).ConfigureAwait(false);
@@ -106,6 +106,16 @@ namespace Raunstrup.UI.Services
                 PropertyNameCaseInsensitive = true
             };
             return await JsonSerializer.DeserializeAsync<IEnumerable<EmployeeDto>>(stream, options).ConfigureAwait(false);
+        }
+        async Task IEmployeeservice.AddProjectEmployeeAsync(List<ProjectEmployeeDto> items)
+        {
+            foreach (var projectEmployee in items)
+            {
+                var json = JsonSerializer.Serialize(projectEmployee);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await Client.PostAsync(_employeesRequestUri + "/AddProjectEmployeeToProject", data).ConfigureAwait(false);
+                response.EnsureSuccessStatusCode();
+            }
         }
     }
 }

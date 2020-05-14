@@ -1,114 +1,70 @@
-﻿@*@{
-    ViewData["Title"] = "Privacy Policy";
-}*@
+﻿@model Raunstrup.UI.Models.ContactViewModel
+@*@{
+        ViewData["Title"] = "Privacy Policy";
+    }*@
 <h1>@ViewData["Title"]</h1>
 
+<h1>Kontaks Os</h1>
+<br />
 
+<section>
 
-<section class="my-5">
+    <form asp-action="Create">
 
-    <!-- Section heading -->
-    <h2 class="h1-responsive font-weight-bold my-5">Kontakt Os</h2>
+        <article class="row">
 
+            <!-- Your Name -->
+            <div class="col-md-6">
 
-    
+                <p class="md-form mb-0">
+                    <label asp-for="Name" class="">Dit Navn</label>
+                    <input asp-for="Name" type="text" id="contact-name" class="form-control" placeholder="Hans">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </p>
 
-    <!-- Grid row -->
-    <div class="row">
+            </div>
+            <!-- Your Name -->
 
-        <!-- Grid column -->
-        <div class="col-md-9 mb-md-0 mb-5">
+            <!-- Your Email -->
+            <div class="col-md-6">
 
-            <form action="mailto:RaikoPrivate@Hotmail.com" method="post" enctype="text/plain">
+                <p class="md-form mb-0">
+                    <label asp-for="Email">Din Email</label>
+                    <input asp-for="Email" type="text" class="form-control" placeholder="Exempel@hotmail.com">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </p>
 
-                <!-- Grid row -->
-                <div class="row">
+            </div>
+            <!-- Your Email -->
 
-                    <!-- Your Name -->
-                    <div class="col-md-6">
-                        <div class="md-form mb-0">
-                            <label for="contact-name" class="">Dit Navn</label>
-                            <input type="text" id="contact-name" class="form-control">
-                        </div>
-                    </div>
-                    <!-- Your Name -->
-                    <!-- Your Email -->
-                    <div class="col-md-6">
-                        <div class="md-form mb-0">
-                            <label for="contact-email" class="">Din Email</label>
-                            <input type="text" id="contact-email" class="form-control">
-                        </div>
-                    </div>
-                    <!-- Your Email -->
+        </article>
 
-                </div>
+        <article>
 
-                <div class="row">
+            <!--Your Subject-->            
+            <p>
+                <label asp-for="Subject">Emne</label>
+                <input asp-for="Subject" type="text" class="form-control" placeholder="Tag">
+                <span asp-validation-for="Subject" class="text-danger"></span>
+            </p>
+            <!--Your Subject-->
 
-                    <!-- Subject -->
-                    <div class="col-md-12">
-                        <div class="md-form mb-0">
-                            <br />
-                            <label for="contact-Subject" class="">Emne</label>
-                            <input type="text" id="contact-Subject" class="form-control">
-                        </div>
-                    </div>
-                    <!-- Subject -->
+            <!--Your Message-->
+            <p>
+                <label asp-for="Message">Meddelse</label>
+                <textarea asp-for="Message" class="form-control md-textarea" rows="8" placeholder="Jeg vil gerne have lavet tag"></textarea>
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </p>
+            <!--Your Message-->
 
-                </div>
+            <!--Send Button-->
+            <p>
+                <button type="submit" class="btn btn-primary">Send</button>
+            </p>
+            <!--Send Button-->
 
-                <div class="row">
+        </article>
 
-                    <!-- Message -->
-                    <div class="col-md-12">
-                        <div class="md-form">
-                            <br />
-                            <label for="contact-message">Meddelse</label>
-                            <textarea id="contact-message" class="form-control md-textarea" rows="3"></textarea>
-                        </div>
-                    </div>
-                    <!-- Message -->
-
-                </div>
-                <!-- Grid row -->
-
-
-                <div class="text-center text-md-left">
-                    <br />
-                    <indput class="btn btn-primary btn-md"> Send </indput>
-                    
-                </div>
-
-            </form>
-
-        </div>
-        <!-- Grid column -->
-        <!-- Grid column -->
-        <div class="col-md-3 text-center">
-            <ul class="list-unstyled mb-0">
-                <li>
-                    <h3>Kontakt info</h3>
-                </li>
-                <li>
-                    <i class="fas fa-map-marker-alt fa-2x blue-text"></i>
-                    <p>By: Vejle</p>
-                </li>
-                <li>
-                    <i class="fas fa-phone fa-2x mt-4 blue-text"></i>
-                    <p>Tlf: +4553375951</p>
-                </li>
-                <li>
-                    <i class="fas fa-envelope fa-2x mt-4 blue-text"></i>
-                    <p class="mb-0">Email: RaikoPrivate@hotmail.com</p>
-                </li>
-            </ul>
-        </div>
-        <!-- Grid column -->
-
-    </div>
-    <!-- Grid row -->
+    </form>
 
 </section>
-
-
-

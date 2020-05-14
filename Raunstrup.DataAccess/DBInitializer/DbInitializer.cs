@@ -52,6 +52,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Email = "Hans@gmail.com",
                         Active = true,
                         CustomerDiscountType = NormalCustomer
+                         
                     },
 
 
@@ -63,6 +64,9 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Email = "Ole@gmail.com",
                         Active = true,
                         CustomerDiscountType = SuperCustomer
+                        
+
+                       
 
                     },
                      new Customer
@@ -269,6 +273,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                         IsFixedPrice = false,
                         Price = 0m,
                         StartDate = new DateTime(2020, 5, 4),
+                        ESTdriving = 20.5,
                         //  WorkingHours = Workingóurlist,
                         ProjectDrivings = new List<ProjectDriving> { projectDriving1, projectDriving2, projectDriving3 },
                         ProjectEmployees = new List<ProjectEmployee> { projectEmployee, projectEmployee2 },
@@ -290,6 +295,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                         IsFixedPrice = false,
                         Price = 0m,
                         StartDate = new DateTime(2020, 5, 4),
+                        ESTdriving = 30.5,
                         Customer = cus1
 
 
@@ -304,6 +310,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                         IsFixedPrice = false,
                         Price = 0m,
                         StartDate = new DateTime(2020, 5, 4),
+                        ESTdriving = 45.8,
                         Customer = cus1
 
                     }, new Project
@@ -315,7 +322,8 @@ namespace Raunstrup.DataAccess.DBInitializer
                         IsDone = false,
                         IsFixedPrice = false,
                         Price = 0m,
-                        StartDate = new DateTime(2020, 5, 4)
+                        StartDate = new DateTime(2020, 5, 4),
+                        ESTdriving = 78.9
 
 
                     }, new Project
@@ -328,7 +336,8 @@ namespace Raunstrup.DataAccess.DBInitializer
                         IsDone = false,
                         IsFixedPrice = false,
                         Price = 0m,
-                        StartDate = new DateTime(2020, 5, 4)
+                        StartDate = new DateTime(2020, 5, 4),
+                        ESTdriving = 1547.8
 
 
                     }  
