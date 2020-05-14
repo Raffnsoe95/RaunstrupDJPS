@@ -68,9 +68,10 @@
             @Html.DisplayNameFor(model => model.ProjectEmployees)
         </dt>
         <dd class="col-sm-10">
+            @*//bruges i specialities*@
             @foreach (var item in @Model.ProjectEmployees)
             {
-                @item.Employee.Name
+                @item.Employee.Name @item.EstWorkingHours
 
             }
         </dd>

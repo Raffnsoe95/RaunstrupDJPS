@@ -30,13 +30,13 @@ namespace Raunstrup.UI.Controllers
 
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            //Udkommenteret fordi det fucker op hvis man er logget ind som admin -Peder
-            //if (User.Identity.IsAuthenticated|)
+            ////Udkommenteret fordi det fucker op hvis man er logget ind som admin -Peder
+            //if (User.Identity.IsAuthenticated)
             //{
             //    string bruger = User.Identity.Name;
-            //    int id = Convert.ToInt32(bruger.Substring(0,1));
+            //    int id = Convert.ToInt32(bruger.Substring(0, 1));
 
             //    //EmployeeViewModel employeeViewModel = EmployeeMapper.Map(_employeeService.GetEmployeesAsync(id));
             //    var employeeDto = await _employeeService.GetEmployeesAsync(id).ConfigureAwait(false);

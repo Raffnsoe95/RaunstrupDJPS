@@ -54,5 +54,28 @@ namespace Raunstrup.UI.Models
                 RowVersion = model.RowVersion
             };
         }
+        public static EstWorkingHoursEmployeeViewModel MapEst(EmployeeDto dto)
+        {
+            if (dto == null)
+            { return null; }
+
+            return new EstWorkingHoursEmployeeViewModel
+            {
+                Id = dto.Id,
+                Name = dto.Name,
+                Phone = dto.Phone,
+                Active = dto.Active,
+                Specialties = SpecialtyMapper.Map(dto.Specialties).ToList(),
+                Type = TypeMapper.Map(dto.Type),
+                ManagerID = dto.ManagerID,
+                Manager = EmployeeMapper.Map(dto.Manager),
+                RowVersion = dto.RowVersion,
+                Department = DepartmentMapper.Map(dto.Department)
+            };
+        }
+        public static IEnumerable<EstWorkingHoursEmployeeViewModel> MapEst(IEnumerable<EmployeeDto> model)
+        {
+            return model.Select(x => MapEst(x)).AsEnumerable();
+        }
     }
 }
