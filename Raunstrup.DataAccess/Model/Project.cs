@@ -34,6 +34,8 @@ namespace Raunstrup.DataAccess
 
         public bool IsDone { get; set; }
 
+        public double ESTdriving { get; set; }
+
         public int? CustomerId { get; set; }  
 
         [Timestamp]
