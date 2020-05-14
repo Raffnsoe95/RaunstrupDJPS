@@ -1,16 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Raunstrup.Contract.DTOs;
+using Raunstrup.Contract.Services;
+using Raunstrup.UI.Data;
+using Raunstrup.UI.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Raunstrup.UI.Data;
-using Raunstrup.UI.Models;
-using Raunstrup.UI.Services;
-using Raunstrup.Contract.Services;
-using Raunstrup.Contract.DTOs;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Raunstrup.UI.Controllers
 {
@@ -32,10 +29,10 @@ namespace Raunstrup.UI.Controllers
             var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
 
             
-            IEnumerable<EmployeeDto> filterdEmployeeDtos = _employeeService.GetFilterdEmployees(employeeDtos, searchString);
+            IEnumerable<EmployeeDto> filteredEmployeeDtos = _employeeService.GetFilteredEmployees(employeeDtos, searchString);
 
 
-            return View(EmployeeMapper.Map(filterdEmployeeDtos));
+            return View(EmployeeMapper.Map(filteredEmployeeDtos));
 
            
         }
@@ -172,9 +169,9 @@ namespace Raunstrup.UI.Controllers
         public async Task<IActionResult> AddProjectEmployee(int id, string searchString)
         { 
             var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
-            IEnumerable<EmployeeDto> filterdEmployeeDtos = _employeeService.GetFilterdEmployees(employeeDtos, searchString);
+            IEnumerable<EmployeeDto> filteredEmployeeDtos = _employeeService.GetFilteredEmployees(employeeDtos, searchString);
 
-            return View(EmployeeMapper.MapEst(filterdEmployeeDtos).ToList());
+            return View(EmployeeMapper.MapEst(filteredEmployeeDtos).ToList());
         }
         //public async Task<IActionResult> AddProjectEmployeeToProject(int id, int projectid)
         //{
