@@ -19,8 +19,8 @@ namespace Raunstrup.UI.UserManagement
             //var adminUserPw = configuration["AdminUserPw"];
             await using var context = serviceProvider.GetRequiredService<UserManagementContext>();
 
-            var adminId = await EnsureUserAsync(serviceProvider, "admin", "admin").ConfigureAwait(false);
-            await EnsureRoleAsync(serviceProvider, adminId, "Admin").ConfigureAwait(false);
+            //var adminId = await EnsureUserAsync(serviceProvider, "admin", "admin").ConfigureAwait(false);
+            //await EnsureRoleAsync(serviceProvider, adminId, "Admin").ConfigureAwait(false);
 
             //var superUserEmail = configuration["SuperUserEmail"];
             //var superUserPw = configuration["SuperUserPw"];
