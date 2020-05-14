@@ -23,6 +23,7 @@ namespace Raunstrup.BusinessLogic.Services
         IEnumerable<Employee> IEmployeeService.GetAll()
         {
             return _context.Employees
+             .Where(a => a.Active == true)
             .Include(e => e.Type)
             .Include(e => e.Specialties)
             .Include(e => e.Department)
@@ -31,9 +32,9 @@ namespace Raunstrup.BusinessLogic.Services
 
         Employee IEmployeeService.Get(int id)
         {
-            return _context.Employees
-            .Include(e => e.Type)
-            .Include(e => e.Specialties)
+            return _context.Employees 
+                .Include(e => e.Type) 
+                .Include(e => e.Specialties)
             .Include(e => e.Manager)
             .Include(e => e.Department)
             .FirstOrDefault(x => x.Id == id);
@@ -68,6 +69,18 @@ namespace Raunstrup.BusinessLogic.Services
 
             _context.projectDrivings.Add(projectDriving);
             _context.SaveChanges();
+        }
+
+
+        IEnumerable<Employee> IEmployeeService.GetFilteredEmployees(string searchString)
+        {
+            return _context.Employees
+             .Where(a => a.Active == true)
+             .Where(f=>f.Name.ToUpper().Contains(searchString.ToUpper()))
+            .Include(e => e.Type)
+            .Include(e => e.Specialties)
+            .Include(e => e.Department)
+                .ToList();
         }
     }
 }

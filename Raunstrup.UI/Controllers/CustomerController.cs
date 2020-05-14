@@ -69,11 +69,18 @@ namespace Raunstrup.UI.Controllers
         // GET: Customer/Create
         public async Task<IActionResult> Create()
         {
-            //den her modtager en liste af customerdiscounttyper
-            var cECustomerViewModel = await _customerService.GetAllCustomerDiscountType().ConfigureAwait(false);
+            
+
+            CECustomerViewModel cECustomerViewModel = new CECustomerViewModel();
+
+           var customerDiscountTypeDtos = await _customerService.GetAllCustomerDiscountType().ConfigureAwait(false);
+
+            IEnumerable<CustomerDiscountTypeViewModel> customerDiscountTypeViewModels= CustomerMapper.Map(customerDiscountTypeDtos);
+
+            cECustomerViewModel.CustomerDiscountTypeViewModels = customerDiscountTypeViewModels.ToList();
 
             //de skal laves om til CEcustomerviewmodels
-            return View(CustomerMapper.Map(cECustomerViewModel));
+            return View(cECustomerViewModel);
         }
 
         // POST: Customer/Create
@@ -81,17 +88,29 @@ namespace Raunstrup.UI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Phone,Address,Email,Active,Rowversion")] CustomerViewModel customerViewModel)
+        public async Task<IActionResult> Create([Bind("Id,Name,Phone,Address,Email,Active,Rowversion, SelectedCustomerDiscountViewModel")] CECustomerViewModel cEcustomerViewModel)
         {
+            CustomerViewModel customerViewModel = CustomerMapper.Map(cEcustomerViewModel);
 
+            
+            CustomerDiscountTypeDto customerDiscountTypeDto = await _customerService.GetCustomerDiscountTypeAsync(cEcustomerViewModel.SelectedCustomerDiscountViewModel);
+
+            CustomerDiscountTypeViewModel customerDiscountTypeViewModel= CustomerMapper.Map(customerDiscountTypeDto);
+
+            customerViewModel.CustomerDiscountType = customerDiscountTypeViewModel;
+
+            //  CustomerDiscountTypeViewModel discountTypeViewModel = customerViewModel.CustomerDiscountType;
             if (ModelState.IsValid)
+
             {
-                await _customerService.AddAsync(CustomerMapper.Map(customerViewModel)).ConfigureAwait(false);
+                
+              await _customerService.AddAsync(CustomerMapper.Map(customerViewModel)).ConfigureAwait(false);
 
                 return RedirectToAction(nameof(Index));
                 //_context.Add(employeeViewModel);
                 //await _context.SaveChangesAsync();
                 //return RedirectToAction(nameof(Index));
+
             }
             return View(customerViewModel);
         }

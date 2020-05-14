@@ -51,7 +51,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Address = "Hansvej 1, 1111 Hansby",
                         Email = "Hans@gmail.com",
                         Active = true,
-                        CustomerDiscountType = SuperCustomer
+                        CustomerDiscountType = NormalCustomer
                     },
 
 
@@ -91,7 +91,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                            Address = "Knudvej 5, 5555 Knudby",
                            Email = "Knud@gmail.com",
                            Active = true,
-                           CustomerDiscountType = NormalCustomer
+                           CustomerDiscountType = SuperCustomer
                        }
 
 

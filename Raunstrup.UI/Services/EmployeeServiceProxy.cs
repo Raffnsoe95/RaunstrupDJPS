@@ -92,18 +92,20 @@ namespace Raunstrup.UI.Services
             var response = await Client.PostAsync(_employeesRequestUri + "/AddProjectDrivingToProject", data).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
-        IEnumerable<EmployeeDto> IEmployeeservice.GetFilterdEmployees(IEnumerable<EmployeeDto> EmployeeDtos, string searchString)
+
+
+        async Task<IEnumerable<EmployeeDto>> IEmployeeservice.GetFilteredEmployeesAsync(string searchString)
         {
+            var response = await Client.GetAsync(_employeesRequestUri + $"/search/{searchString}").ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
 
+            var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
-            var filterdEmployeeDtos = from m in EmployeeDtos
-                                      select m;
-
-            if (!String.IsNullOrEmpty(searchString))
+            var options = new JsonSerializerOptions
             {
-                filterdEmployeeDtos = filterdEmployeeDtos.Where(s => s.Name.ToUpper().Contains(searchString.ToUpper()));
-            }
-            return filterdEmployeeDtos;
+                PropertyNameCaseInsensitive = true
+            };
+            return await JsonSerializer.DeserializeAsync<IEnumerable<EmployeeDto>>(stream, options).ConfigureAwait(false);
         }
     }
 }

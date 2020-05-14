@@ -29,13 +29,19 @@ namespace Raunstrup.UI
         // GET: Employee
         public async Task<IActionResult> Index(string searchString)
         {
-            var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
-
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var filteredEmployeeDtos = await _employeeService.GetFilteredEmployeesAsync(searchString).ConfigureAwait(false);
+                return View(EmployeeMapper.Map(filteredEmployeeDtos));
+            }
+            else
+            {
+                var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
+                return View(EmployeeMapper.Map(employeeDtos));
+            }
             
-            IEnumerable<EmployeeDto> filterdEmployeeDtos = _employeeService.GetFilterdEmployees(employeeDtos, searchString);
 
-
-            return View(EmployeeMapper.Map(filterdEmployeeDtos));
+         
 
            
         }
@@ -170,11 +176,19 @@ namespace Raunstrup.UI
         }
         // GET: Employee
         public async Task<IActionResult> AddProjectEmployee(int id, string searchString)
-        { 
-            var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
-            IEnumerable<EmployeeDto> filterdEmployeeDtos = _employeeService.GetFilterdEmployees(employeeDtos, searchString);
+        {
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var filterdEmployeeDtos = await _employeeService.GetFilteredEmployeesAsync(searchString).ConfigureAwait(false);
+                return View(EmployeeMapper.Map(filterdEmployeeDtos));
+            }
+            else
+            {
+                var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
+                return View(EmployeeMapper.Map(employeeDtos));
+            }
 
-            return View(EmployeeMapper.Map(filterdEmployeeDtos));
+           
         }
         public async Task<IActionResult> AddProjectEmployeeToProject(int id, int projectid)
         {

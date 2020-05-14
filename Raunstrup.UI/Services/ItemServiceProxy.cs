@@ -101,18 +101,18 @@ namespace Raunstrup.UI.Services
             }
         }
 
-        IEnumerable<ItemDto> IItemService.GetFilterdItem(IEnumerable<ItemDto> ItemDtos, string searchString)
+        async Task<IEnumerable<ItemDto>> IItemService.GetFilteredItemsAsync(string searchString)
         {
+            var response = await Client.GetAsync(_itemsRequestUri + $"/search/{searchString}").ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
 
+            var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
-            var filterdItemsDtos = from m in ItemDtos
-                                   select m;
-
-            if (!String.IsNullOrEmpty(searchString))
+            var options = new JsonSerializerOptions
             {
-                filterdItemsDtos = filterdItemsDtos.Where(s => s.Name.ToUpper().Contains(searchString.ToUpper()));
-            }
-            return filterdItemsDtos;
+                PropertyNameCaseInsensitive = true
+            };
+            return await JsonSerializer.DeserializeAsync<IEnumerable<ItemDto>>(stream, options).ConfigureAwait(false);
         }
     }
 }

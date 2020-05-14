@@ -37,7 +37,8 @@ namespace Raunstrup.BusinessLogic.Services
 
             void ICustomerService.Create(Customer customer)
             {
-                _context.customers.Add(customer);
+                _context.customers
+                .Add(customer);
                 _context.SaveChanges();
             }
 
@@ -71,6 +72,15 @@ namespace Raunstrup.BusinessLogic.Services
         IEnumerable<CustomerDiscountType> ICustomerService.GetAllCustomerDiscountType()
         {
             return _context.CustomerDiscountTypes.ToList();
+        }
+
+        CustomerDiscountType ICustomerService.CustomerDiscountType(int id)
+        {
+            return _context.CustomerDiscountTypes
+           
+           .FirstOrDefault(x => x.Id == id);
+
+
         }
     }
     }
