@@ -19,7 +19,7 @@ namespace Raunstrup.BusinessLogic.ServiceInterfaces
 
         void Delete(int id);
 
-        void Create(ProjectEmployee projectEmployee);
+        void CreateProjectEmployee(ProjectEmployee projectEmployee);
 
         void Create(ProjectDriving projectDriving);
     }

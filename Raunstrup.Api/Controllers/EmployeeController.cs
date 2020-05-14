@@ -63,7 +63,7 @@ namespace Raunstrup.Api.Controllers
         [HttpPost("AddProjectEmployeeToProject", Name = "AddProjectEmployeeToProject")]
         public void AddProjectEmployeeToProject([FromBody] ProjectEmployeeDto value)
         {
-            _employeeService.Create(ProjectEmployeeMapper.Map(value));
+            _employeeService.CreateProjectEmployee(ProjectEmployeeMapper.Map(value));
         }
 
         [HttpPost("AddProjectDrivingToProject", Name = "AddProjectDrivingToProject")]
@@ -71,10 +71,6 @@ namespace Raunstrup.Api.Controllers
         {
             _employeeService.Create(ProjectDrivingMapper.Map(value));
         }
-        [HttpPost("AddEstWorkHoursToProject", Name = "AddEstWorkingHoursToProject")]
-        public void AddEstWorkingHoursToProject([FromBody] ProjectEmployeeDto value)
-        {
-            _employeeService.Create(ProjectEmployeeMapper.Map(value));
-        }
+        
     }
 }

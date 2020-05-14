@@ -15,8 +15,6 @@ namespace Raunstrup.Contract.DTOs
 
         public bool Active { get; set; }
 
-        public int EstWorkingHours { get; set; }
-
         [Timestamp]
         public byte[] RowVersion { get; set; }
 

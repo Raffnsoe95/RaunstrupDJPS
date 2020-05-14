@@ -22,7 +22,6 @@ namespace Raunstrup.Api.Models
                 Id = dto.Id,
                 Name = dto.Name,
                 Phone = dto.Phone,
-                EstWorkingHours = dto.EstWorkingHours,
                 Active = dto.Active,
                 Specialties = SpecialtyMapper.Map(dto.Specialties).ToList(), 
                 Type = TypeMapper.Map(dto.Type), 
@@ -54,7 +53,6 @@ namespace Raunstrup.Api.Models
                 Id = model.Id,
                 Name = model.Name,
                 Phone = model.Phone,
-                EstWorkingHours = model.EstWorkingHours,
                 Active = model.Active,
                 Specialties = SpecialtyMapper.Map(model.Specialties).ToList(),
                 Type = TypeMapper.Map(model.Type),
@@ -64,5 +62,6 @@ namespace Raunstrup.Api.Models
                 RowVersion = model.RowVersion
             };
         }
+       
     }
 }
