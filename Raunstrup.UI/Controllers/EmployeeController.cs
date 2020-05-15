@@ -30,13 +30,22 @@ namespace Raunstrup.UI.Controllers
         // GET: Employee
         public async Task<IActionResult> Index(string searchString)
         {
-            var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                IEnumerable<EmployeeDto> filterdEmployeeDtos = await _employeeService.GetFilteredEmployeesAsync(searchString);
+
+
+                return View(EmployeeMapper.Map(filterdEmployeeDtos));
+            }
+            else
+            {
+                var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
+                return View(EmployeeMapper.Map(employeeDtos));
+            }
+            
 
             
-            IEnumerable<EmployeeDto> filterdEmployeeDtos = await _employeeService.GetFilteredEmployeesAsync(searchString);
-
-
-            return View(EmployeeMapper.Map(filterdEmployeeDtos));
+           
 
            
         }
