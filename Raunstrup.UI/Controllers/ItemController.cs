@@ -164,11 +164,8 @@ namespace Raunstrup.UI.Controllers
                 ItemId = x.Id,  
             });
 
-
-            if (ModelState.IsValid)
-            {
-                await _itemService.AddAssignedItemAsync(ProjectAssignedItemMapper.Map(projectItems).ToList()).ConfigureAwait(false);
-            }
+            await _itemService.AddAssignedItemAsync(ProjectAssignedItemMapper.Map(projectItems).ToList()).ConfigureAwait(false);
+          
             return RedirectToAction("AddAssignedProjectItem", new { id = items[0].projectID });
         }
 
