@@ -32,13 +32,13 @@ namespace Raunstrup.UI.Controllers
         {
             var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
 
-            
+
             IEnumerable<EmployeeDto> filterdEmployeeDtos = await _employeeService.GetFilteredEmployeesAsync(searchString);
 
 
             return View(EmployeeMapper.Map(filterdEmployeeDtos));
 
-           
+
         }
 
         // GET: Employee/Details/5
@@ -171,84 +171,87 @@ namespace Raunstrup.UI.Controllers
         }
         // GET: Employee
         public async Task<IActionResult> AddProjectEmployee(int id, string searchString)
-        { 
+        {
             var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
             IEnumerable<EmployeeDto> filteredEmployeeDtos = await _employeeService.GetFilteredEmployeesAsync(searchString);
 
             return View(EmployeeMapper.MapEst(filteredEmployeeDtos).ToList());
-        {
-            if (!String.IsNullOrEmpty(searchString))
             {
-                IEnumerable<EmployeeDto> filterdEmployeeDtos = await _employeeService.GetFilteredEmployeesAsync(searchString);
-                return View(EmployeeMapper.MapEst(filterdEmployeeDtos).ToList());
+                //if (!String.IsNullOrEmpty(searchString))
+                //{
+                //    IEnumerable<EmployeeDto> filterdEmployeeDtos = await _employeeService.GetFilteredEmployeesAsync(searchString);
+                //    return View(EmployeeMapper.MapEst(filterdEmployeeDtos).ToList());
+                //}
+                //else
+                //{
+                //    var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
+
+
+                //    return View(EmployeeMapper.MapEst(employeeDtos).ToList());
+                //}
+
             }
-            else {
+        }
+            //public async Task<IActionResult> AddProjectEmployeeToProject(int id, int projectid)
+            //{
+            //    if (ModelState.IsValid)
+            //    {
+            //        await _employeeService.AddAsync(id,projectid).ConfigureAwait(false);
+
+
+            //        //_context.Add(employeeViewModel);
+            //        //await _context.SaveChangesAsync();
+            //        //return RedirectToAction(nameof(Index));
+            //    }
+            //    return RedirectToAction("AddProjectEmployee",new {id=projectid});
+            //}
+
+
+            public async Task<IActionResult> AddProjectEmployees(int id)
+            {
                 var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
+                var items = EmployeeMapper.MapEst(employeeDtos).Select(x => { x.Id = id; return x; }).ToList();
 
-
-                return View(EmployeeMapper.MapEst(employeeDtos).ToList());
+                return View(EmployeeMapper.MapEst(employeeDtos).Select(x => { x.Id = id; return x; }).ToList());
             }
-          
-        }
-        //public async Task<IActionResult> AddProjectEmployeeToProject(int id, int projectid)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        await _employeeService.AddAsync(id,projectid).ConfigureAwait(false);
+
+            //public async Task<IActionResult> AddProjectEmployeeToProject(List<EstWorkingHoursEmployeeViewModel> items)
+            //{
+            //    var projectEmployees = items.Where(x => x.EstWorkingHours > 0).Select(x => new ProjectEmployeeViewModel()
+            //    {
+            //        Id =x.Id,
+            //        EstWorkingHours =x.EstWorkingHours,
+            //        ProjectId =x.projectId
 
 
-        //        //_context.Add(employeeViewModel);
-        //        //await _context.SaveChangesAsync();
-        //        //return RedirectToAction(nameof(Index));
-        //    }
-        //    return RedirectToAction("AddProjectEmployee",new {id=projectid});
-        //}
+            //    });
 
 
-        public async Task<IActionResult> AddProjectEmployees(int id)
-        {
-            var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
-            var items = EmployeeMapper.MapEst(employeeDtos).Select(x => { x.Id = id; return x; }).ToList();
-
-            return View(EmployeeMapper.MapEst(employeeDtos).Select(x => { x.Id = id; return x; }).ToList());
-        }
-
-        //public async Task<IActionResult> AddProjectEmployeeToProject(List<EstWorkingHoursEmployeeViewModel> items)
-        //{
-        //    var projectEmployees = items.Where(x => x.EstWorkingHours > 0).Select(x => new ProjectEmployeeViewModel()
-        //    {
-        //        Id =x.Id,
-        //        EstWorkingHours =x.EstWorkingHours,
-        //        ProjectId =x.projectId
-                
-               
-        //    });
-
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        await _employeeService.AddProjectEmployeeAsync(ProjectEmployeeMapper.Map(projectEmployees).ToList()).ConfigureAwait(false);
-        //    }
-        //    return RedirectToAction("AddProjectEmployeeToProject", new { id = items[0].projectId });
-        //}
-        public async Task<IActionResult> AddProjectEmployeeToProject(List<EstWorkingHoursEmployeeViewModel> items)
-        {
-            var projectEmployees = items.Where(x => x.EstWorkingHours > 0).Select(x => new ProjectEmployeeViewModel()
+            //    if (ModelState.IsValid)
+            //    {
+            //        await _employeeService.AddProjectEmployeeAsync(ProjectEmployeeMapper.Map(projectEmployees).ToList()).ConfigureAwait(false);
+            //    }
+            //    return RedirectToAction("AddProjectEmployeeToProject", new { id = items[0].projectId });
+            //}
+            public async Task<IActionResult> AddProjectEmployeeToProject(List<EstWorkingHoursEmployeeViewModel> items)
             {
-                 EmployeeName= x.Name,
-                 ProjectId = x.projectId,
-                 EstWorkingHours = x.EstWorkingHours,
-                 
-            });
+                var projectEmployees = items.Where(x => x.EstWorkingHours > 0).Select(x => new ProjectEmployeeViewModel()
+                {
+                    EmployeeName = x.Name,
+                    ProjectId = x.projectId,
+                    EstWorkingHours = x.EstWorkingHours,
+
+                });
 
 
-            if (ModelState.IsValid)
-            {
-                await _employeeService.AddProjectEmployeeAsync(ProjectEmployeeMapper.Map(projectEmployees).ToList()).ConfigureAwait(false);
+                if (ModelState.IsValid)
+                {
+                    await _employeeService.AddProjectEmployeeAsync(ProjectEmployeeMapper.Map(projectEmployees).ToList()).ConfigureAwait(false);
+                }
+                return RedirectToAction("AddAssignedProjectItem", new { id = items[0].projectId });
             }
-            return RedirectToAction("AddAssignedProjectItem", new { id = items[0].projectId });
+
+
         }
+    } 
 
-
-    }
-}

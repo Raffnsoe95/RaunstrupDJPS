@@ -236,7 +236,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                 ProjectDriving projectDriving1 = new ProjectDriving { Amount = 25, Employee = emp1, UnitPrice = 2 };
                 ProjectDriving projectDriving2 = new ProjectDriving { Amount = 25, Employee = emp1, UnitPrice = 2 };
                 ProjectDriving projectDriving3 = new ProjectDriving { Amount = 2, Employee = emp1, UnitPrice = 795 };
-                ProjectEmployee projectEmployee = new ProjectEmployee { Employee = emp1, EmployeeName = "Jørgen Clevin" };
+                ProjectEmployee projectEmployee = new ProjectEmployee { Employee = emp1};
                 var usedItem1 = new ProjectUsedItem { Amount = 10, ItemID = 1, Price = 7.99m };
                 var usedItem2 = new ProjectUsedItem { Amount = 10, ItemID = 1, Price = 7.99m };
                 var usedItem3 = new ProjectUsedItem { Amount = 10, ItemID = 1, Price = 7.99m };

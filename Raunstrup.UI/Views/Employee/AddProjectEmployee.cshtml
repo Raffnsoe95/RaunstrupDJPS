@@ -86,10 +86,16 @@
                 Navn
             </th>
             <th>
-                Pris
+                Telefonnummer
             </th>
             <th>
-                Amount
+                Type
+            </th>
+            <th>
+                Speciale
+            </th>
+            <th>
+                Antal Timer
             </th>
             <th></th>
         </tr>
@@ -127,13 +133,19 @@
 
         @for (var i = 0; i < Model.Count(); i++)
         {
-            <tr>
-                <td><label  asp-for="@Model[i].Id" hidden /></td>
-                <td><label  asp-for="@Model[i].Name" /></td>
-                <td><label  asp-for="@Model[i].Phone" /></td>
-                <td><label  asp-for="@Model[i].Type.Title" hidden /></td>
-                <td><input type="text" asp-for="@Model[i].EstWorkingHours" /></td>
-            </tr>
+        <tr>
+            <td><label asp-for="@Model[i].Id" hidden /></td>
+            <td><label asp-for="@Model[i].Name" /></td>
+
+            <td><label asp-for="@Model[i].Phone" /></td>
+            <td><label asp-for="@Model[i].Type.Title" /></td>
+            <td>
+                <label asp-for="@Model[i].Specialties" />
+               
+
+            </td>
+            <td><input type="text" asp-for="@Model[i].EstWorkingHours" /></td>
+        </tr>
         }
     </table>
     <button>Update</button>
