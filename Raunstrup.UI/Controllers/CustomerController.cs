@@ -31,22 +31,11 @@ namespace Raunstrup.UI.Controllers
 
         public async Task<IActionResult> Index(string searchString)
         {
-            
 
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                var customerDtos = await _customerService.GetFilteredCustomers(searchString).ConfigureAwait(false);
-                return View(CustomerMapper.Map(customerDtos));
-            }
-            else
-            {
-                var customerDtos = await _customerService.GetCustomerAsync().ConfigureAwait(false);
-                return View(CustomerMapper.Map(customerDtos));
-            }
+            IEnumerable<CustomerDto> customerDtos = await _customerService.GetChosenCustomers(searchString);
 
-
-            
-
+            return View(CustomerMapper.Map(customerDtos));
+          
         }
 
 
@@ -208,20 +197,12 @@ namespace Raunstrup.UI.Controllers
         }
         public async Task<IActionResult> AddProjectCustomer(int id, string searchString)
         {
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                IEnumerable<CustomerDto> filterdCustomersDtos = await _customerService.GetFilteredCustomers(searchString);
-                return View(CustomerMapper.Map(filterdCustomersDtos));
-            }
-            else
-            {
-                var customerDtos = await _customerService.GetCustomerAsync().ConfigureAwait(false);
-                return View(CustomerMapper.Map(customerDtos));
-            }
-            
+            IEnumerable<CustomerDto> customerDtos = await _customerService.GetChosenCustomers(searchString);
 
-            
-            
+            return View(CustomerMapper.Map(customerDtos));
+
+         
+
         }
         public async Task<IActionResult> AddProjectCustomerToProject(int id, int projectid)
         {
