@@ -21,6 +21,7 @@ namespace Raunstrup.Api.Models
                 Id = dto.Id,
                 Name = dto.Name,
                 Active=dto.active,
+                DiscountPercent=dto.DiscountPercent,
                 CustomerID = dto.CustomerId,
             };
         }
@@ -45,6 +46,7 @@ namespace Raunstrup.Api.Models
                 Id = model.Id,
                 Name = model.Name,
                 active=model.Active,
+                DiscountPercent=model.DiscountPercent,
                 CustomerId = model.CustomerID,
             };
         }
