@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Raunstrup.UI.Controllers
 {
+    [Authorize(Roles = "Admin,SuperUser")]
     public class EmployeeController : Controller
     {
         private readonly ViewModelContext _context;
@@ -207,6 +208,7 @@ namespace Raunstrup.UI.Controllers
             return View(EmployeeMapper.MapEst(employeeDtos).Select(x => { x.Id = id; return x; }).ToList());
         }
 
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddProjectEmployeeToProject(List<EstWorkingHoursEmployeeViewModel> items)
         {
             var projectEmployees = items.Where(x => x.EstWorkingHours > 0).Select(x => new ProjectEmployeeViewModel()

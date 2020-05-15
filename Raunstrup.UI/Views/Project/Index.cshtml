@@ -27,21 +27,25 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Active)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsFixedPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsAccepted)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsDone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rowversion)
-            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>*@
+
+            @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.IsFixedPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsAccepted)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsDone)
+                </th>
+            }
+            @*<th>
+            @Html.DisplayNameFor(model => model.Rowversion)
+        </th>*@
             <th></th>
         </tr>
     </thead>
@@ -63,25 +67,35 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.Active)
+        </td>*@
+            @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsFixedPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAccepted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsDone)
+                </td>
+            }
+            @*<td>
+            @Html.DisplayFor(modelItem => item.Rowversion)
+        </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.Active)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsFixedPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsAccepted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rowversion)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> <span>|</span>
+                }
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+                {
+                    <span>|</span>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                }
             </td>
         </tr>
 }

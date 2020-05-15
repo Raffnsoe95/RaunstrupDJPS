@@ -10,9 +10,12 @@ using Raunstrup.UI.Models;
 using Raunstrup.UI.Services;
 using Raunstrup.Contract.Services;
 using Raunstrup.Contract.DTOs;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Raunstrup.UI.Controllers
 {
+    [Authorize(Roles = "Admin,SuperUser,User")]
     public class ProjectController : Controller
     {
         private readonly ViewModelContext _context;
@@ -27,7 +30,10 @@ namespace Raunstrup.UI.Controllers
         // GET: Project
         public async Task<IActionResult> Index()
         {
-            var projectDtos = await _projectService.GetProjectAsync().ConfigureAwait(false);
+            var userId = User.FindFirstValue(ClaimTypes.Name);
+            var userRole = User.FindFirstValue(ClaimTypes.Role);
+
+            var projectDtos = await _projectService.GetProjectAsync(userId, userRole).ConfigureAwait(false);
             return View(ProjectMapper.Map(projectDtos));
             //return View(await _context.Projects.ToListAsync());
         }
@@ -51,12 +57,14 @@ namespace Raunstrup.UI.Controllers
             return View(ProjectDetailsMapper.Map(projectViewModel));
         }
 
+        [Authorize(Roles = "Admin,SuperUser")]
         // GET: Project/Create
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin,SuperUser")]
         // POST: Project/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -77,6 +85,7 @@ namespace Raunstrup.UI.Controllers
             return View(projectViewModel);
         }
 
+        [Authorize(Roles = "Admin,SuperUser")]
         // GET: Project/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
@@ -93,6 +102,7 @@ namespace Raunstrup.UI.Controllers
             return View(ProjectMapper.Map(projectViewModel));
         }
 
+        [Authorize(Roles = "Admin,SuperUser")]
         // POST: Project/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -127,6 +137,7 @@ namespace Raunstrup.UI.Controllers
             return View(projectViewModel);
         }
 
+        [Authorize(Roles = "Admin,SuperUser")]
         // GET: Project/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -144,6 +155,7 @@ namespace Raunstrup.UI.Controllers
             return View(ProjectMapper.Map(projectViewModel));
         }
 
+        [Authorize(Roles = "Admin,SuperUser")]
         // POST: Project/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
