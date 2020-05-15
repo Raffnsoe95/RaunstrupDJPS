@@ -23,6 +23,8 @@ namespace Raunstrup.BusinessLogic.ServiceInterfaces
 
         IEnumerable<Item> GetFilteredItems(string searchString);
 
+
+
         //void AddDiscountToItem(Discount discount);
 
     }
