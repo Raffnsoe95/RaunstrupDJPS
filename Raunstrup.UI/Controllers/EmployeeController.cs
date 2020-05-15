@@ -173,24 +173,17 @@ namespace Raunstrup.UI.Controllers
         // GET: Employee 
         public async Task<IActionResult> AddProjectEmployee(int id, string searchString)
         {
-            var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
-            IEnumerable<EmployeeDto> filteredEmployeeDtos = await _employeeService.GetFilteredEmployeesAsync(searchString);
-
-            return View(EmployeeMapper.MapEst(filteredEmployeeDtos).ToList());
+            if (!String.IsNullOrEmpty(searchString))
             {
-                //if (!String.IsNullOrEmpty(searchString))
-                //{
-                //    IEnumerable<EmployeeDto> filterdEmployeeDtos = await _employeeService.GetFilteredEmployeesAsync(searchString);
-                //    return View(EmployeeMapper.MapEst(filterdEmployeeDtos).ToList());
-                //}
-                //else
-                //{
-                //    var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
+                var filteredEmployeeDtos = await _employeeService.GetFilteredEmployeesAsync(searchString);
+                return View(EmployeeMapper.MapEst(filteredEmployeeDtos).Select(x => { x.projectId = id; return x; }).ToList());
+            }
+            else
+            {
+                var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
 
 
-                //    return View(EmployeeMapper.MapEst(employeeDtos).ToList());
-                //}
-
+                return View(EmployeeMapper.MapEst(employeeDtos).Select(x => { x.projectId = id; return x; }).ToList());
             }
         }
             //public async Task<IActionResult> AddProjectEmployeeToProject(int id, int projectid)
@@ -211,9 +204,9 @@ namespace Raunstrup.UI.Controllers
             public async Task<IActionResult> AddProjectEmployees(int id)
             {
                 var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
-                var items = EmployeeMapper.MapEst(employeeDtos).Select(x => { x.Id = id; return x; }).ToList();
+                
 
-                return View(EmployeeMapper.MapEst(employeeDtos).Select(x => { x.Id = id; return x; }).ToList());
+                return View(EmployeeMapper.MapEst(employeeDtos).Select(x => { x.projectId = id; return x; }).ToList());
             }
 
             //public async Task<IActionResult> AddProjectEmployeeToProject(List<EstWorkingHoursEmployeeViewModel> items)
@@ -238,18 +231,19 @@ namespace Raunstrup.UI.Controllers
             {
                 var projectEmployees = items.Where(x => x.EstWorkingHours > 0).Select(x => new ProjectEmployeeViewModel()
                 {
-                    EmployeeName = x.Name,
+                    EmployeeId = x.Id,
                     ProjectId = x.projectId,
                     EstWorkingHours = x.EstWorkingHours,
 
                 });
 
 
-                if (ModelState.IsValid)
-                {
-                    await _employeeService.AddProjectEmployeeAsync(ProjectEmployeeMapper.Map(projectEmployees).ToList()).ConfigureAwait(false);
-                }
-                return RedirectToAction("AddAssignedProjectItem", new { id = items[0].projectId });
+            
+          
+              
+                await _employeeService.AddProjectEmployeeAsync(ProjectEmployeeMapper.Map(projectEmployees).ToList()).ConfigureAwait(false);
+                
+                return RedirectToAction("details","project", new { id = items[0].projectId });
             }
 
 
