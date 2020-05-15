@@ -42,7 +42,14 @@ namespace Raunstrup.UI.Models
                         UnitPrice = PD.First().UnitPrice
                     }).ToList(),
 
-                ProjectEmployees = ProjectEmployeeMapper.Map(dto.ProjectEmployeeDtos).ToList(),
+                ProjectEmployees = ProjectEmployeeMapper.Map(dto.ProjectEmployeeDtos).GroupBy(PE => PE.EmployeeId)
+                    .Select(PE => new ProjectEmployeeViewModel
+                    {
+                        EstWorkingHours = PE.Sum(a => a.EstWorkingHours),
+                        EmployeeId = PE.First().EmployeeId,
+                        Employee = PE.First().Employee,
+                        ProjectId = PE.First().ProjectId
+                    }).ToList(),
 
                 //working hours summed up by employee 
                 WorkingHours = WorkingHoursMapper.Map(dto.WorkingHoursDtos)
