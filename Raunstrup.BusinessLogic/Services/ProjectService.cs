@@ -38,7 +38,24 @@ namespace Raunstrup.BusinessLogic.Services
                 .ToList();
             }
 
-            Project IProjectService.Get(int id)
+        IEnumerable<Project> IProjectService.GetAll(int employeeId)
+        {
+            return _context.Projects.Where(e => e.ProjectEmployees.Any(f => f.EmployeeId == employeeId) && e.Active)
+                .Include(w => w.WorkingHours)
+                .ThenInclude(e => e.Employee)
+                .Include(w => w.ProjectDrivings)
+                .ThenInclude(e => e.Employee)
+                .Include(w => w.ProjectEmployees)
+                .ThenInclude(e => e.Employee)
+                .Include(w => w.UsedItems)
+                .ThenInclude(e => e.Item)
+                .Include(w => w.AssignedItems)
+                .ThenInclude(e => e.Item)
+                .Include(w => w.Customer)
+                .ToList();
+        }
+
+        Project IProjectService.Get(int id)
             {
             return _context.Projects
             .Include(w => w.WorkingHours)

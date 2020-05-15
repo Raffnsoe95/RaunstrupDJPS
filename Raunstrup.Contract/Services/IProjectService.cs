@@ -9,7 +9,7 @@ namespace Raunstrup.Contract.Services
 {
    public interface IProjectService
     {
-        Task<IEnumerable<ProjectDto >> GetProjectAsync();
+        Task<IEnumerable<ProjectDto >> GetProjectAsync(string userName, string userRole);
 
         Task<ProjectDto> GetProjectAsync(int id);
 

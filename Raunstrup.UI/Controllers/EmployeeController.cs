@@ -15,6 +15,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Raunstrup.UI.Controllers
 {
+    [Authorize(Roles = "Admin,SuperUser")]
     public class EmployeeController : Controller
     {
         private readonly ViewModelContext _context;
@@ -169,7 +170,7 @@ namespace Raunstrup.UI.Controllers
         {
             return _context.Employees.Any(e => e.Id == id);
         }
-        // GET: Employee
+        // GET: Employee 
         public async Task<IActionResult> AddProjectEmployee(int id, string searchString)
         {
             var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);

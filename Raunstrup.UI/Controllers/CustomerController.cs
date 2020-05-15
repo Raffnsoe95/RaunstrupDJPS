@@ -10,9 +10,11 @@ using Raunstrup.UI.Models;
 using Raunstrup.UI.Services;
 using Raunstrup.Contract.Services;
 using Raunstrup.Contract.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Raunstrup.UI.Controllers
 {
+    [Authorize(Roles = "Admin,SuperUser")]
     public class CustomerController : Controller
     {
         private readonly ViewModelContext _context;

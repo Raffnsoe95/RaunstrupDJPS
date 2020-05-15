@@ -9,6 +9,7 @@ using Raunstrup.Contract.DTOs;
 using Raunstrup.Contract.Services;
 using Raunstrup.UI.Data;
 using Raunstrup.UI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Raunstrup.UI.Controllers
 {
@@ -24,6 +25,7 @@ namespace Raunstrup.UI.Controllers
             _itemService = itemService;
         }
 
+        [Authorize(Roles = "Admin,SuperUser")]
         // GET: Item
         public async Task<IActionResult> Index(string searchString)
         {
@@ -132,6 +134,7 @@ namespace Raunstrup.UI.Controllers
         //    return _context.Items.Any(e => e.Id == id);
         //}
 
+        [Authorize(Roles = "Admin,SuperUser")]
         public async Task<IActionResult> AddAssignedProjectItem(int id, string searchString)
         {
             if (!String.IsNullOrEmpty(searchString))
@@ -150,6 +153,7 @@ namespace Raunstrup.UI.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin,SuperUser")]
         public async Task<IActionResult> AddAssignedProjectItemToProject(List<ItemViewModel> items)
         {
             var projectItems = items.Where(x => x.Amount > 0).Select(x => new ProjectAssignedItemViewModel() 
@@ -168,6 +172,7 @@ namespace Raunstrup.UI.Controllers
             return RedirectToAction("AddAssignedProjectItem", new { id = items[0].projectID });
         }
 
+        [Authorize(Roles = "Admin,SuperUser,User")]
         public async Task<IActionResult> AddUsedProjectItem(int id, string searchString)
         {
             if (!String.IsNullOrEmpty(searchString))
@@ -186,6 +191,7 @@ namespace Raunstrup.UI.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin,SuperUser,User")]
         public async Task<IActionResult> AddUsedProjectItemToProject(List<ItemViewModel> items)
         {
             var projectItems = items.Where(x => x.Amount > 0).Select(x => new ProjectUsedItemViewModel() 
