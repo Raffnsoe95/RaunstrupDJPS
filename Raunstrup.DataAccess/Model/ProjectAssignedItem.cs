@@ -12,6 +12,7 @@ namespace Raunstrup.DataAccess.Model
 
         public decimal Price { get; set; }
 
+        //ISUSED SKAL FJERNES
         public bool IsUsed { get; set; }
 
         public Item Item { get; set; }

@@ -8,6 +8,8 @@ namespace Raunstrup.DataAccess.Model
     public class ProjectEmployee
     {
         public int id { get; set; }
+       
+        //denne skal fjernes
         public string EmployeeName { get; set; }
         public int EmployeeId { get; set; }
         public int EstWorkingHours { get; set; }
