@@ -9,7 +9,7 @@
 
 <section>
 
-    <form asp-action="CreateEmail" >
+    <form asp-action="CreateEmail">
 
         <article class="row">
 
@@ -24,31 +24,36 @@
 
             </div>
             <!-- Your Name -->
-
-            <!-- Your Email -->
+            <!-- Your Phone -->
             <div class="col-md-6">
 
                 <p class="md-form mb-0">
-                    <label asp-for="Email">Din Email</label>
-                    <input asp-for="Email" type="text" class="form-control" placeholder="Exempel@hotmail.com">
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <label asp-for="Phone">Tlf. Nr.</label>
+                    <input asp-for="Phone" type="text" class="form-control" placeholder="88888888">
+                    <span asp-validation-for="Phone" class="text-danger"></span>
                 </p>
 
             </div>
-            <!-- Your Email -->
+            <!-- Your Phone -->
 
         </article>
 
         <article>
 
-            <!--Your Subject-->            
+            <!--Your Email-->
+            <p>
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" type="text" class="form-control" placeholder="Exempel@hotmail.com">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </p>
+            <!--Your Email-->
+            <!--Your Subject-->
             <p>
                 <label asp-for="Subject">Emne</label>
                 <input asp-for="Subject" type="text" class="form-control" placeholder="Tag">
                 <span asp-validation-for="Subject" class="text-danger"></span>
             </p>
             <!--Your Subject-->
-
             <!--Your Message-->
             <p>
                 <label asp-for="Message">Meddelse</label>
@@ -56,10 +61,11 @@
                 <span asp-validation-for="Message" class="text-danger"></span>
             </p>
             <!--Your Message-->
-
             <!--Send Button-->
             <p>
                 <button type="submit" class="btn btn-primary">Send</button>
+
+
             </p>
             <!--Send Button-->
 
@@ -68,3 +74,25 @@
     </form>
 
 </section>
+
+
+
+@*@Ajax.ActionLink("Open popup", "SomeAction", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "result", InsertionMode = InsertionMode.Replace, OnSuccess = "openPopup" })
+<br />
+
+<div id="result" style="display:none;"></div>*@
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#result").dialog({
+            autoOpen: false,
+            title: 'Title',
+            width: 500,
+            height: 'auto',
+            modal: true
+        });
+    });
+    function openPopup() {
+        $("#result").dialog("open");
+    }
+</script>

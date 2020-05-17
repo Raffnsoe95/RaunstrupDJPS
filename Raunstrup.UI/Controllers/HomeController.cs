@@ -13,6 +13,7 @@ using Raunstrup.Contract.Services;
 using Raunstrup.UI.Models;
 using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
+
 namespace Raunstrup.UI.Controllers
 {
     public class HomeController : Controller
@@ -57,12 +58,12 @@ namespace Raunstrup.UI.Controllers
         {
             var message = new MimeMessage();
 
-            message.From.Add(new MailboxAddress("From", contactViewModel.Email));
+            message.From.Add(new MailboxAddress("From", "raunstrupdjps@gmail.com"));
             message.To.Add(new MailboxAddress("To", "RaikoPrivate@hotmail.com"));
             message.Subject = contactViewModel.Subject;
             message.Body = new TextPart("text")
             {
-                Text = contactViewModel.Name + contactViewModel.Message + contactViewModel.Email
+                Text = contactViewModel.Name +  contactViewModel.Email+ "/b"+ contactViewModel.Message
             };
 
             using (var client = new SmtpClient())
@@ -73,7 +74,7 @@ namespace Raunstrup.UI.Controllers
 
                 client.Disconnect(true);
             }
-            return View();
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
