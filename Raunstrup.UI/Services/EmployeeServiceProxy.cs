@@ -11,7 +11,7 @@ using Raunstrup.Contract.Services;
 
 namespace Raunstrup.UI.Services
 {
-    public class EmployeeServiceProxy: IEmployeeservice
+    public class EmployeeServiceProxy : IEmployeeservice
     {
         private const string _employeesRequestUri = "api/Employee";
 
@@ -50,7 +50,7 @@ namespace Raunstrup.UI.Services
             return await JsonSerializer.DeserializeAsync<EmployeeDto>(stream, options).ConfigureAwait(false);
         }
 
-        async Task<IEnumerable<EmployeeDto>> IEmployeeservice.GetEmployeesAsync()
+        public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync()
         {
             var response = await Client.GetAsync(_employeesRequestUri).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
@@ -79,10 +79,10 @@ namespace Raunstrup.UI.Services
         }
         async Task IEmployeeservice.AddAsync(int id, int projectid)
         {
-            var projectEmployee = new ProjectEmployeeDto{Id=id, ProjectId = projectid};
+            var projectEmployee = new ProjectEmployeeDto { Id = id, ProjectId = projectid };
             var json = JsonSerializer.Serialize(projectEmployee);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await Client.PostAsync(_employeesRequestUri+ "/AddProjectEmployeeToProject", data).ConfigureAwait(false);
+            var response = await Client.PostAsync(_employeesRequestUri + "/AddProjectEmployeeToProject", data).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
         async Task IEmployeeservice.AddAsync(ProjectDrivingDto projectDriving)
@@ -94,7 +94,7 @@ namespace Raunstrup.UI.Services
         }
 
 
-        async Task<IEnumerable<EmployeeDto>> IEmployeeservice.GetFilteredEmployeesAsync(string searchString)
+        public async Task<IEnumerable<EmployeeDto>> GetFilteredEmployeesAsync(string searchString)
         {
             var response = await Client.GetAsync(_employeesRequestUri + $"/search/{searchString}").ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
@@ -115,6 +115,20 @@ namespace Raunstrup.UI.Services
                 var data = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await Client.PostAsync(_employeesRequestUri + "/AddProjectEmployeeToProject", data).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
+            }
+        }
+
+        public async Task<IEnumerable<EmployeeDto>> GetChosenEmployees(string searchString)
+        {
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var employeeDtos = await GetFilteredEmployeesAsync(searchString).ConfigureAwait(false);
+                return employeeDtos;
+            }
+            else
+            {
+                var employeeDtos = await GetEmployeesAsync().ConfigureAwait(false);
+                return employeeDtos;
             }
         }
     }

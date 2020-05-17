@@ -8,9 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using Raunstrup.UI.Data;
 using Raunstrup.UI.Models;
 using Raunstrup.Contract.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Raunstrup.UI.Controllers
 {
+
+    [Authorize(Roles = "Admin,SuperUser,User")]
     public class ProjectDrivingController : Controller
     {
         private readonly ViewModelContext _context;

@@ -27,7 +27,9 @@ namespace Raunstrup.Api.Models
                 Email = dto.Email, 
                 Active=dto.Active, 
                 Rowversion=dto.Rowversion, 
-                CustomerDiscountType=CustomerDiscountTypeMapper.Map( dto.CustomerDiscountType) };
+                CustomerDiscountType=CustomerDiscountTypeMapper.Map( dto.CustomerDiscountType),
+            CustomerDiscountTypeId=dto.CustomerDiscountTypeId
+            };
         }
 
         public static IEnumerable<CustomerDto> Map(IEnumerable<Customer> model)

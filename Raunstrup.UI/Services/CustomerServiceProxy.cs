@@ -53,7 +53,7 @@ namespace Raunstrup.UI.Services
             return await JsonSerializer.DeserializeAsync<CustomerDto>(stream, options).ConfigureAwait(false);
         }
 
-        async Task<IEnumerable<CustomerDto>> ICustomerService.GetCustomerAsync()
+       public async Task<IEnumerable<CustomerDto>> GetCustomerAsync()
         {
 
 
@@ -84,9 +84,9 @@ namespace Raunstrup.UI.Services
             response.EnsureSuccessStatusCode();
         }
 
-        async Task ICustomerService.UpdateAsync(int id, CustomerDto movie)
+        async Task ICustomerService.UpdateAsync(int id, CustomerDto customer)
         {
-            var json = JsonSerializer.Serialize(movie);
+            var json = JsonSerializer.Serialize(customer);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await Client.PutAsync($"{_customerRequestUri}/{id}", data).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
@@ -101,21 +101,14 @@ namespace Raunstrup.UI.Services
             response.EnsureSuccessStatusCode();
         }
 
-        async Task<IEnumerable<CustomerDto>> ICustomerService.GetFilteredCustomers(string searchString)
+      public  async Task<IEnumerable<CustomerDto>> GetFilteredCustomers(string searchString)
         {
 
 
             var response = await Client.GetAsync(_customerRequestUri + $"/search/{searchString}").ConfigureAwait(false);
-
-
             response.EnsureSuccessStatusCode();
 
-
-
-
             var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-
-
 
             var options = new JsonSerializerOptions
             {
@@ -123,7 +116,7 @@ namespace Raunstrup.UI.Services
             };
             return await JsonSerializer.DeserializeAsync<IEnumerable<CustomerDto>>(stream, options).ConfigureAwait(false);
         }
-        //metode der kalder metoden fra api-controlleren som henter listen over alle customerdiscounttype 
+        
         async Task<IEnumerable<CustomerDiscountTypeDto>> ICustomerService.GetAllCustomerDiscountType()
         {
 
@@ -163,12 +156,22 @@ namespace Raunstrup.UI.Services
             return await JsonSerializer.DeserializeAsync<CustomerDiscountTypeDto>(stream, options).ConfigureAwait(false);
         }
 
+      public async Task< IEnumerable<CustomerDto>> GetChosenCustomers(string searchString)
+        {
+            if (!String.IsNullOrEmpty(searchString))
+            {
+            var customerDtos = await GetFilteredCustomers(searchString).ConfigureAwait(false);
+                return customerDtos;
+            }
+            else
+            {
+               var customerDtos =  await GetCustomerAsync().ConfigureAwait(false);
+                return customerDtos;
+            }
+        }
+
+
     }
  
-
-   
-
-
-    //i controlleren kalder jeg denne metode så jeg kan få listen ind på cecustomerviewmodellen
 }
 

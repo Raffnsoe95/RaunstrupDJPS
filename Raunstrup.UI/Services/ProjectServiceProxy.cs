@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Raunstrup.Contract;
 using Raunstrup.Contract.Services;
 using Raunstrup.Contract.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 
 
@@ -16,7 +17,7 @@ namespace Raunstrup.UI.Services
 {
     public class ProjectServiceProxy: IProjectService
     {
-        private const string _customerRequestUri = "api/Project";
+        private const string _projectRequestUri = "api/Project";
 
         public ProjectServiceProxy(HttpClient client)
         {
@@ -34,14 +35,14 @@ namespace Raunstrup.UI.Services
         {
             var json = JsonSerializer.Serialize(project);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await Client.PostAsync(_customerRequestUri, data).ConfigureAwait(false);
+            var response = await Client.PostAsync(_projectRequestUri, data).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
 
      
         async Task<ProjectDto> IProjectService.GetProjectAsync(int id)
         {
-            var response = await Client.GetAsync($"{_customerRequestUri}/{id}").ConfigureAwait(false);
+            var response = await Client.GetAsync($"{_projectRequestUri}/{id}").ConfigureAwait(false);
 
             response.EnsureSuccessStatusCode();
 
@@ -54,9 +55,15 @@ namespace Raunstrup.UI.Services
             return await JsonSerializer.DeserializeAsync<ProjectDto>(stream, options).ConfigureAwait(false);
         }
 
-        async Task<IEnumerable<ProjectDto>> IProjectService.GetProjectAsync()
+        async Task<IEnumerable<ProjectDto>> IProjectService.GetProjectAsync(string userName, string userRole)
         {
-            var response = await Client.GetAsync(_customerRequestUri).ConfigureAwait(false);
+            string requestUri = _projectRequestUri;
+            if (userRole == "User")
+            {
+                requestUri += $"/GetAllByEmployeeId/{userName}";
+            }
+
+            var response = await Client.GetAsync(requestUri).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 
             var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
@@ -70,7 +77,7 @@ namespace Raunstrup.UI.Services
 
         async Task IProjectService.RemoveAsync(int id)
         {
-            var response = await Client.DeleteAsync($"{_customerRequestUri}/{id}").ConfigureAwait(false);
+            var response = await Client.DeleteAsync($"{_projectRequestUri}/{id}").ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
 
@@ -78,7 +85,7 @@ namespace Raunstrup.UI.Services
         {
             var json = JsonSerializer.Serialize(project);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await Client.PutAsync($"{_customerRequestUri}/{id}", data).ConfigureAwait(false);
+            var response = await Client.PutAsync($"{_projectRequestUri}/{id}", data).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
     }

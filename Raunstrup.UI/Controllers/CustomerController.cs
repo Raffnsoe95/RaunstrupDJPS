@@ -10,9 +10,11 @@ using Raunstrup.UI.Models;
 using Raunstrup.UI.Services;
 using Raunstrup.Contract.Services;
 using Raunstrup.Contract.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Raunstrup.UI.Controllers
 {
+    [Authorize(Roles = "Admin,SuperUser")]
     public class CustomerController : Controller
     {
         private readonly ViewModelContext _context;
@@ -29,22 +31,11 @@ namespace Raunstrup.UI.Controllers
 
         public async Task<IActionResult> Index(string searchString)
         {
-            
 
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                var customerDtos = await _customerService.GetFilteredCustomers(searchString).ConfigureAwait(false);
-                return View(CustomerMapper.Map(customerDtos));
-            }
-            else
-            {
-                var customerDtos = await _customerService.GetCustomerAsync().ConfigureAwait(false);
-                return View(CustomerMapper.Map(customerDtos));
-            }
+            IEnumerable<CustomerDto> customerDtos = await _customerService.GetChosenCustomers(searchString);
 
-
-            
-
+            return View(CustomerMapper.Map(customerDtos));
+          
         }
 
 
@@ -70,7 +61,6 @@ namespace Raunstrup.UI.Controllers
         public async Task<IActionResult> Create()
         {
             
-
             CECustomerViewModel cECustomerViewModel = new CECustomerViewModel();
 
            var customerDiscountTypeDtos = await _customerService.GetAllCustomerDiscountType().ConfigureAwait(false);
@@ -79,7 +69,6 @@ namespace Raunstrup.UI.Controllers
 
             cECustomerViewModel.CustomerDiscountTypeViewModels = customerDiscountTypeViewModels.ToList();
 
-            //de skal laves om til CEcustomerviewmodels
             return View(cECustomerViewModel);
         }
 
@@ -92,14 +81,8 @@ namespace Raunstrup.UI.Controllers
         {
             CustomerViewModel customerViewModel = CustomerMapper.Map(cEcustomerViewModel);
 
-            
-            CustomerDiscountTypeDto customerDiscountTypeDto = await _customerService.GetCustomerDiscountTypeAsync(cEcustomerViewModel.SelectedCustomerDiscountViewModel);
-
-            CustomerDiscountTypeViewModel customerDiscountTypeViewModel= CustomerMapper.Map(customerDiscountTypeDto);
-
-            customerViewModel.CustomerDiscountType = customerDiscountTypeViewModel;
-
-            //  CustomerDiscountTypeViewModel discountTypeViewModel = customerViewModel.CustomerDiscountType;
+        
+           
             if (ModelState.IsValid)
 
             {
@@ -118,12 +101,22 @@ namespace Raunstrup.UI.Controllers
         // GET: Customer/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
+            
+
             var customerViewModel = await _customerService.GetCustomerAsync(id).ConfigureAwait(false);
+            customerViewModel.Id = id;
+
+            CECustomerViewModel cECustomerViewModel = CustomerMapper.MaptoCE(customerViewModel);
+            var customerDiscountTypeDtos = await _customerService.GetAllCustomerDiscountType().ConfigureAwait(false);
+            IEnumerable<CustomerDiscountTypeViewModel> customerDiscountTypeViewModels = CustomerMapper.Map(customerDiscountTypeDtos);
+
+            cECustomerViewModel.CustomerDiscountTypeViewModels = customerDiscountTypeViewModels.ToList();
+
             if (customerViewModel == null)
             {
                 return NotFound();
             }
-            return View(CustomerMapper.Map(customerViewModel));
+            return View(cECustomerViewModel);
         }
 
         // POST: Customer/Edit/5
@@ -131,17 +124,21 @@ namespace Raunstrup.UI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Phone,Address,Email,Active,Rowversion")] CustomerViewModel customerViewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Phone,Address,Email,Active,Rowversion,SelectedCustomerDiscountViewModel")] CECustomerViewModel cEcustomerViewModel)
         {
-            if (id != customerViewModel.Id)
+           
+
+            if (id != cEcustomerViewModel.Id)
             {
                 return NotFound();
             }
-
+            CustomerViewModel customerViewModel = CustomerMapper.Map(cEcustomerViewModel);
+            
             if (ModelState.IsValid)
             {
                 try
                 {
+                    
                     await _customerService.UpdateAsync(id, CustomerMapper.Map(customerViewModel)).ConfigureAwait(false);
                     return RedirectToAction(nameof(Index));
                 }
@@ -200,20 +197,12 @@ namespace Raunstrup.UI.Controllers
         }
         public async Task<IActionResult> AddProjectCustomer(int id, string searchString)
         {
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                IEnumerable<CustomerDto> filterdCustomersDtos = await _customerService.GetFilteredCustomers(searchString);
-                return View(CustomerMapper.Map(filterdCustomersDtos));
-            }
-            else
-            {
-                var customerDtos = await _customerService.GetCustomerAsync().ConfigureAwait(false);
-                return View(CustomerMapper.Map(customerDtos));
-            }
-            
+            IEnumerable<CustomerDto> customerDtos = await _customerService.GetChosenCustomers(searchString);
 
-            
-            
+            return View(CustomerMapper.Map(customerDtos));
+
+         
+
         }
         public async Task<IActionResult> AddProjectCustomerToProject(int id, int projectid)
         {

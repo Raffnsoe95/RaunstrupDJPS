@@ -23,5 +23,7 @@ namespace Raunstrup.Contract.Services
         Task AddUsedItemAsync(List<ProjectUsedItemDto> items);
 
         Task<IEnumerable<ItemDto>> GetFilteredItemsAsync(string searchString);
+
+         Task<IEnumerable<ItemDto>> GetChosenItems(string searchString);
     }
 }

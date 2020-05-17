@@ -11,9 +11,12 @@ using Raunstrup.UI.Services;
 using Raunstrup.Contract.Services;
 using Raunstrup.Contract.DTOs;
 using Microsoft.CodeAnalysis;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Raunstrup.UI.Controllers
 {
+
+    [Authorize(Roles = "Admin,SuperUser,User")]
     public class WorkingHoursController : Controller
     {
         private readonly ViewModelContext _context;

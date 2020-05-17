@@ -4,9 +4,9 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Opret ny cecustomerviewmodel</h1>
+<h1>Opret ny kunde</h1>
 
-@Model.CustomerDiscountTypeViewModels.Count
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -32,11 +32,14 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            @*SelectedCustomerDiscountViewModel*@
-            <select id="mySelect" asp-for="SelectedCustomerDiscountViewModel" asp-items="@(new SelectList(Model.CustomerDiscountTypeViewModels, "Id", "Name"))">
-                <option disabled selected>Vælg kundetype</option>
-               
-            </select>
+            <div>
+                <label asp-for="SelectedCustomerDiscountViewModel" class="control-label">Vælg kundetype</label>
+                <br />
+                <select id="mySelect" asp-for="SelectedCustomerDiscountViewModel" asp-items="@(new SelectList(Model.CustomerDiscountTypeViewModels, "Id", "Name"))">
+                    @*<option disabled selected>Vælg kundetype</option>*@
+
+                </select>
+            </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Active" checked hidden />

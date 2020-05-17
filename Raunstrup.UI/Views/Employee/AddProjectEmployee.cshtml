@@ -69,7 +69,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Tilføj Item til Project</h1>
+<h1>Tilføj medarbejder til Project</h1>
 <form asp-controller="Employee" asp-action="AddProjectEmployee">
     <p>
         Søg på varenavn: <input type="text" name="SearchString">
@@ -77,7 +77,7 @@
     </p>
 </form>
 <p>
-    <!--<a asp-action="Create">Tilføj Item til Project</a>-->
+    <!--<a asp-action="Create">Tilføj Medarbejder til Project</a>-->
 </p>
 <table class="table">
     <thead>
@@ -86,10 +86,16 @@
                 Navn
             </th>
             <th>
-                Pris
+                Telefonnummer
             </th>
             <th>
-                Amount
+                Type
+            </th>
+            <th>
+                Speciale
+            </th>
+            <th>
+                Antal Timer
             </th>
             <th></th>
         </tr>
@@ -127,13 +133,15 @@
 
         @for (var i = 0; i < Model.Count(); i++)
         {
-            <tr>
-                <td><input type="text" asp-for="@Model[i].Id" hidden /></td>
-                <td><input type="text" asp-for="@Model[i].Name" /></td>
-                <td><input type="text" asp-for="@Model[i].Phone" /></td>
-                <td><input type="text" asp-for="@Model[i].Type.Title" hidden /></td>
-                <td><input type="text" asp-for="@Model[i].EstWorkingHours" /></td>
-            </tr>
+        <tr>
+            <td><input type="text" asp-for="@Model[i].Id" /></td>
+            <td><input type="text" asp-for="@Model[i].Name" /></td>
+
+            <td><input type="text" asp-for="@Model[i].Phone" /></td>
+            <td><input type="text" asp-for="@Model[i].Type.Title" /></td>
+            <td><input type="text" asp-for="@Model[i].projectId" /></td>
+            <td><input type="text" asp-for="@Model[i].EstWorkingHours" /></td>
+        </tr>
         }
     </table>
     <button>Update</button>

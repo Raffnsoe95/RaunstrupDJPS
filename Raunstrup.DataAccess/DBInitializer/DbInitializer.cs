@@ -236,7 +236,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                 ProjectDriving projectDriving1 = new ProjectDriving { Amount = 25, Employee = emp1, UnitPrice = 2 };
                 ProjectDriving projectDriving2 = new ProjectDriving { Amount = 25, Employee = emp1, UnitPrice = 2 };
                 ProjectDriving projectDriving3 = new ProjectDriving { Amount = 2, Employee = emp1, UnitPrice = 795 };
-                ProjectEmployee projectEmployee = new ProjectEmployee { Employee = emp1, EmployeeName = "Jørgen Clevin" };
+                ProjectEmployee projectEmployee = new ProjectEmployee { Employee = emp1, EstWorkingHours = 50};
                 var usedItem1 = new ProjectUsedItem { Amount = 10, ItemID = 1, Price = 7.99m };
                 var usedItem2 = new ProjectUsedItem { Amount = 10, ItemID = 1, Price = 7.99m };
                 var usedItem3 = new ProjectUsedItem { Amount = 10, ItemID = 1, Price = 7.99m };
@@ -256,7 +256,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                 var workingHours3 = new WorkingHours { Employee = emp2, Amount = 10 };
                 var workingHours4 = new WorkingHours { Employee = emp2, Amount = 10 };
 
-                ProjectEmployee projectEmployee2 = new ProjectEmployee { Employee = emp2 };
+                ProjectEmployee projectEmployee2 = new ProjectEmployee { Employee = emp2, EstWorkingHours = 20 };
 
 
 

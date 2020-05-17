@@ -71,6 +71,11 @@ namespace Raunstrup.Api.Controllers
         {
             _employeeService.Create(ProjectDrivingMapper.Map(value));
         }
-        
+
+        [HttpGet("search/{searchString}", Name = "GetFilteredEmployees")]
+        public IEnumerable<EmployeeDto> GetFilteredCustomers(string searchString)
+        {
+            return _employeeService.GetFilteredEmployees(searchString).Select(a => EmployeeMapper.Map(a));
+        }
     }
 }
