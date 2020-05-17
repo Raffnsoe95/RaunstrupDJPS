@@ -57,18 +57,18 @@ namespace Raunstrup.UI.Controllers
         {
             var message = new MimeMessage();
 
-            message.From.Add(new MailboxAddress("From", "RaunstrupDJPS@protonmail.com"));
+            message.From.Add(new MailboxAddress("From", contactViewModel.Email));
             message.To.Add(new MailboxAddress("To", "RaikoPrivate@hotmail.com"));
             message.Subject = contactViewModel.Subject;
             message.Body = new TextPart("text")
             {
-                Text = contactViewModel.Name + contactViewModel.Message
+                Text = contactViewModel.Name + contactViewModel.Message + contactViewModel.Email
             };
 
             using (var client = new SmtpClient())
             {
-                client.Connect("mail.protonmail.com", 587, false);
-                client.Authenticate("RaunstrupDJPS@protonmail.com", "RaunstrupDJPS");
+                client.Connect("smtp.Gmail.com", 587, false);
+                client.Authenticate("raunstrupdjps@gmail.com", "RaunstrupDJPS123!");
                 client.Send(message);
 
                 client.Disconnect(true);
