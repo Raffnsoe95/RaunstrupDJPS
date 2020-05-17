@@ -19,11 +19,13 @@ namespace Raunstrup.UI.Controllers
     {
         private readonly ViewModelContext _context;
         private readonly ICustomerService _customerService;
+        private readonly IProjectService _projectService;
 
-        public CustomerController(ViewModelContext context, ICustomerService customerService)
+        public CustomerController(ViewModelContext context, ICustomerService customerService, IProjectService projectService)
         {
             _context = context;
             _customerService = customerService;
+            _projectService = projectService;
         }
 
         // GET: Customer
@@ -48,13 +50,22 @@ namespace Raunstrup.UI.Controllers
             }
 
             var customerViewModel = await _customerService.GetCustomerAsync(id.Value).ConfigureAwait(false);
+            
 
             if (customerViewModel == null)
             {
                 return NotFound();
             }
 
-            return View(CustomerMapper.Map(customerViewModel));
+            CustomerDetailsViewModel customerDetailsViewModel = CustomerDetailsMapper.Map(customerViewModel);
+
+            
+            IEnumerable<ProjectDto> Projects = await _projectService.GetProjectsByCustomerId(id.Value);
+
+          
+            customerDetailsViewModel.Projects = ProjectMapper.Map(Projects);
+
+            return View(customerDetailsViewModel);
         }
 
         // GET: Customer/Create

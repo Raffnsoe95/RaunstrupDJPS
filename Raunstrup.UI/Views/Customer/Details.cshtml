@@ -1,4 +1,4 @@
-﻿@model Raunstrup.UI.Models.CustomerViewModel
+﻿@model Raunstrup.UI.Models.CustomerDetailsViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -37,6 +37,17 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Email)
         </dd>
+
+        <dt class="col-sm-2">
+            Tilknyttede projekter
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var item in Model.Projects)
+            {
+                @item.Description
+            }
+        </dd>
+
         @*<dt class="col-sm-2">
             Aktiv
         </dt>
