@@ -116,6 +116,13 @@ namespace Raunstrup.BusinessLogic.Services
                 _context.Projects.Update(tempProject);
                 _context.SaveChanges();
         }
+
+        IEnumerable<Project> IProjectService.GetProjectsByCustomerId(int customerID)
+        {
+            return _context.Projects
+                .Where(c => c.CustomerId == customerID);
+                
+        }
     }
 }
 
