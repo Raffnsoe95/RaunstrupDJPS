@@ -14,9 +14,12 @@ namespace Raunstrup.DataAccess.Model
         public decimal Price { get; set; }
 
         public bool Active { get; set; }
+
         public int ItemId { get; set; }
+
         public ItemDiscountType Discount { get; set; }
+
         [Timestamp]
-        public byte[] RowVision { get; set; }
+        public byte[] RowVersion { get; set; }
     }
 }
