@@ -215,19 +215,18 @@ namespace Raunstrup.UI.Controllers
          
 
         }
-        public async Task<IActionResult> AddProjectCustomerToProject(int id, int projectid)
+        public async Task<ActionResult> AddProjectCustomerToProject(int id, int projectid)
         {
             if (ModelState.IsValid)
             {
                  await _customerService.AddAsync(id, projectid).ConfigureAwait(false);
 
-                //_context.Add(employeeViewModel);
-                //await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
-
             }
-           
-            return RedirectToAction("AddProjectCustomer", new { id = projectid });
+
+          
+            return RedirectToAction("Details", "Project", new { id = projectid });
+
+       
             
         }
     }
