@@ -6,7 +6,7 @@
 
 <h1>Projekt</h1>
 
-<div>
+<section>
     <h4>ProjectViewModel</h4>
     <hr />
     <dl class="row">
@@ -67,229 +67,9 @@
         </dd>
     </dl>
 
-    <h5>Afregning for Kørsel</h5>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Antal
-                </th>
-                <th>
-                    Stk. pris
-                </th>
-                <th>
-                    Total
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.ProjectDrivings)
-            {
-                <tr>
-                    <td>
-                        @item.Amount
-                    </td>
-                    <td>
-                        @item.UnitPrice
-                    </td>
-                    <td>
-                        @(item.Amount * item.UnitPrice)
-                    </td>
-                </tr>
-            }
-            <tr>
-                <td colspan="2">
-                    <b>Total:</b>
-                <td>
-                    @Model.ProjectDrivings.Sum(WH => WH.Amount * WH.UnitPrice)
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <h5>Arbejdstimer forventet</h5>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Medarbejder
-                </th>
-                <th>
-                    Timer
-                </th>
-                <th>
-                    Timepris
-                </th>
-                <th>
-                    Total
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.ProjectEmployees)
-            {
-            <tr>
-                <td>
-                    @item.Employee.Name
-                </td>
-                <td>
-                    @item.EstWorkingHours
-                </td>
-                <td>
-                    @(item.Employee.Type.HourlyPrice + item.Employee.Specialties.Sum(s => s.Bonus))
-                </td>
-                <td>
-                    @((item.Employee.Type.HourlyPrice + item.Employee.Specialties.Sum(s => s.Bonus)) * item.EstWorkingHours)
-                </td>
-            </tr>
-            }
-            <tr>
-                <td colspan="3">
-                    <b>Total:</b>
-                <td>
-                    @Model.ProjectEmployees.Sum(PE => (PE.Employee.Type.HourlyPrice + PE.Employee.Specialties.Sum(s => s.Bonus)) * PE.EstWorkingHours)
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <h5>Arbejdstimer brugt</h5>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Medarbejder
-                </th>
-                <th>
-                    Timer arbejdet
-                </th>
-                <th>
-                    Timepris
-                </th>
-                <th>
-                    Total
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.WorkingHours)
-            {
-                <tr>
-                    <td>
-                        @item.Employee.Name
-                    </td>
-                    <td>
-                        @item.Amount
-                    </td>
-                    <td>
-                        @item.HourlyPrice
-                    </td>
-                    <td>
-                        @(item.Amount * item.HourlyPrice)
-                    </td>
-                </tr>
-            }
-            <tr>
-                <td colspan="3">
-                    <b>Total:</b>
-                <td>
-                    @Model.WorkingHours.Sum(WH => WH.Amount * WH.HourlyPrice)
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h5>Materialer Allokeret</h5>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Vare
-                </th>
-                <th>
-                    Antal
-                </th>
-                <th>
-                    Pris
-                </th>
-                <th>
-                    Total
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.AssignedItems)
-            {
-                <tr>
-                    <td>
-                        @item.Item.Name
-                    </td>
-                    <td>
-                        @item.Amount
-                    </td>
-                    <td>
-                        @item.Price
-                    </td>
-                    <td>
-                        @(item.Amount * item.Price)
-                    </td>
-                </tr>
-            }
-            <tr>
-                <td colspan="3">
-                    <b>Total:</b>
-                <td>
-                    @Model.AssignedItems.Sum(UI => UI.Amount * UI.Price)
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h5>Materialer Brugt</h5>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Vare
-                </th>
-                <th>
-                    Antal
-                </th>
-                <th>
-                    Pris
-                </th>
-                <th>
-                    Total
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.UsedItems)
-            {
-                <tr>
-                    <td>
-                        @item.Item.Name
-                    </td>
-                    <td>
-                        @item.Amount
-                    </td>
-                    <td>
-                        @item.Price
-                    </td>
-                    <td>
-                        @(item.Amount * item.Price)
-                    </td>
-                </tr>
-            }
-            <tr>
-                <td colspan="3">
-                    <b>Total:</b>
-                <td>
-                    @Model.UsedItems.Sum(UI => UI.Amount * UI.Price)
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<div>
+    
+</section>
+<section>
 
 
     <a asp-action="Create" asp-route-id="@Model.Id" asp-controller="ProjectDriving">Indberet kørsel</a> |
@@ -305,4 +85,243 @@
     }
 
     <a asp-action="Index">Back to List</a>
-</div>
+    <br />
+    <br />
+</section>
+<section class="tabs">
+    <input type="radio" name="tabs" id="tabone" checked="checked">
+    <label for="tabone">Materialer</label>
+    <content class="tab">
+        <h5>Materialer Allokeret</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Vare
+                    </th>
+                    <th>
+                        Antal
+                    </th>
+                    <th>
+                        Pris
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.AssignedItems)
+                {
+                    <tr>
+                        <td>
+                            @item.Item.Name
+                        </td>
+                        <td>
+                            @item.Amount
+                        </td>
+                        <td>
+                            @item.Price
+                        </td>
+                        <td>
+                            @(item.Amount * item.Price)
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="3">
+                        <b>Total:</b>
+                    <td>
+                        @Model.AssignedItems.Sum(UI => UI.Amount * UI.Price)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h5>Materialer Brugt</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Vare
+                    </th>
+                    <th>
+                        Antal
+                    </th>
+                    <th>
+                        Pris
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.UsedItems)
+                {
+                    <tr>
+                        <td>
+                            @item.Item.Name
+                        </td>
+                        <td>
+                            @item.Amount
+                        </td>
+                        <td>
+                            @item.Price
+                        </td>
+                        <td>
+                            @(item.Amount * item.Price)
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="3">
+                        <b>Total:</b>
+                    <td>
+                        @Model.UsedItems.Sum(UI => UI.Amount * UI.Price)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </content>
+
+    <input type="radio" name="tabs" id="tabtwo">
+    <label for="tabtwo">Timer</label>
+    <content class="tab">
+
+        <h5>Arbejdstimer forventet</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Medarbejder
+                    </th>
+                    <th>
+                        Timer
+                    </th>
+                    <th>
+                        Timepris
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ProjectEmployees)
+                {
+                    <tr>
+                        <td>
+                            @item.Employee.Name
+                        </td>
+                        <td>
+                            @item.EstWorkingHours
+                        </td>
+                        <td>
+                            @(item.Employee.Type.HourlyPrice + item.Employee.Specialties.Sum(s => s.Bonus))
+                        </td>
+                        <td>
+                            @((item.Employee.Type.HourlyPrice + item.Employee.Specialties.Sum(s => s.Bonus)) * item.EstWorkingHours)
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="3">
+                        <b>Total:</b>
+                    <td>
+                        @Model.ProjectEmployees.Sum(PE => (PE.Employee.Type.HourlyPrice + PE.Employee.Specialties.Sum(s => s.Bonus)) * PE.EstWorkingHours)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h5>Arbejdstimer brugt</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Medarbejder
+                    </th>
+                    <th>
+                        Timer arbejdet
+                    </th>
+                    <th>
+                        Timepris
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.WorkingHours)
+                {
+                    <tr>
+                        <td>
+                            @item.Employee.Name
+                        </td>
+                        <td>
+                            @item.Amount
+                        </td>
+                        <td>
+                            @item.HourlyPrice
+                        </td>
+                        <td>
+                            @(item.Amount * item.HourlyPrice)
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="3">
+                        <b>Total:</b>
+                    <td>
+                        @Model.WorkingHours.Sum(WH => WH.Amount * WH.HourlyPrice)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </content>
+
+    <input type="radio" name="tabs" id="tabthree">
+    <label for="tabthree">Kørsel</label>
+    <content class="tab">
+        <h5>Afregning for Kørsel</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Antal
+                    </th>
+                    <th>
+                        Stk. pris
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ProjectDrivings)
+                {
+                    <tr>
+                        <td>
+                            @item.Amount
+                        </td>
+                        <td>
+                            @item.UnitPrice
+                        </td>
+                        <td>
+                            @(item.Amount * item.UnitPrice)
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="2">
+                        <b>Total:</b>
+                    <td>
+                        @Model.ProjectDrivings.Sum(WH => WH.Amount * WH.UnitPrice)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </content>
+</section>

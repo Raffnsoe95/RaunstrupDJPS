@@ -65,5 +65,11 @@ namespace Raunstrup.Api.Controllers
             _projectService.Delete(id);
         }
 
+        [HttpGet("GetProjectsByCustomerId/{customerId}", Name = "GetProjectsByCustomerId")]
+        public IEnumerable<ProjectDto> GetProjectsByCustomerId(int customerId)
+        {
+            var result = _projectService.GetProjectsByCustomerId(customerId).Select(a => ProjectMapper.Map(a)).ToList();
+            return result;
+        }
     }
 }

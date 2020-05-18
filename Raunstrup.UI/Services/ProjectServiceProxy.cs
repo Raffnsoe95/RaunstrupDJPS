@@ -88,6 +88,22 @@ namespace Raunstrup.UI.Services
             var response = await Client.PutAsync($"{_projectRequestUri}/{id}", data).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
+
+       async Task<IEnumerable<ProjectDto>> IProjectService.GetProjectsByCustomerId(int customerId)
+        {
+
+            var response = await Client.GetAsync(_projectRequestUri + $"/GetProjectsByCustomerId/{customerId}").ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+
+            var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            return await JsonSerializer.DeserializeAsync<IEnumerable<ProjectDto>>(stream, options).ConfigureAwait(false);
+        }
+
     }
 }
 
