@@ -198,10 +198,13 @@ namespace Raunstrup.UI.Controllers
                 
             });
 
-            if (ModelState.IsValid)
-            {
-                await _itemService.AddUsedItemAsync(ProjectUsedItemMapper.Map(projectItems).ToList()).ConfigureAwait(false);
-            }
+            //if (ModelState.IsValid)
+            //{
+            //    await _itemService.AddUsedItemAsync(ProjectUsedItemMapper.Map(projectItems).ToList()).ConfigureAwait(false);
+            //}
+
+            await _itemService.AddUsedItemAsync(ProjectUsedItemMapper.Map(projectItems).ToList()).ConfigureAwait(false);
+
             return RedirectToAction("AddUsedProjectItem", new { id = items[0].projectID });
         }
     }

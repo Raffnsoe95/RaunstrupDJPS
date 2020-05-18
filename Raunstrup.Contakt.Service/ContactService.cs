@@ -11,10 +11,10 @@ namespace Raunstrup.Contakt.Service
 
         //public ContractService() 
         //{
-        
-        
-        
-        
+
+
+
+
         //}
 
         //public void SendEmail(ContactViewModel contactViewModel)

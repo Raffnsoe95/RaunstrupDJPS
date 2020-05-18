@@ -1,7 +1,8 @@
 ﻿@model Raunstrup.UI.Models.ContactViewModel
-@*@{
+@{
         ViewData["Title"] = "Privacy Policy";
-    }*@
+    }
+
 <h1>@ViewData["Title"]</h1>
 
 <h1>Kontaks Os</h1>
@@ -10,6 +11,7 @@
 <section>
 
     <form asp-action="CreateEmail">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <article class="row">
 
@@ -64,10 +66,9 @@
             <!--Send Button-->
             <p>
                 <button type="submit" class="btn btn-primary">Send</button>
-
-
             </p>
             <!--Send Button-->
+            
 
         </article>
 
