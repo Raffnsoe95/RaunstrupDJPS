@@ -11,13 +11,11 @@ namespace Raunstrup.DataAccess.Model
         public int Amount { get; set; }
 
         public decimal Price { get; set; }
-        //ISUSED SKAL FJERNES
-        public bool IsUsed { get; set; }
 
-        public Item Item { get; set; }
+        public int ProjectId { get; set; }
 
         public int ItemID { get; set; }
 
-        public int ProjectId { get; set; }
+        public Item Item { get; set; }
     }
 }

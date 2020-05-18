@@ -18,12 +18,12 @@ namespace Raunstrup.DataAccess
 
         public bool Active { get; set; }
 
-        public CustomerDiscountType CustomerDiscountType { get; set; }
-
         public int? CustomerDiscountTypeId { get; set; }
 
+        public CustomerDiscountType CustomerDiscountType { get; set; }
+
         [Timestamp]
-        public byte[] Rowversion { get; set; }
+        public byte[] RowVersion { get; set; }
 
     }
 }

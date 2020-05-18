@@ -16,7 +16,6 @@ namespace Raunstrup.Api.Models
                 Id = dto.Id,
                 Amount = dto.Amount,
                 Price = dto.Price,
-                IsUsed = dto.IsUsed,
                 Item = ItemMapper.Map(dto.Item),
                 ItemID = dto.ItemID,
                 ProjectId = dto.ProjectId
@@ -40,7 +39,6 @@ namespace Raunstrup.Api.Models
                 Id = projectItem.Id,
                 Amount = projectItem.Amount,
                 Price = projectItem.Price,
-                IsUsed = projectItem.IsUsed,
                 Item = ItemMapper.Map(projectItem.Item),
                 ItemID = projectItem.ItemID,
                 ProjectId = projectItem.ProjectId
