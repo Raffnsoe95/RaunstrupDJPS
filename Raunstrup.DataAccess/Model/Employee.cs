@@ -12,6 +12,7 @@ namespace Raunstrup.DataAccess.Model
         public Employee()
         {
             Specialties = new List<Specialty>();
+            Projects = new List<Project>();
         }
         public int Id { get; set; }
 
@@ -28,6 +29,7 @@ namespace Raunstrup.DataAccess.Model
         public EmployeeType Type { get; set; }
 
         public List<Specialty> Specialties { get; set; }
+        public List<Project> Projects { get; set; }
 
         public int? ManagerID { get; set; }
 

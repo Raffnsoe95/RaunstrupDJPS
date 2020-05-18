@@ -1,69 +1,4 @@
-﻿@*@model IEnumerable<Raunstrup.UI.Models.EstWorkingHoursEmployeeViewModel>
-
-    @{
-        ViewData["Title"] = "Index";
-    }
-
-    <h1>Tilknyt medarbejder</h1>
-    <form asp-controller="Employee" asp-action="AddProjectEmployee">
-        <p>
-            Søg på mederbejdernavn: <input type="text" name="SearchString">
-            <input type="submit" value="Søg" />
-        </p>
-    </form>
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Phone)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Type.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Specialties)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Active)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Phone)
-                    </td>
-                    <td>
-                        @foreach (var modelItem in @Model.Specialties)
-                        {
-                            @item.Title
-
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EstWorkingHours)
-                    </td>
-                    <td>
-                        <a asp-action="AddProjectEmployeeToProject" asp-route-id="@item.Id" asp-route-projectid="@ViewContext.ModelState["id"].AttemptedValue" asp-controller="Employee">Tilknyt</a> |
-
-                    </td>
-                </tr>
-            }
-        </tbody>
-
-    </table>*@
-@model List<Raunstrup.UI.Models.EstWorkingHoursEmployeeViewModel>
+﻿@model List<Raunstrup.UI.Models.EstWorkingHoursEmployeeViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -77,10 +12,11 @@
     </p>
 </form>
 <p>
-    <!--<a asp-action="Create">Tilføj Medarbejder til Project</a>-->
+
 </p>
-<table class="table">
-    <thead>
+<form method="post" asp-action="AddProjectEmployeeToProject">
+    <table class="table">
+
         <tr>
             <th>
                 Navn
@@ -92,59 +28,24 @@
                 Type
             </th>
             <th>
-                Speciale
-            </th>
-            <th>
                 Antal Timer
             </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @*foreach (var item in Model) {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Price)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Active)
-                        </td>
-                        <td>
-
-                            <label></label>
-
-                            <input  />
-
-                        </td>
-                        <td>
-                            <a asp-action="AddAssignedProjectItemToProject" asp-route-id="@item.Id" asp-route-projectid="@ViewContext.ModelState["id"].AttemptedValue" asp-controller="Item">Tilføj</a>
-                        </td>
-                    </tr>
-            }*@
-    </tbody>
-</table>
-
-<form method="post" asp-action="AddProjectEmployeeToProject">
-
-    <table class="table">
-
-        @for (var i = 0; i < Model.Count(); i++)
-        {
+            </tr>
+        
         <tr>
-            <td><input type="text" asp-for="@Model[i].Id" /></td>
-            <td><input type="text" asp-for="@Model[i].Name" /></td>
 
-            <td><input type="text" asp-for="@Model[i].Phone" /></td>
-            <td><input type="text" asp-for="@Model[i].Type.Title" /></td>
-            <td><input type="text" asp-for="@Model[i].projectId" /></td>
-            <td><input type="text" asp-for="@Model[i].EstWorkingHours" /></td>
+            @for (var i = 0; i < Model.Count(); i++)
+            {
+                <td>@Model[i].Name</td>
+                <td>@Model[i].Phone</td>
+                <td>@Model[i].Type.Title</td>
+                <td><input type="text" asp-for="@Model[i].EstWorkingHours" /></td>
+            }
+
         </tr>
-        }
+     
+
     </table>
     <button>Update</button>
+
 </form>
-
-

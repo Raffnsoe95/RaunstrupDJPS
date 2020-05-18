@@ -18,10 +18,13 @@ namespace Raunstrup.Api.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeService _employeeService;
+        
+
 
         public EmployeeController(IEmployeeService employeeService)
         {
             _employeeService = employeeService;
+            
         }
 
         // GET: api/Movies
@@ -77,5 +80,14 @@ namespace Raunstrup.Api.Controllers
         {
             return _employeeService.GetFilteredEmployees(searchString).Select(a => EmployeeMapper.Map(a));
         }
+
+        //hent liste af projecter
+        //[HttpGet("GetAllByProductId/{id}", Name = "GetAllByProductId")]
+        //public IEnumerable<EmployeeDto> GetAllByProductId(int id)
+        //{
+        //    var result = _employeeService.GetAllProjects(id).Select(a => EmployeeMapper.Map(a)).ToList();
+        //    return result;
+        //}
+
     }
 }

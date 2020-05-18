@@ -11,28 +11,28 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            
+
             Navn
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class="col-sm-2">
-            
+
             Telefon
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Phone)
         </dd>
         <dt class="col-sm-2">
-            
+
             Titel
         </dt>
         <dd class="col-sm-10">
-            
+
         </dd>
         <dt class="col-sm-2">
-            
+
             Speciale
         </dt>
         <dd class="col-sm-10">
@@ -42,7 +42,7 @@
 
             }
         </dd>
-        
+
         <dt class="col-sm-2">
             Tilsynsførende?
         </dt>
@@ -54,6 +54,20 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Department.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Projektor
+        </dt>
+        <dt class="col-sm-2">
+            @*@Html.DisplayNameFor(model => model.EmployeesProjectList)*@
+        </dt>
+        <dd class="col-sm-10">
+            @*//bruges i specialities*@
+            @foreach (var item in @Model.Projects)
+            {
+                @item.Description
+
+            }
         </dd>
     </dl>
 </div>

@@ -65,5 +65,7 @@ namespace Raunstrup.UI.Models
                 CustomerDto = CustomerMapper.Map(project.Customer)
             };
         }
+
+        
     }
 }

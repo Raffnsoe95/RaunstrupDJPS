@@ -52,5 +52,7 @@ namespace Raunstrup.DataAccess
         public List<ProjectEmployee> ProjectEmployees { get; set; }
         
         public Customer Customer { get; set; }
+
+       
     }
 }

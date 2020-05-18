@@ -10,6 +10,7 @@ namespace Raunstrup.UI.Models
         public EmployeeViewModel()
         {
             Specialties = new List<SpecialtyViewModel>();
+            Projects = new List<ProjectViewModel>();
         }
         public int Id { get; set; }
 
@@ -35,5 +36,9 @@ namespace Raunstrup.UI.Models
         public EmployeeViewModel Manager { get; set; }
 
         public DepartmentViewModel Department { get; set; }
+
+        public List<ProjectViewModel> Projects { get; set; }
+
+        public ProjectEmployeeViewModel ProjectEmployees { get; set; }
     }
 }

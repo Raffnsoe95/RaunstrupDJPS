@@ -18,6 +18,7 @@ namespace Raunstrup.UI.Models
                 Phone = dto.Phone,
                 Active = dto.Active,
                 Specialties = SpecialtyMapper.Map(dto.Specialties).ToList(),
+                Projects = ProjectMapper.Map(dto.Projects).ToList(),
                 Type = TypeMapper.Map(dto.Type),
                 ManagerID = dto.ManagerID,
                 Manager = EmployeeMapper.Map(dto.Manager),
@@ -50,6 +51,7 @@ namespace Raunstrup.UI.Models
                 Type = TypeMapper.Map(model.Type),
                 ManagerID = model.ManagerID,
                 Manager = EmployeeMapper.Map(model.Manager),
+                //Projects = ProjectMapper.Map(model.Projects).ToList(),
                 Department = DepartmentMapper.Map(model.Department),
                 RowVersion = model.RowVersion
             };
