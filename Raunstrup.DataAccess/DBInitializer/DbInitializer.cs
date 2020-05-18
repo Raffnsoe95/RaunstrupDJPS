@@ -20,7 +20,7 @@ namespace Raunstrup.DataAccess.DBInitializer
             {
                 context.Database.EnsureCreated();
                 //  Look for any customers.
-                if (context.customers.Any())
+                if (context.Customers.Any())
                 {
                     return;   // DB has been seeded
                 }
@@ -43,7 +43,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                     Active = true
                 };
 
-                context.customers.AddRange(
+                context.Customers.AddRange(
                     new Customer
                     {
                         Name = "Hans Hansen",

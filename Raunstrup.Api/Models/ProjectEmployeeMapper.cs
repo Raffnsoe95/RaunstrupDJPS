@@ -13,7 +13,7 @@ namespace Raunstrup.Api.Models
         {
             return new ProjectEmployee
             {
-                EmployeeId = dto.Id,
+                EmployeeID = dto.Id,
                 EstWorkingHours = dto.EstWorkingHours,
                 Employee = EmployeeMapper.Map(dto.Employee),
                 ProjectId = dto.ProjectId
@@ -34,7 +34,7 @@ namespace Raunstrup.Api.Models
         {
             return new ProjectEmployeeDto
             {
-                Id = addEmployee.EmployeeId,
+                Id = addEmployee.EmployeeID,
                 EstWorkingHours = addEmployee.EstWorkingHours,
                 Employee = EmployeeMapper.Map(addEmployee.Employee),
                 ProjectId = addEmployee.ProjectId

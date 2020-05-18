@@ -40,7 +40,7 @@ namespace Raunstrup.BusinessLogic.Services
 
         IEnumerable<Project> IProjectService.GetAll(int employeeId)
         {
-            return _context.Projects.Where(e => e.ProjectEmployees.Any(f => f.EmployeeId == employeeId) && e.Active)
+            return _context.Projects.Where(e => e.ProjectEmployees.Any(f => f.EmployeeID == employeeId) && e.Active)
                 .Include(w => w.WorkingHours)
                 .ThenInclude(e => e.Employee)
                 .Include(w => w.ProjectDrivings)
@@ -112,7 +112,7 @@ namespace Raunstrup.BusinessLogic.Services
                 .ThenInclude(e => e.Item)
                 .Include(w => w.Customer)
                 .FirstOrDefault(x => x.Id == project.Id);
-                tempProject.CustomerId = project.CustomerId;
+                tempProject.CustomerID = project.CustomerID;
                 _context.Projects.Update(tempProject);
                 _context.SaveChanges();
         }
@@ -120,7 +120,7 @@ namespace Raunstrup.BusinessLogic.Services
         IEnumerable<Project> IProjectService.GetProjectsByCustomerId(int customerID)
         {
             return _context.Projects
-                .Where(c => c.CustomerId == customerID);
+                .Where(c => c.CustomerID == customerID);
                 
         }
     }

@@ -14,18 +14,7 @@ namespace Raunstrup.DataAccess.Context
 
         }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder) 
-        //{
-        //    modelBuilder.Entity<Project>().HasMany(c => c.UsedItems).has
-
-        //    //    .Map(m =>
-        //    //{
-        //    //    m.ToTable("ProjectItem");
-        //    //    m.MapLeftKey("ProjectId");
-        //    //    m.MapRightKey("ItemId");
-        //    //}); ;
-        //    //modelBuilder.Entity<ProjectItem>().HasMany(c => c.AssignedItems);
-        //}
+     
 
         public DbSet<Employee> Employees { get; set; }
 
@@ -33,20 +22,19 @@ namespace Raunstrup.DataAccess.Context
 
         public DbSet<WorkingHours> WorkingHours { get; set; }
 
-        public DbSet<Customer> customers { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
         public DbSet<Project> Projects { get; set; }
 
-        public DbSet<ProjectDriving> projectDrivings { get; set; }
+        public DbSet<ProjectDriving> ProjectDrivings { get; set; }
 
         public DbSet<ProjectEmployee> ProjectEmployees { get; set; }
-
-        public DbSet<Customer> Customer { get; set; }
 
         public DbSet<ProjectUsedItem> ProjectUsedItems { get; set; }
 
         public DbSet<ProjectAssignedItem> ProjectAssignedItems { get; set; }
 
+        public DbSet<ItemDiscountType> ItemDiscountTypes { get; set; }
         public DbSet<CustomerDiscountType> CustomerDiscountTypes { get; set; }
     }
 }

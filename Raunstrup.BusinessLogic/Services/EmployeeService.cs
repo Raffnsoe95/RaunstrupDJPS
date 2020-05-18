@@ -65,7 +65,7 @@ namespace Raunstrup.BusinessLogic.Services
         void IEmployeeService.Create(ProjectDriving projectDriving)
         {
 
-            _context.projectDrivings.Add(projectDriving);
+            _context.ProjectDrivings.Add(projectDriving);
             _context.SaveChanges();
         }
 

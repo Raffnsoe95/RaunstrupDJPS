@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Raunstrup.DataAccess.Model
@@ -15,8 +16,11 @@ namespace Raunstrup.DataAccess.Model
 
         public bool Active { get; set; }
 
-        public int ItemId { get; set; }
+       
+        
+        public int DiscountID { get; set; }
 
+        [ForeignKey("DiscountID")]
         public ItemDiscountType Discount { get; set; }
 
         [Timestamp]

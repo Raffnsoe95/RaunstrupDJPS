@@ -15,7 +15,7 @@ namespace Raunstrup.DataAccess.Model
 
         public bool Active { get; set; }
 
-        public int CustomerID { get; set; }
+        //public int CustomerID { get; set; }
 
         [Timestamp]
         public byte[] RowVersion { get; set; }
