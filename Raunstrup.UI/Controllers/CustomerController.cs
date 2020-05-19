@@ -172,6 +172,9 @@ namespace Raunstrup.UI.Controllers
                     cEcustomerViewModel.CustomerDiscountTypeViewModels = customerDiscountTypeViewModels.ToList();
 
                     cEcustomerViewModel.CustomerDiscountType = dbcustomer.CustomerDiscountType;
+                    ModelState.AddModelError(string.Empty, "Denne kunde er blevet opdateret af en anden bruger, tryk gem for at overskrive");
+                    cEcustomerViewModel.Rowversion = dbcustomer.Rowversion;
+                    ModelState.Remove("Rowversion");
                     return View("Edit",cEcustomerViewModel);
                 }
             }

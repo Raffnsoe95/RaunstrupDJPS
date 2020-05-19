@@ -24,10 +24,10 @@ namespace Raunstrup.BusinessLogic.Services
             IEnumerable<Project> IProjectService.GetAll()
             {
                 return _context.Projects
-                .Include(w=>w.WorkingHours)
-                .ThenInclude(e=>e.Employee)
+                .Include(w => w.WorkingHours)
+                .ThenInclude(e => e.Employee)
                 .Include(w => w.ProjectDrivings)
-                .ThenInclude(e=>e.Employee)
+                .ThenInclude(e => e.Employee)
                 .Include(w => w.ProjectEmployees)
                 .ThenInclude(e => e.Employee)
                 .Include(w => w.UsedItems)
