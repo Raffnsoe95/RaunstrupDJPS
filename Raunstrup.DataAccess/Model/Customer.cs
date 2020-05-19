@@ -1,6 +1,7 @@
 ﻿using Raunstrup.DataAccess.Model;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Raunstrup.DataAccess
 {
@@ -18,12 +19,14 @@ namespace Raunstrup.DataAccess
 
         public bool Active { get; set; }
 
+
+        public int? CustomerDiscountTypeID { get; set; }
+
+        [ForeignKey("CustomerDiscountTypeID")]
         public CustomerDiscountType CustomerDiscountType { get; set; }
 
-        public int? CustomerDiscountTypeId { get; set; }
-
         [Timestamp]
-        public byte[] Rowversion { get; set; }
+        public byte[] RowVersion { get; set; }
 
     }
 }

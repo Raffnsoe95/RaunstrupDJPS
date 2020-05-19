@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Raunstrup.DataAccess.Model
@@ -11,13 +12,12 @@ namespace Raunstrup.DataAccess.Model
         public int Amount { get; set; }
 
         public decimal Price { get; set; }
-        //ISUSED SKAL FJERNES
-        public bool IsUsed { get; set; }
 
-        public Item Item { get; set; }
+        public int ProjectId { get; set; }
 
         public int ItemID { get; set; }
 
-        public int ProjectId { get; set; }
+        [ForeignKey("ItemID")]
+        public Item Item { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Raunstrup.DataAccess
 {
@@ -36,12 +37,6 @@ namespace Raunstrup.DataAccess
 
         public double ESTdriving { get; set; }
 
-        public int? CustomerId { get; set; }
-        public int? EmployeeId { get; set; }
-
-        [Timestamp]
-        public byte[] Rowversion { get; set; }
-
         public List<WorkingHours> WorkingHours { get; set; }
 
         public List<ProjectUsedItem> UsedItems { get; set; }
@@ -51,10 +46,13 @@ namespace Raunstrup.DataAccess
         public List<ProjectDriving> ProjectDrivings { get; set; }
 
         public List<ProjectEmployee> ProjectEmployees { get; set; }
-        
+
+        public int? CustomerID { get; set; }
+
+        [ForeignKey("CustomerID")]
         public Customer Customer { get; set; }
-        public Employee Employee { get; set; }
 
-
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }

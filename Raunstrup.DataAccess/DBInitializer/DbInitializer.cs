@@ -20,7 +20,7 @@ namespace Raunstrup.DataAccess.DBInitializer
             {
                 context.Database.EnsureCreated();
                 //  Look for any customers.
-                if (context.customers.Any())
+                if (context.Customers.Any())
                 {
                     return;   // DB has been seeded
                 }
@@ -43,7 +43,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                     Active = true
                 };
 
-                context.customers.AddRange(
+                context.Customers.AddRange(
                     new Customer
                     {
                         Name = "Hans Hansen",
@@ -288,7 +288,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                     new Project
                     {
                         Active = true,
-                        Description = "Nyt tag",
+                        Description = "Ny Carport",
                         EndDate = new DateTime(2020, 5, 5),
                         IsAccepted = true,
                         IsDone = false,
@@ -303,7 +303,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                     }, new Project
                     {
                         Active = true,
-                        Description = "Nyt tag",
+                        Description = "Ny terrese",
                         EndDate = new DateTime(2020, 5, 5),
                         IsAccepted = true,
                         IsDone = false,
@@ -316,7 +316,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                     }, new Project
                     {
                         Active = true,
-                        Description = "Nyt tag",
+                        Description = "Ny dør",
                         EndDate = new DateTime(2020, 5, 5),
                         IsAccepted = true,
                         IsDone = false,
@@ -330,7 +330,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                     {
 
                         Active = true,
-                        Description = "Nyt tag",
+                        Description = "Nyt gulv",
                         EndDate = new DateTime(2020, 5, 5),
                         IsAccepted = true,
                         IsDone = false,

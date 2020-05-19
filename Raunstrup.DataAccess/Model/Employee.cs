@@ -14,6 +14,7 @@ namespace Raunstrup.DataAccess.Model
             Specialties = new List<Specialty>();
             Projects = new List<Project>();
         }
+
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -22,10 +23,10 @@ namespace Raunstrup.DataAccess.Model
 
         public bool Active { get; set; }
 
-        [Timestamp]
-        public byte[] RowVersion { get; set; }
 
-        public int? TypeId { get; set; }
+        public int? TypeID { get; set; }
+
+        [ForeignKey("TypeID")]
         public EmployeeType Type { get; set; }
 
         public List<Specialty> Specialties { get; set; }
@@ -33,9 +34,17 @@ namespace Raunstrup.DataAccess.Model
 
         public int? ManagerID { get; set; }
 
+       [ForeignKey("ManagerID")]
         public Employee Manager { get; set; }
 
-        public int? DepartmentId { get; set; }
+       
+
+         public int? DepartmentID { get; set; }
+
+        [ForeignKey("DepartmentID")]
         public Department Department { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }
