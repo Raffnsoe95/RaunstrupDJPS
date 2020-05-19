@@ -97,7 +97,7 @@ namespace Raunstrup.UI.Services
             {
                 response.EnsureSuccessStatusCode();
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 if(response.StatusCode == HttpStatusCode.Conflict)
                 {

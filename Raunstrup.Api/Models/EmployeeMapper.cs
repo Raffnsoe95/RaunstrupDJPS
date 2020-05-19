@@ -64,7 +64,7 @@ namespace Raunstrup.Api.Models
                 Manager = EmployeeMapper.Map(model.Manager),
                 Department = DepartmentMapper.Map(model.Department),
                 RowVersion = model.RowVersion,
-                Projects = ProjectMapper.Map(model.Projects).ToList(),
+              
             };
         }
        
