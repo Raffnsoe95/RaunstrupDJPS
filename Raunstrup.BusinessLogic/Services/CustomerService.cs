@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Raunstrup.BusinessLogic.ServiceInterfaces;
 using Raunstrup.DataAccess;
@@ -46,13 +47,28 @@ namespace Raunstrup.BusinessLogic.Services
 
             void ICustomerService.Update(Customer customer)
             {
-            
-
             CustomerDiscountType customerDiscountType = _context.CustomerDiscountTypes.Find(customer.CustomerDiscountTypeID);
-            customer.CustomerDiscountType = customerDiscountType;
-
-            _context.Customers.Update(customer);
+            
+            try
+            {
+                customer.CustomerDiscountType = customerDiscountType;
+                _context.Customers.Update(customer);
                 _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException dbu)
+
+            {
+                var exceptionEntry = dbu.Entries.Single();
+                var databaseEntry = exceptionEntry.GetDatabaseValues();
+                customer = (Customer)databaseEntry.ToObject();
+                customer.CustomerDiscountType = customerDiscountType;
+                dbu.Data.Add("dbvalue", customer);
+                throw;
+
+            }
+
+
+            
             }
 
             void ICustomerService.Delete(int id)

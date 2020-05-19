@@ -23,6 +23,6 @@ namespace Raunstrup.BusinessLogic.ServiceInterfaces
 
         IEnumerable<Project> GetProjectsByCustomerId(int customerId);
 
-        IEnumerable<Project> GetProjectsByEmployeeId(int employeeId);
+       
     }
 }

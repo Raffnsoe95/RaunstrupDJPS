@@ -56,7 +56,7 @@
             @Html.DisplayFor(model => model.Department.Name)
         </dd>
         <dt class="col-sm-2">
-            Projektor
+            Projekter
         </dt>
         <dt class="col-sm-2">
             @*@Html.DisplayNameFor(model => model.EmployeesProjectList)*@
@@ -75,3 +75,74 @@
     <a asp-action="Edit" asp-route-id="@Model.Id">Ret</a> |
     <a asp-action="Index">Gå til Medarbejderliste</a>
 </div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Startdato
+            </th>
+            <th>
+                Slutdato
+            </th>
+            <th>
+                Pris
+            </th>
+            <th>
+                Forventet kørsel
+            </th>
+            <th>
+                Beskrivelse
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Active)
+                </th>*@
+
+           
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Rowversion)
+                </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Projects)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ESTdriving)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Active)
+                    </td>*@
+                
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Rowversion)
+                    </td>*@
+                <td>
+                    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> <span>|</span>
+                    }
+                    <a asp-action="Details" asp-controller="Project" asp-route-id="@item.Id">Details</a>
+                    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+                    {
+                        <span>|</span>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

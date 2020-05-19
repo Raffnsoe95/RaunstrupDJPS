@@ -74,7 +74,7 @@ namespace Raunstrup.Api.Controllers
         [HttpGet("GetProjectsByEmployeeId/{employeeId}", Name = "GetProjectsByEmployeeId")]
         public IEnumerable<ProjectDto> GetProjectsByEmployeeId(int employeeId)
         {
-            var result = _projectService.GetProjectsByEmployeeId(employeeId).Select(a => ProjectMapper.Map(a)).ToList();
+            var result = _projectService.GetAll(employeeId).Select(a => ProjectMapper.Map(a)).ToList();
             return result;
         }
     }

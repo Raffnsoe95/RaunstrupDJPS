@@ -11,6 +11,9 @@ using Raunstrup.UI.Services;
 using Raunstrup.Contract.Services;
 using Raunstrup.Contract.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using Raunstrup.DataAccess;
+using System.ComponentModel.DataAnnotations;
+using System.Net.Http;
 
 namespace Raunstrup.UI.Controllers
 {
@@ -149,23 +152,30 @@ namespace Raunstrup.UI.Controllers
             {
                 try
                 {
-                    
+
                     await _customerService.UpdateAsync(id, CustomerMapper.Map(customerViewModel)).ConfigureAwait(false);
                     return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException dbu)
                 {
-                    if (!CustomerViewModelExists(customerViewModel.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                   
+                    
+                        var dbcustomer = CustomerMapper.Map((CustomerDto)dbu.Data["dbvalue"]);
+                        if(cEcustomerViewModel.Phone != dbcustomer.Phone) 
+                        {
+                            ModelState.AddModelError("Phone", "telefonnummeret er opdateret af en anden person");
+                        }
+                    
+                    var customerDiscountTypeDtos = await _customerService.GetAllCustomerDiscountType().ConfigureAwait(false);
+                    IEnumerable<CustomerDiscountTypeViewModel> customerDiscountTypeViewModels = CustomerMapper.Map(customerDiscountTypeDtos);
+
+                    cEcustomerViewModel.CustomerDiscountTypeViewModels = customerDiscountTypeViewModels.ToList();
+
+                    cEcustomerViewModel.CustomerDiscountType = dbcustomer.CustomerDiscountType;
+                    return View("Edit",cEcustomerViewModel);
                 }
             }
-            return View(customerViewModel);
+            return View(cEcustomerViewModel);
         }
 
         // GET: Customer/Delete/5
