@@ -36,6 +36,7 @@ namespace Raunstrup.BusinessLogic.Services
                 .ThenInclude(e => e.Item)
                 .Include(w => w.Customer)
                 .ToList();
+            //
             }
 
         IEnumerable<Project> IProjectService.GetAll(int employeeId)
