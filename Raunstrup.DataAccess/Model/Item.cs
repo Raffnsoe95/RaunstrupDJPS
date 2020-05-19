@@ -18,7 +18,7 @@ namespace Raunstrup.DataAccess.Model
 
        
         
-        public int DiscountID { get; set; }
+        public int? DiscountID { get; set; }
 
         [ForeignKey("DiscountID")]
         public ItemDiscountType Discount { get; set; }

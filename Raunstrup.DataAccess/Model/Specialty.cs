@@ -12,6 +12,5 @@ namespace Raunstrup.DataAccess.Model
 
         public decimal Bonus { get; set; }
 
-        public int EmployeeId { get; set; }
     }
 }

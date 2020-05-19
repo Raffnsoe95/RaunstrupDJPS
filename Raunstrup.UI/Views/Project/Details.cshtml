@@ -218,10 +218,10 @@
                             @item.EstWorkingHours
                         </td>
                         <td>
-                            @(item.Employee.Type.HourlyPrice + item.Employee.Specialties.Sum(s => s.Bonus))
+                            @(item.Employee.Type.HourlyPrice + item.Employee.Specialty.Bonus)
                         </td>
                         <td>
-                            @((item.Employee.Type.HourlyPrice + item.Employee.Specialties.Sum(s => s.Bonus)) * item.EstWorkingHours)
+                            @((item.Employee.Type.HourlyPrice + item.Employee.Specialty.Bonus)) * item.EstWorkingHours)
                         </td>
                     </tr>
                 }
@@ -229,7 +229,7 @@
                     <td colspan="3">
                         <b>Total:</b>
                     <td>
-                        @Model.ProjectEmployees.Sum(PE => (PE.Employee.Type.HourlyPrice + PE.Employee.Specialties.Sum(s => s.Bonus)) * PE.EstWorkingHours)
+                        @Model.ProjectEmployees.Sum(PE => (PE.Employee.Type.HourlyPrice + PE.Employee.Specialty.Bonus)) * PE.EstWorkingHours)
                     </td>
                 </tr>
             </tbody>

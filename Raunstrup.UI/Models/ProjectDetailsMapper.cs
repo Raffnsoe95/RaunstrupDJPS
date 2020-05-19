@@ -60,7 +60,7 @@ namespace Raunstrup.UI.Models
                         EmployeeId = WH.First().EmployeeId,
                         Employee = WH.First().Employee,
                         ProjectId = WH.First().ProjectId,
-                        HourlyPrice = WH.First().Employee.Type.HourlyPrice + WH.First().Employee.Specialties.Sum(b => b.Bonus),
+                        HourlyPrice = WH.First().Employee.Type.HourlyPrice + WH.First().Employee.Specialty.Bonus,
                         WorkingHoursId = WH.First().WorkingHoursId
                     }).ToList(),
 

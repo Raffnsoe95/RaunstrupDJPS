@@ -17,7 +17,7 @@ namespace Raunstrup.UI.Models
                 Name = dto.Name,
                 Phone = dto.Phone,
                 Active = dto.Active,
-                Specialties = SpecialtyMapper.Map(dto.Specialties).ToList(),
+                Specialty = SpecialtyMapper.Map(dto.Specialty),
                 Type = TypeMapper.Map(dto.Type),
                 ManagerID = dto.ManagerID,
                 Manager = EmployeeMapper.Map(dto.Manager),
@@ -46,7 +46,7 @@ namespace Raunstrup.UI.Models
                 Name = model.Name,
                 Phone = model.Phone,
                 Active = model.Active,
-                Specialties = SpecialtyMapper.Map(model.Specialties).ToList(),
+                Specialty = SpecialtyMapper.Map(model.Specialty),
                 Type = TypeMapper.Map(model.Type),
                 ManagerID = model.ManagerID,
                 Manager = EmployeeMapper.Map(model.Manager),
@@ -62,15 +62,9 @@ namespace Raunstrup.UI.Models
             return new EstWorkingHoursEmployeeViewModel
             {
                 Id = dto.Id,
-                Name = dto.Name,
-                Phone = dto.Phone,
-                Active = dto.Active,
-                Specialties = SpecialtyMapper.Map(dto.Specialties).ToList(),
-                Type = TypeMapper.Map(dto.Type),
-                ManagerID = dto.ManagerID,
-                Manager = EmployeeMapper.Map(dto.Manager),
-                RowVersion = dto.RowVersion,
-                Department = DepartmentMapper.Map(dto.Department)
+                Employee=EmployeeMapper.Map(dto),
+                EmployeeID=dto.Id
+
             };
         }
         public static IEnumerable<EstWorkingHoursEmployeeViewModel> MapEst(IEnumerable<EmployeeDto> model)

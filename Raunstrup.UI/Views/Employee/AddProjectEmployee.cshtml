@@ -135,11 +135,11 @@
         {
         <tr>
             <td><input type="text" asp-for="@Model[i].Id" /></td>
-            <td><input type="text" asp-for="@Model[i].Name" /></td>
+            <td><input type="text" asp-for="@Model[i].Employee.Name" /></td>
 
-            <td><input type="text" asp-for="@Model[i].Phone" /></td>
-            <td><input type="text" asp-for="@Model[i].Type.Title" /></td>
-            <td><input type="text" asp-for="@Model[i].projectId" /></td>
+            <td><input type="text" asp-for="@Model[i].Employee.Phone" /></td>
+            <td><input type="text" asp-for="@Model[i].Employee.Type.Title" /></td>
+            <td><input type="text" asp-for="@Model[i].ProjectId" /></td>
             <td><input type="text" asp-for="@Model[i].EstWorkingHours" /></td>
         </tr>
         }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Raunstrup.DataAccess.Context;
 
 namespace Raunstrup.Api.Migrations
 {
     [DbContext(typeof(RaunstrupContext))]
-    partial class RaunstrupContextModelSnapshot : ModelSnapshot
+    [Migration("20200519073438_fixedemployee")]
+    partial class fixedemployee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,6 +90,9 @@ namespace Raunstrup.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -171,7 +176,7 @@ namespace Raunstrup.Api.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("DiscountID")
+                    b.Property<int>("DiscountID")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -450,7 +455,9 @@ namespace Raunstrup.Api.Migrations
                 {
                     b.HasOne("Raunstrup.DataAccess.Model.ItemDiscountType", "Discount")
                         .WithMany()
-                        .HasForeignKey("DiscountID");
+                        .HasForeignKey("DiscountID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Raunstrup.DataAccess.Model.ProjectAssignedItem", b =>

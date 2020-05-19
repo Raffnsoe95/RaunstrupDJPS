@@ -24,7 +24,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" valeu="@Model.Address"/>
+                <input asp-for="Address" class="form-control" valeu="@Model.Address" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -37,12 +37,13 @@
 
             </select>
             <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" Checked hidden asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
-            </label>
-        </div>
+                <label class="form-check-label">
+                    <input class="form-check-input" Checked hidden asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                </label>
+            </div>
+
             @*<div class="form-group">
-            <label asp-for="Rowversion" class="control-label"></label>
+                        <label asp-for="Rowversion" class="control-label"></label>
             <input asp-for="Rowversion" class="form-control" />
             <span asp-validation-for="Rowversion" class="text-danger"></span>
         </div>*@

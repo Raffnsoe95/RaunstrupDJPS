@@ -23,7 +23,7 @@ namespace Raunstrup.BusinessLogic.Services
             return _context.Employees
              .Where(a => a.Active == true)
             .Include(e => e.Type)
-            .Include(e => e.Specialties)
+            .Include(e => e.Specialty)
             .Include(e => e.Department)
                 .ToList();
         }
@@ -32,7 +32,7 @@ namespace Raunstrup.BusinessLogic.Services
         {
             return _context.Employees 
                 .Include(e => e.Type) 
-                .Include(e => e.Specialties)
+                .Include(e => e.Specialty)
             .Include(e => e.Manager)
             .Include(e => e.Department)
             .FirstOrDefault(x => x.Id == id);
@@ -76,7 +76,7 @@ namespace Raunstrup.BusinessLogic.Services
              .Where(a => a.Active == true)
              .Where(f=>f.Name.ToUpper().Contains(searchString.ToUpper()))
             .Include(e => e.Type)
-            .Include(e => e.Specialties)
+            .Include(e => e.Specialty)
             .Include(e => e.Department)
                 .ToList();
         }

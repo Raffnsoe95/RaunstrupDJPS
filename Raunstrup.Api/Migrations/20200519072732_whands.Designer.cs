@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Raunstrup.DataAccess.Context;
 
 namespace Raunstrup.Api.Migrations
 {
     [DbContext(typeof(RaunstrupContext))]
-    partial class RaunstrupContextModelSnapshot : ModelSnapshot
+    [Migration("20200519072732_whands")]
+    partial class whands
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,6 +91,9 @@ namespace Raunstrup.Api.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -124,9 +129,6 @@ namespace Raunstrup.Api.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<int?>("SpecialtyID")
-                        .HasColumnType("int");
-
                     b.Property<int?>("TypeID")
                         .HasColumnType("int");
 
@@ -135,8 +137,6 @@ namespace Raunstrup.Api.Migrations
                     b.HasIndex("DepartmentID");
 
                     b.HasIndex("ManagerID");
-
-                    b.HasIndex("SpecialtyID");
 
                     b.HasIndex("TypeID");
 
@@ -171,7 +171,7 @@ namespace Raunstrup.Api.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("DiscountID")
+                    b.Property<int>("DiscountID")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -335,10 +335,16 @@ namespace Raunstrup.Api.Migrations
                     b.Property<decimal>("Bonus")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId")
+                        .IsUnique();
 
                     b.ToTable("Specialty");
                 });
@@ -437,10 +443,6 @@ namespace Raunstrup.Api.Migrations
                         .WithMany()
                         .HasForeignKey("ManagerID");
 
-                    b.HasOne("Raunstrup.DataAccess.Model.Specialty", "Specialty")
-                        .WithMany()
-                        .HasForeignKey("SpecialtyID");
-
                     b.HasOne("Raunstrup.DataAccess.Model.EmployeeType", "Type")
                         .WithMany()
                         .HasForeignKey("TypeID");
@@ -450,7 +452,9 @@ namespace Raunstrup.Api.Migrations
                 {
                     b.HasOne("Raunstrup.DataAccess.Model.ItemDiscountType", "Discount")
                         .WithMany()
-                        .HasForeignKey("DiscountID");
+                        .HasForeignKey("DiscountID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Raunstrup.DataAccess.Model.ProjectAssignedItem", b =>
@@ -509,6 +513,15 @@ namespace Raunstrup.Api.Migrations
                     b.HasOne("Raunstrup.DataAccess.Project", null)
                         .WithMany("UsedItems")
                         .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Raunstrup.DataAccess.Model.Specialty", b =>
+                {
+                    b.HasOne("Raunstrup.DataAccess.Model.Employee", null)
+                        .WithOne("Specialty")
+                        .HasForeignKey("Raunstrup.DataAccess.Model.Specialty", "EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -11,7 +11,7 @@ namespace Raunstrup.DataAccess.Model
     {
         public Employee()
         {
-            Specialties = new List<Specialty>();
+            Specialty = new Specialty();
         }
 
         public int Id { get; set; }
@@ -28,8 +28,13 @@ namespace Raunstrup.DataAccess.Model
         [ForeignKey("TypeID")]
         public EmployeeType Type { get; set; }
 
-        public List<Specialty> Specialties { get; set; }
+        public int? SpecialtyID { get; set; }
 
+
+        [ForeignKey("SpecialtyID")]
+        public Specialty Specialty { get; set; }
+
+        
         public int? ManagerID { get; set; }
 
        [ForeignKey("ManagerID")]
