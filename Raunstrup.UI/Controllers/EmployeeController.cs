@@ -20,12 +20,13 @@ namespace Raunstrup.UI.Controllers
     {
         private readonly ViewModelContext _context;
         private readonly IEmployeeservice _employeeService;
+        private readonly IProjectService _projectService;
 
-        public EmployeeController(ViewModelContext context, IEmployeeservice employeeService)
+        public EmployeeController(ViewModelContext context, IEmployeeservice employeeService, IProjectService projectService)
         {
             _context = context;
             _employeeService = employeeService;
-
+            _projectService = projectService;
         }
 
         // GET: Employee
@@ -43,15 +44,22 @@ namespace Raunstrup.UI.Controllers
             {
                 return NotFound();
             }
-            var employeeDto = await _employeeService.GetEmployeesAsync(id.Value).ConfigureAwait(false);
+            var employeeViewModel = await _employeeService.GetEmployeeAsync(id.Value).ConfigureAwait(false);
             //////var employeeViewModel = await _context.Employees
             //////    .FirstOrDefaultAsync(m => m.Id == id);
-            if (employeeDto == null)
+            if (employeeViewModel == null)
             {
                 return NotFound();
             }
+            EmployeeDetailsViewModel employeeDetailsViewModel = EmployeeDetailsMapper.Map(employeeViewModel);
 
-            return View(EmployeeMapper.Map(employeeDto));
+
+            IEnumerable<ProjectDto> Projects = await _projectService.GetProjectsByEmployeeId(id.Value);
+
+
+            employeeDetailsViewModel.Projects = ProjectMapper.Map(Projects);
+
+            return View(employeeDetailsViewModel);
         }
 
         // GET: Employee/Create
@@ -141,7 +149,7 @@ namespace Raunstrup.UI.Controllers
                 return NotFound();
             }
 
-            var employeeViewModel = await _employeeService.GetEmployeesAsync(id.Value).ConfigureAwait(false);
+            var employeeViewModel = await _employeeService.GetEmployeeAsync(id.Value).ConfigureAwait(false);
             if (employeeViewModel == null)
             {
                 return NotFound();
@@ -200,7 +208,7 @@ namespace Raunstrup.UI.Controllers
 
         public async Task<IActionResult> AddProjectEmployees(int id)
             {
-                var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
+                var employeeDtos = await _employeeService.GetEmployeeAsync().ConfigureAwait(false);
                 
 
                 return View(EmployeeMapper.MapEst(employeeDtos).Select(x => { x.projectId = id; return x; }).ToList());

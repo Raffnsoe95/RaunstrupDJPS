@@ -20,5 +20,6 @@ namespace Raunstrup.Contract.Services
         Task RemoveAsync(int id);
 
         Task<IEnumerable<ProjectDto>> GetProjectsByCustomerId(int customerId);
+        Task<IEnumerable<ProjectDto>> GetProjectsByEmployeeId(int employeeId);
     }
 }

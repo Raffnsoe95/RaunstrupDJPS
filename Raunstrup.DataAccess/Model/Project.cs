@@ -36,7 +36,8 @@ namespace Raunstrup.DataAccess
 
         public double ESTdriving { get; set; }
 
-        public int? CustomerId { get; set; }  
+        public int? CustomerId { get; set; }
+        public int? EmployeeId { get; set; }
 
         [Timestamp]
         public byte[] Rowversion { get; set; }
@@ -52,7 +53,8 @@ namespace Raunstrup.DataAccess
         public List<ProjectEmployee> ProjectEmployees { get; set; }
         
         public Customer Customer { get; set; }
+        public Employee Employee { get; set; }
 
-       
+
     }
 }

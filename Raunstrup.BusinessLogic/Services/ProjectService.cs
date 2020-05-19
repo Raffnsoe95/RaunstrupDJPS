@@ -123,6 +123,12 @@ namespace Raunstrup.BusinessLogic.Services
                 .Where(c => c.CustomerId == customerID);
                 
         }
+        IEnumerable<Project> IProjectService.GetProjectsByEmployeeId(int employeeID)
+        {
+            return _context.Projects
+                .Where(c => c.EmployeeId == employeeID);
+
+        }
     }
 }
 

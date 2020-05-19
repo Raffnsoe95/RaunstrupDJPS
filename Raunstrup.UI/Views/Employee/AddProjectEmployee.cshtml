@@ -16,36 +16,38 @@
 </p>
 <form method="post" asp-action="AddProjectEmployeeToProject">
     <table class="table">
-
-        <tr>
-            <th>
-                Navn
-            </th>
-            <th>
-                Telefonnummer
-            </th>
-            <th>
-                Type
-            </th>
-            <th>
-                Antal Timer
-            </th>
+        <thead>
+            <tr>
+                <th>
+                    Navn
+                </th>
+                <th>
+                    Telefonnummer
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Antal Timer
+                </th>
             </tr>
-        
-        <tr>
 
-            @for (var i = 0; i < Model.Count(); i++)
-            {
-                <td>@Model[i].Name</td>
-                <td>@Model[i].Phone</td>
-                <td>@Model[i].Type.Title</td>
-                <td><input type="text" asp-for="@Model[i].EstWorkingHours" /></td>
-            }
+            
+        </thead>
+        <tbody>
+            <tr>
+                @for (var i = 0; i < Model.Count(); i++)
+                {
+                    <td>@Model[i].Name</td>
+                    <td>@Model[i].Phone</td>
+                    <td>@Model[i].Type.Title</td>
+                    <td><input type="text" asp-for="@Model[i].EstWorkingHours" /></td>
+                }
 
-        </tr>
-     
+            </tr>
 
-    </table>
+            </tbody>
+        </table>
     <button>Update</button>
 
 </form>
