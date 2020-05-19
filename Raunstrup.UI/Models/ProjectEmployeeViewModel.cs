@@ -18,6 +18,7 @@ namespace Raunstrup.UI.Models
         public string name { get; set; }
         public ProjectViewModel Project { get; set; }
         public int ProjectId { get; set; }
+        public List<ProjectViewModel> Projects { get; set; }
         
     }
 }

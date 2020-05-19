@@ -8,15 +8,17 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Raunstrup.Contract.DTOs;
 using Raunstrup.Contract.Services;
+using Raunstrup.UI.Models;
 
 namespace Raunstrup.UI.Services
 {
     public class EmployeeServiceProxy : IEmployeeservice
     {
-        private const string _employeesRequestUri = "api/Employee";
-
-        public EmployeeServiceProxy(HttpClient client)
+        private const string _employeeRequestUri = "api/Employee";
+        private IProjectService projectService;
+        public EmployeeServiceProxy(HttpClient client, IProjectService projectService)
         {
+            this.projectService = projectService;
             Client = client;
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json")
@@ -31,13 +33,13 @@ namespace Raunstrup.UI.Services
         {
             var json = JsonSerializer.Serialize(employee);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await Client.PostAsync(_employeesRequestUri, data).ConfigureAwait(false);
+            var response = await Client.PostAsync(_employeeRequestUri, data).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
 
-        async Task<EmployeeDto> IEmployeeservice.GetEmployeesAsync(int id)
+        async Task<EmployeeDto> IEmployeeservice.GetEmployeeAsync(int id)
         {
-            var response = await Client.GetAsync($"{_employeesRequestUri}/{id}").ConfigureAwait(false);
+            var response = await Client.GetAsync($"{_employeeRequestUri}/{id}").ConfigureAwait(false);
 
             response.EnsureSuccessStatusCode();
 
@@ -50,9 +52,9 @@ namespace Raunstrup.UI.Services
             return await JsonSerializer.DeserializeAsync<EmployeeDto>(stream, options).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync()
+        public async Task<IEnumerable<EmployeeDto>> GetEmployeeAsync()
         {
-            var response = await Client.GetAsync(_employeesRequestUri).ConfigureAwait(false);
+            var response = await Client.GetAsync(_employeeRequestUri).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 
             var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
@@ -66,7 +68,7 @@ namespace Raunstrup.UI.Services
 
         async Task IEmployeeservice.RemoveAsync(int id)
         {
-            var response = await Client.DeleteAsync($"{_employeesRequestUri}/{id}").ConfigureAwait(false);
+            var response = await Client.DeleteAsync($"{_employeeRequestUri}/{id}").ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
 
@@ -74,7 +76,7 @@ namespace Raunstrup.UI.Services
         {
             var json = JsonSerializer.Serialize(employee);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await Client.PutAsync($"{_employeesRequestUri}/{id}", data).ConfigureAwait(false);
+            var response = await Client.PutAsync($"{_employeeRequestUri}/{id}", data).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
         async Task IEmployeeservice.AddAsync(int id, int projectid)
@@ -82,21 +84,21 @@ namespace Raunstrup.UI.Services
             var projectEmployee = new ProjectEmployeeDto { Id = id, ProjectId = projectid };
             var json = JsonSerializer.Serialize(projectEmployee);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await Client.PostAsync(_employeesRequestUri + "/AddProjectEmployeeToProject", data).ConfigureAwait(false);
+            var response = await Client.PostAsync(_employeeRequestUri + "/AddProjectEmployeeToProject", data).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
         async Task IEmployeeservice.AddAsync(ProjectDrivingDto projectDriving)
         {
             var json = JsonSerializer.Serialize(projectDriving);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await Client.PostAsync(_employeesRequestUri + "/AddProjectDrivingToProject", data).ConfigureAwait(false);
+            var response = await Client.PostAsync(_employeeRequestUri + "/AddProjectDrivingToProject", data).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
         }
 
 
         public async Task<IEnumerable<EmployeeDto>> GetFilteredEmployeesAsync(string searchString)
         {
-            var response = await Client.GetAsync(_employeesRequestUri + $"/search/{searchString}").ConfigureAwait(false);
+            var response = await Client.GetAsync(_employeeRequestUri + $"/search/{searchString}").ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 
             var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
@@ -113,7 +115,7 @@ namespace Raunstrup.UI.Services
             {
                 var json = JsonSerializer.Serialize(projectEmployee);
                 var data = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await Client.PostAsync(_employeesRequestUri + "/AddProjectEmployeeToProject", data).ConfigureAwait(false);
+                var response = await Client.PostAsync(_employeeRequestUri + "/AddProjectEmployeeToProject", data).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
             }
         }
@@ -127,7 +129,7 @@ namespace Raunstrup.UI.Services
             }
             else
             {
-                var employeeDtos = await GetEmployeesAsync().ConfigureAwait(false);
+                var employeeDtos = await GetEmployeeAsync().ConfigureAwait(false);
                 return employeeDtos;
             }
         }

@@ -35,7 +35,7 @@ namespace Raunstrup.UI.Models
 
         public List<CustomerDiscountTypeViewModel> CustomerDiscountTypeViewModels { get; set; }
         public CustomerDiscountTypeViewModel CustomerDiscountType { get; set; }
-
+        [Timestamp]
         public byte[] Rowversion { get; set; }
     }
 }

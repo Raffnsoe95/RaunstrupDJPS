@@ -7,6 +7,9 @@ using Raunstrup.Api.Models;
 using Raunstrup.Contract.DTOs;
 using Raunstrup.BusinessLogic.ServiceInterfaces;
 using Raunstrup.DataAccess.Model;
+using System.Data;
+using Microsoft.EntityFrameworkCore;
+using Raunstrup.DataAccess;
 
 namespace Raunstrup.Api.Controllers
 {
@@ -49,9 +52,22 @@ namespace Raunstrup.Api.Controllers
 
         // PUT: api/Customer/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] CustomerDto value)
+        public ActionResult<CustomerDto> Put(int id, [FromBody] CustomerDto value)
         {
-            _customerService.Update(CustomerMapper.Map(value));
+            try
+            {
+                _customerService.Update(CustomerMapper.Map(value));
+                return value;
+            }
+            catch (DbUpdateConcurrencyException dbu)
+            {
+
+                Customer customer = (Customer)dbu.Data["dbvalue"];
+                return Conflict(CustomerMapper.Map(customer));
+                
+            }
+            
+            
         }
 
         // DELETE: api/ApiWithActions/5

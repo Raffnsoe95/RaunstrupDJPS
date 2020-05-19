@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Raunstrup.Contract.DTOs;
+using Raunstrup.DataAccess;
 using Raunstrup.DataAccess.Model;
 
 
@@ -24,5 +25,9 @@ namespace Raunstrup.BusinessLogic.ServiceInterfaces
         void Create(ProjectDriving projectDriving);
 
         IEnumerable<Employee> GetFilteredEmployees(string searchString);
+
+        
+
+     
     }
 }

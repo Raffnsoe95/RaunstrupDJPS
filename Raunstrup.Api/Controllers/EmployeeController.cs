@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Raunstrup.Api.Models;
 using Raunstrup.Contract.DTOs;
 using Raunstrup.BusinessLogic.ServiceInterfaces;
+using Raunstrup.DataAccess.Model;
 
 
 namespace Raunstrup.Api.Controllers
@@ -18,10 +19,15 @@ namespace Raunstrup.Api.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeService _employeeService;
+        private readonly IProjectService _projectService;
 
-        public EmployeeController(IEmployeeService employeeService)
+
+
+        public EmployeeController(IEmployeeService employeeService, IProjectService projectService)
         {
+            _projectService = projectService;
             _employeeService = employeeService;
+            
         }
 
         // GET: api/Movies
@@ -77,5 +83,8 @@ namespace Raunstrup.Api.Controllers
         {
             return _employeeService.GetFilteredEmployees(searchString).Select(a => EmployeeMapper.Map(a));
         }
+
+       
+
     }
 }
