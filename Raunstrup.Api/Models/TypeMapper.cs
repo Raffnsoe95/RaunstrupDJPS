@@ -20,7 +20,6 @@ namespace Raunstrup.Api.Models
             return new EmployeeType
             {
                 Id = dto.Id,
-                EmployeeId = dto.EmployeeId,
                 HourlyPrice = dto.HourlyPrice,
                 Title = dto.Title
             };
@@ -42,8 +41,7 @@ namespace Raunstrup.Api.Models
 
             return new TypeDto
             { 
-                Id = model.Id,
-                EmployeeId = model.EmployeeId,
+                Id = model.Id, 
                 HourlyPrice = model.HourlyPrice,
                 Title = model.Title
             };

@@ -20,7 +20,7 @@ namespace Raunstrup.Contract.DTOs
 
         public TypeDto Type { get; set; }
 
-        public List<SpecialtyDto> Specialties { get; set; }
+        public SpecialtyDto Specialty { get; set; }
 
         public int? ManagerID { get; set; }
 

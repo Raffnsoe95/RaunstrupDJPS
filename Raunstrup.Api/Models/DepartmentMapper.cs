@@ -19,8 +19,7 @@ namespace Raunstrup.Api.Models
             return new Department
             {
                 Id = dto.Id,
-                Name =dto.Name,
-                EmployeeId = dto.EmployeeId,
+                Name =dto.Name
             };
         }
 
@@ -42,8 +41,7 @@ namespace Raunstrup.Api.Models
             return new DepartmentDto
             {
                 Id = model.Id,
-                Name = model.Name,
-                EmployeeId = model.EmployeeId,
+                Name = model.Name
             };
         }
     }

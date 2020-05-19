@@ -40,13 +40,13 @@
             {
             <tr>
 
-                <td>@Model[i].Name</td>
-                <td>@Model[i].Phone</td>
-                <td>@Model[i].Type.Title</td>
+                <td>@Model[i].Employee.Name</td>
+                <td>@Model[i].Employee.Phone</td>
+                <td>@Model[i].Employee.Type.Title</td>
                 <td>
                     <input type="text" asp-for="@Model[i].EstWorkingHours" />
                 </td>
-                <td><input type="text" asp-for="@Model[i].projectId" hidden /></td>
+                <td><input type="text" asp-for="@Model[i].Employee.projectId" hidden /></td>
                 <td><input type="text" asp-for="@Model[i].Id" hidden /></td>
             </tr>
             }

@@ -10,6 +10,5 @@ namespace Raunstrup.DataAccess.Model
 
         public string Name { get; set; }
 
-        public int EmployeeId { get; set; }
     }
 }

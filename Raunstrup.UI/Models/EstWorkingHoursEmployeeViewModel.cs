@@ -7,39 +7,21 @@ namespace Raunstrup.UI.Models
 {
     public class EstWorkingHoursEmployeeViewModel
     {
-        public EstWorkingHoursEmployeeViewModel()
-        {
-            Specialties = new List<SpecialtyViewModel>();
-        }
+       
         public int Id { get; set; }
 
-        //[RegularExpression(@"[A-ZØ]+[a-zøA-ZØ]"),StringLength(200)]
-        //[Required(ErrorMessage = "Skal udfyldes")]
-        public string Name { get; set; }
 
-        //[Required(ErrorMessage = "Skal udfyldes")]
-        //[RegularExpression(@"[0-9()+]"), StringLength(9)]
-        public string Phone { get; set; }
-
-        public bool Active { get; set; }
-
-        public int projectId { get; set; }
+        public int ProjectId { get; set; }
 
         public int EstWorkingHours { get; set; }
+       
+        public int? EmployeeID { get; set; }
 
-        [Timestamp]
-        public byte[] RowVersion { get; set; }
+        public EmployeeViewModel Employee { get; set; }
 
-        public TypeViewModel Type { get; set; }
+       
 
-        public List<SpecialtyViewModel> Specialties { get; set; }
 
-        public int? ManagerID { get; set; }
 
-        public EmployeeViewModel Manager { get; set; }
-
-        public DepartmentViewModel Department { get; set; }
-
-        
     }
 }
