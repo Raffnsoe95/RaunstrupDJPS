@@ -9,8 +9,6 @@ using Raunstrup.DataAccess.Model;
 
 namespace Raunstrup.BusinessLogic.Services
 {
-   
-
     public class EmployeeService : IEmployeeService
     {
         private readonly RaunstrupContext _context;

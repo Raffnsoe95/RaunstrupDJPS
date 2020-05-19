@@ -78,9 +78,6 @@ namespace Raunstrup.UI.Controllers
 
                 return RedirectToAction(nameof(Index));
 
-                //_context.Add(projectViewModel);
-                //await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
             }
             return View(projectViewModel);
         }

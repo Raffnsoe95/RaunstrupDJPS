@@ -50,7 +50,7 @@ namespace Raunstrup.UI.Services
             return await JsonSerializer.DeserializeAsync<ItemDto>(stream, options).ConfigureAwait(false);
         }
 
-        async Task<IEnumerable<ItemDto>> IItemService.GetItemsAsync()
+       public async Task<IEnumerable<ItemDto>> GetItemsAsync()
         {
             var response = await Client.GetAsync(_itemsRequestUri).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
@@ -101,7 +101,7 @@ namespace Raunstrup.UI.Services
             }
         }
 
-        async Task<IEnumerable<ItemDto>> IItemService.GetFilteredItemsAsync(string searchString)
+       public async Task<IEnumerable<ItemDto>> GetFilteredItemsAsync(string searchString)
         {
             var response = await Client.GetAsync(_itemsRequestUri + $"/search/{searchString}").ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
@@ -113,6 +113,21 @@ namespace Raunstrup.UI.Services
                 PropertyNameCaseInsensitive = true
             };
             return await JsonSerializer.DeserializeAsync<IEnumerable<ItemDto>>(stream, options).ConfigureAwait(false);
+        }
+
+
+        public async Task<IEnumerable<ItemDto>> GetChosenItems(string searchString)
+        {
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var itemDtos = await GetFilteredItemsAsync(searchString).ConfigureAwait(false);
+                return itemDtos;
+            }
+            else
+            {
+                var itemDtos = await GetItemsAsync().ConfigureAwait(false);
+                return itemDtos;
+            }
         }
     }
 }

@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raunstrup.DataAccess", "Rau
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raunstrup.UI", "Raunstrup.UI\Raunstrup.UI.csproj", "{BCEC4287-6096-4F0B-B4A6-DE3E4DDE7AF2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raunstrup.Contakt.Service", "Raunstrup.Contakt.Service\Raunstrup.Contakt.Service.csproj", "{24A129E2-BE35-48FE-80FF-647642DC77A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{BCEC4287-6096-4F0B-B4A6-DE3E4DDE7AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCEC4287-6096-4F0B-B4A6-DE3E4DDE7AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCEC4287-6096-4F0B-B4A6-DE3E4DDE7AF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24A129E2-BE35-48FE-80FF-647642DC77A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24A129E2-BE35-48FE-80FF-647642DC77A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24A129E2-BE35-48FE-80FF-647642DC77A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24A129E2-BE35-48FE-80FF-647642DC77A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

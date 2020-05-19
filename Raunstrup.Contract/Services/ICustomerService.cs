@@ -9,7 +9,7 @@ namespace Raunstrup.Contract.Services
 {
    public interface ICustomerService
     {
-        Task<IEnumerable<CustomerDto>> GetCustomerAsync();
+       Task< IEnumerable<CustomerDto>> GetCustomerAsync();
         Task<CustomerDto> GetCustomerAsync(int id);
         Task AddAsync(CustomerDto customer);
         Task UpdateAsync(int id, CustomerDto customer);
@@ -21,6 +21,8 @@ namespace Raunstrup.Contract.Services
          Task<IEnumerable<CustomerDiscountTypeDto>> GetAllCustomerDiscountType();
 
         Task<CustomerDiscountTypeDto> GetCustomerDiscountTypeAsync(int id);
+
+        Task<IEnumerable<CustomerDto>> GetChosenCustomers(string searchString);
 
 
     }

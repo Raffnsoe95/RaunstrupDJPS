@@ -29,18 +29,8 @@ namespace Raunstrup.UI.Controllers
         // GET: Item
         public async Task<IActionResult> Index(string searchString)
         {
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                var filterdCustomersDtos = await _itemService.GetFilteredItemsAsync(searchString).ConfigureAwait(false);
-
-                return View(ItemMapper.Map(filterdCustomersDtos));
-            }
-            else
-            {
-                var itemsDtos = await _itemService.GetItemsAsync().ConfigureAwait(false);
-                return View(ItemMapper.Map(itemsDtos));
-
-            }
+            var itemsDtos = await _itemService.GetChosenItems(searchString).ConfigureAwait(false);
+            return View(ItemMapper.Map(itemsDtos));
 
         }
 
@@ -137,20 +127,24 @@ namespace Raunstrup.UI.Controllers
         [Authorize(Roles = "Admin,SuperUser")]
         public async Task<IActionResult> AddAssignedProjectItem(int id, string searchString)
         {
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                var filteredItemDtos = await _itemService.GetFilteredItemsAsync(searchString).ConfigureAwait(false);
-                var items = ItemMapper.Map(filteredItemDtos).Select(x => { x.projectID = id; return x; }).ToList();
-                return View(ItemMapper.Map(filteredItemDtos).Select(x => { x.projectID = id; return x; }).ToList());
+            var itemDtos = await _itemService.GetChosenItems(searchString).ConfigureAwait(false);
+            var items = ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList();
+            return View(ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList());
 
-            }
-            else
-            {
-                var itemDtos = await _itemService.GetItemsAsync().ConfigureAwait(false);
-                var items = ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList();
-                return View(ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList());
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    var filteredItemDtos = await _itemService.GetFilteredItemsAsync(searchString).ConfigureAwait(false);
+            //    var items = ItemMapper.Map(filteredItemDtos).Select(x => { x.projectID = id; return x; }).ToList();
+            //    return View(ItemMapper.Map(filteredItemDtos).Select(x => { x.projectID = id; return x; }).ToList());
 
-            }
+            //}
+            //else
+            //{
+            //    var itemDtos = await _itemService.GetItemsAsync().ConfigureAwait(false);
+            //    var items = ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList();
+            //    return View(ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList());
+
+            //}
         }
 
         [Authorize(Roles = "Admin,SuperUser")]
@@ -172,20 +166,24 @@ namespace Raunstrup.UI.Controllers
         [Authorize(Roles = "Admin,SuperUser,User")]
         public async Task<IActionResult> AddUsedProjectItem(int id, string searchString)
         {
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                var filteredItemDtos = await _itemService.GetFilteredItemsAsync(searchString).ConfigureAwait(false);
-                var items = ItemMapper.Map(filteredItemDtos).Select(x => { x.projectID = id; return x; }).ToList();
-                return View(ItemMapper.Map(filteredItemDtos).Select(x => { x.projectID = id; return x; }).ToList());
+            var itemDtos = await _itemService.GetChosenItems(searchString).ConfigureAwait(false);
+            var items = ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList();
+            return View(ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList());
 
-            }
-            else
-            {
-                var itemDtos = await _itemService.GetItemsAsync().ConfigureAwait(false);
-                var items = ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList();
-                return View(ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList());
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    var filteredItemDtos = await _itemService.GetFilteredItemsAsync(searchString).ConfigureAwait(false);
+            //    var items = ItemMapper.Map(filteredItemDtos).Select(x => { x.projectID = id; return x; }).ToList();
+            //    return View(ItemMapper.Map(filteredItemDtos).Select(x => { x.projectID = id; return x; }).ToList());
 
-            }
+            //}
+            //else
+            //{
+            //    var itemDtos = await _itemService.GetItemsAsync().ConfigureAwait(false);
+            //    var items = ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList();
+            //    return View(ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList());
+
+            //}
         }
 
         [Authorize(Roles = "Admin,SuperUser,User")]
@@ -200,10 +198,13 @@ namespace Raunstrup.UI.Controllers
                 
             });
 
-            if (ModelState.IsValid)
-            {
-                await _itemService.AddUsedItemAsync(ProjectUsedItemMapper.Map(projectItems).ToList()).ConfigureAwait(false);
-            }
+            //if (ModelState.IsValid)
+            //{
+            //    await _itemService.AddUsedItemAsync(ProjectUsedItemMapper.Map(projectItems).ToList()).ConfigureAwait(false);
+            //}
+
+            await _itemService.AddUsedItemAsync(ProjectUsedItemMapper.Map(projectItems).ToList()).ConfigureAwait(false);
+
             return RedirectToAction("AddUsedProjectItem", new { id = items[0].projectID });
         }
     }
