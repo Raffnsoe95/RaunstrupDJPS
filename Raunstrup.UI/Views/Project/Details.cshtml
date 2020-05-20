@@ -94,12 +94,13 @@
         <a asp-action="AddAssignedProjectItem" asp-route-id="@Model.Id" asp-controller="Item">TilFøj Item</a> <span>|</span>
 
         <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> <span>|</span>
-    }
+        <div> @Html.ActionLink("Create Pdf", "CreatePdf", "Home")</div>
+        }
 
-    <a asp-action="Index">Back to List</a>
-    <br />
-    <br />
-</section>
+        <a asp-action="Index">Back to List</a>
+        <br />
+        <br />
+    </section>
 <section class="tabs">
     <input type="radio" name="tabs" id="tabone" checked="checked">
     <label for="tabone">Materialer</label>
