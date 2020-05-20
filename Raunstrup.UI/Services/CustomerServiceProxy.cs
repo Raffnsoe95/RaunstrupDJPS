@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+//using Newtonsoft.Json;
 using Raunstrup.Contract.DTOs;
 using Raunstrup.Contract.Services;
 using Raunstrup.UI.Models;
@@ -86,10 +89,27 @@ namespace Raunstrup.UI.Services
 
         async Task ICustomerService.UpdateAsync(int id, CustomerDto customer)
         {
-            var json = JsonSerializer.Serialize(customer);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await Client.PutAsync($"{_customerRequestUri}/{id}", data).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
+           
+                var json = JsonSerializer.Serialize(customer);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await Client.PutAsync($"{_customerRequestUri}/{id}", data).ConfigureAwait(false);
+            try
+            {
+                response.EnsureSuccessStatusCode();
+            }
+            catch (Exception)
+            {
+                if(response.StatusCode == HttpStatusCode.Conflict)
+                {
+                    var result = response.Content.ReadAsStringAsync().Result;
+                    var dbcustomer = Newtonsoft.Json.JsonConvert.DeserializeObject<CustomerDto>(result);
+                    DbUpdateConcurrencyException dbu = new DbUpdateConcurrencyException();
+                    dbu.Data.Add("dbvalue", dbcustomer);
+                    throw dbu;
+                }
+                throw;
+            }
+            
         }
         async Task ICustomerService.AddAsync(int id, int projectid)
         {

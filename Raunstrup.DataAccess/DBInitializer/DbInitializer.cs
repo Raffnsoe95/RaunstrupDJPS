@@ -20,7 +20,7 @@ namespace Raunstrup.DataAccess.DBInitializer
             {
                 context.Database.EnsureCreated();
                 //  Look for any customers.
-                if (context.customers.Any())
+                if (context.Customers.Any())
                 {
                     return;   // DB has been seeded
                 }
@@ -43,7 +43,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                     Active = true
                 };
 
-                context.customers.AddRange(
+                context.Customers.AddRange(
                     new Customer
                     {
                         Name = "Hans Hansen",
@@ -170,7 +170,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                 var type1 = new EmployeeType { HourlyPrice = 0, Title = "musse" };
                 var specialty = new Specialty { Bonus = 100, Title = "Velux" };
                 
-                Employee emp1 = new Employee { Name = "Jørgen Clevin", Active = true, Phone = "1241234",Department = department, Type = type, Specialties = new List<Specialty> { specialty } };
+                Employee emp1 = new Employee { Name = "Jørgen Clevin", Active = true, Phone = "1241234",Department = department, Type = type };
                 Employee emp2 = new Employee { Name = "Brian Jørgensen", Active = true, Phone = "1241234",Department = department, Type = type };
                 context.Employees.AddRange(
                     new Employee
@@ -179,7 +179,7 @@ namespace Raunstrup.DataAccess.DBInitializer
                         Phone = "67589342",
                         Active = true,
                         Type = type,
-                        Specialties = new List<Specialty> { specialty },
+                        
                         Manager = emp1,
                         Department = department
                     },

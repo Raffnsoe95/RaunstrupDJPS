@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Raunstrup.Api.Models
 {
@@ -23,12 +24,15 @@ namespace Raunstrup.Api.Models
                 Name = dto.Name,
                 Phone = dto.Phone,
                 Active = dto.Active,
-                Specialties = SpecialtyMapper.Map(dto.Specialties).ToList(), 
+                Specialty = SpecialtyMapper.Map(dto.Specialty), 
                 Type = TypeMapper.Map(dto.Type), 
                 ManagerID = dto.ManagerID,
                 Manager = EmployeeMapper.Map(dto.Manager),
                 Department = DepartmentMapper.Map(dto.Department),
-                RowVersion = dto.RowVersion
+                RowVersion = dto.RowVersion,
+                //Project =
+
+                
             };
         }
 
@@ -54,12 +58,13 @@ namespace Raunstrup.Api.Models
                 Name = model.Name,
                 Phone = model.Phone,
                 Active = model.Active,
-                Specialties = SpecialtyMapper.Map(model.Specialties).ToList(),
+                Specialty = SpecialtyMapper.Map(model.Specialty),
                 Type = TypeMapper.Map(model.Type),
                 ManagerID = model.ManagerID,
                 Manager = EmployeeMapper.Map(model.Manager),
                 Department = DepartmentMapper.Map(model.Department),
-                RowVersion = model.RowVersion
+                RowVersion = model.RowVersion,
+              
             };
         }
        

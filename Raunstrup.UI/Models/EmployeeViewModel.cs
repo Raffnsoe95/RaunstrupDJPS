@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Raunstrup.DataAccess.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,7 +10,7 @@ namespace Raunstrup.UI.Models
     {
         public EmployeeViewModel()
         {
-            Specialties = new List<SpecialtyViewModel>();
+            Specialty = new SpecialtyViewModel { Bonus=0};
         }
         public int Id { get; set; }
 
@@ -28,12 +29,16 @@ namespace Raunstrup.UI.Models
 
         public TypeViewModel Type { get; set; }
 
-        public List<SpecialtyViewModel> Specialties { get; set; }
+        public SpecialtyViewModel Specialty { get; set; }
 
         public int? ManagerID { get; set; }
 
         public EmployeeViewModel Manager { get; set; }
 
         public DepartmentViewModel Department { get; set; }
+
+        public List<ProjectViewModel> Projects { get; set; }
+
+        public ProjectEmployeeViewModel ProjectEmployees { get; set; }
     }
 }

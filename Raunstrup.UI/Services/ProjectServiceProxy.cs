@@ -103,6 +103,20 @@ namespace Raunstrup.UI.Services
             };
             return await JsonSerializer.DeserializeAsync<IEnumerable<ProjectDto>>(stream, options).ConfigureAwait(false);
         }
+        async Task<IEnumerable<ProjectDto>> IProjectService.GetProjectsByEmployeeId(int employeeId)
+        {
+
+            var response = await Client.GetAsync(_projectRequestUri + $"/GetProjectsByEmployeeId/{employeeId}").ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
+
+            var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            return await JsonSerializer.DeserializeAsync<IEnumerable<ProjectDto>>(stream, options).ConfigureAwait(false);
+        }
 
     }
 }

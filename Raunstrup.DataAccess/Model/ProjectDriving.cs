@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Raunstrup.DataAccess.Model
@@ -10,12 +11,13 @@ namespace Raunstrup.DataAccess.Model
 
         public int Amount { get; set; }
 
-        public int EmployeeId { get; set; }
-
         public decimal UnitPrice { get; set; }
 
         public int ProjectId { get; set; }
 
+        public int EmployeeID { get; set; }
+
+        [ForeignKey("EmployeeID")]
         public Employee Employee { get; set; }
     }
 }

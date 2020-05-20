@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Raunstrup.BusinessLogic.ServiceInterfaces;
 using Raunstrup.DataAccess;
@@ -20,7 +21,7 @@ namespace Raunstrup.BusinessLogic.Services
 
             IEnumerable<Customer> ICustomerService.GetAll()
             {
-                return _context.customers
+                return _context.Customers
                 .Where(a=>a.Active==true)
                 .Include(c=>c.CustomerDiscountType)
             .ToList();
@@ -28,7 +29,7 @@ namespace Raunstrup.BusinessLogic.Services
 
             Customer ICustomerService.Get(int id)
             {
-            return _context.customers
+            return _context.Customers
            .Include(e => e.CustomerDiscountType)
            .FirstOrDefault(x => x.Id == id);
 
@@ -37,43 +38,58 @@ namespace Raunstrup.BusinessLogic.Services
 
             void ICustomerService.Create(Customer customer)
             {
-            CustomerDiscountType customerDiscountType = _context.CustomerDiscountTypes.Find(customer.CustomerDiscountTypeId);
+            CustomerDiscountType customerDiscountType = _context.CustomerDiscountTypes.Find(customer.CustomerDiscountTypeID);
             customer.CustomerDiscountType = customerDiscountType;
-                _context.customers
+                _context.Customers
                 .Add(customer);
                 _context.SaveChanges();
             }
 
             void ICustomerService.Update(Customer customer)
             {
+            CustomerDiscountType customerDiscountType = _context.CustomerDiscountTypes.Find(customer.CustomerDiscountTypeID);
             
-
-            CustomerDiscountType customerDiscountType = _context.CustomerDiscountTypes.Find(customer.CustomerDiscountTypeId);
-            customer.CustomerDiscountType = customerDiscountType;
-
-            _context.customers.Update(customer);
+            try
+            {
+                customer.CustomerDiscountType = customerDiscountType;
+                _context.Customers.Update(customer);
                 _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException dbu)
+
+            {
+                var exceptionEntry = dbu.Entries.Single();
+                var databaseEntry = exceptionEntry.GetDatabaseValues();
+                customer = (Customer)databaseEntry.ToObject();
+                customer.CustomerDiscountType = customerDiscountType;
+                dbu.Data.Add("dbvalue", customer);
+                throw;
+
+            }
+
+
+            
             }
 
             void ICustomerService.Delete(int id)
             {
             
 
-            Customer tmpCustomer=_context.customers.Find(id);
+            Customer tmpCustomer=_context.Customers.Find(id);
 
             tmpCustomer.Active = false;
-            _context.customers.Update(tmpCustomer);
+            _context.Customers.Update(tmpCustomer);
             _context.SaveChanges();
             }
         void ICustomerService.AddCustomerToProject(Customer Customer)
         {
-            _context.Customer.Add(Customer);
+            _context.Customers.Add(Customer);
             _context.SaveChanges();
         }
 
         IEnumerable<Customer> ICustomerService.GetFilteredCustomers(string searchString)
         {
-            return _context.customers
+            return _context.Customers
                 .Where(f=>f.Name.ToUpper().Contains(searchString.ToUpper()))
                 .Where(a=>a.Active==true)
                 .Include(c => c.CustomerDiscountType)

@@ -12,6 +12,6 @@ namespace Raunstrup.DataAccess.Model
 
         public decimal HourlyPrice { get; set; }
 
-        public int EmployeeId { get; set; }
+       // public int EmployeeId { get; set; }
     }
 }

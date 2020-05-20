@@ -49,5 +49,7 @@ namespace Raunstrup.Contract.DTOs
 
         public List<ProjectEmployeeDto> ProjectEmployeeDtos { get; set; }
         public CustomerDto CustomerDto { get; set; }
+
+       
     }
 }

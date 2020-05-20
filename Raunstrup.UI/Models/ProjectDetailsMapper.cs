@@ -42,6 +42,8 @@ namespace Raunstrup.UI.Models
                         UnitPrice = PD.First().UnitPrice
                     }).ToList(),
 
+                TotalUsedDriving = dto.ProjectDrivingDtos.Sum(UI => UI.Amount * UI.UnitPrice),
+
                 ProjectEmployees = ProjectEmployeeMapper.Map(dto.ProjectEmployeeDtos).GroupBy(PE => PE.EmployeeId)
                     .Select(PE => new ProjectEmployeeViewModel
                     {
@@ -50,6 +52,8 @@ namespace Raunstrup.UI.Models
                         Employee = PE.First().Employee,
                         ProjectId = PE.First().ProjectId
                     }).ToList(),
+
+                TotalAssignedHours = dto.ProjectEmployeeDtos.Sum(PE => (PE.Employee.Type.HourlyPrice + PE.Employee.Specialty.Bonus) * PE.EstWorkingHours),
 
                 //working hours summed up by employee 
                 WorkingHours = WorkingHoursMapper.Map(dto.WorkingHoursDtos)
@@ -60,9 +64,11 @@ namespace Raunstrup.UI.Models
                         EmployeeId = WH.First().EmployeeId,
                         Employee = WH.First().Employee,
                         ProjectId = WH.First().ProjectId,
-                        HourlyPrice = WH.First().Employee.Type.HourlyPrice + WH.First().Employee.Specialties.Sum(b => b.Bonus),
+                        HourlyPrice = WH.First().Employee.Type.HourlyPrice + WH.First().Employee.Specialty.Bonus,
                         WorkingHoursId = WH.First().WorkingHoursId
                     }).ToList(),
+
+                TotalUsedHours = dto.WorkingHoursDtos.Sum(WH => WH.Amount * WH.HourlyPrice),
 
                 //assigned items summed up
                 AssignedItems = ProjectAssignedItemMapper.Map(dto.AssignedItemDtos).GroupBy(PAI => PAI.ItemId)
@@ -74,6 +80,8 @@ namespace Raunstrup.UI.Models
                         ProjectId = PAI.First().ProjectId
                     }).ToList(),
 
+                TotalAssignedItems = dto.AssignedItemDtos.Sum(UI => UI.Amount * UI.Price),
+
                 //used items summed up
                 UsedItems = ProjectUsedItemMapper.Map(dto.UsedItemsDtos).GroupBy(PUI => PUI.ItemId)
                     .Select(PUI => new ProjectUsedItemViewModel
@@ -82,7 +90,8 @@ namespace Raunstrup.UI.Models
                         Item = PUI.First().Item,
                         Price = PUI.First().Price,
                         ProjectId = PUI.First().ProjectId
-                    }).ToList()
+                    }).ToList(),
+                TotalUsedItems = dto.UsedItemsDtos.Sum(UI => UI.Amount * UI.Price)
 
             };
         }

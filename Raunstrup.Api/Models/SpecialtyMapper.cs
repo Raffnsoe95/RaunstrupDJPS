@@ -21,8 +21,7 @@ namespace Raunstrup.Api.Models
             { 
                 Id = dto.Id, 
                 Bonus = dto.Bonus,
-                Title = dto.Title,
-                EmployeeId = dto.EmployeeId
+                Title = dto.Title
             };
         }
 
@@ -41,8 +40,7 @@ namespace Raunstrup.Api.Models
             {
                 Id = model.Id,
                 Bonus = model.Bonus,
-                Title = model.Title,
-                EmployeeId = model.EmployeeId
+                Title = model.Title
             };
         }
     }

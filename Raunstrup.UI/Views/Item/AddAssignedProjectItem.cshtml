@@ -14,62 +14,37 @@
 <p>
     <!--<a asp-action="Create">Tilføj Item til Project</a>-->
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Navn
-            </th>
-            <th>
-                Pris
-            </th>
-            <th>
-                Amount
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @*foreach (var item in Model) {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Active)
-                    </td>
-                    <td>
 
-                        <label></label>
-
-                        <input  />
-
-                    </td>
-                    <td>
-                        <a asp-action="AddAssignedProjectItemToProject" asp-route-id="@item.Id" asp-route-projectid="@ViewContext.ModelState["id"].AttemptedValue" asp-controller="Item">Tilføj</a>
-                    </td>
-                </tr>
-        }*@
-    </tbody>
-</table>
 
 <form method="post" asp-action="AddAssignedProjectItemToProject">
 
     <table class="table">
-
-       @for (var i = 0; i < Model.Count(); i++)
-        {
-           <tr>
-             <td><input type="text" asp-for="@Model[i].Id" hidden/></td>
-             <td><input type="text" asp-for="@Model[i].Name" /></td>
-             <td><input type="text" asp-for="@Model[i].Price" /></td>
-             <td><input type="text" asp-for="@Model[i].projectID" hidden /></td>
-             <td><input type="text" asp-for="@Model[i].Amount" /></td>
-           </tr>
-        }
+        <thead>
+            <tr>
+                <th>
+                    Navn
+                </th>
+                <th>
+                    Pris
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <input type="text" asp-for="@Model[i].Id" hidden />
+                    <td><input type="text" asp-for="@Model[i].Name" /></td>
+                    <td><input type="text" asp-for="@Model[i].Price" /></td>
+                    <td><input type="text" asp-for="@Model[i].projectID" hidden /></td>
+                    <td><input type="text" asp-for="@Model[i].Amount" /></td>
+                </tr>
+            }
+        </tbody>
     </table>
     <button>Update</button>
 </form>

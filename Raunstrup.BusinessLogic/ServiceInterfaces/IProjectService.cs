@@ -22,5 +22,7 @@ namespace Raunstrup.BusinessLogic.ServiceInterfaces
         void AddCustomerToProject(Project project);
 
         IEnumerable<Project> GetProjectsByCustomerId(int customerId);
+
+       
     }
 }

@@ -7,9 +7,9 @@ namespace Raunstrup.Contract.Services
 {
     public interface IEmployeeservice
     {
-        Task<IEnumerable<EmployeeDto>> GetEmployeesAsync();
+        Task<IEnumerable<EmployeeDto>> GetEmployeeAsync();
 
-        Task<EmployeeDto> GetEmployeesAsync(int id);
+        Task<EmployeeDto> GetEmployeeAsync(int id);
 
         Task AddAsync(EmployeeDto employee);
 

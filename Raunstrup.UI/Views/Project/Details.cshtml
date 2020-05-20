@@ -26,7 +26,7 @@
             Samlet Pris
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Price)
+            @Model.EstimatedPrice
         </dd>
         <dt class="col-sm-2">
             Estimeret kørsel
@@ -132,7 +132,7 @@
                     <td colspan="3">
                         <b>Total:</b>
                     <td>
-                        @Model.AssignedItems.Sum(UI => UI.Amount * UI.Price)
+                        @Model.TotalAssignedItems
                     </td>
                 </tr>
             </tbody>
@@ -178,7 +178,7 @@
                     <td colspan="3">
                         <b>Total:</b>
                     <td>
-                        @Model.UsedItems.Sum(UI => UI.Amount * UI.Price)
+                        @Model.TotalUsedItems
                     </td>
                 </tr>
             </tbody>
@@ -218,10 +218,10 @@
                             @item.EstWorkingHours
                         </td>
                         <td>
-                            @(item.Employee.Type.HourlyPrice + item.Employee.Specialties.Sum(s => s.Bonus))
+                            @(item.Employee.Type.HourlyPrice + item.Employee.Specialty.Bonus)
                         </td>
                         <td>
-                            @((item.Employee.Type.HourlyPrice + item.Employee.Specialties.Sum(s => s.Bonus)) * item.EstWorkingHours)
+                            @((item.Employee.Type.HourlyPrice + item.Employee.Specialty.Bonus) * item.EstWorkingHours)
                         </td>
                     </tr>
                 }
@@ -229,7 +229,7 @@
                     <td colspan="3">
                         <b>Total:</b>
                     <td>
-                        @Model.ProjectEmployees.Sum(PE => (PE.Employee.Type.HourlyPrice + PE.Employee.Specialties.Sum(s => s.Bonus)) * PE.EstWorkingHours)
+                        @Model.TotalAssignedHours
                     </td>
                 </tr>
             </tbody>
@@ -274,7 +274,7 @@
                     <td colspan="3">
                         <b>Total:</b>
                     <td>
-                        @Model.WorkingHours.Sum(WH => WH.Amount * WH.HourlyPrice)
+                        @Model.TotalUsedHours
                     </td>
                 </tr>
             </tbody>
@@ -318,7 +318,7 @@
                     <td colspan="2">
                         <b>Total:</b>
                     <td>
-                        @Model.ProjectDrivings.Sum(WH => WH.Amount * WH.UnitPrice)
+                        @Model.TotalUsedDriving
                     </td>
                 </tr>
             </tbody>

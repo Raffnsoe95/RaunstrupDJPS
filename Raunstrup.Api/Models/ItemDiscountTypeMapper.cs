@@ -22,9 +22,9 @@ namespace Raunstrup.Api.Models
                 DiscountPercentage = dto.DiscountPercentage,
                 StartDate = dto.StartDate,
                 EndDate = dto.EndDate,
-                Amount = dto.Amount,
+                Amount = dto.Amount
                 //DiscountType = dto.Discount,
-                ItemId = dto.ItemId,
+               
                 //RowVersion = dto.RowVersion,
             };
         }
@@ -48,9 +48,9 @@ namespace Raunstrup.Api.Models
                 DiscountPercentage = model.DiscountPercentage,
                 StartDate = model.StartDate,
                 EndDate = model.EndDate,
-                Amount = model.Amount,
+                Amount = model.Amount
                 //Discount = model.DiscountType,
-                ItemId = model.ItemId,
+                
                 //RowVersion = model.RowVersion,
             };
         }

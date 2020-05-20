@@ -16,6 +16,6 @@ namespace Raunstrup.DataAccess.Model
 
         public int Amount { get; set; }
 
-        public int ItemId { get; set; }
+      //  public int ItemId { get; set; }
     }
 }

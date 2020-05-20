@@ -28,7 +28,7 @@ namespace Raunstrup.Api.Models
                 Active=dto.Active, 
                 RowVersion=dto.Rowversion, 
                 CustomerDiscountType=CustomerDiscountTypeMapper.Map( dto.CustomerDiscountType),
-            CustomerDiscountTypeId=dto.CustomerDiscountTypeId
+            CustomerDiscountTypeID=dto.CustomerDiscountTypeId
             };
         }
 
@@ -52,7 +52,7 @@ namespace Raunstrup.Api.Models
                 Active=model.Active, 
                 Rowversion=model.RowVersion, 
                 CustomerDiscountType=CustomerDiscountTypeMapper.Map(model.CustomerDiscountType),
-            CustomerDiscountTypeId=model.CustomerDiscountTypeId
+            CustomerDiscountTypeId=model.CustomerDiscountTypeID
             };
         }
     
@@ -71,8 +71,7 @@ namespace Raunstrup.Api.Models
             return new CustomerDiscountTypeDto
             { Id = model.Id, 
                 Name = model.Name, 
-                DiscountPercent=model.DiscountPercent, 
-                CustomerId=model.CustomerID, 
+                DiscountPercent=model.DiscountPercent,
                 Rowversion = model.RowVersion,
            
             };
