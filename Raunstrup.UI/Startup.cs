@@ -33,7 +33,6 @@ namespace Raunstrup.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Try an Erro
             services.AddHttpClient<IItemService, ItemServiceProxy>(client =>
             {
                 client.BaseAddress = new Uri(Configuration["BaseUrl"]);
@@ -54,19 +53,13 @@ namespace Raunstrup.UI
             {
                 client.BaseAddress = new Uri(Configuration["BaseUrl"]);
             });
-            //---------------------
-
-
+            
             //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase(databaseName: "RaunstrupDBVieModelInMemory"));
+
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             
-            
-
-
-
-
             services.AddDbContext<UserManagementContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("UserDatabaseConnection")));
@@ -89,12 +82,14 @@ namespace Raunstrup.UI
 
             services.AddRazorPages();
 
-            //services.AddDbContext<ViewModelContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //SqlDb
+            services.AddDbContext<ViewModelContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //SqlDb
 
-            services.AddDbContext<ViewModelContext>(options => options.UseInMemoryDatabase(databaseName: "RaunstrupInMeme"));
-            //options.UseSqlite(Configuration.GetConnectionString("MvcMovieContext")));
+            ////InMemDB
+            //services.AddDbContext<ViewModelContext>(options => options.UseInMemoryDatabase(databaseName: "RaunstrupInMeme"));
+            ////InMemDB
 
-            //services.AddScoped<IItemService, ItemService>(); -------------------------------------------------
             services.AddScoped<IContactService, ContactService>();
         }
 

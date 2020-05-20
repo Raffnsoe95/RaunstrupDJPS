@@ -85,13 +85,13 @@
 
 
     <a asp-action="Create" asp-route-id="@Model.Id" asp-controller="ProjectDriving">Indberet kørsel</a> |
-    <a asp-action="AddUsedProjectItem" asp-route-id="@Model.Id" asp-controller="Item">Indberet Item</a> |
-    <a asp-action="Create" asp-route-id="@Model.Id" asp-controller="WorkingHours">Indberet WorkingHours</a> |
+    <a asp-action="AddUsedProjectItem" asp-route-id="@Model.Id" asp-controller="Item">Indberet materialer</a> |
+    <a asp-action="Create" asp-route-id="@Model.Id" asp-controller="WorkingHours">Indberet arbejdstimer</a> |
     @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
     {
         <a asp-action="AddProjectEmployee" asp-route-id="@Model.Id" asp-controller="Employee">Tilknyt medarbejder</a> <span>|</span>
         <a asp-action="AddProjectCustomer" asp-route-id="@Model.Id" asp-controller="Customer">Tilknyt Kunde</a> <span>|</span>
-        <a asp-action="AddAssignedProjectItem" asp-route-id="@Model.Id" asp-controller="Item">TilFøj Item</a> <span>|</span>
+        <a asp-action="AddAssignedProjectItem" asp-route-id="@Model.Id" asp-controller="Item">Tilføj materialer</a> <span>|</span>
 
         <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> <span>|</span>
     }

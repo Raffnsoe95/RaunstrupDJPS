@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Raunstrup.Api.Models;
 using Raunstrup.Contract.DTOs;
 using Raunstrup.BusinessLogic.ServiceInterfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.CodeAnalysis;
 
 namespace Raunstrup.Api.Controllers
 {
@@ -53,9 +55,19 @@ namespace Raunstrup.Api.Controllers
 
         // PUT: api/Customer/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] ProjectDto value)
+        public ActionResult<ProjectDto> Put(int id, [FromBody] ProjectDto value)
         {
-            _projectService.Update(ProjectMapper.Map(value));
+            try
+            {
+                _projectService.Update(ProjectMapper.Map(value));
+                return value;
+            }
+            catch (DbUpdateConcurrencyException dbu)
+            { 
+                Project project = (Project)dbu.Data["dbvalue"];
+                return Conflict(project);
+                //return Conflict(ProjectMapper.Map(project));
+            }
         }
 
         // DELETE: api/ApiWithActions/5

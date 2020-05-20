@@ -86,11 +86,6 @@ namespace Raunstrup.UI.Controllers
         // GET: Project/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            //if (id == null)
-            //{
-            //    return NotFound();
-            //}
-
             var projectViewModel = await _projectService.GetProjectAsync(id).ConfigureAwait(false);
             if (projectViewModel == null)
             {
@@ -107,31 +102,72 @@ namespace Raunstrup.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,StartDate,EndDate,Price,Description,Active,IsFixedPrice,IsAccepted,IsDone,Rowversion")] ProjectViewModel projectViewModel)
         {
+
             if (id != projectViewModel.Id)
             {
                 return NotFound();
             }
 
+            //CustomerViewModel customerViewModel = CustomerMapper.Map(cEcustomerViewModel);
+
             if (ModelState.IsValid)
             {
                 try
                 {
+
                     await _projectService.UpdateAsync(id, ProjectMapper.Map(projectViewModel)).ConfigureAwait(false);
                     return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException dbu)
                 {
-                    if (!ProjectViewModelExists(projectViewModel.Id))
+                    var dbcustomer = ProjectMapper.Map((ProjectDto)dbu.Data["dbvalue"]);
+                    if (projectViewModel.Description != dbcustomer.Description)
                     {
-                        return NotFound();
+                        ModelState.AddModelError("Description", "er opdateret af en anden person");
                     }
-                    else
-                    {
-                        throw;
-                    }
+
+                    //var customerDiscountTypeDtos = await _customerService.GetAllCustomerDiscountType().ConfigureAwait(false);
+                    //IEnumerable<CustomerDiscountTypeViewModel> customerDiscountTypeViewModels = CustomerMapper.Map(customerDiscountTypeDtos);
+
+                    //cEcustomerViewModel.CustomerDiscountTypeViewModels = customerDiscountTypeViewModels.ToList();
+
+                    //cEcustomerViewModel.CustomerDiscountType = dbcustomer.CustomerDiscountType;
+                    ModelState.AddModelError(string.Empty, "Denne kunde er blevet opdateret af en anden bruger, tryk gem for at overskrive");
+                    projectViewModel.Rowversion = dbcustomer.Rowversion;
+                    ModelState.Remove("Rowversion");
+                    return View("Edit", projectViewModel);
                 }
             }
             return View(projectViewModel);
+
+
+            ////The old-----
+            //if (id != projectViewModel.Id)
+            //{
+            //    return NotFound();
+            //}
+
+            //if (ModelState.IsValid)
+            //{
+            //    try
+            //    {
+            //        await _projectService.UpdateAsync(id, ProjectMapper.Map(projectViewModel)).ConfigureAwait(false);
+            //        return RedirectToAction(nameof(Index));
+            //    }
+            //    catch (DbUpdateConcurrencyException)
+            //    {
+            //        if (!ProjectViewModelExists(projectViewModel.Id))
+            //        {
+            //            return NotFound();
+            //        }
+            //        else
+            //        {
+            //            throw;
+            //        }
+            //    }
+            //}
+            //return View(projectViewModel);
+            ////Theold---
         }
 
         [Authorize(Roles = "Admin,SuperUser")]
