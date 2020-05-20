@@ -16,7 +16,8 @@ using Raunstrup.UI.Services;
 using Raunstrup.Contract.Services;
 using Raunstrup.BusinessLogic.Services;
 using Raunstrup.UI.UserManagement;
-//using Raunstrup.BusinessLogic.ServiceInterfaces;
+using Raunstrup.Contakt.Service;
+using Raunstrup.Contakt.Service.Interface;
 
 namespace Raunstrup.UI
 {
@@ -60,6 +61,8 @@ namespace Raunstrup.UI
             services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase(databaseName: "RaunstrupDBVieModelInMemory"));
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+            
+            
 
 
 
@@ -92,7 +95,7 @@ namespace Raunstrup.UI
             //options.UseSqlite(Configuration.GetConnectionString("MvcMovieContext")));
 
             //services.AddScoped<IItemService, ItemService>(); -------------------------------------------------
-
+            services.AddScoped<IContactService, ContactService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
