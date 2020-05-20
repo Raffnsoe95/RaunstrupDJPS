@@ -164,7 +164,23 @@ namespace Raunstrup.UI.Controllers
                         {
                             ModelState.AddModelError("Phone", "telefonnummeret er opdateret af en anden person");
                         }
-                    
+                    if (cEcustomerViewModel.Name != dbcustomer.Name)
+                    {
+                        ModelState.AddModelError("Name", "Navnet er opdateret af en anden person");
+                    }
+                    if (cEcustomerViewModel.Address != dbcustomer.Address)
+                    {
+                        ModelState.AddModelError("Address", "Addressen er opdateret af en anden person");
+                    }
+                    if (cEcustomerViewModel.Email != dbcustomer.Email)
+                    {
+                        ModelState.AddModelError("Email", "E-mailen er opdateret af en anden person");
+                    }
+                    if (cEcustomerViewModel.CustomerDiscountType != dbcustomer.CustomerDiscountType)
+                    {
+                        ModelState.AddModelError("SelectedCustomerDiscountViewModel", "Kundetypen er opdateret af en anden person");
+                    }
+
                     var customerDiscountTypeDtos = await _customerService.GetAllCustomerDiscountType().ConfigureAwait(false);
                     IEnumerable<CustomerDiscountTypeViewModel> customerDiscountTypeViewModels = CustomerMapper.Map(customerDiscountTypeDtos);
 

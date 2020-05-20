@@ -72,7 +72,7 @@ namespace Raunstrup.UI.Controllers
                 //_context.Add(projectDrivingViewModel);
                 //await _context.SaveChangesAsync();
                 await _employeeService.AddAsync(ProjectDrivingMapper.Map(projectDrivingViewModel));
-                return RedirectToAction(nameof(Create));
+                return RedirectToAction("details", "project", new { id = projectDrivingViewModel.ProjectId });
             }
             ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", projectDrivingViewModel.EmployeeId);
             return View(projectDrivingViewModel);
