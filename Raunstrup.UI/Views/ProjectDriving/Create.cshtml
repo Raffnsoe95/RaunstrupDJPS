@@ -1,12 +1,11 @@
 ﻿@model Raunstrup.UI.Models.ProjectDrivingViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Indberet kørsel";
 }
 
-<h1>Create</h1>
+<h1>Indberet kørsel</h1>
 
-<h4>ProjectDrivingViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -23,7 +22,8 @@
         </div>*@
             <input type="hidden" asp-for="EmployeeId" class="form-control" />
             <div class="form-group">
-                <label asp-for="UnitPrice" class="control-label"></label>
+                @*<label asp-for="UnitPrice" class="control-label"></label>*@
+                Enhedspris
                 <input asp-for="UnitPrice" class="form-control" />
                 <span asp-validation-for="UnitPrice" class="text-danger"></span>
             </div>
@@ -33,14 +33,14 @@
                 @*<span asp-validation-for="ProjectId" class="text-danger"></span>
             </div>*@
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Gem" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Details" asp-controller="Project" asp-route-id="@Model.ProjectId">Tilbage</a>
 </div>
 
 @section Scripts {
