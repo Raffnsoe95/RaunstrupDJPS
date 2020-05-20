@@ -66,8 +66,6 @@ namespace Raunstrup.Api.Controllers
                 return Conflict(CustomerMapper.Map(customer));
                 
             }
-            
-            
         }
 
         // DELETE: api/ApiWithActions/5
