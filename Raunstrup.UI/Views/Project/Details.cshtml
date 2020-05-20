@@ -120,28 +120,40 @@
                     <th>
                         Total
                     </th>
+                    <th>
+                        Rabat
+                    </th>
+                    <th>
+                        Total m. rabat
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model.AssignedItems)
                 {
-                    <tr>
-                        <td>
-                            @item.Item.Name
-                        </td>
-                        <td>
-                            @item.Amount
-                        </td>
-                        <td>
-                            @item.Price
-                        </td>
-                        <td>
-                            @(item.Amount * item.Price)
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @item.Item.Name
+                    </td>
+                    <td>
+                        @item.Amount
+                    </td>
+                    <td>
+                        @item.Price
+                    </td>
+                    <td>
+                        @(item.Amount * item.Price)
+                    </td>
+                    <td>
+                        @item.Discount
+                    </td>
+                    <td>
+                        @item.TotalPriceWithDiscount
+                    </td>
+                </tr>
                 }
                 <tr>
-                    <td colspan="3">
+                    <td colspan="5">
                         <b>Total:</b>
                     <td>
                         @Model.TotalAssignedItems

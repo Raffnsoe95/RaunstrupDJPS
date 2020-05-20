@@ -19,7 +19,7 @@ namespace Raunstrup.UI.Models
 
         public int ProjectId { get; set; }
 
-        public int Discount
+        public decimal Discount
         {
             get
             {
@@ -29,7 +29,7 @@ namespace Raunstrup.UI.Models
                 }
                 else
                 {
-                    return Item.Discount.DiscountPercentage;
+                    return Math.Round((Amount * Price) * Item.Discount.DiscountPercentage / 100, 2);
                 }
             }
         }
@@ -38,7 +38,7 @@ namespace Raunstrup.UI.Models
         {
             get
             {
-                return (Amount * Price) * (100 - Discount) / 100;
+                return Math.Round((Amount * Price) - Discount, 2);
             }
         }
     }

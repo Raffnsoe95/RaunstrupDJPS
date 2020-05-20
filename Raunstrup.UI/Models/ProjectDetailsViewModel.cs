@@ -55,6 +55,7 @@ namespace Raunstrup.UI.Models
 
         public List<ProjectDrivingViewModel> ProjectDrivings { get; set; }
 
+
         public decimal TotalAssignedHours { get; set; }
         public decimal TotalAssignedItems { get; set; }
         public decimal TotalUsedHours { get; set; }
