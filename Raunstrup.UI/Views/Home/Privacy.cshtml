@@ -1,7 +1,7 @@
 ﻿@model Raunstrup.UI.Models.ContactViewModel
-@{
+@*@{
         ViewData["Title"] = "Privacy Policy";
-    }
+    }*@
 
 <h1>@ViewData["Title"]</h1>
 
@@ -42,6 +42,13 @@
 
         <article>
 
+            <!--Your Adress-->
+            <p>
+                <label asp-for="Adress">Adresse</label>
+                <input asp-for="Adress" type="text" class="form-control" placeholder="Borge Gade 258b, 6000 kolding">
+                <span asp-validation-for="Adress" class="text-danger"></span>
+            </p>
+            <!--Your Adress-->
             <!--Your Email-->
             <p>
                 <label asp-for="Email">Email</label>
@@ -68,7 +75,7 @@
                 <button type="submit" class="btn btn-primary">Send</button>
             </p>
             <!--Send Button-->
-            
+
 
         </article>
 

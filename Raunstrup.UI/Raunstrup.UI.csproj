@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Raunstrup.BusinessLogic\Raunstrup.BusinessLogic.csproj" />
+    <ProjectReference Include="..\Raunstrup.Contakt.Service\Raunstrup.Contakt.Service.csproj" />
     <ProjectReference Include="..\Raunstrup.Contract\Raunstrup.Contract.csproj" />
   </ItemGroup>
 
