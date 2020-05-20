@@ -8,7 +8,8 @@ namespace Raunstrup.Contakt.Service.Interface
 {
     public interface IContactService
     {
-        //void SendEmail(ContactDto contact);
-         Task SendEmail(ContactDto contact);
+         //void SendEmail(ContactDto contact);
+
+        void SendEmail(ContactDto contact);
     }
 }
