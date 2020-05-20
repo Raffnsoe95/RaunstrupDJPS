@@ -54,5 +54,35 @@ namespace Raunstrup.UI.Models
         public List<ProjectUsedItemViewModel> UsedItems { get; set; }
 
         public List<ProjectDrivingViewModel> ProjectDrivings { get; set; }
+
+        public decimal TotalAssignedHours { get; set; }
+        public decimal TotalAssignedItems { get; set; }
+        public decimal TotalUsedHours { get; set; }
+        public decimal TotalUsedItems { get; set; }
+        public decimal TotalUsedDriving { get; set; }
+
+        public decimal EstimatedPrice
+        {
+            get
+            {
+                return TotalAssignedHours + TotalAssignedItems + Convert.ToDecimal(ESTdriving);
+            }
+        }
+
+        public decimal CustomerDiscount
+        {
+            get
+            {
+                return Math.Round(EstimatedPrice * Customer.CustomerDiscountType.DiscountPercent / 100, 2);
+            }
+        }
+
+        public decimal DiscountedPrice
+        {
+            get
+            {
+                return Math.Round(EstimatedPrice - (EstimatedPrice * Customer.CustomerDiscountType.DiscountPercent / 100), 2);
+            }
+        }
     }
 }

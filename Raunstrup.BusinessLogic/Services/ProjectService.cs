@@ -73,7 +73,7 @@ namespace Raunstrup.BusinessLogic.Services
             .ThenInclude(e => e.Item)
             .Include(w => w.AssignedItems)
             .ThenInclude(e => e.Item)
-            .Include(w=> w.Customer)
+            .Include(w=> w.Customer).ThenInclude(e => e.CustomerDiscountType)
             
 
                 .FirstOrDefault(x => x.Id == id);

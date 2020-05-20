@@ -219,6 +219,7 @@ namespace Raunstrup.UI.Controllers
         {
             return _context.customers.Any(e => e.Id == id);
         }
+
         public async Task<IActionResult> AddProjectCustomer(int id, string searchString)
         {
             IEnumerable<CustomerDto> customerDtos = await _customerService.GetChosenCustomers(searchString);

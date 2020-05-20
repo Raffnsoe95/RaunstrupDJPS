@@ -20,6 +20,9 @@ namespace Raunstrup.UI.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Skal udfyldes")]
+        public string Adress { get; set; }
+
+        [Required(ErrorMessage = "Skal udfyldes")]
         public string Subject { get; set; }
 
         [Required(ErrorMessage = "Skal udfyldes")]
