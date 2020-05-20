@@ -9,4 +9,8 @@
     <PackageReference Include="MimeKit" Version="2.6.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Raunstrup.Contract\Raunstrup.Contract.csproj" />
+  </ItemGroup>
+
 </Project>

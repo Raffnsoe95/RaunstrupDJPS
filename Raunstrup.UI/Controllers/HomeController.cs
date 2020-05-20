@@ -12,7 +12,8 @@ using MimeKit;
 using Raunstrup.Contract.Services;
 using Raunstrup.UI.Models;
 using SmtpClient = MailKit.Net.Smtp.SmtpClient;
-
+using Raunstrup.Contakt.Service.Interface;
+using Raunstrup.Contract.DTOs;
 
 namespace Raunstrup.UI.Controllers
 {
@@ -20,14 +21,14 @@ namespace Raunstrup.UI.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IEmployeeservice _employeeService;
-        //private readonly ContactViewModel _contactViewModel;
+        //private readonly IContactService _contact;
 
 
-        public HomeController(ILogger<HomeController> logger, IEmployeeservice employeeservice)
+        public HomeController(ILogger<HomeController> logger, IEmployeeservice employeeservice, IContactService contact)
         {
             _logger = logger;
             _employeeService = employeeservice;
-            //_contactViewModel = contactViewModel;
+            //_contact = contact;
 
         }
 
@@ -63,7 +64,12 @@ namespace Raunstrup.UI.Controllers
             message.Subject = contactViewModel.Subject;
             message.Body = new TextPart("text")
             {
-                Text = contactViewModel.Name +  contactViewModel.Email+ "/b"+ contactViewModel.Message
+                Text =
+                "Navn " + contactViewModel.Name +
+                "Tlf: " + contactViewModel.Phone +
+                "Adresse: " + contactViewModel.Adress +
+                "Email: " + contactViewModel.Email +
+                contactViewModel.Message
             };
 
             using (var client = new SmtpClient())
@@ -76,6 +82,12 @@ namespace Raunstrup.UI.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        //public async Task< IActionResult> CreateEmail(ContactDto contact)
+        //{
+        //    await _contact.SendEmail(contact).ConfigureAwait(false);
+        //    return RedirectToAction("Index");
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
