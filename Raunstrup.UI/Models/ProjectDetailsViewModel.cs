@@ -61,9 +61,28 @@ namespace Raunstrup.UI.Models
         public decimal TotalUsedItems { get; set; }
         public decimal TotalUsedDriving { get; set; }
 
-        public decimal EstimatedPrice { get
+        public decimal EstimatedPrice
+        {
+            get
             {
                 return TotalAssignedHours + TotalAssignedItems + Convert.ToDecimal(ESTdriving);
-            } }
+            }
+        }
+
+        public decimal CustomerDiscount
+        {
+            get
+            {
+                return Math.Round(EstimatedPrice * Customer.CustomerDiscountType.DiscountPercent / 100, 2);
+            }
+        }
+
+        public decimal DiscountedPrice
+        {
+            get
+            {
+                return Math.Round(EstimatedPrice - (EstimatedPrice * Customer.CustomerDiscountType.DiscountPercent / 100), 2);
+            }
+        }
     }
 }
