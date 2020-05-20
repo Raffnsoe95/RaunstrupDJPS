@@ -27,7 +27,5 @@ namespace Raunstrup.Contract.DTOs
         public EmployeeDto Manager { get; set; }
 
         public DepartmentDto Department { get; set; }
-
-        public List<ProjectDto> Projects { get; set; }
     }
 }

@@ -1,11 +1,14 @@
-﻿using System;
+﻿using Raunstrup.Contract.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Raunstrup.Contakt.Service.Interface
 {
     public interface IContactService
     {
-        //void SendEmail(ContactViewModel contactViewModel);
+        //void SendEmail(ContactDto contact);
+         Task SendEmail(ContactDto contact);
     }
 }

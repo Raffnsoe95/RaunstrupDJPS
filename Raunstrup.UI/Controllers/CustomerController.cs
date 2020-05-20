@@ -172,6 +172,9 @@ namespace Raunstrup.UI.Controllers
                     cEcustomerViewModel.CustomerDiscountTypeViewModels = customerDiscountTypeViewModels.ToList();
 
                     cEcustomerViewModel.CustomerDiscountType = dbcustomer.CustomerDiscountType;
+                    ModelState.AddModelError(string.Empty, "Denne kunde er blevet opdateret af en anden bruger, tryk gem for at overskrive");
+                    cEcustomerViewModel.Rowversion = dbcustomer.Rowversion;
+                    ModelState.Remove("Rowversion");
                     return View("Edit",cEcustomerViewModel);
                 }
             }
@@ -216,6 +219,7 @@ namespace Raunstrup.UI.Controllers
         {
             return _context.customers.Any(e => e.Id == id);
         }
+
         public async Task<IActionResult> AddProjectCustomer(int id, string searchString)
         {
             IEnumerable<CustomerDto> customerDtos = await _customerService.GetChosenCustomers(searchString);

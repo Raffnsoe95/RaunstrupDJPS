@@ -24,10 +24,10 @@ namespace Raunstrup.BusinessLogic.Services
             IEnumerable<Project> IProjectService.GetAll()
             {
                 return _context.Projects
-                .Include(w=>w.WorkingHours)
-                .ThenInclude(e=>e.Employee)
+                .Include(w => w.WorkingHours)
+                .ThenInclude(e => e.Employee)
                 .Include(w => w.ProjectDrivings)
-                .ThenInclude(e=>e.Employee)
+                .ThenInclude(e => e.Employee)
                 .Include(w => w.ProjectEmployees)
                 .ThenInclude(e => e.Employee)
                 .Include(w => w.UsedItems)
@@ -36,6 +36,7 @@ namespace Raunstrup.BusinessLogic.Services
                 .ThenInclude(e => e.Item)
                 .Include(w => w.Customer)
                 .ToList();
+            //
             }
 
         IEnumerable<Project> IProjectService.GetAll(int employeeId)
@@ -72,7 +73,7 @@ namespace Raunstrup.BusinessLogic.Services
             .ThenInclude(e => e.Item)
             .Include(w => w.AssignedItems)
             .ThenInclude(e => e.Item)
-            .Include(w=> w.Customer)
+            .Include(w=> w.Customer).ThenInclude(e => e.CustomerDiscountType)
             
 
                 .FirstOrDefault(x => x.Id == id);
