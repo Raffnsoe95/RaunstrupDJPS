@@ -18,5 +18,28 @@ namespace Raunstrup.UI.Models
         public int ItemId { get; set; }
 
         public int ProjectId { get; set; }
+
+        public int Discount
+        {
+            get
+            {
+                if (Item.Discount == null || Amount < Item.Discount.Amount)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return Item.Discount.DiscountPercentage;
+                }
+            }
+        }
+
+        public decimal TotalPriceWithDiscount
+        {
+            get
+            {
+                return (Amount * Price) * (100 - Discount) / 100;
+            }
+        }
     }
 }

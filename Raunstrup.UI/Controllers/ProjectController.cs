@@ -53,7 +53,7 @@ namespace Raunstrup.UI.Controllers
             {
                 return NotFound();
             }
-
+            var project2 = ProjectDetailsMapper.Map(projectViewModel);
             return View(ProjectDetailsMapper.Map(projectViewModel));
         }
 
