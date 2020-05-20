@@ -4,24 +4,16 @@ using System;
 using MailKit.Net.Smtp;
 using Raunstrup.Contract.DTOs;
 using System.Threading.Tasks;
+using Raunstrup.Contakt.Service.Interface;
 
 namespace Raunstrup.Contakt.Service
 {
-    public class ContactService
+    public class ContactService : IContactService
     {
-
-        private readonly ContactDto _contact;
-
-        public ContactService(ContactDto contact) 
-        {
-            _contact = contact;
-        
-        }
-
 
         public void SendEmail(ContactDto contact)
         {
-            var message = new MimeMessage(contact);
+            var message = new MimeMessage();
 
             message.From.Add(new MailboxAddress("From", contact.Email));
             message.To.Add(new MailboxAddress("To", "RaikoPrivate@hotmail.com"));
