@@ -5,16 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-
 namespace Raunstrup.UI.Models
 {
     public static class CustomerMapper
     {
-
         public static CustomerViewModel Map(CustomerDto dto)
         {
             if (dto == null)
                 return null;
+
             return new CustomerViewModel
             { Id=dto.Id, 
                 Name=dto.Name, 
@@ -24,7 +23,8 @@ namespace Raunstrup.UI.Models
                 Active=dto.Active, 
                 Rowversion=dto.Rowversion,
                 CustomerDiscountType=CustomerDiscountTypeMapper.Map( dto.CustomerDiscountType),
-                CustomerDiscountTypeId=dto.CustomerDiscountTypeId};
+                CustomerDiscountTypeId=dto.CustomerDiscountTypeId
+            };
         }
 
         public static IEnumerable<CustomerViewModel> Map(IEnumerable<CustomerDto> dtos)
@@ -36,6 +36,7 @@ namespace Raunstrup.UI.Models
         {
             if (view == null)
                 return null;
+
             return new CustomerDto
             { Id = view.Id, 
                 Name = view.Name, 
@@ -45,19 +46,22 @@ namespace Raunstrup.UI.Models
                 Active = view.Active, 
                 Rowversion = view.Rowversion, 
                 CustomerDiscountType=CustomerDiscountTypeMapper.Map( view.CustomerDiscountType), 
-                CustomerDiscountTypeId=view.CustomerDiscountTypeId };
+                CustomerDiscountTypeId=view.CustomerDiscountTypeId 
+            };
         }
 
         public static CustomerDiscountTypeViewModel Map(CustomerDiscountTypeDto dto)
         {
             if (dto == null)
                 return null;
+
             return new CustomerDiscountTypeViewModel
             { Id = dto.Id, 
                 Name = dto.Name, 
                 Active=dto.active, 
                 DiscountPercent=dto.DiscountPercent, 
-                Rowversion=dto.Rowversion };
+                Rowversion=dto.Rowversion 
+            };
         }
 
 
@@ -70,6 +74,7 @@ namespace Raunstrup.UI.Models
         {
             if (view == null)
                 return null;
+
             return new CustomerViewModel
             { Id = view.Id, 
                 Name = view.Name, 
@@ -80,12 +85,9 @@ namespace Raunstrup.UI.Models
                 Rowversion = view.Rowversion, 
                 CustomerDiscountType =  view.CustomerDiscountType,
                 CustomerDiscountTypeId=view.SelectedCustomerDiscountViewModel
-
             };
-    
-
-        
         }
+
         public static CECustomerViewModel MaptoCE(CustomerDto dto)
         {
             if (dto == null)
@@ -101,9 +103,7 @@ namespace Raunstrup.UI.Models
                 Rowversion = dto.Rowversion,
                 CustomerDiscountType =Map( dto.CustomerDiscountType),
                 SelectedCustomerDiscountViewModel =Convert.ToInt32(dto.CustomerDiscountTypeId)
-
             };
         }
-
     }
 }

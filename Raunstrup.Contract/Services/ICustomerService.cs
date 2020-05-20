@@ -7,13 +7,18 @@ using System.Threading.Tasks;
 
 namespace Raunstrup.Contract.Services
 {
-   public interface ICustomerService
+    public interface ICustomerService
     {
-       Task< IEnumerable<CustomerDto>> GetCustomerAsync();
+        Task< IEnumerable<CustomerDto>> GetCustomerAsync();
+         
         Task<CustomerDto> GetCustomerAsync(int id);
+         
         Task AddAsync(CustomerDto customer);
+
         Task UpdateAsync(int id, CustomerDto customer);
+
         Task RemoveAsync(int id);
+
         Task AddAsync(int id, int projectid);
 
         Task<IEnumerable<CustomerDto>> GetFilteredCustomers(string searchString);
@@ -23,7 +28,5 @@ namespace Raunstrup.Contract.Services
         Task<CustomerDiscountTypeDto> GetCustomerDiscountTypeAsync(int id);
 
         Task<IEnumerable<CustomerDto>> GetChosenCustomers(string searchString);
-
-
     }
 }

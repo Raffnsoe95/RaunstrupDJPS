@@ -115,8 +115,6 @@ namespace Raunstrup.UI.Controllers
         // GET: Customer/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            
-
             var customerViewModel = await _customerService.GetCustomerAsync(id).ConfigureAwait(false);
             customerViewModel.Id = id;
 
@@ -131,6 +129,7 @@ namespace Raunstrup.UI.Controllers
                 return NotFound();
             }
             return View(cECustomerViewModel);
+
         }
 
         // POST: Customer/Edit/5

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Raunstrup.Contract.Services
 {
-   public interface IProjectService
+    public interface IProjectService
     {
         Task<IEnumerable<ProjectDto >> GetProjectAsync(string userName, string userRole);
 
@@ -20,6 +20,7 @@ namespace Raunstrup.Contract.Services
         Task RemoveAsync(int id);
 
         Task<IEnumerable<ProjectDto>> GetProjectsByCustomerId(int customerId);
+
         Task<IEnumerable<ProjectDto>> GetProjectsByEmployeeId(int employeeId);
     }
 }

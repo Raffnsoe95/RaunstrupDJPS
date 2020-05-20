@@ -10,8 +10,8 @@ using Raunstrup.Contract;
 using Raunstrup.Contract.Services;
 using Raunstrup.Contract.DTOs;
 using Microsoft.AspNetCore.Authorization;
-
-
+using System.Net;
+using Microsoft.EntityFrameworkCore;
 
 namespace Raunstrup.UI.Services
 {
@@ -86,10 +86,26 @@ namespace Raunstrup.UI.Services
             var json = JsonSerializer.Serialize(project);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await Client.PutAsync($"{_projectRequestUri}/{id}", data).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
+
+            try
+            {
+                response.EnsureSuccessStatusCode();
+            }
+            catch (Exception)
+            {
+                if (response.StatusCode == HttpStatusCode.Conflict)
+                {
+                    var result = response.Content.ReadAsStringAsync().Result;
+                    var dbProject = Newtonsoft.Json.JsonConvert.DeserializeObject<ProjectDto>(result);
+                    DbUpdateConcurrencyException dbu = new DbUpdateConcurrencyException();
+                    dbu.Data.Add("dbvalue", dbProject);
+                    throw dbu;
+                }
+                throw;
+            }
         }
 
-       async Task<IEnumerable<ProjectDto>> IProjectService.GetProjectsByCustomerId(int customerId)
+        async Task<IEnumerable<ProjectDto>> IProjectService.GetProjectsByCustomerId(int customerId)
         {
 
             var response = await Client.GetAsync(_projectRequestUri + $"/GetProjectsByCustomerId/{customerId}").ConfigureAwait(false);
@@ -103,6 +119,7 @@ namespace Raunstrup.UI.Services
             };
             return await JsonSerializer.DeserializeAsync<IEnumerable<ProjectDto>>(stream, options).ConfigureAwait(false);
         }
+
         async Task<IEnumerable<ProjectDto>> IProjectService.GetProjectsByEmployeeId(int employeeId)
         {
 
@@ -117,7 +134,6 @@ namespace Raunstrup.UI.Services
             };
             return await JsonSerializer.DeserializeAsync<IEnumerable<ProjectDto>>(stream, options).ConfigureAwait(false);
         }
-
     }
 }
 

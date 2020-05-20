@@ -63,12 +63,11 @@ namespace Raunstrup.Api.Controllers
                 return value;
             }
             catch (DbUpdateConcurrencyException dbu)
-            {
-
+            { 
                 Project project = (Project)dbu.Data["dbvalue"];
+                return Conflict(project);
                 //return Conflict(ProjectMapper.Map(project));
             }
-            return value;
         }
 
         // DELETE: api/ApiWithActions/5

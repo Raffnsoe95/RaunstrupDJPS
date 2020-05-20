@@ -12,15 +12,15 @@ namespace Raunstrup.Api.Models
 {
     public static class CustomerMapper
     {
-
         public static Customer Map(CustomerDto dto)
         {
             if (dto == null)
             {
                 return null;
             }
+
             return new Customer
-            { Id = dto.Id, 
+            {   Id = dto.Id, 
                 Name = dto.Name , 
                 Phone = dto.Phone, 
                 Address = dto.Address, 
@@ -28,7 +28,7 @@ namespace Raunstrup.Api.Models
                 Active=dto.Active, 
                 RowVersion=dto.Rowversion, 
                 CustomerDiscountType=CustomerDiscountTypeMapper.Map( dto.CustomerDiscountType),
-            CustomerDiscountTypeID=dto.CustomerDiscountTypeId
+                CustomerDiscountTypeID=dto.CustomerDiscountTypeId
             };
         }
 
@@ -43,6 +43,7 @@ namespace Raunstrup.Api.Models
             {
                 return null;
             }
+
             return new CustomerDto
             { Id = model.Id,
                 Name = model.Name, 
@@ -56,7 +57,7 @@ namespace Raunstrup.Api.Models
             };
         }
     
-    public static IEnumerable<CustomerDiscountTypeDto> Map (IEnumerable<CustomerDiscountType> model)
+        public static IEnumerable<CustomerDiscountTypeDto> Map (IEnumerable<CustomerDiscountType> model)
         {
             return model.Select(x => Map(x)).AsEnumerable();
         }
@@ -68,14 +69,13 @@ namespace Raunstrup.Api.Models
             {
                 return null;
             }
+
             return new CustomerDiscountTypeDto
-            { Id = model.Id, 
+            {   Id = model.Id, 
                 Name = model.Name, 
                 DiscountPercent=model.DiscountPercent,
                 Rowversion = model.RowVersion,
-           
             };
         }
-
     }
 }
