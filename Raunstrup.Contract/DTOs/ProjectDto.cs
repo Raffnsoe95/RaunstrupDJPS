@@ -20,6 +20,7 @@ namespace Raunstrup.Contract.DTOs
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
+
         public decimal Price { get; set; }
 
         public string Description { get; set; }
@@ -36,9 +37,6 @@ namespace Raunstrup.Contract.DTOs
 
         public int? CustomerId { get; set; }
 
-        [Timestamp]
-        public byte[] Rowversion { get; set; }
-
         public List<WorkingHoursDto> WorkingHoursDtos { get; set; }
 
         public List<ProjectUsedItemDto> UsedItemsDtos { get; set; }
@@ -48,8 +46,10 @@ namespace Raunstrup.Contract.DTOs
         public List<ProjectDrivingDto> ProjectDrivingDtos { get; set; }
 
         public List<ProjectEmployeeDto> ProjectEmployeeDtos { get; set; }
+
         public CustomerDto CustomerDto { get; set; }
 
-       
+        [Timestamp]
+        public byte[] Rowversion { get; set; }
     }
 }

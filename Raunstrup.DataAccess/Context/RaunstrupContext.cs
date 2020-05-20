@@ -9,12 +9,11 @@ namespace Raunstrup.DataAccess.Context
         {
 
         }
+
         public RaunstrupContext(DbContextOptions<RaunstrupContext> options) : base(options)
         {
 
         }
-
-     
 
         public DbSet<Employee> Employees { get; set; }
 
@@ -35,6 +34,7 @@ namespace Raunstrup.DataAccess.Context
         public DbSet<ProjectAssignedItem> ProjectAssignedItems { get; set; }
 
         public DbSet<ItemDiscountType> ItemDiscountTypes { get; set; }
+
         public DbSet<CustomerDiscountType> CustomerDiscountTypes { get; set; }
     }
 }

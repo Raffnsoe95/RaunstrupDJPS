@@ -4,28 +4,28 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Projektoversigt</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Opret nyt projekt</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.StartDate)
+               Startdato
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndDate)
+                Slutdato
             </th>
             <th>
                 Pris
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ESTdriving)
+                Estimeret kørsel
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                Beskrivelse
             </th>
             @*<th>
             @Html.DisplayNameFor(model => model.Active)
@@ -34,13 +34,13 @@
             @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
             {
                 <th>
-                    @Html.DisplayNameFor(model => model.IsFixedPrice)
+                   Fast pris
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IsAccepted)
+                    Accepteret
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IsDone)
+                    Færdig
                 </th>
             }
             @*<th>
@@ -88,13 +88,13 @@
             <td>
                 @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
                 {
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> <span>|</span>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Ret</a> <span>|</span>
                 }
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Detaljer</a>
                 @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
                 {
                     <span>|</span>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Slet</a>
                 }
             </td>
         </tr>

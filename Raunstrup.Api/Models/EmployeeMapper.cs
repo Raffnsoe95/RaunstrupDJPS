@@ -29,10 +29,7 @@ namespace Raunstrup.Api.Models
                 ManagerID = dto.ManagerID,
                 Manager = EmployeeMapper.Map(dto.Manager),
                 Department = DepartmentMapper.Map(dto.Department),
-                RowVersion = dto.RowVersion,
-                //Project =
-
-                
+                RowVersion = dto.RowVersion
             };
         }
 

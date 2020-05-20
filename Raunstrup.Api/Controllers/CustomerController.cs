@@ -61,13 +61,9 @@ namespace Raunstrup.Api.Controllers
             }
             catch (DbUpdateConcurrencyException dbu)
             {
-
                 Customer customer = (Customer)dbu.Data["dbvalue"];
-                return Conflict(CustomerMapper.Map(customer));
-                
+                return Conflict(CustomerMapper.Map(customer)); 
             }
-            
-            
         }
 
         // DELETE: api/ApiWithActions/5

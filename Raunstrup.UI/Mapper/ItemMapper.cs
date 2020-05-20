@@ -13,7 +13,7 @@ namespace Raunstrup.UI.Models
             if (dto == null)
             { return null; }            
             return new ItemViewModel
-            { Id = dto.Id, Name = dto.Name, Price = dto.Price, Active = dto.Active, RowVision = dto.RowVision };
+            { Id = dto.Id, Name = dto.Name, Price = dto.Price, Active = dto.Active, RowVision = dto.RowVision, Discount = ItemDiscountTypeMapper.Map(dto.Discounts) };
         }
 
         public static IEnumerable<ItemViewModel> Map(IEnumerable<ItemDto> dtos)
@@ -26,7 +26,7 @@ namespace Raunstrup.UI.Models
             if (view == null)
             { return null; }
             return new ItemDto
-            { Id = view.Id, Name = view.Name, Price = view.Price, Active = view.Active, RowVision = view.RowVision };
+            { Id = view.Id, Name = view.Name, Price = view.Price, Active = view.Active, RowVision = view.RowVision, Discounts = ItemDiscountTypeMapper.Map(view.Discount) };
         }
     }
 }

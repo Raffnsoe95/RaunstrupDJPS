@@ -34,7 +34,7 @@ namespace Raunstrup.BusinessLogic.Services
            .FirstOrDefault(x => x.Id == id);
 
 
-        }
+            }
 
             void ICustomerService.Create(Customer customer)
             {

@@ -70,14 +70,14 @@ namespace Raunstrup.BusinessLogic.Services
             .Include(w => w.ProjectEmployees)
             .ThenInclude(e => e.Employee).ThenInclude(e => e.Specialty)
             .Include(w => w.UsedItems)
-            .ThenInclude(e => e.Item)
+            .ThenInclude(e => e.Item).ThenInclude(e => e.Discount)
             .Include(w => w.AssignedItems)
-            .ThenInclude(e => e.Item)
+            .ThenInclude(e => e.Item).ThenInclude(e => e.Discount)
             .Include(w=> w.Customer).ThenInclude(e => e.CustomerDiscountType)
             
 
                 .FirstOrDefault(x => x.Id == id);
-            }
+        }
 
             void IProjectService.Create(Project project)
             {
@@ -85,23 +85,35 @@ namespace Raunstrup.BusinessLogic.Services
                 _context.SaveChanges();
             }
 
-            void IProjectService.Update(Project project)
+        void IProjectService.Update(Project project)
+        {
+            try 
             {
                 _context.Projects.Update(project);
                 _context.SaveChanges();
             }
-
-            void IProjectService.Delete(int id)
+            catch (DbUpdateConcurrencyException dbu)
             {
-                Project tmpProject = _context.Projects.Find(id);
-                tmpProject.Active = false;
-                _context.Projects.Update(tmpProject);
-                _context.SaveChanges();
+                var exceptionEntry = dbu.Entries.Single();
+                var databaseEntry = exceptionEntry.GetDatabaseValues();
+                project = (Project)databaseEntry.ToObject();
+
+                dbu.Data.Add("dbvalue", project);
+                throw;
             }
+        }
+
+        void IProjectService.Delete(int id)
+        {
+            Project tmpProject = _context.Projects.Find(id);
+            tmpProject.Active = false;
+            _context.Projects.Update(tmpProject);
+            _context.SaveChanges();
+        }
 
         void IProjectService.AddCustomerToProject(Project project)
         {
-                Project tempProject =
+            Project tempProject =
                  _context.Projects
                 .Include(w => w.WorkingHours)
                 .ThenInclude(e => e.Employee)
@@ -115,9 +127,9 @@ namespace Raunstrup.BusinessLogic.Services
                 .ThenInclude(e => e.Item)
                 .Include(w => w.Customer)
                 .FirstOrDefault(x => x.Id == project.Id);
-                tempProject.CustomerID = project.CustomerID;
-                _context.Projects.Update(tempProject);
-                _context.SaveChanges();
+            tempProject.CustomerID = project.CustomerID;
+            _context.Projects.Update(tempProject);
+            _context.SaveChanges();
         }
 
         IEnumerable<Project> IProjectService.GetProjectsByCustomerId(int customerID)
