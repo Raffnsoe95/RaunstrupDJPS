@@ -12,6 +12,7 @@ using Raunstrup.Contract.Services;
 using Raunstrup.Contract.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.CodeAnalysis;
 
 namespace Raunstrup.UI.Controllers
 {
@@ -203,5 +204,7 @@ namespace Raunstrup.UI.Controllers
         {
             return _context.Projects.Any(e => e.Id == id);
         }
+        
+
     }
 }
