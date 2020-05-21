@@ -59,10 +59,10 @@ namespace Raunstrup.UI
 
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
-            
+
             services.AddDbContext<UserManagementContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("UserDatabaseConnection")));
+                    Configuration.GetConnectionString("UserDatabaseConnection2")));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
