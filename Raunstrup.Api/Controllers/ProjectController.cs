@@ -7,7 +7,7 @@ using Raunstrup.Api.Models;
 using Raunstrup.Contract.DTOs;
 using Raunstrup.BusinessLogic.ServiceInterfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.CodeAnalysis;
+using Raunstrup.DataAccess;
 
 namespace Raunstrup.Api.Controllers
 {
@@ -65,8 +65,7 @@ namespace Raunstrup.Api.Controllers
             catch (DbUpdateConcurrencyException dbu)
             { 
                 Project project = (Project)dbu.Data["dbvalue"];
-                return Conflict(project);
-                //return Conflict(ProjectMapper.Map(project));
+                return Conflict(ProjectMapper.Map(project));
             }
         }
 

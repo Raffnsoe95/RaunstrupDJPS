@@ -158,43 +158,19 @@ namespace Raunstrup.UI.Controllers
                     {
                         ModelState.AddModelError("IsDone", "Projectets Status er opdateret af en anden person");
                     }
-                    
+
                     ModelState.AddModelError(string.Empty, "Denne kunde er blevet opdateret af en anden bruger, tryk gem for at overskrive");
                     projectViewModel.Rowversion = dbProject.Rowversion;
                     ModelState.Remove("Rowversion");
                     return View("Edit", projectViewModel);
                 }
+                catch 
+                {
+                    ModelState.AddModelError(string.Empty, "Noget gik galt");
+                    return View("Edit", projectViewModel);
+                }
             }
             return View(projectViewModel);
-
-
-            ////The old-----
-            //if (id != projectViewModel.Id)
-            //{
-            //    return NotFound();
-            //}
-
-            //if (ModelState.IsValid)
-            //{
-            //    try
-            //    {
-            //        await _projectService.UpdateAsync(id, ProjectMapper.Map(projectViewModel)).ConfigureAwait(false);
-            //        return RedirectToAction(nameof(Index));
-            //    }
-            //    catch (DbUpdateConcurrencyException)
-            //    {
-            //        if (!ProjectViewModelExists(projectViewModel.Id))
-            //        {
-            //            return NotFound();
-            //        }
-            //        else
-            //        {
-            //            throw;
-            //        }
-            //    }
-            //}
-            //return View(projectViewModel);
-            ////Theold---
         }
 
         [Authorize(Roles = "Admin,SuperUser")]
