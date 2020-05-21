@@ -6,6 +6,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace Raunstrup.UI.Models
 {
@@ -18,7 +20,11 @@ namespace Raunstrup.UI.Models
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Skal udfyldes")]
-        [RegularExpression(@"^[0-9|+| |(|)]+$"), StringLength(30)]
+         [RegularExpression(@"^[0-9|+| |(|)]+$"), StringLength(30)]
+
+
+
+
         
         public string Phone { get; set; }
 
@@ -28,6 +34,9 @@ namespace Raunstrup.UI.Models
 
         [Required(ErrorMessage = "Skal udfyldes")]
         [EmailAddress(ErrorMessage ="Ikke gyldig email-adresse")]
+        // [Remote("ValidateEmail", "CustomerController", ErrorMessage = "The User Exists")]
+
+      //  [Remote("ValidateEmail", "CustomerController", HttpMethod = "POST", ErrorMessage = "EmailId already exists in database.")]
         public string Email { get; set; }
 
         public bool Active { get; set; }

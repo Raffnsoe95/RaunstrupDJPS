@@ -75,11 +75,11 @@ namespace Raunstrup.UI.Controllers
                  await _workingHoursService.AddAsync(WorkingHoursMapper.Map(workingHoursViewModel)) .ConfigureAwait(false);
 
                 //ProjectViewModel projectViewModel =  ProjectMapper.Map(await _projectService.GetProjectAsync(workingHoursViewModel.ProjectId));
-                
-               // return RedirectToAction(nameof(Index));
-                return View(workingHoursViewModel);
+
+                // return RedirectToAction(nameof(Index));
+                return RedirectToAction("details", "project", new { id = workingHoursViewModel.ProjectId });
             }
-           // ViewData["EmployeeId"] = new SelectList(_context.Set<Employee>(), "Id", "Id", workingHours.EmployeeId);
+            // ViewData["EmployeeId"] = new SelectList(_context.Set<Employee>(), "Id", "Id", workingHours.EmployeeId);
             return View(workingHoursViewModel);
         }
 
