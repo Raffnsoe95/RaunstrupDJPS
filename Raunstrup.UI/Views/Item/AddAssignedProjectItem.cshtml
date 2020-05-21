@@ -36,13 +36,14 @@
         <tbody>
             @for (var i = 0; i < Model.Count(); i++)
             {
-                <tr>
-                    <input type="text" asp-for="@Model[i].Id" hidden />
-                    <td><input type="text" asp-for="@Model[i].Name" /></td>
-                    <td><input type="text" asp-for="@Model[i].Price" /></td>
-                    <td><input type="text" asp-for="@Model[i].projectID" hidden /></td>
-                    <td><input type="text" asp-for="@Model[i].Amount" /></td>
-                </tr>
+            <tr>
+
+                <td><input type="text" asp-for="@Model[i].Name" /></td>
+                <td><input type="text" asp-for="@Model[i].Price" /></td>
+                <td><input type="text" asp-for="@Model[i].Amount" /></td>
+                <td><input type="text" asp-for="@Model[i].projectID" hidden /></td>
+                <td><input type="text" asp-for="@Model[i].Id" hidden /></td>
+            </tr>
             }
         </tbody>
     </table>

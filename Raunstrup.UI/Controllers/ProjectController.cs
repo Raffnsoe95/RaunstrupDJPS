@@ -102,73 +102,75 @@ namespace Raunstrup.UI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,StartDate,EndDate,Price,Description,Active,IsFixedPrice,IsAccepted,IsDone,Rowversion")] ProjectViewModel projectViewModel)
-        {
-
+        { 
             if (id != projectViewModel.Id)
             {
                 return NotFound();
             }
 
-            //CustomerViewModel customerViewModel = CustomerMapper.Map(cEcustomerViewModel);
-
             if (ModelState.IsValid)
             {
                 try
                 {
-
                     await _projectService.UpdateAsync(id, ProjectMapper.Map(projectViewModel)).ConfigureAwait(false);
                     return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException dbu)
                 {
-                    var dbcustomer = ProjectMapper.Map((ProjectDto)dbu.Data["dbvalue"]);
-                    if (projectViewModel.Description != dbcustomer.Description)
+                    var dbProject = ProjectMapper.Map((ProjectDto)dbu.Data["dbvalue"]);
+
+                    if (projectViewModel.StartDate != dbProject.StartDate)
                     {
-                        ModelState.AddModelError("Description", "er opdateret af en anden person");
+                        ModelState.AddModelError("StartDate", "Start Dagen er opdateret af en anden person");
                     }
 
-                    //var customerDiscountTypeDtos = await _customerService.GetAllCustomerDiscountType().ConfigureAwait(false);
-                    //IEnumerable<CustomerDiscountTypeViewModel> customerDiscountTypeViewModels = CustomerMapper.Map(customerDiscountTypeDtos);
+                    if (projectViewModel.EndDate != dbProject.EndDate)
+                    {
+                        ModelState.AddModelError("EndDate", "Slut Dagen er opdateret af en anden person");
+                    }
 
-                    //cEcustomerViewModel.CustomerDiscountTypeViewModels = customerDiscountTypeViewModels.ToList();
+                    if (projectViewModel.Price != dbProject.Price)
+                    {
+                        ModelState.AddModelError("Price", "Prisen er er opdateret af en anden person");
+                    }
 
-                    //cEcustomerViewModel.CustomerDiscountType = dbcustomer.CustomerDiscountType;
+                    if (projectViewModel.ESTdriving != dbProject.ESTdriving)
+                    {
+                        ModelState.AddModelError("ESTdriving", "Den Estimeret Kørsel er opdateret af en anden person");
+                    }
+
+                    if (projectViewModel.Description != dbProject.Description)
+                    {
+                        ModelState.AddModelError("Description", "Beskrivelsen er opdateret af en anden person");
+                    }
+
+                    if (projectViewModel.IsFixedPrice != dbProject.IsFixedPrice)
+                    {
+                        ModelState.AddModelError("IsFixedPrice", "Fast pris er opdateret af en anden person");
+                    }
+
+                    if (projectViewModel.IsAccepted != dbProject.IsAccepted)
+                    {
+                        ModelState.AddModelError("IsAccepted", "Accepteret er blevet opdateret af en anden person");
+                    }
+
+                    if (projectViewModel.IsDone != dbProject.IsDone)
+                    {
+                        ModelState.AddModelError("IsDone", "Projectets Status er opdateret af en anden person");
+                    }
+
                     ModelState.AddModelError(string.Empty, "Denne kunde er blevet opdateret af en anden bruger, tryk gem for at overskrive");
-                    projectViewModel.Rowversion = dbcustomer.Rowversion;
+                    projectViewModel.Rowversion = dbProject.Rowversion;
                     ModelState.Remove("Rowversion");
+                    return View("Edit", projectViewModel);
+                }
+                catch 
+                {
+                    ModelState.AddModelError(string.Empty, "Noget gik galt");
                     return View("Edit", projectViewModel);
                 }
             }
             return View(projectViewModel);
-
-
-            ////The old-----
-            //if (id != projectViewModel.Id)
-            //{
-            //    return NotFound();
-            //}
-
-            //if (ModelState.IsValid)
-            //{
-            //    try
-            //    {
-            //        await _projectService.UpdateAsync(id, ProjectMapper.Map(projectViewModel)).ConfigureAwait(false);
-            //        return RedirectToAction(nameof(Index));
-            //    }
-            //    catch (DbUpdateConcurrencyException)
-            //    {
-            //        if (!ProjectViewModelExists(projectViewModel.Id))
-            //        {
-            //            return NotFound();
-            //        }
-            //        else
-            //        {
-            //            throw;
-            //        }
-            //    }
-            //}
-            //return View(projectViewModel);
-            ////Theold---
         }
 
         [Authorize(Roles = "Admin,SuperUser")]
