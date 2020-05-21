@@ -34,11 +34,20 @@ namespace Raunstrup.Api
         {
             services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             //Try'n Erro
-            services.AddDbContext<RaunstrupContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ModelDatabaseConnection"), b => b.MigrationsAssembly("Raunstrup.Api")));
 
-            //services.AddDbContext<RaunstrupContext>(options =>
-            //  options.UseInMemoryDatabase(databaseName: "RaunstrupDBAPIInMemory"));
+            // bool isTest = Convert.ToBoolean(Configuration["IsTest"]);
+            bool isTest = true;
+
+            if(isTest == false)
+            {
+                services.AddDbContext<RaunstrupContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ModelDatabaseConnection"), b => b.MigrationsAssembly("Raunstrup.Api")));
+            }
+            else
+            {
+                services.AddDbContext<RaunstrupContext>(options =>
+                  options.UseInMemoryDatabase(databaseName: "RaunstrupDBAPIInMemory"));
+            }
 
             //options.UseSqlite(Configuration.GetConnectionString("MvcMovieContext")));
 
