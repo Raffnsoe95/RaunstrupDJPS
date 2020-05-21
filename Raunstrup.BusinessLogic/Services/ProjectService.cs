@@ -70,9 +70,9 @@ namespace Raunstrup.BusinessLogic.Services
             .Include(w => w.ProjectEmployees)
             .ThenInclude(e => e.Employee).ThenInclude(e => e.Specialty)
             .Include(w => w.UsedItems)
-            .ThenInclude(e => e.Item)
+            .ThenInclude(e => e.Item).ThenInclude(e => e.Discount)
             .Include(w => w.AssignedItems)
-            .ThenInclude(e => e.Item)
+            .ThenInclude(e => e.Item).ThenInclude(e => e.Discount)
             .Include(w=> w.Customer).ThenInclude(e => e.CustomerDiscountType)
             
 

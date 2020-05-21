@@ -55,6 +55,7 @@ namespace Raunstrup.UI.Models
 
         public List<ProjectDrivingViewModel> ProjectDrivings { get; set; }
 
+
         public decimal TotalAssignedHours { get; set; }
         public decimal TotalAssignedItems { get; set; }
         public decimal TotalUsedHours { get; set; }
@@ -73,7 +74,14 @@ namespace Raunstrup.UI.Models
         {
             get
             {
-                return Math.Round(EstimatedPrice * Customer.CustomerDiscountType.DiscountPercent / 100, 2);
+                if (Customer == null)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return Math.Round(EstimatedPrice * Customer.CustomerDiscountType.DiscountPercent / 100, 2);
+                }
             }
         }
 
@@ -81,8 +89,16 @@ namespace Raunstrup.UI.Models
         {
             get
             {
-                return Math.Round(EstimatedPrice - (EstimatedPrice * Customer.CustomerDiscountType.DiscountPercent / 100), 2);
+                if (Customer == null)
+                {
+                    return EstimatedPrice;
+                }
+                else
+                {
+                    return Math.Round(EstimatedPrice - (EstimatedPrice * Customer.CustomerDiscountType.DiscountPercent / 100), 2);
+                }
             }
         }
     }
 }
+

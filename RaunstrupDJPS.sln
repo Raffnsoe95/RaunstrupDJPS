@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raunstrup.UI", "Raunstrup.U
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raunstrup.Contakt.Service", "Raunstrup.Contakt.Service\Raunstrup.Contakt.Service.csproj", "{24A129E2-BE35-48FE-80FF-647642DC77A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raunstrup.UnitTest", "ProjectUnitTestProjectTest\Raunstrup.UnitTest.csproj", "{1AD978A2-BD8D-47B9-B706-EC582B57C86D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raunstrup.UnitTest", "ProjectUnitTestProjectTest\Raunstrup.UnitTest.csproj", "{1AD978A2-BD8D-47B9-B706-EC582B57C86D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
