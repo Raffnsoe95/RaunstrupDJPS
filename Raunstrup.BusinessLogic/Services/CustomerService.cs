@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -38,11 +39,24 @@ namespace Raunstrup.BusinessLogic.Services
 
             void ICustomerService.Create(Customer customer)
             {
-            CustomerDiscountType customerDiscountType = _context.CustomerDiscountTypes.Find(customer.CustomerDiscountTypeID);
-            customer.CustomerDiscountType = customerDiscountType;
+            try
+            {
+                CustomerDiscountType customerDiscountType = _context.CustomerDiscountTypes.Find(customer.CustomerDiscountTypeID);
+                customer.CustomerDiscountType = customerDiscountType;
                 _context.Customers
                 .Add(customer);
                 _context.SaveChanges();
+            }
+            catch (Exception dbe)
+            {
+
+               // var exceptionEntry = dbe.Entries.Single();
+               // var databaseEntry = exceptionEntry.GetDatabaseValues();
+                //customer = (Customer)databaseEntry.ToObject();
+              
+                dbe.Data.Add("dbvalue", customer);
+                throw;
+            }
             }
 
             void ICustomerService.Update(Customer customer)

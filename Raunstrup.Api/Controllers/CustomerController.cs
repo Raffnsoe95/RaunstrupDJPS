@@ -45,9 +45,18 @@ namespace Raunstrup.Api.Controllers
 
         // POST: api/Customer
         [HttpPost]
-        public void Post([FromBody] CustomerDto value)
+        public ActionResult<CustomerDto> Post([FromBody] CustomerDto value)
         {
-            _customerService.Create(CustomerMapper.Map(value));
+            try
+            {
+                _customerService.Create(CustomerMapper.Map(value));
+                return value;
+            }
+            catch(Exception dbe)
+            {
+                Customer customer = (Customer)dbe.Data["dbvalue"];
+                return Conflict(CustomerMapper.Map(customer));
+            }
         }
 
         // PUT: api/Customer/5
