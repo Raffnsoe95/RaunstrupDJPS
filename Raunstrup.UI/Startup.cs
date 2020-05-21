@@ -64,6 +64,7 @@ namespace Raunstrup.UI
                 options.UseSqlServer(
                     Configuration.GetConnectionString("UserDatabaseConnection2")));
 
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<UserManagementContext>();
@@ -82,13 +83,13 @@ namespace Raunstrup.UI
 
             services.AddRazorPages();
 
-            //SqlDb
-            services.AddDbContext<ViewModelContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            //SqlDb
+            ////SqlDb
+            //services.AddDbContext<ViewModelContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            ////SqlDb
 
-            ////InMemDB
-            //services.AddDbContext<ViewModelContext>(options => options.UseInMemoryDatabase(databaseName: "RaunstrupInMeme"));
-            ////InMemDB
+            //InMemDB
+            services.AddDbContext<ViewModelContext>(options => options.UseInMemoryDatabase(databaseName: "RaunstrupInMeme"));
+            //InMemDB
 
             services.AddScoped<IContactService, ContactService>();
         }
