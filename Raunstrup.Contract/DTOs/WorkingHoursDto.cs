@@ -14,7 +14,7 @@ namespace Raunstrup.Contract.DTOs
         //}
         public int Id { get; set; }
         public int Amount { get; set; }
-        public int EmployeeId { get; set; }
+        public int? EmployeeId { get; set; }
         public decimal HourlyPrice { get; set; }
 
         public int ProjectId { get; set; }

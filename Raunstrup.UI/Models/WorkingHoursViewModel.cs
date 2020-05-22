@@ -10,7 +10,7 @@ namespace Raunstrup.UI.Models
     {
         public int WorkingHoursId { get; set; }
         public int Amount { get; set; }
-        public int EmployeeId { get; set; }
+        public int? EmployeeId { get; set; }
 
         public decimal HourlyPrice { get; set; }
 
