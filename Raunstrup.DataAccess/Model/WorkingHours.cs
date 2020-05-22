@@ -8,10 +8,10 @@ namespace Raunstrup.DataAccess.Model
 {
     public class WorkingHours
     {
-        public WorkingHours()
-        {
-            Employee = new Employee();
-        }
+        //public WorkingHours()
+        //{
+        //    Employee = new Employee();
+        //}
         public int Id { get; set; }
 
         public int Amount { get; set; }
@@ -20,7 +20,7 @@ namespace Raunstrup.DataAccess.Model
 
         public int ProjectId { get; set; }
 
-        public int? EmployeeID { get; set; }
+        public int EmployeeID { get; set; }
 
         [ForeignKey("EmployeeID")]
         public Employee Employee { get; set; }
