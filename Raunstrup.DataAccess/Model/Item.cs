@@ -15,8 +15,6 @@ namespace Raunstrup.DataAccess.Model
         public decimal Price { get; set; }
 
         public bool Active { get; set; }
-
-       
         
         public int? DiscountID { get; set; }
 

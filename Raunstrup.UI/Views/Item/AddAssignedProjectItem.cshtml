@@ -4,17 +4,16 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Tilføj Item til Project</h1>
+<h1>Tilføj Materialer</h1>
 <form asp-controller="Item" asp-action="AddAssignedProjectItem">
     <p>
         Søg på varenavn: <input type="text" name="SearchString">
-        <input type="submit" value="Søg" />
+        <indput type="submit" value="Søg" />
     </p>
 </form>
 <p>
     <!--<a asp-action="Create">Tilføj Item til Project</a>-->
 </p>
-
 
 <form method="post" asp-action="AddAssignedProjectItemToProject">
 
@@ -28,7 +27,7 @@
                     Pris
                 </th>
                 <th>
-                    Amount
+                    Antal
                 </th>
                 <th></th>
             </tr>
@@ -36,17 +35,22 @@
         <tbody>
             @for (var i = 0; i < Model.Count(); i++)
             {
-            <tr>
+                <tr>
 
-                <td><input type="text" asp-for="@Model[i].Name" /></td>
-                <td><input type="text" asp-for="@Model[i].Price" /></td>
-                <td><input type="text" asp-for="@Model[i].Amount" /></td>
-                <td><input type="text" asp-for="@Model[i].projectID" hidden /></td>
-                <td><input type="text" asp-for="@Model[i].Id" hidden /></td>
-            </tr>
+                    <td><input type="text" asp-for="@Model[i].Name" /></td>
+                    <td><input type="text" asp-for="@Model[i].Price" /></td>
+                    <td><input type="text" asp-for="@Model[i].Amount" /></td>
+                    <td><input type="text" asp-for="@Model[i].projectID" hidden /></td>
+                    <td><input type="text" asp-for="@Model[i].Id" hidden /></td>
+                </tr>
             }
         </tbody>
+
     </table>
-    <button>Update</button>
+    <button type="submit" class="btn btn-primary">Tilføj</button>
 </form>
 
+<br />
+<p>
+    <a asp-action="Details" asp-controller="Project" asp-route-id="@Model[0].projectID">Tilbage til projektet</a>
+</p>
