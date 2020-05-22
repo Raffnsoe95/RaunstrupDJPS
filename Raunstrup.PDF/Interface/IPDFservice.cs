@@ -8,8 +8,8 @@ namespace Raunstrup.PDF.Interface
 
     public interface IPDFService
     {
-        void SendEmail(ContactDto contact);
+        //void SendEmail(ContactDto contact);
 
-        void CreatePDF(ProjectDetailDto pdf);
+        void CreatePDF(ProjectDetailsDto pdf);
     }
 }

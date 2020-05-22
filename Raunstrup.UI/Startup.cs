@@ -84,11 +84,11 @@ namespace Raunstrup.UI
             services.AddRazorPages();
 
             ////SqlDb
-            //services.AddDbContext<ViewModelContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ViewModelContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             ////SqlDb
 
             //InMemDB
-            services.AddDbContext<ViewModelContext>(options => options.UseInMemoryDatabase(databaseName: "RaunstrupInMeme"));
+            //services.AddDbContext<ViewModelContext>(options => options.UseInMemoryDatabase(databaseName: "RaunstrupInMeme"));
             //InMemDB
 
             services.AddScoped<IContactService, ContactService>();
