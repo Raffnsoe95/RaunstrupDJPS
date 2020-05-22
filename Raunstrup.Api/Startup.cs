@@ -37,7 +37,7 @@ namespace Raunstrup.Api
 
             bool isTest = Convert.ToBoolean(Configuration["IsTest"]);
             // bool isTest = Convert.ToBoolean(Configuration["IsTest"]);
-            bool isTest = true;
+            //bool isTest = true;
 
             if(isTest == false)
             {
