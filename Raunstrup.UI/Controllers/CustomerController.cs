@@ -100,14 +100,28 @@ namespace Raunstrup.UI.Controllers
             if (ModelState.IsValid)
 
             {
-                
-              await _customerService.AddAsync(CustomerMapper.Map(customerViewModel)).ConfigureAwait(false);
 
-                return RedirectToAction(nameof(Index));
-                //_context.Add(employeeViewModel);
-                //await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
+                try
+                {
+                    await _customerService.AddAsync(CustomerMapper.Map(customerViewModel)).ConfigureAwait(false);
 
+                    return RedirectToAction(nameof(Index));
+
+                }
+                catch (Exception)
+                {
+
+                    var dbcustomer = CustomerMapper.Map((customerViewModel));
+                    var customerDiscountTypeDtos = await _customerService.GetAllCustomerDiscountType().ConfigureAwait(false);
+
+                    IEnumerable<CustomerDiscountTypeViewModel> customerDiscountTypeViewModels = CustomerMapper.Map(customerDiscountTypeDtos);
+
+
+                    cEcustomerViewModel.CustomerDiscountTypeViewModels = customerDiscountTypeViewModels.ToList();
+
+                    ModelState.AddModelError(string.Empty, "Email eller Telefonnummer er ikke unikt");
+                    return View(cEcustomerViewModel);
+                }
             }
             return View(customerViewModel);
         }
@@ -258,5 +272,6 @@ namespace Raunstrup.UI.Controllers
        
             
         }
+     
     }
 }

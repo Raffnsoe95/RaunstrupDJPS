@@ -34,10 +34,18 @@ namespace Raunstrup.UI.Services
 
         async Task ICustomerService.AddAsync(CustomerDto customer)
         {
-            var json = JsonSerializer.Serialize(customer);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await Client.PostAsync(_customerRequestUri, data).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
+            try
+            {
+                var json = JsonSerializer.Serialize(customer);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await Client.PostAsync(_customerRequestUri, data).ConfigureAwait(false);
+                response.EnsureSuccessStatusCode();
+
+            }
+            catch(Exception)
+            {
+                throw;
+            }
         }
 
         async Task<CustomerDto> ICustomerService.GetCustomerAsync(int id)

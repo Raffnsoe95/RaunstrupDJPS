@@ -64,6 +64,7 @@ namespace Raunstrup.UI
                 options.UseSqlServer(
                     Configuration.GetConnectionString("UserDatabaseConnection2")));
 
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<UserManagementContext>();
