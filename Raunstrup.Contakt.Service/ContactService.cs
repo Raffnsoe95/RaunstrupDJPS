@@ -29,9 +29,6 @@ namespace Raunstrup.Contakt.Service
                 contact.Message
             };
 
-            //var body = message.BodyParts.OfType().FirstOrDefault(x => x.ContentType.Matches("text", "html"));
-
-
             using (var client = new SmtpClient())
             {
                 client.Connect("smtp.Gmail.com", 587, false);
