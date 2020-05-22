@@ -14,23 +14,23 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Navn</label>
-                <input asp-for="Name" class="form-control" />
+                <input id="input_name" asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Address" class="control-label">Adresse</label>
-                <input asp-for="Address" class="form-control" />
+                <input id="input_address" asp-for="Address" class="form-control" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Phone" class="control-label">Telefon</label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
+                <input id="input_phone" asp-for="Phone" class="form-control" />
+                <span id="input_phone_validation" asp-validation-for="Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label">Email</label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <input id="input_email" asp-for="Email" class="form-control" />
+                <span id="input_email_validation" asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div>
                 <label asp-for="SelectedCustomerDiscountViewModel" class="control-label">Vælg kundetype</label>
@@ -47,7 +47,7 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Opret" class="btn btn-primary" />
+                <input id="customer_submit" type="submit" value="Opret" class="btn btn-primary" />
             </div>
         </form>
     </div>
