@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Raunstrup.DataAccess.Context;
 
 namespace Raunstrup.Api.Migrations
 {
     [DbContext(typeof(RaunstrupContext))]
-    partial class RaunstrupContextModelSnapshot : ModelSnapshot
+    [Migration("20200522145700_workinghoursfix")]
+    partial class workinghoursfix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -361,7 +363,7 @@ namespace Raunstrup.Api.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int>("EmployeeID")
+                    b.Property<int?>("EmployeeID")
                         .HasColumnType("int");
 
                     b.Property<decimal>("HourlyPrice")
@@ -523,9 +525,7 @@ namespace Raunstrup.Api.Migrations
                 {
                     b.HasOne("Raunstrup.DataAccess.Model.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("EmployeeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmployeeID");
 
                     b.HasOne("Raunstrup.DataAccess.Project", null)
                         .WithMany("WorkingHours")

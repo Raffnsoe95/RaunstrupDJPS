@@ -23,7 +23,7 @@ namespace Raunstrup.BusinessLogic.Services
 
             IEnumerable<Project> IProjectService.GetAll()
             {
-                return _context.Projects
+                return _context.Projects.Where( p => p.Active == true)
                 .Include(w => w.WorkingHours)
                 .ThenInclude(e => e.Employee)
                 .Include(w => w.ProjectDrivings)
@@ -74,9 +74,7 @@ namespace Raunstrup.BusinessLogic.Services
             .Include(w => w.AssignedItems)
             .ThenInclude(e => e.Item).ThenInclude(e => e.Discount)
             .Include(w=> w.Customer).ThenInclude(e => e.CustomerDiscountType)
-            
-
-                .FirstOrDefault(x => x.Id == id);
+            .FirstOrDefault(x => x.Id == id);
         }
 
             void IProjectService.Create(Project project)

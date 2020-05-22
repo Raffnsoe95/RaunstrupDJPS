@@ -54,8 +54,8 @@ namespace Raunstrup.UI.Controllers
             {
                 return NotFound();
             }
-            var project2 = ProjectDetailsMapper.Map(projectViewModel);
-            var project3 = ProjectDetailsMapper.MapToDetailsDto(projectViewModel);
+            //var project2 = ProjectDetailsMapper.Map(projectViewModel);
+            //var project3 = ProjectDetailsMapper.MapToDetailsDto(projectViewModel);
             return View(ProjectDetailsMapper.Map(projectViewModel));
         }
 
