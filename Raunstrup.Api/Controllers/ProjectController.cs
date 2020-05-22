@@ -43,6 +43,7 @@ namespace Raunstrup.Api.Controllers
         [HttpGet("{id}")]
         public ProjectDto Get(int id)
         {
+            var project = _projectService.Get(id);
             return ProjectMapper.Map(_projectService.Get(id));
         }
 

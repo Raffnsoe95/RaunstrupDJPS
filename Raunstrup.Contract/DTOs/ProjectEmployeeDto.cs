@@ -14,7 +14,7 @@ namespace Raunstrup.Contract.DTOs
         
         public EmployeeDto Employee { get; set; }
 
-        public int EmployeeID { get; set; } 
+        public int? EmployeeID { get; set; } 
 
         //public ProjectDto Project { get; set; }
         

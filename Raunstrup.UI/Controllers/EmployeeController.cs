@@ -177,6 +177,7 @@ namespace Raunstrup.UI.Controllers
         {
 
             IEnumerable<EmployeeDto> employeeDtos = await _employeeService.GetChosenEmployees(searchString);
+            var projects = EmployeeMapper.MapEst(employeeDtos).Select(x => { x.ProjectId = id; return x; }).ToList();
             return View(EmployeeMapper.MapEst(employeeDtos).Select(x => { x.ProjectId = id; return x; }).ToList());
             //if (!String.IsNullOrEmpty(searchString))
             //{

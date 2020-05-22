@@ -35,8 +35,9 @@ namespace Raunstrup.Api
             services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             //Try'n Erro
 
+            bool isTest = Convert.ToBoolean(Configuration["IsTest"]);
             // bool isTest = Convert.ToBoolean(Configuration["IsTest"]);
-            bool isTest = false;
+            //bool isTest = true;
 
             if(isTest == false)
             {
