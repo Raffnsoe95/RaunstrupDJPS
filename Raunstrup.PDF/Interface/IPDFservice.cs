@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Raunstrup.PDF.Interface
-{ 
-    
-        public interface IPDFService
-        {
-            //void SendEmail(ContactDto contact);
+{
 
-            void CreatePDF(PDFDto pdf);
-        }
+    public interface IPDFService
+    {
+        void SendEmail(ContactDto contact);
+
+        void CreatePDF(ProjectDetailDto pdf);
+    }
 }
