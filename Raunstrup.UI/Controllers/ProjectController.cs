@@ -13,19 +13,24 @@ using Raunstrup.Contract.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.CodeAnalysis;
+using Raunstrup.Contakt.Service.Interface;
 
 namespace Raunstrup.UI.Controllers
 {
-    [Authorize(Roles = "Admin,SuperUser,User")]
+    [Authorize(Roles = "SuperUser,User")]
     public class ProjectController : Controller
     {
         private readonly ViewModelContext _context;
         private readonly IProjectService _projectService;
+        private readonly IPDFService _PDFService;
 
-        public ProjectController(ViewModelContext context, IProjectService projectService)
+
+
+        public ProjectController(ViewModelContext context, IProjectService projectService, IPDFService pdfService)
         {
             _context = context;
             _projectService = projectService;
+            _PDFService = pdfService;
         }
 
         // GET: Project
@@ -42,9 +47,9 @@ namespace Raunstrup.UI.Controllers
         // GET: Project/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            
+
             if (id == null)
-            {   
+            {
                 return NotFound();
             }
 
@@ -66,7 +71,7 @@ namespace Raunstrup.UI.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin,SuperUser")]
+        [Authorize(Roles = "SuperUser")]
         // POST: Project/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -103,7 +108,7 @@ namespace Raunstrup.UI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,StartDate,EndDate,Price,Description,Active,IsFixedPrice,IsAccepted,IsDone,Rowversion")] ProjectViewModel projectViewModel)
-        { 
+        {
             if (id != projectViewModel.Id)
             {
                 return NotFound();
@@ -165,7 +170,7 @@ namespace Raunstrup.UI.Controllers
                     ModelState.Remove("Rowversion");
                     return View("Edit", projectViewModel);
                 }
-                catch 
+                catch
                 {
                     ModelState.AddModelError(string.Empty, "Noget gik galt");
                     return View("Edit", projectViewModel);
@@ -207,5 +212,16 @@ namespace Raunstrup.UI.Controllers
         {
             return _context.Projects.Any(e => e.Id == id);
         }
+        public async Task<IActionResult> CreatePDF(int id)
+        {
+            var projectViewModel = await _projectService.GetProjectAsync(id).ConfigureAwait(false);
+            _PDFService.CreatePDF(ProjectDetailsMapper.MapToDetailsDto(projectViewModel));
+            return RedirectToAction("Index");
+        }
+
     }
 }
+
+
+
+

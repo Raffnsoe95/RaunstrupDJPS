@@ -50,12 +50,17 @@ namespace Raunstrup.BusinessLogic.Services
             catch (Exception dbe)
             {
 
-               // var exceptionEntry = dbe.Entries.Single();
-               // var databaseEntry = exceptionEntry.GetDatabaseValues();
+                // var exceptionEntry = dbe.Entries.Single();
+                // var databaseEntry = exceptionEntry.GetDatabaseValues();
                 //customer = (Customer)databaseEntry.ToObject();
-              
+
+               
+                
                 dbe.Data.Add("dbvalue", customer);
-                throw;
+                // hvis der er problemer med telefon lav en data
+
+                dbe.Data.Add("ErrorType", "phone");
+                throw dbe;
             }
             }
 

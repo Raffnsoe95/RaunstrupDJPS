@@ -17,7 +17,7 @@ namespace Raunstrup.UI.Models
             {
                 Id = dto.Id,
                 Name = dto.Name,
-                Active=dto.active,
+                Active = dto.active,
                 CustomerId = dto.CustomerId,
                 DiscountPercent = dto.DiscountPercent
             };

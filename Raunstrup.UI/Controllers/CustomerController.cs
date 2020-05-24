@@ -108,9 +108,9 @@ namespace Raunstrup.UI.Controllers
                     return RedirectToAction(nameof(Index));
 
                 }
-                catch (Exception)
+                catch (Exception dbe)
                 {
-
+                    
                     var dbcustomer = CustomerMapper.Map((customerViewModel));
                     var customerDiscountTypeDtos = await _customerService.GetAllCustomerDiscountType().ConfigureAwait(false);
 
@@ -119,7 +119,9 @@ namespace Raunstrup.UI.Controllers
 
                     cEcustomerViewModel.CustomerDiscountTypeViewModels = customerDiscountTypeViewModels.ToList();
 
-                    ModelState.AddModelError(string.Empty, "Email eller Telefonnummer er ikke unikt");
+                    
+
+                    ModelState.AddModelError(string.Empty, "Email eller Telefonnummer er brugt af en anden");
                     return View(cEcustomerViewModel);
                 }
             }

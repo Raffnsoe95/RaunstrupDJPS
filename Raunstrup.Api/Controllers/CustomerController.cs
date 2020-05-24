@@ -23,10 +23,10 @@ namespace Raunstrup.Api.Controllers
         private readonly ICustomerService _customerService;
         private readonly IProjectService _projectService;
 
-        public CustomerController(ICustomerService movieService, IProjectService projectService)
+        public CustomerController(ICustomerService customerService, IProjectService projectService)
         {
             _projectService = projectService;
-            _customerService = movieService;
+            _customerService = customerService;
         }
 
         // GET: api/Customer

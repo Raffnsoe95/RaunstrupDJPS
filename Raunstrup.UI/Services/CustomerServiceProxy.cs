@@ -42,9 +42,11 @@ namespace Raunstrup.UI.Services
                 response.EnsureSuccessStatusCode();
 
             }
-            catch(Exception)
+            catch(Exception dbe)
             {
-                throw;
+                dbe.Data.Add("dbvalue", customer);
+             //   dbe.Data.Add("Errortype", "phone");
+                throw dbe ;
             }
         }
 
