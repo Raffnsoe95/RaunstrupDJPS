@@ -22,44 +22,79 @@ namespace Raunstrup.Api.Controllers
         {
             _workinghoursService = workinghoursService;
         }
+
         // GET: api/WoringHours
         [HttpGet]
         public IEnumerable<WorkingHoursDto> Get()
         {
-            return _workinghoursService.GetAll()
-                .Select(a => WorkingHoursMapper
-                .Map(a))
-                .ToList();
+            try
+            {
+                return _workinghoursService.GetAll().Select(a => WorkingHoursMapper.Map(a)).ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         // GET: api/WorkingHours/5
         [HttpGet("{id}")]
         public WorkingHoursDto Get(int id)
         {
-            //den skal aflevere en dto
-            //ud fra en rigtig model, vel
-            return WorkingHoursMapper.Map(_workinghoursService.Get(id));
+            try
+            {
+                //den skal aflevere en dto
+                //ud fra en rigtig model, vel
+                return WorkingHoursMapper.Map(_workinghoursService.Get(id));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         // POST: api/WorkingHours
         [HttpPost]
         public void Post([FromBody] WorkingHoursDto value)
         {
-            _workinghoursService.Create(WorkingHoursMapper.Map(value));
+            try
+            {
+                _workinghoursService.Create(WorkingHoursMapper.Map(value));
+            }
+            catch (Exception)
+            {
+            }
         }
 
         // PUT: api/Customer/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] WorkingHoursDto value)
         {
-            _workinghoursService.Update(WorkingHoursMapper.Map(value));
+            try
+            {
+                _workinghoursService.Update(WorkingHoursMapper.Map(value));
+            }
+            catch (Exception)
+            {    
+                    
+            }
+            
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _workinghoursService.Delete(id);
+            try
+            {
+                _workinghoursService.Delete(id);
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }
