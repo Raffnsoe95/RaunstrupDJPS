@@ -29,9 +29,15 @@ namespace Raunstrup.UI.Controllers
         // GET: Item
         public async Task<IActionResult> Index(string searchString)
         {
-            var itemsDtos = await _itemService.GetChosenItems(searchString).ConfigureAwait(false);
-            return View(ItemMapper.Map(itemsDtos));
-
+            try
+            {
+                var itemsDtos = await _itemService.GetChosenItems(searchString).ConfigureAwait(false);
+                return View(ItemMapper.Map(itemsDtos));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         // GET: Item/Details/5
@@ -127,49 +133,78 @@ namespace Raunstrup.UI.Controllers
         [Authorize(Roles = "Admin,SuperUser")]
         public async Task<IActionResult> AddAssignedProjectItem(int id, string searchString)
         {
-            var itemDtos = await _itemService.GetChosenItems(searchString).ConfigureAwait(false);
-            var items = ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList();
-            return View(ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList());
+            try
+            {
+                var itemDtos = await _itemService.GetChosenItems(searchString).ConfigureAwait(false);
+                var items = ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList();
+                return View(ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList());
+            }
+            catch (Exception)
+            { 
+                throw;
+            }
         }
 
         [Authorize(Roles = "Admin,SuperUser")]
         public async Task<IActionResult> AddAssignedProjectItemToProject(List<ItemViewModel> items)
         {
-            var projectItems = items.Where(x => x.Amount > 0).Select(x => new ProjectAssignedItemViewModel() 
-            { 
-                Amount = x.Amount, 
-                Price = x.Price, 
-                ProjectId = x.projectID, 
-                ItemId = x.Id,  
-            });
+            try
+            {
+                var projectItems = items.Where(x => x.Amount > 0).Select(x => new ProjectAssignedItemViewModel()
+                {
+                    Amount = x.Amount,
+                    Price = x.Price,
+                    ProjectId = x.projectID,
+                    ItemId = x.Id,
+                });
 
-            await _itemService.AddAssignedItemAsync(ProjectAssignedItemMapper.Map(projectItems).ToList()).ConfigureAwait(false);
-            return RedirectToAction("Details","Project", new { id = items[0].projectID });
+                await _itemService.AddAssignedItemAsync(ProjectAssignedItemMapper.Map(projectItems).ToList()).ConfigureAwait(false);
+                return RedirectToAction("Details", "Project", new { id = items[0].projectID });
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [Authorize(Roles = "Admin,SuperUser,User")]
         public async Task<IActionResult> AddUsedProjectItem(int id, string searchString)
         {
-            var itemDtos = await _itemService.GetChosenItems(searchString).ConfigureAwait(false);
-            var items = ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList();
-            return View(ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList());
+            try
+            {
+                var itemDtos = await _itemService.GetChosenItems(searchString).ConfigureAwait(false);
+                var items = ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList();
+                return View(ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [Authorize(Roles = "Admin,SuperUser,User")]
         public async Task<IActionResult> AddUsedProjectItemToProject(List<ItemViewModel> items)
         {
-            var projectItems = items.Where(x => x.Amount > 0).Select(x => new ProjectUsedItemViewModel() 
-            {   Amount = x.Amount, 
-                Price = x.Price, 
-                ProjectId = x.projectID, 
-                ItemId = x.Id,
-              
-                
-            });
+            try
+            {
+                var projectItems = items.Where(x => x.Amount > 0).Select(x => new ProjectUsedItemViewModel()
+                {
+                    Amount = x.Amount,
+                    Price = x.Price,
+                    ProjectId = x.projectID,
+                    ItemId = x.Id,
 
-            await _itemService.AddUsedItemAsync(ProjectUsedItemMapper.Map(projectItems).ToList()).ConfigureAwait(false);
-            //return RedirectToAction("AddUsedProjectItem", new { id = items[0].projectID });
-            return RedirectToAction("Details", "Project", new { id = items[0].projectID });
+
+                });
+
+                await _itemService.AddUsedItemAsync(ProjectUsedItemMapper.Map(projectItems).ToList()).ConfigureAwait(false);
+                return RedirectToAction("Details", "Project", new { id = items[0].projectID });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
