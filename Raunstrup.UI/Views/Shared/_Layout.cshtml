@@ -24,7 +24,7 @@
                         </li>
 
 
-                        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+                        @if  (User.IsInRole("SuperUser"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Employee" asp-action="Index">Medarbejdere</a>
@@ -39,7 +39,7 @@
 
                         }
 
-                        @if (User.IsInRole("User") || User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+                        @if (User.IsInRole("User") || User.IsInRole("SuperUser"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="Index">Projekter</a>

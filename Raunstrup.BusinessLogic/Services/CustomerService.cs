@@ -55,8 +55,11 @@ namespace Raunstrup.BusinessLogic.Services
                 //customer = (Customer)databaseEntry.ToObject();
 
                
-
+                
                 dbe.Data.Add("dbvalue", customer);
+                // hvis der er problemer med telefon lav en data
+
+                dbe.Data.Add("ErrorType", "phone");
                 throw dbe;
             }
             }
