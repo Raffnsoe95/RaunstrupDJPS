@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using PdfSharp.Pdf; //To be used for creating PDF
 using PdfSharp.Drawing; //to be used for creating PDF
-using Raunstrup.PDF.Interface;
+//using System.Drawing;
+using Raunstrup.Contakt.Service.Interface;
 using Raunstrup.Contract.DTOs;
 //using Raunstrup.DataAccess;
 
-namespace PDFService
+namespace Raunstrup.Contakt.Service
 {
     public class PDFservice : IPDFService
     {

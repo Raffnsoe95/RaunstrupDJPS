@@ -92,6 +92,7 @@ namespace Raunstrup.UI
             //InMemDB
 
             services.AddScoped<IContactService, ContactService>();
+            services.AddScoped<IPDFService, PDFservice>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
