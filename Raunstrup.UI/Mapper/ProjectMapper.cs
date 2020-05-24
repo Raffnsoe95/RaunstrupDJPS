@@ -65,7 +65,28 @@ namespace Raunstrup.UI.Models
                 CustomerDto = CustomerMapper.Map(project.Customer)
             };
         }
+        public static ProjectDto Map(ProjectDetailsDto project)
+        {
+            return new ProjectDto
+            {
+                Id = project.Id,
+                Active = project.Active,
+                Description = project.Description,
+                EndDate = project.EndDate,
+                IsAccepted = project.IsAccepted,
+                IsDone = project.IsDone,
+                IsFixedPrice = project.IsFixedPrice,
+                Price = project.Price,
+                StartDate = project.StartDate,
+                ESTdriving = project.ESTdriving,
+                Rowversion = project.Rowversion,
+                CustomerId = project.CustomerId,
+                //UsedItemsDtos = ProjectMapper.Map(project.UsedItems).ToList()
+                //7ProjectDetailsMapper = ProjectDetailsMapper.Map(project.ProjectDto).ToList(),
+                //CustomerDto = CustomerMapper.Map(project.Customer)
+            };
+        }
 
-        
+
     }
 }

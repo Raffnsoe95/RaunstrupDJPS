@@ -4,6 +4,7 @@
     ViewData["Title"] = "Projekt " + Model.Id;
 }
 
+   
 <h1>Projekt</h1>
 
 <section>
@@ -90,7 +91,7 @@
         </dd>
     </dl>
 
-    
+
 </section>
 <section>
 
@@ -104,7 +105,9 @@
         <a asp-action="AddProjectCustomer" asp-route-id="@Model.Id" asp-controller="Customer">Tilknyt Kunde</a> <span>|</span>
         <a asp-action="AddAssignedProjectItem" asp-route-id="@Model.Id" asp-controller="Item">Tilknyt materialer</a> <span>|</span>
 
-        <a id="edit_project" asp-action="Edit" asp-route-id="@Model.Id">Ret</a> <span>|</span>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> <span>|</span>
+        <a asp-action="createPDF" asp-route-id="@Model.Id" asp-controller="Project">Udskriv PDF</a><span>|</span>
+
     }
 
     <a asp-action="Index">Tilbage</a>
@@ -142,26 +145,26 @@
             <tbody>
                 @foreach (var item in Model.AssignedItems)
                 {
-                <tr>
-                    <td>
-                        @item.Item.Name
-                    </td>
-                    <td>
-                        @item.Amount
-                    </td>
-                    <td>
-                        @item.Price
-                    </td>
-                    <td>
-                        @(item.Amount * item.Price)
-                    </td>
-                    <td>
-                        @item.Discount
-                    </td>
-                    <td>
-                        @item.TotalPriceWithDiscount
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            @item.Item.Name
+                        </td>
+                        <td>
+                            @item.Amount
+                        </td>
+                        <td>
+                            @item.Price
+                        </td>
+                        <td>
+                            @(item.Amount * item.Price)
+                        </td>
+                        <td>
+                            @item.Discount
+                        </td>
+                        <td>
+                            @item.TotalPriceWithDiscount
+                        </td>
+                    </tr>
                 }
                 <tr>
                     <td colspan="5">
@@ -200,26 +203,26 @@
             <tbody>
                 @foreach (var item in Model.UsedItems)
                 {
-                <tr>
-                    <td>
-                        @item.Item.Name
-                    </td>
-                    <td>
-                        @item.Amount
-                    </td>
-                    <td>
-                        @item.Price
-                    </td>
-                    <td>
-                        @(item.Amount * item.Price)
-                    </td>
-                    <td>
-                        @item.Discount
-                    </td>
-                    <td>
-                        @item.TotalPriceWithDiscount
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            @item.Item.Name
+                        </td>
+                        <td>
+                            @item.Amount
+                        </td>
+                        <td>
+                            @item.Price
+                        </td>
+                        <td>
+                            @(item.Amount * item.Price)
+                        </td>
+                        <td>
+                            @item.Discount
+                        </td>
+                        <td>
+                            @item.TotalPriceWithDiscount
+                        </td>
+                    </tr>
                 }
                 <tr>
                     <td colspan="5">
