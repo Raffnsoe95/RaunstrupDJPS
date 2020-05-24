@@ -19,6 +19,7 @@ namespace Raunstrup.UI.Models
                 Name = dto.Name,
                 Active=dto.active,
                 CustomerId = dto.CustomerId,
+                DiscountPercent = dto.DiscountPercent
             };
         }
 
@@ -42,6 +43,7 @@ namespace Raunstrup.UI.Models
                 Name = model.Name,
                 active=model.Active,
                 CustomerId = model.CustomerId,
+                DiscountPercent = model.DiscountPercent
 
             };
         }
