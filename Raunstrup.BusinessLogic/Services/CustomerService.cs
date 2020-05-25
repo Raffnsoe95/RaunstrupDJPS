@@ -50,16 +50,10 @@ namespace Raunstrup.BusinessLogic.Services
             catch (Exception dbe)
             {
 
-                // var exceptionEntry = dbe.Entries.Single();
-                // var databaseEntry = exceptionEntry.GetDatabaseValues();
-                //customer = (Customer)databaseEntry.ToObject();
-
-               
                 
                 dbe.Data.Add("dbvalue", customer);
-                // hvis der er problemer med telefon lav en data
 
-                dbe.Data.Add("ErrorType", "phone");
+               // dbe.Data.Add("ErrorType", "phone");
                 throw dbe;
             }
             }
@@ -67,24 +61,31 @@ namespace Raunstrup.BusinessLogic.Services
             void ICustomerService.Update(Customer customer)
             {
             CustomerDiscountType customerDiscountType = _context.CustomerDiscountTypes.Find(customer.CustomerDiscountTypeID);
-            
+
             try
             {
-                customer.CustomerDiscountType = customerDiscountType;
-                _context.Customers.Update(customer);
-                _context.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException dbu)
+                try
+                {
+                    customer.CustomerDiscountType = customerDiscountType;
+                    _context.Customers.Update(customer);
+                    _context.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException dbu)
 
-            {
-                var exceptionEntry = dbu.Entries.Single();
-                var databaseEntry = exceptionEntry.GetDatabaseValues();
-                customer = (Customer)databaseEntry.ToObject();
-                customer.CustomerDiscountType = customerDiscountType;
-                dbu.Data.Add("dbvalue", customer);
-                throw;
+                {
+                    var exceptionEntry = dbu.Entries.Single();
+                    var databaseEntry = exceptionEntry.GetDatabaseValues();
+                    customer = (Customer)databaseEntry.ToObject();
+                    customer.CustomerDiscountType = customerDiscountType;
+                    dbu.Data.Add("dbvalue", customer);
+                    throw;
 
+                }
             }
+            catch
+            (Exception dbe)
+            { throw dbe; }
+           
 
 
             
@@ -100,6 +101,8 @@ namespace Raunstrup.BusinessLogic.Services
             _context.Customers.Update(tmpCustomer);
             _context.SaveChanges();
             }
+
+
         void ICustomerService.AddCustomerToProject(Customer Customer)
         {
             _context.Customers.Add(Customer);

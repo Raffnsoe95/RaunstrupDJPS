@@ -65,7 +65,7 @@ namespace Raunstrup.UI.Controllers
             return View(ProjectDetailsMapper.Map(projectViewModel));
         }
 
-        [Authorize(Roles = "Admin,SuperUser")]
+        [Authorize(Roles = "SuperUser")]
         // GET: Project/Create
         public IActionResult Create()
         {
@@ -78,7 +78,7 @@ namespace Raunstrup.UI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StartDate,EndDate,Price,Description,Active,IsFixedPrice,IsAccepted,IsDone,Rowversion")] ProjectViewModel projectViewModel)
+        public async Task<IActionResult> Create([Bind("Id,StartDate,EndDate,Price,Description,Active,IsFixedPrice,IsAccepted,IsDone,Rowversion,ESTdriving")] ProjectViewModel projectViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace Raunstrup.UI.Controllers
             return View(projectViewModel);
         }
 
-        [Authorize(Roles = "Admin,SuperUser")]
+        [Authorize(Roles = "SuperUser")]
         // GET: Project/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
@@ -102,7 +102,7 @@ namespace Raunstrup.UI.Controllers
             return View(ProjectMapper.Map(projectViewModel));
         }
 
-        [Authorize(Roles = "Admin,SuperUser")]
+        [Authorize(Roles = "SuperUser")]
         // POST: Project/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -180,7 +180,7 @@ namespace Raunstrup.UI.Controllers
             return View(projectViewModel);
         }
 
-        [Authorize(Roles = "Admin,SuperUser")]
+        [Authorize(Roles = "SuperUser")]
         // GET: Project/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -198,7 +198,7 @@ namespace Raunstrup.UI.Controllers
             return View(ProjectMapper.Map(projectViewModel));
         }
 
-        [Authorize(Roles = "Admin,SuperUser")]
+        [Authorize(Roles = "SuperUser")]
         // POST: Project/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

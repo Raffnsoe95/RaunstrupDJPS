@@ -23,14 +23,19 @@ namespace Raunstrup.UI.Models
 
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "Skal udfyldes")]
         [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime StartDate { get; set; }
 
+        [Required(ErrorMessage = "Skal udfyldes")]
         [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime EndDate { get; set; }
 
+        [Required(ErrorMessage = "Skal udfyldes")]
+        [RegularExpression(@"^[0-9\.,]+$", ErrorMessage = "Indtast venligst et nummer")]
         public decimal Price { get; set; }
 
+        [Required(ErrorMessage = "Skal udfyldes")]
         public string Description { get; set; }
 
         public bool Active { get; set; }
@@ -41,6 +46,8 @@ namespace Raunstrup.UI.Models
 
         public bool IsDone { get; set; }
 
+        [Required(ErrorMessage = "Skal udfyldes")]
+        [RegularExpression(@"^[0-9\.,]+$", ErrorMessage = "Indtast venligst et nummer")]
         public double ESTdriving { get; set; }
 
         public int? CustomerId { get; set; }
