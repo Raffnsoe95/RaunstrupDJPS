@@ -42,6 +42,7 @@ namespace Raunstrup.Contakt.Service
             }
             else
             {
+                
                 gfx.DrawString(project.Customer.Name, companyAndDebtor, XBrushes.Black,
                 new XRect(80, -270, page.Width, page.Height),
                 XStringFormats.CenterLeft);
@@ -63,6 +64,16 @@ namespace Raunstrup.Contakt.Service
             gfx.DrawString("Tilbud", tilbud, XBrushes.Black,
                 new XRect(80, -170, page.Width, page.Height),
                 XStringFormats.CenterLeft);
+
+            gfx.DrawString((project.StartDate.ToString()), companyAndDebtor, XBrushes.Black,
+                new XRect(80, -160, page.Width, page.Height),
+                XStringFormats.CenterLeft);
+
+            gfx.DrawString((project.EndDate.ToString()), companyAndDebtor, XBrushes.Black,
+                new XRect(80, -150, page.Width, page.Height),
+                XStringFormats.CenterLeft);
+
+
 
             //Billede af Firmallogo---------------------------------------------------------------------------------------
             //Mangler
@@ -105,23 +116,29 @@ namespace Raunstrup.Contakt.Service
 
             //Navn på vare antal pris beløb-------------------------------------------------------------------------------------------------------------
             //varens navn
+
+            gfx.DrawString((project.Description.ToString()), tilbud, XBrushes.Black,
+                new XRect(80, -140, page.Width, page.Height),
+                XStringFormats.CenterLeft);
+
+
             gfx.DrawString("Vare", companyAndDebtor, XBrushes.Black,
-            new XRect(80, -130, page.Width, page.Height),
+            new XRect(80, -120, page.Width, page.Height),
             XStringFormats.CenterLeft);
 
             //Antal 
             gfx.DrawString("Antal", companyAndDebtor, XBrushes.Black,
-                new XRect(-80, -130, page.Width, page.Height),
+                new XRect(-80, -120, page.Width, page.Height),
                 XStringFormats.Center);
 
             //Stykpris
             gfx.DrawString("Stykpris", companyAndDebtor, XBrushes.Black,
-               new XRect(90, -130, page.Width, page.Height),
+               new XRect(90, -120, page.Width, page.Height),
                XStringFormats.Center);
 
             //I alt
             gfx.DrawString("I alt", companyAndDebtor, XBrushes.Black,
-               new XRect(200, -130, page.Width, page.Height),
+               new XRect(200, -120, page.Width, page.Height),
                XStringFormats.Center);
 
             gfx.DrawString("___________________________________________________________________________________________ ", smallHeadLine, XBrushes.Black,
@@ -149,7 +166,7 @@ namespace Raunstrup.Contakt.Service
                    new XRect(90, -110 + lineSpace, page.Width, page.Height),
                    XStringFormats.Center);
 
-                ////I alt
+                //I alt
                 //decimal priceSum = project.AssignedItems.();
                 //gfx.DrawString((priceSum.ToString() + " Kr"), companyAndDebtor, XBrushes.Black,
                 //   new XRect(200, -110 + lineSpace, page.Width, page.Height),
@@ -259,8 +276,11 @@ namespace Raunstrup.Contakt.Service
             //Her Laves navnet på filen
             string filename = "Tilbud" + project.Id.ToString() + ".pdf";
 
+            
             //Dette er til at gemme pdf
             document.Save(filename);
+
+            
         }
 
 
