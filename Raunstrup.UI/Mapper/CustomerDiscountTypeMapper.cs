@@ -43,7 +43,7 @@ namespace Raunstrup.UI.Models
                 Name = model.Name,
                 active=model.Active,
                 CustomerId = model.CustomerId,
-                DiscountPercent=model.DiscountPercent
+                DiscountPercent = model.DiscountPercent
 
             };
         }

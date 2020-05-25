@@ -16,8 +16,7 @@ namespace Raunstrup.UI.Models
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Skal udfyldes")]
-        [RegularExpression(@"^[0-9|+| |(|)]+$"), StringLength(30)]
-
+        [RegularExpression(@"^[0-9\+ \(\)]+$", ErrorMessage = "Indtast venligst et korrekt telefonnummer"), StringLength(30)]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "Skal udfyldes")]

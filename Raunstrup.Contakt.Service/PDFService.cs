@@ -8,13 +8,14 @@ using PdfSharp.Drawing; //to be used for creating PDF
 //using System.Drawing;
 using Raunstrup.Contakt.Service.Interface;
 using Raunstrup.Contract.DTOs;
+using System.IO;
 //using Raunstrup.DataAccess;
 
 namespace Raunstrup.Contakt.Service
 {
     public class PDFservice : IPDFService
     {
-        public void CreatePDF(ProjectDetailsDto project)
+        public string CreatePDF(ProjectDetailsDto project)
         {
             // Her bruges classen pdfDocument.
             PdfDocument document = new PdfDocument();
@@ -260,10 +261,10 @@ namespace Raunstrup.Contakt.Service
             string filename = "Tilbud" + project.Id.ToString() + ".pdf";
 
             //Dette er til at gemme pdf
+
             document.Save(filename);
+            return filename;
         }
-
-
 
     }
 
