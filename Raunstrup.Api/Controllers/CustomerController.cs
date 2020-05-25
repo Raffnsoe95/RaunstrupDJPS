@@ -10,6 +10,8 @@ using Raunstrup.DataAccess.Model;
 using System.Data;
 using Microsoft.EntityFrameworkCore;
 using Raunstrup.DataAccess;
+using Org.BouncyCastle.Asn1.Cmp;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Raunstrup.Api.Controllers
 {
@@ -63,15 +65,22 @@ namespace Raunstrup.Api.Controllers
         [HttpPut("{id}")]
         public ActionResult<CustomerDto> Put(int id, [FromBody] CustomerDto value)
         {
-            try
+            
+                try
+                {
+                    _customerService.Update(CustomerMapper.Map(value));
+                    return value;
+                }
+                catch (DbUpdateConcurrencyException dbu)
+                {
+                    Customer customer = (Customer)dbu.Data["dbvalue"];
+                    return Conflict(CustomerMapper.Map(customer));
+                }
+            
+            catch (Exception dbe)
             {
-                _customerService.Update(CustomerMapper.Map(value));
-                return value;
-            }
-            catch (DbUpdateConcurrencyException dbu)
-            {
-                Customer customer = (Customer)dbu.Data["dbvalue"];
-                return Conflict(CustomerMapper.Map(customer)); 
+                Customer customer = (Customer)dbe.Data["dbvalue"];
+                return new StatusCodeResult((int)500);
             }
         }
 

@@ -17,7 +17,7 @@ using System.Net.Http;
 
 namespace Raunstrup.UI.Controllers
 {
-    [Authorize(Roles = "Admin,SuperUser")]
+    [Authorize(Roles = "SuperUser")]
     public class CustomerController : Controller
     {
         private readonly ViewModelContext _context;
@@ -165,49 +165,91 @@ namespace Raunstrup.UI.Controllers
             
             if (ModelState.IsValid)
             {
-                try
-                {
 
-                    await _customerService.UpdateAsync(id, CustomerMapper.Map(customerViewModel)).ConfigureAwait(false);
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (DbUpdateConcurrencyException dbu)
-                {
-                   
-                    
+                
+                    try
+                    {
+
+                        await _customerService.UpdateAsync(id, CustomerMapper.Map(customerViewModel)).ConfigureAwait(false);
+                        return RedirectToAction(nameof(Index));
+
+
+
+                    }
+
+
+                    catch (DbUpdateConcurrencyException dbu)
+                    {
+
+
                         var dbcustomer = CustomerMapper.Map((CustomerDto)dbu.Data["dbvalue"]);
-                        if(cEcustomerViewModel.Phone != dbcustomer.Phone) 
+
+                        if (cEcustomerViewModel.Phone != dbcustomer.Phone)
                         {
                             ModelState.AddModelError("Phone", "telefonnummeret er opdateret af en anden person");
                         }
-                    if (cEcustomerViewModel.Name != dbcustomer.Name)
-                    {
-                        ModelState.AddModelError("Name", "Navnet er opdateret af en anden person");
-                    }
-                    if (cEcustomerViewModel.Address != dbcustomer.Address)
-                    {
-                        ModelState.AddModelError("Address", "Addressen er opdateret af en anden person");
-                    }
-                    if (cEcustomerViewModel.Email != dbcustomer.Email)
-                    {
-                        ModelState.AddModelError("Email", "E-mailen er opdateret af en anden person");
-                    }
-                    if (cEcustomerViewModel.CustomerDiscountType != dbcustomer.CustomerDiscountType)
-                    {
-                        ModelState.AddModelError("SelectedCustomerDiscountViewModel", "Kundetypen er opdateret af en anden person");
-                    }
 
+
+                        if (cEcustomerViewModel.Name != dbcustomer.Name)
+                        {
+                            ModelState.AddModelError("Name", "Navnet er opdateret af en anden person");
+                        }
+                        if (cEcustomerViewModel.Address != dbcustomer.Address)
+                        {
+                            ModelState.AddModelError("Address", "Addressen er opdateret af en anden person");
+                        }
+                        if (cEcustomerViewModel.Email != dbcustomer.Email)
+                        {
+                            ModelState.AddModelError("Email", "E-mailen er opdateret af en anden person");
+                        }
+                        if (cEcustomerViewModel.CustomerDiscountType != dbcustomer.CustomerDiscountType)
+                        {
+                            ModelState.AddModelError("SelectedCustomerDiscountViewModel", "Kundetypen er opdateret af en anden person");
+                        }
+
+                        var customerDiscountTypeDtos = await _customerService.GetAllCustomerDiscountType().ConfigureAwait(false);
+                        IEnumerable<CustomerDiscountTypeViewModel> customerDiscountTypeViewModels = CustomerMapper.Map(customerDiscountTypeDtos);
+
+                        cEcustomerViewModel.CustomerDiscountTypeViewModels = customerDiscountTypeViewModels.ToList();
+
+                        cEcustomerViewModel.CustomerDiscountType = dbcustomer.CustomerDiscountType;
+                        ModelState.AddModelError(string.Empty, "Denne kunde er blevet opdateret af en anden bruger, tryk gem for at overskrive");
+                        cEcustomerViewModel.Rowversion = dbcustomer.Rowversion;
+                        ModelState.Remove("Rowversion");
+                        return View("Edit", cEcustomerViewModel);
+                    }
+                catch (Exception dbe)
+                {
+
+                    var dbcustomer = CustomerMapper.Map((customerViewModel));
                     var customerDiscountTypeDtos = await _customerService.GetAllCustomerDiscountType().ConfigureAwait(false);
+
                     IEnumerable<CustomerDiscountTypeViewModel> customerDiscountTypeViewModels = CustomerMapper.Map(customerDiscountTypeDtos);
+
 
                     cEcustomerViewModel.CustomerDiscountTypeViewModels = customerDiscountTypeViewModels.ToList();
 
-                    cEcustomerViewModel.CustomerDiscountType = dbcustomer.CustomerDiscountType;
-                    ModelState.AddModelError(string.Empty, "Denne kunde er blevet opdateret af en anden bruger, tryk gem for at overskrive");
-                    cEcustomerViewModel.Rowversion = dbcustomer.Rowversion;
-                    ModelState.Remove("Rowversion");
-                    return View("Edit",cEcustomerViewModel);
+
+                    int selectedCustomerDiscountViewModel = cEcustomerViewModel.SelectedCustomerDiscountViewModel;
+
+                    var customerDiscountType = await _customerService.GetCustomerDiscountTypeAsync(selectedCustomerDiscountViewModel);
+
+                    cEcustomerViewModel.CustomerDiscountType= CustomerDiscountTypeMapper.Map( customerDiscountType);
+
+
+                    ModelState.AddModelError(string.Empty, "Email eller telefonnummer er brut af en anden");
+                    return View(cEcustomerViewModel);
+
+
                 }
+                
+              
+
+
+                   
+                
+               
+              
             }
             return View(cEcustomerViewModel);
         }
