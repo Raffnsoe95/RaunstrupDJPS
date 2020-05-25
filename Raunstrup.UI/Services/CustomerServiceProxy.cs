@@ -164,7 +164,7 @@ namespace Raunstrup.UI.Services
             return await JsonSerializer.DeserializeAsync<CustomerDiscountTypeDto>(stream, options).ConfigureAwait(false);
         }
 
-        public async Task< IEnumerable<CustomerDto>> GetChosenCustomers(string searchString)
+        public async Task<IEnumerable<CustomerDto>> GetChosenCustomers(string searchString)
         {
             if (!String.IsNullOrEmpty(searchString))
             {
