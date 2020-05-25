@@ -25,7 +25,7 @@ namespace Raunstrup.UI.Controllers
             _itemService = itemService;
         }
 
-        [Authorize(Roles = "Admin,SuperUser")]
+        [Authorize(Roles = "SuperUser")]
         // GET: Item
         public async Task<IActionResult> Index(string searchString)
         {
@@ -36,7 +36,8 @@ namespace Raunstrup.UI.Controllers
             }
             catch (Exception)
             {
-                throw;
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke finde Matrialerne" };
+                return View("Error", model);
             }
         }
 
@@ -130,7 +131,7 @@ namespace Raunstrup.UI.Controllers
         //    return _context.Items.Any(e => e.Id == id);
         //}
 
-        [Authorize(Roles = "Admin,SuperUser")]
+        [Authorize(Roles = "SuperUser")]
         public async Task<IActionResult> AddAssignedProjectItem(int id, string searchString)
         {
             try
@@ -140,12 +141,13 @@ namespace Raunstrup.UI.Controllers
                 return View(ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList());
             }
             catch (Exception)
-            { 
-                throw;
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke finde nogle Matrialer" };
+                return View("Error", model);
             }
         }
 
-        [Authorize(Roles = "Admin,SuperUser")]
+        [Authorize(Roles = "SuperUser")]
         public async Task<IActionResult> AddAssignedProjectItemToProject(List<ItemViewModel> items)
         {
             try
@@ -164,11 +166,12 @@ namespace Raunstrup.UI.Controllers
             }
             catch (Exception)
             {
-                throw;
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke tilføje Matrialer til Projectet" };
+                return View("Error", model);
             }
         }
 
-        [Authorize(Roles = "Admin,SuperUser,User")]
+        [Authorize(Roles = "SuperUser,User")]
         public async Task<IActionResult> AddUsedProjectItem(int id, string searchString)
         {
             try
@@ -179,11 +182,12 @@ namespace Raunstrup.UI.Controllers
             }
             catch (Exception)
             {
-                throw;
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke finde nogle matrialer" };
+                return View("Error", model);
             }
         }
 
-        [Authorize(Roles = "Admin,SuperUser,User")]
+        [Authorize(Roles = "SuperUser,User")]
         public async Task<IActionResult> AddUsedProjectItemToProject(List<ItemViewModel> items)
         {
             try
@@ -194,8 +198,6 @@ namespace Raunstrup.UI.Controllers
                     Price = x.Price,
                     ProjectId = x.projectID,
                     ItemId = x.Id,
-
-
                 });
 
                 await _itemService.AddUsedItemAsync(ProjectUsedItemMapper.Map(projectItems).ToList()).ConfigureAwait(false);
@@ -203,7 +205,8 @@ namespace Raunstrup.UI.Controllers
             }
             catch (Exception)
             {
-                throw;
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke indberette nogle Matrialer" };
+                return View("Error", model);
             }
         }
     }
