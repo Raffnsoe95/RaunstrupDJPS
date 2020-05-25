@@ -17,7 +17,7 @@ using System.Net.Http;
 
 namespace Raunstrup.UI.Controllers
 {
-    [Authorize(Roles = "Admin,SuperUser")]
+    [Authorize(Roles = "SuperUser")]
     public class CustomerController : Controller
     {
         private readonly ViewModelContext _context;

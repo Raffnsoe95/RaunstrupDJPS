@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Raunstrup.UI.Controllers
 {
 
-    [Authorize(Roles = "Admin,SuperUser,User")]
+    [Authorize(Roles = "SuperUser,User")]
     public class ProjectDrivingController : Controller
     {
         private readonly ViewModelContext _context;

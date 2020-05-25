@@ -15,7 +15,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Raunstrup.UI.Controllers
 {
-    [Authorize(Roles = "Admin,SuperUser")]
+    [Authorize(Roles = "SuperUser")]
     public class EmployeeController : Controller
     {
         private readonly ViewModelContext _context;
@@ -75,7 +75,7 @@ namespace Raunstrup.UI.Controllers
         [ValidateAntiForgeryToken]
 
         //------------------------------------
-        [Authorize(Roles = "Admin,SuperUser")]
+        [Authorize(Roles = "SuperUser")]
         //-----------------------------
         public async Task<IActionResult> Create([Bind("Id,Name,Phone,Salary,Active")] EmployeeViewModel employeeViewModel)
         {

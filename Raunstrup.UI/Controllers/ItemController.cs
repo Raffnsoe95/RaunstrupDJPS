@@ -25,7 +25,7 @@ namespace Raunstrup.UI.Controllers
             _itemService = itemService;
         }
 
-        [Authorize(Roles = "Admin,SuperUser")]
+        [Authorize(Roles = "SuperUser")]
         // GET: Item
         public async Task<IActionResult> Index(string searchString)
         {
@@ -130,7 +130,7 @@ namespace Raunstrup.UI.Controllers
         //    return _context.Items.Any(e => e.Id == id);
         //}
 
-        [Authorize(Roles = "Admin,SuperUser")]
+        [Authorize(Roles = "SuperUser")]
         public async Task<IActionResult> AddAssignedProjectItem(int id, string searchString)
         {
             try
@@ -145,7 +145,7 @@ namespace Raunstrup.UI.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin,SuperUser")]
+        [Authorize(Roles = "SuperUser")]
         public async Task<IActionResult> AddAssignedProjectItemToProject(List<ItemViewModel> items)
         {
             try
@@ -168,7 +168,7 @@ namespace Raunstrup.UI.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin,SuperUser,User")]
+        [Authorize(Roles = "SuperUser,User")]
         public async Task<IActionResult> AddUsedProjectItem(int id, string searchString)
         {
             try
@@ -183,7 +183,7 @@ namespace Raunstrup.UI.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin,SuperUser,User")]
+        [Authorize(Roles = "SuperUser,User")]
         public async Task<IActionResult> AddUsedProjectItemToProject(List<ItemViewModel> items)
         {
             try
