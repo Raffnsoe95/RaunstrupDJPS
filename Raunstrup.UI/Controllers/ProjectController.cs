@@ -215,9 +215,17 @@ namespace Raunstrup.UI.Controllers
         }
         public async Task<IActionResult> CreatePDF(int id)
         {
-            var projectViewModel = await _projectService.GetProjectAsync(id).ConfigureAwait(false);
-            _PDFService.CreatePDF(ProjectDetailsMapper.MapToDetailsDto(projectViewModel));
-            return RedirectToAction("Index");
+            try
+            {
+                var projectViewModel = await _projectService.GetProjectAsync(id).ConfigureAwait(false);
+                _PDFService.CreatePDF(ProjectDetailsMapper.MapToDetailsDto(projectViewModel));
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "PDF'en kunne ikke laves" };
+                return View("Error", model);
+            }
         }
 
         public async Task<IActionResult> SendPDF(int id)
