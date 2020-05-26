@@ -36,7 +36,8 @@ namespace Raunstrup.UI.Controllers
             }
             catch (Exception)
             {
-                throw;
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke finde Matrialerne" };
+                return View("Error", model);
             }
         }
 
@@ -140,8 +141,9 @@ namespace Raunstrup.UI.Controllers
                 return View(ItemMapper.Map(itemDtos).Select(x => { x.projectID = id; return x; }).ToList());
             }
             catch (Exception)
-            { 
-                throw;
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke finde nogle Matrialer" };
+                return View("Error", model);
             }
         }
 
@@ -164,7 +166,8 @@ namespace Raunstrup.UI.Controllers
             }
             catch (Exception)
             {
-                throw;
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke tilføje Matrialer til Projectet" };
+                return View("Error", model);
             }
         }
 
@@ -179,7 +182,8 @@ namespace Raunstrup.UI.Controllers
             }
             catch (Exception)
             {
-                throw;
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke finde nogle matrialer" };
+                return View("Error", model);
             }
         }
 
@@ -194,8 +198,6 @@ namespace Raunstrup.UI.Controllers
                     Price = x.Price,
                     ProjectId = x.projectID,
                     ItemId = x.Id,
-
-
                 });
 
                 await _itemService.AddUsedItemAsync(ProjectUsedItemMapper.Map(projectItems).ToList()).ConfigureAwait(false);
@@ -203,7 +205,8 @@ namespace Raunstrup.UI.Controllers
             }
             catch (Exception)
             {
-                throw;
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke indberette nogle Matrialer" };
+                return View("Error", model);
             }
         }
     }
