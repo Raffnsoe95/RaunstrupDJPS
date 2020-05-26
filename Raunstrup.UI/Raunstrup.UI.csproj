@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
     <UserSecretsId>aspnet-Raunstrup.UI-0DB23880-7E14-4FF4-8D29-6C5246A0A337</UserSecretsId>
   </PropertyGroup>
 

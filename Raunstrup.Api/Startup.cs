@@ -70,6 +70,7 @@ namespace Raunstrup.Api
                 app.UseDeveloperExceptionPage();
             }
 
+
             app.UseHttpsRedirection();
 
             app.UseSwagger();
@@ -79,6 +80,7 @@ namespace Raunstrup.Api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
+            app.UseExceptionHandler("/Error");
             app.UseRouting();
 
             app.UseAuthorization();
