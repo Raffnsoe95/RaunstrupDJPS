@@ -35,14 +35,22 @@ namespace Raunstrup.Api.Controllers
         [HttpGet]
         public IEnumerable<CustomerDto> Get()
         {
-            return _customerService.GetAll().Select(a => CustomerMapper.Map(a));
+            try
+            {
+                return _customerService.GetAll().Select(a => CustomerMapper.Map(a));
+            }
+            catch (Exception) { throw; }
         }
 
         // GET: api/Customer/5
         [HttpGet("{id}")]
         public CustomerDto Get(int id)
         {
-            return CustomerMapper.Map(_customerService.Get(id));
+            try
+            {
+                return CustomerMapper.Map(_customerService.Get(id));
+            }
+            catch (Exception) { throw; }
         }
 
         // POST: api/Customer
@@ -88,32 +96,59 @@ namespace Raunstrup.Api.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _customerService.Delete(id);
+            try
+            {
+                _customerService.Delete(id);
+            }
+            catch (Exception) { throw; }
         }
 
         [HttpPut("AddCustomerToProject", Name = "AddCustomerToProject")]
         public void AddCustomerToProject([FromBody] ProjectDto value)
         {
-            _projectService.AddCustomerToProject(ProjectMapper.Map(value));
+            try
+            {
+                _projectService.AddCustomerToProject(ProjectMapper.Map(value));
+
+            }
+            catch (Exception) { throw; }
         }
 
         [HttpGet("search/{searchString}", Name = "GetFilteredCustomers")]
         public IEnumerable<CustomerDto> GetFilteredCustomers(string searchString)
         {
-            return _customerService.GetFilteredCustomers(searchString).Select(a => CustomerMapper.Map(a));
+            try
+            {
+                return _customerService.GetFilteredCustomers(searchString).Select(a => CustomerMapper.Map(a));
+
+            }
+            catch (Exception) { throw; }
         }
 
         
         [HttpGet("GetAllCustomerDiscountType")]
         public IEnumerable<CustomerDiscountTypeDto> GetAllCustomerDiscountType()
         {
-            return _customerService.GetAllCustomerDiscountType().Select(a => CustomerMapper.Map(a));
+            try
+            {
+                return _customerService.GetAllCustomerDiscountType().Select(a => CustomerMapper.Map(a));
+
+            }
+            catch (Exception){ throw; }
         }
 
         [HttpGet("getcustomerdiscounttype/{Id}", Name = "getcustomerdiscounttype")]
         public CustomerDiscountTypeDto CustomerDiscountType(int id)
         {
-            return CustomerMapper.Map(_customerService.GetCustomerDiscountType(id));
-        }
+            try
+            {
+                return CustomerMapper.Map(_customerService.GetCustomerDiscountType(id));
+
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+            }
     }
 }
