@@ -36,7 +36,6 @@ namespace Raunstrup.Api.Controllers
             {
                 throw;
             }
-            
         }
 
         // GET: api/Items/5
@@ -65,7 +64,7 @@ namespace Raunstrup.Api.Controllers
             }
             catch (Exception)
             {
-               
+                throw;
             }
         }
 
@@ -79,7 +78,7 @@ namespace Raunstrup.Api.Controllers
             }
             catch (Exception)
             {
-
+                throw;
             }
         }
 
@@ -93,6 +92,7 @@ namespace Raunstrup.Api.Controllers
             }
             catch (Exception)
             {
+                throw;
             }
         }
 
@@ -105,6 +105,7 @@ namespace Raunstrup.Api.Controllers
             }
             catch (Exception)
             {
+                throw;
             }
         }
 
@@ -117,6 +118,7 @@ namespace Raunstrup.Api.Controllers
             }
             catch (Exception)
             {
+                throw;
             }
         }
 
@@ -129,7 +131,6 @@ namespace Raunstrup.Api.Controllers
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
