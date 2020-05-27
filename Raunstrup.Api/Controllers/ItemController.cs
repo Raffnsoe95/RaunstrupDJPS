@@ -28,14 +28,7 @@ namespace Raunstrup.Api.Controllers
         [HttpGet]
         public IEnumerable<ItemDto> Get()
         {
-            try
-            {
-                return _itemService.GetAll().Select(a => ItemMapper.Map(a));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return _itemService.GetAll().Select(a => ItemMapper.Map(a));
         }
 
         // GET: api/Items/5
@@ -43,96 +36,46 @@ namespace Raunstrup.Api.Controllers
         //[ApiVersion("1.1")]
         public ItemDto Get(int id)
         {
-            try
-            {
-                return ItemMapper.Map(_itemService.Get(id));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            
+            return ItemMapper.Map(_itemService.Get(id));
         }
 
         // POST: api/Items
         [HttpPost]
         public void Post([FromBody] ItemDto value)
         {
-            try
-            {
-                _itemService.Create(ItemMapper.Map(value));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            _itemService.Create(ItemMapper.Map(value));
         }
 
         // PUT: api/Items/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] ItemDto value)
         {
-            try
-            {
-                _itemService.Update(ItemMapper.Map(value));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            _itemService.Update(ItemMapper.Map(value));
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            try
-            {
-                _itemService.Delete(id);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            _itemService.Delete(id);
         }
 
         [HttpPost("AddUsedProjectItemToProject", Name = "AddUsedProjectItemToProject")]
         public void AddUsedProjectItemToProject([FromBody] ProjectUsedItemDto value)
         {
-            try
-            {
-                _itemService.CreateUsedItems(ProjectUsedItemMapper.Map(value));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            _itemService.CreateUsedItems(ProjectUsedItemMapper.Map(value));
         }
 
         [HttpPost("AddAssignedProjectItemToProject", Name = "AddAssignedProjectItemToProject")]
         public void AddAssignedProjectItemToProject([FromBody] ProjectAssignedItemDto value)
         {
-            try
-            {
-                _itemService.CreateAssignedItems(ProjectAssignedItemMapper.Map(value));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            _itemService.CreateAssignedItems(ProjectAssignedItemMapper.Map(value));
         }
 
         [HttpGet("search/{searchString}", Name = "GetFilteredItems")]
         public IEnumerable<ItemDto> GetFilteredCustomers(string searchString)
         {
-            try
-            {
-                return _itemService.GetFilteredItems(searchString).Select(a => ItemMapper.Map(a));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return _itemService.GetFilteredItems(searchString).Select(a => ItemMapper.Map(a));
         }
     }
 }
