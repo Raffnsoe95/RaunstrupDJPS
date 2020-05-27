@@ -6,6 +6,13 @@
     <UserSecretsId>aspnet-Raunstrup.UI-0DB23880-7E14-4FF4-8D29-6C5246A0A337</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="PDFdocuments\**" />
+    <Content Remove="PDFdocuments\**" />
+    <EmbeddedResource Remove="PDFdocuments\**" />
+    <None Remove="PDFdocuments\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     
