@@ -13,7 +13,7 @@ namespace Raunstrup.DataAccess.Context
         public RaunstrupContext(DbContextOptions<RaunstrupContext> options) : base(options)
         {
         
-    }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,11 +24,7 @@ namespace Raunstrup.DataAccess.Context
             modelBuilder.Entity<Customer>()
             .HasIndex(p => p.Phone)
             .IsUnique();
-
-            //  .HasName("AlternateKey_Email");
         }
-
-
 
         public DbSet<Employee> Employees { get; set; }
 
@@ -52,6 +48,4 @@ namespace Raunstrup.DataAccess.Context
 
         public DbSet<CustomerDiscountType> CustomerDiscountTypes { get; set; }
     }
-
-
 }

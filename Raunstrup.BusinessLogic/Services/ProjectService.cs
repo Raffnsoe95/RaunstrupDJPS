@@ -113,14 +113,13 @@ namespace Raunstrup.BusinessLogic.Services
         IEnumerable<Project> IProjectService.GetProjectsByCustomerId(int customerID)
         {
             return _context.Projects
-                .Where(c => c.CustomerID == customerID);
-                
+                .Where(c => c.CustomerID == customerID);    
         }
+
         void IProjectService.CreatePDF(Project project)
         {
 
         }
-
     }
 }
 

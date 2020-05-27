@@ -23,9 +23,6 @@ namespace Raunstrup.Api.Models
                 StartDate = dto.StartDate,
                 EndDate = dto.EndDate,
                 Amount = dto.Amount
-                //DiscountType = dto.Discount,
-               
-                //RowVersion = dto.RowVersion,
             };
         }
 
@@ -33,10 +30,12 @@ namespace Raunstrup.Api.Models
         {
             return model.Select(x => Map(x)).AsEnumerable();
         }
+
         public static IEnumerable<ItemDiscountType> Map(IEnumerable<ItemDiscountTypeDto> model)
         {
             return model.Select(x => Map(x)).AsEnumerable();
         }
+
         public static ItemDiscountTypeDto Map(ItemDiscountType model)
         {
             if (model == null)
@@ -49,9 +48,6 @@ namespace Raunstrup.Api.Models
                 StartDate = model.StartDate,
                 EndDate = model.EndDate,
                 Amount = model.Amount
-                //Discount = model.DiscountType,
-                
-                //RowVersion = model.RowVersion,
             };
         }
     }

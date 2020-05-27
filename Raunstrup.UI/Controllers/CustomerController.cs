@@ -286,8 +286,7 @@ namespace Raunstrup.UI.Controllers
             {
                 ErrorViewModel model = new ErrorViewModel { RequestId = "Kunden kunne ikke slettes" };
                 return View("Error", model);
-            }
-            
+            }  
         }
 
         // POST: Customer/Delete/5
