@@ -50,7 +50,8 @@ namespace Raunstrup.UI.Controllers
             }
             catch (Exception)
             {
-                throw;
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke Sende Email" };
+                return View("Error", model);
             }
         }
 

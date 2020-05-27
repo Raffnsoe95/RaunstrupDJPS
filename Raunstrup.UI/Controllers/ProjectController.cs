@@ -282,10 +282,10 @@ namespace Raunstrup.UI.Controllers
             {
                 var projectViewModel = await _projectService.GetProjectAsync(id);
                 string pDFOffer = _PDFService.CreatePDF(ProjectDetailsMapper.MapToDetailsDto(projectViewModel));
-                _contactService.SendOffer(pDFOffer, "jens_christ@hotmail.com");
+                _contactService.SendOffer(pDFOffer, "jens095w@edu.ucl.dk");
                 return RedirectToAction("Details", new { id = id });
             }
-            catch
+            catch (Exception e)
             {
                 ErrorViewModel model = new ErrorViewModel { RequestId = "Tilbuddet blev ikke sendt!" };
                 return View("Error", model);
