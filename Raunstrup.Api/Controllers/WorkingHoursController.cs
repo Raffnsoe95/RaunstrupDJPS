@@ -65,6 +65,7 @@ namespace Raunstrup.Api.Controllers
             }
             catch (Exception)
             {
+                throw;
             }
         }
 
@@ -77,8 +78,8 @@ namespace Raunstrup.Api.Controllers
                 _workinghoursService.Update(WorkingHoursMapper.Map(value));
             }
             catch (Exception)
-            {    
-                    
+            {
+                throw;
             }
             
         }
@@ -93,7 +94,7 @@ namespace Raunstrup.Api.Controllers
             }
             catch (Exception)
             {
-
+                throw;
             }
         }
     }

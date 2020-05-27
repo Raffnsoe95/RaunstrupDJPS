@@ -15,7 +15,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Raunstrup.UI.Controllers
 {
-    [Authorize(Roles = "Admin,SuperUser")]
+    [Authorize(Roles = "SuperUser")]
     public class EmployeeController : Controller
     {
         private readonly ViewModelContext _context;
@@ -32,17 +32,15 @@ namespace Raunstrup.UI.Controllers
         // GET: Employee
         public async Task<IActionResult> Index(string searchString)
         {
-            try 
+            try
             {
                 IEnumerable<EmployeeDto> employeeDtos = await _employeeService.GetChosenEmployees(searchString);
                 return View(EmployeeMapper.Map(employeeDtos));
+
             }
-            catch(Exception)
-            {
-                throw;
-            }
-            
-         
+            catch (Exception) { throw; }
+
+
         }
 
         // GET: Employee/Details/5
@@ -71,49 +69,66 @@ namespace Raunstrup.UI.Controllers
 
                 return View(employeeDetailsViewModel);
             }
-            catch(Exception)
-            {
-                throw;
-            }
-            
+            catch (Exception) { throw; }
         }
 
-        //// GET: Employee/Create
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
+        // GET: Employee/Create
+        public IActionResult Create()
+        {
+            try
+            {
+                return View();
+            }
+            catch { throw; }
+        }
 
-        //// POST: Employee/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
+        // POST: Employee/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
 
-        ////------------------------------------
-        //[Authorize(Roles = "Admin,SuperUser")]
-        ////-----------------------------
-        //public async Task<IActionResult> Create([Bind("Id,Name,Phone,Salary,Active")] EmployeeViewModel employeeViewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        await _employeeService.AddAsync(EmployeeMapper.Map(employeeViewModel)).ConfigureAwait(false);
+        //------------------------------------
+        [Authorize(Roles = "SuperUser")]
+        //-----------------------------
+        public async Task<IActionResult> Create([Bind("Id,Name,Phone,Salary,Active")] EmployeeViewModel employeeViewModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    await _employeeService.AddAsync(EmployeeMapper.Map(employeeViewModel)).ConfigureAwait(false);
 
-        //        return RedirectToAction(nameof(Index));
-        //        //_context.Add(employeeViewModel);
-        //        //await _context.SaveChangesAsync();
-        //        //return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(employeeViewModel);
-        //}
+                    return RedirectToAction(nameof(Index));
+                    //_context.Add(employeeViewModel);
+                    //await _context.SaveChangesAsync();
+                    //return RedirectToAction(nameof(Index));
+                }
+                return View(employeeViewModel);
+            }
+            catch (Exception) { throw; }
+        }
 
-        //// GET: Employee/Edit/5
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    //if (id == null)
-        //    //{
-        //    //    return NotFound();
-        //    //}
+        // GET: Employee/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            try
+            {
+
+                //if (id == null)
+                //{
+                //    return NotFound();
+                //}
+
+                var employeeViewModel = await _context.Employees.FindAsync(id);
+                if (employeeViewModel == null)
+                {
+                    return NotFound();
+                }
+                return View(employeeViewModel);
+            }
+            catch (Exception){ throw; }
+        }
 
         //    var employeeViewModel = await _context.Employees.FindAsync(id);
         //    if (employeeViewModel == null)
@@ -126,96 +141,101 @@ namespace Raunstrup.UI.Controllers
         // POST: Employee/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Phone,Salary,Active")] EmployeeViewModel employeeViewModel)
-        //{
-        //    if (id != employeeViewModel.Id)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Phone,Salary,Active")] EmployeeViewModel employeeViewModel)
+        {
+            try
+            {
+                if (id != employeeViewModel.Id)
+                {
+                    return NotFound();
+                }
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            await _employeeService.UpdateAsync(id, EmployeeMapper.Map(employeeViewModel)).ConfigureAwait(false);
-        //            return RedirectToAction(nameof(Index));
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!EmployeeViewModelExists(employeeViewModel.Id))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //    }
-        //    return View(employeeViewModel);
-        //}
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        await _employeeService.UpdateAsync(id, EmployeeMapper.Map(employeeViewModel)).ConfigureAwait(false);
+                        return RedirectToAction(nameof(Index));
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!EmployeeViewModelExists(employeeViewModel.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                }
+                return View(employeeViewModel);
+            }
+            catch (Exception) { throw; }
+            
+        }
 
-        //// GET: Employee/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // GET: Employee/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            try
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-        //    var employeeViewModel = await _employeeService.GetEmployeeAsync(id.Value).ConfigureAwait(false);
-        //    if (employeeViewModel == null)
-        //    {
-        //        return NotFound();
-        //    }
+                var employeeViewModel = await _employeeService.GetEmployeeAsync(id.Value).ConfigureAwait(false);
+                if (employeeViewModel == null)
+                {
+                    return NotFound();
+                }
 
-        //    return View(employeeViewModel);
-        //}
+                return View(employeeViewModel);
+            }
+            catch (Exception) { throw; }
+            
+        }
 
-        //// POST: Employee/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    await _employeeService.RemoveAsync(id).ConfigureAwait(false);
+        // POST: Employee/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            try
+            {
+                await _employeeService.RemoveAsync(id).ConfigureAwait(false);
 
-        //    return RedirectToAction(nameof(Index));
-        //}
+                return RedirectToAction(nameof(Index));
 
-        //private bool EmployeeViewModelExists(int id)
-        //{
-        //    return _context.Employees.Any(e => e.Id == id);
-        //}
+            }
+            catch (Exception) { throw; }
+        }
+
+        private bool EmployeeViewModelExists(int id)
+        {
+            try
+            {
+                return _context.Employees.Any(e => e.Id == id);
+
+            }
+            catch (Exception) { throw; }
+        }
         // GET: Employee 
         public async Task<IActionResult> AddProjectEmployee(int id, string searchString)
         {
-            try 
+            try
             {
                 IEnumerable<EmployeeDto> employeeDtos = await _employeeService.GetChosenEmployees(searchString);
                 var projects = EmployeeMapper.MapEst(employeeDtos).Select(x => { x.ProjectId = id; return x; }).ToList();
                 return View(EmployeeMapper.MapEst(employeeDtos).Select(x => { x.ProjectId = id; return x; }).ToList());
 
             }
-            catch(Exception)
-            {
-                throw;
-            }
-
-            
-            //if (!String.IsNullOrEmpty(searchString))
-            //{
-            //    var filteredEmployeeDtos = await _employeeService.GetFilteredEmployeesAsync(searchString);
-            //    return View(EmployeeMapper.MapEst(filteredEmployeeDtos).Select(x => { x.projectId = id; return x; }).ToList());
-            //}
-            //else
-            //{
-            //    var employeeDtos = await _employeeService.GetEmployeesAsync().ConfigureAwait(false);
+            catch (Exception) { throw; }
 
 
-            //    return View(EmployeeMapper.MapEst(employeeDtos).Select(x => { x.projectId = id; return x; }).ToList());
-            //}
         }
         //public async Task<IActionResult> AddProjectEmployeeToProject(int id, int projectid)
         //{
@@ -234,21 +254,16 @@ namespace Raunstrup.UI.Controllers
 
         public async Task<IActionResult> AddProjectEmployees(int id) 
             {
-            try 
+            try
             {
                 var employeeDtos = await _employeeService.GetEmployeeAsync().ConfigureAwait(false);
 
 
                 return View(EmployeeMapper.MapEst(employeeDtos).Select(x => { x.ProjectId = id; return x; }).ToList());
-            }
-            catch(Exception)
-            {
-                throw;
-            }
-
 
             }
-             
+            catch (Exception) { throw; }
+                }
 
             //public async Task<IActionResult> AddProjectEmployeeToProject(List<EstWorkingHoursEmployeeViewModel> items)
             //{
@@ -279,20 +294,13 @@ namespace Raunstrup.UI.Controllers
                     EstWorkingHours = x.EstWorkingHours,
 
                 });
-
-
-
-
-
                 await _employeeService.AddProjectEmployeeAsync(ProjectEmployeeMapper.Map(projectEmployees).ToList()).ConfigureAwait(false);
 
                 return RedirectToAction("details", "project", new { id = items[0].ProjectId });
+            }
+            catch (Exception){ throw; }
 
-            }
-            catch(Exception)
-            {
-                throw;
-            }
+
                 
             }
 

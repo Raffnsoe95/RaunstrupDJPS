@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Raunstrup.UI.Controllers
 {
 
-    [Authorize(Roles = "Admin,SuperUser,User")]
+    [Authorize(Roles = "SuperUser,User")]
     public class WorkingHoursController : Controller
     {
         private readonly ViewModelContext _context;
@@ -33,65 +33,87 @@ namespace Raunstrup.UI.Controllers
         // GET: WorkingHours
         public async Task<IActionResult> Index()
         {
-            var WorkingHoursDtos = await _workingHoursService.GetWorkingHoursAsync().ConfigureAwait(false);
-            return View(WorkingHoursMapper.Map(WorkingHoursDtos));
+            try
+            {
+                var WorkingHoursDtos = await _workingHoursService.GetWorkingHoursAsync().ConfigureAwait(false);
+                return View(WorkingHoursMapper.Map(WorkingHoursDtos));
+
+            }
+            catch (Exception) { throw; }
         }
 
         // GET: WorkingHours/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var workingHoursViewModel = await _workingHoursService.GetWorkingHoursAsync(id.Value).ConfigureAwait(false);
+
+                if (workingHoursViewModel == null)
+                {
+                    return NotFound();
+                }
+
+                return View(WorkingHoursMapper.Map(workingHoursViewModel));
             }
+            catch (Exception) { throw; }
 
-            var workingHoursViewModel = await _workingHoursService.GetWorkingHoursAsync(id.Value).ConfigureAwait(false);
-
-            if (workingHoursViewModel == null)
-            {
-                return NotFound();
-            }
-
-            return View(WorkingHoursMapper.Map(workingHoursViewModel));
         }
 
         // GET: WorkingHours/Create
         public IActionResult Create(int Id)
         {
-            var WorkingHours = new WorkingHoursViewModel { ProjectId = Id, EmployeeId = Convert.ToInt32(User.Identity.Name.Split('@')[0])};
-            return View(WorkingHours);
+            try
+            {
+                var WorkingHours = new WorkingHoursViewModel { ProjectId = Id, EmployeeId = Convert.ToInt32(User.Identity.Name.Split('@')[0]) };
+                return View(WorkingHours);
+
+            }
+            catch (Exception) { throw; }
         }
-    
+
 
         // POST: WorkingHours/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( WorkingHoursViewModel workingHoursViewModel)
+        public async Task<IActionResult> Create(WorkingHoursViewModel workingHoursViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                 await _workingHoursService.AddAsync(WorkingHoursMapper.Map(workingHoursViewModel)) .ConfigureAwait(false);
+                if (ModelState.IsValid)
+                {
+                    await _workingHoursService.AddAsync(WorkingHoursMapper.Map(workingHoursViewModel)).ConfigureAwait(false);
 
-                //ProjectViewModel projectViewModel =  ProjectMapper.Map(await _projectService.GetProjectAsync(workingHoursViewModel.ProjectId));
+                    return RedirectToAction("details", "project", new { id = workingHoursViewModel.ProjectId });
+                }
 
-                // return RedirectToAction(nameof(Index));
-                return RedirectToAction("details", "project", new { id = workingHoursViewModel.ProjectId });
+                return View(workingHoursViewModel);
             }
-            // ViewData["EmployeeId"] = new SelectList(_context.Set<Employee>(), "Id", "Id", workingHours.EmployeeId);
-            return View(workingHoursViewModel);
+            catch (Exception) { throw; }
+
         }
 
         // GET: WorkingHours/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            var WorkingHoursViewModel = await _workingHoursService.GetWorkingHoursAsync(id).ConfigureAwait(false);
-            if (WorkingHoursViewModel == null)
+            try
             {
-                return NotFound();
+                var WorkingHoursViewModel = await _workingHoursService.GetWorkingHoursAsync(id).ConfigureAwait(false);
+                if (WorkingHoursViewModel == null)
+                {
+                    return NotFound();
+                }
+                return View(WorkingHoursMapper.Map(WorkingHoursViewModel));
             }
-            return View(WorkingHoursMapper.Map(WorkingHoursViewModel));
+            catch (Exception) { throw; }
+
         }
 
         // POST: WorkingHours/Edit/5
@@ -101,75 +123,104 @@ namespace Raunstrup.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Amount,EmployeeId,HourlyPrice,ProjectId")] WorkingHoursViewModel workingHoursViewModel)
         {
-            if (id != workingHoursViewModel.WorkingHoursId)
+            try
             {
-                return NotFound();
-            }
+                if (id != workingHoursViewModel.WorkingHoursId)
+                {
+                    return NotFound();
+                }
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(workingHoursViewModel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!WorkingHoursExists(workingHoursViewModel.WorkingHoursId))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(workingHoursViewModel);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!WorkingHoursExists(workingHoursViewModel.WorkingHoursId))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+
+                return View(workingHoursViewModel);
             }
-            //ViewData["EmployeeId"] = new SelectList(_context.Set<Employee>(), "Id", "Id", workingHoursViewModel.EmployeeId);
-            return View(workingHoursViewModel);
+            catch (Exception) { throw; }
+
         }
 
         // GET: WorkingHours/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var workingHours = await _context.WorkingHours
-                .Include(w => w.Employee)
-                .FirstOrDefaultAsync(m => m.WorkingHoursId == id);
-            if (workingHours == null)
-            {
-                return NotFound();
-            }
+                var workingHours = await _context.WorkingHours
+                    .Include(w => w.Employee)
+                    .FirstOrDefaultAsync(m => m.WorkingHoursId == id);
+                if (workingHours == null)
+                {
+                    return NotFound();
+                }
 
-            return View(workingHours);
-        }
+                return View(workingHours);
+            }
+            catch (Exception) { throw; }
+            }
+        
+           
 
         // POST: WorkingHours/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var workingHours = await _context.WorkingHours.FindAsync(id);
-            _context.WorkingHours.Remove(workingHours);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                var workingHours = await _context.WorkingHours.FindAsync(id);
+                _context.WorkingHours.Remove(workingHours);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+
+            }
+            catch (Exception) { throw; }
+
         }
 
         private bool WorkingHoursExists(int id)
         {
-            return _context.WorkingHours.Any(e => e.WorkingHoursId == id);
+            try
+            {
+                return _context.WorkingHours.Any(e => e.WorkingHoursId == id);
+
+            }
+            catch(Exception)
+            { throw; }
+            
         }
 
         public IActionResult AddWorkingHours(int id)
         {
-            WorkingHoursViewModel workingHours = new WorkingHoursViewModel { ProjectId=id, EmployeeId = 3 };
-        
-            return View(workingHours);
+            try
+            {
+                WorkingHoursViewModel workingHours = new WorkingHoursViewModel { ProjectId = id, EmployeeId = 3 };
+
+                return View(workingHours);
+
+            }
+            catch (Exception) { throw; }
 
         }
     }

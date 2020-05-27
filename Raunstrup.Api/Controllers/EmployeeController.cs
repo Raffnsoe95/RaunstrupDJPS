@@ -64,40 +64,67 @@ namespace Raunstrup.Api.Controllers
         [HttpPost]
         public void Post([FromBody] EmployeeDto value)
         {
-            _employeeService.Create(EmployeeMapper.Map(value));
+            try
+            {
+                _employeeService.Create(EmployeeMapper.Map(value));
+            }
+            catch (Exception) { throw; }
         }
 
         // PUT: api/Movies/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] EmployeeDto value)
         {
-            _employeeService.Update(EmployeeMapper.Map(value));
-        }
+            try
+            {
+                _employeeService.Update(EmployeeMapper.Map(value));
+
+            }
+            catch (Exception) { throw; }
+                    }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _employeeService.Delete(id);
+            try
+            {
+                _employeeService.Delete(id);
+            }
+            catch (Exception) { throw; }
         }
 
         [HttpPost("AddProjectEmployeeToProject", Name = "AddProjectEmployeeToProject")]
         public void AddProjectEmployeeToProject([FromBody] ProjectEmployeeDto value)
         {
+            try
+            {
+                _employeeService.CreateProjectEmployee(ProjectEmployeeMapper.Map(value));
 
-            _employeeService.CreateProjectEmployee(ProjectEmployeeMapper.Map(value));
+            }
+            catch (Exception) { throw; }
         }
 
         [HttpPost("AddProjectDrivingToProject", Name = "AddProjectDrivingToProject")]
         public void AddProjectDrivingToProject([FromBody] ProjectDrivingDto value)
         {
-            _employeeService.Create(ProjectDrivingMapper.Map(value));
+            try
+            {
+                _employeeService.Create(ProjectDrivingMapper.Map(value));
+
+            }
+            catch (Exception) { throw; }
         }
 
         [HttpGet("search/{searchString}", Name = "GetFilteredEmployees")]
         public IEnumerable<EmployeeDto> GetFilteredCustomers(string searchString)
         {
-            return _employeeService.GetFilteredEmployees(searchString).Select(a => EmployeeMapper.Map(a));
+            try
+            {
+                return _employeeService.GetFilteredEmployees(searchString).Select(a => EmployeeMapper.Map(a));
+
+            }
+            catch (Exception) { throw; }
         }
 
        

@@ -10,6 +10,8 @@ using Raunstrup.DataAccess.Model;
 using System.Data;
 using Microsoft.EntityFrameworkCore;
 using Raunstrup.DataAccess;
+using Org.BouncyCastle.Asn1.Cmp;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Raunstrup.Api.Controllers
 {
@@ -33,15 +35,22 @@ namespace Raunstrup.Api.Controllers
         [HttpGet]
         public IEnumerable<CustomerDto> Get()
         {
-
-            return _customerService.GetAll().Select(a => CustomerMapper.Map(a));
+            try
+            {
+                return _customerService.GetAll().Select(a => CustomerMapper.Map(a));
+            }
+            catch (Exception) { throw; }
         }
 
         // GET: api/Customer/5
         [HttpGet("{id}")]
         public CustomerDto Get(int id)
         {
-            return CustomerMapper.Map(_customerService.Get(id));
+            try
+            {
+                return CustomerMapper.Map(_customerService.Get(id));
+            }
+            catch (Exception) { throw; }
         }
 
         // POST: api/Customer
@@ -64,15 +73,22 @@ namespace Raunstrup.Api.Controllers
         [HttpPut("{id}")]
         public ActionResult<CustomerDto> Put(int id, [FromBody] CustomerDto value)
         {
-            try
+            
+                try
+                {
+                    _customerService.Update(CustomerMapper.Map(value));
+                    return value;
+                }
+                catch (DbUpdateConcurrencyException dbu)
+                {
+                    Customer customer = (Customer)dbu.Data["dbvalue"];
+                    return Conflict(CustomerMapper.Map(customer));
+                }
+            
+            catch (Exception dbe)
             {
-                _customerService.Update(CustomerMapper.Map(value));
-                return value;
-            }
-            catch (DbUpdateConcurrencyException dbu)
-            {
-                Customer customer = (Customer)dbu.Data["dbvalue"];
-                return Conflict(CustomerMapper.Map(customer)); 
+                Customer customer = (Customer)dbe.Data["dbvalue"];
+                return new StatusCodeResult((int)500);
             }
         }
 
@@ -80,32 +96,59 @@ namespace Raunstrup.Api.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _customerService.Delete(id);
+            try
+            {
+                _customerService.Delete(id);
+            }
+            catch (Exception) { throw; }
         }
 
         [HttpPut("AddCustomerToProject", Name = "AddCustomerToProject")]
         public void AddCustomerToProject([FromBody] ProjectDto value)
         {
-            _projectService.AddCustomerToProject(ProjectMapper.Map(value));
+            try
+            {
+                _projectService.AddCustomerToProject(ProjectMapper.Map(value));
+
+            }
+            catch (Exception) { throw; }
         }
 
         [HttpGet("search/{searchString}", Name = "GetFilteredCustomers")]
         public IEnumerable<CustomerDto> GetFilteredCustomers(string searchString)
         {
-            return _customerService.GetFilteredCustomers(searchString).Select(a => CustomerMapper.Map(a));
+            try
+            {
+                return _customerService.GetFilteredCustomers(searchString).Select(a => CustomerMapper.Map(a));
+
+            }
+            catch (Exception) { throw; }
         }
 
         
         [HttpGet("GetAllCustomerDiscountType")]
         public IEnumerable<CustomerDiscountTypeDto> GetAllCustomerDiscountType()
         {
-            return _customerService.GetAllCustomerDiscountType().Select(a => CustomerMapper.Map(a));
+            try
+            {
+                return _customerService.GetAllCustomerDiscountType().Select(a => CustomerMapper.Map(a));
+
+            }
+            catch (Exception){ throw; }
         }
 
         [HttpGet("getcustomerdiscounttype/{Id}", Name = "getcustomerdiscounttype")]
         public CustomerDiscountTypeDto CustomerDiscountType(int id)
         {
-            return CustomerMapper.Map(_customerService.GetCustomerDiscountType(id));
-        }
+            try
+            {
+                return CustomerMapper.Map(_customerService.GetCustomerDiscountType(id));
+
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+            }
     }
 }

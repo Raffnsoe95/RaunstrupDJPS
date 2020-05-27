@@ -16,7 +16,7 @@ namespace Raunstrup.Contakt.Service
 {
     public class PDFservice : IPDFService
     {
-        public void CreatePDF(ProjectDetailsDto project)
+        public string CreatePDF(ProjectDetailsDto project)
         {
             // Her bruges classen pdfDocument.
             PdfDocument document = new PdfDocument();

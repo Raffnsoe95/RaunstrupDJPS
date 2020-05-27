@@ -45,7 +45,7 @@ namespace Raunstrup.UI.Services
             catch(Exception dbe)
             {
                 dbe.Data.Add("dbvalue", customer);
-             //   dbe.Data.Add("Errortype", "phone");
+             
                 throw dbe ;
             }
         }
@@ -92,22 +92,30 @@ namespace Raunstrup.UI.Services
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await Client.PutAsync($"{_customerRequestUri}/{id}", data).ConfigureAwait(false);
 
-            try
-            {
-                response.EnsureSuccessStatusCode();
-            }
-            catch (Exception)
-            {
-                if(response.StatusCode == HttpStatusCode.Conflict)
+           
+                try
                 {
-                    var result = response.Content.ReadAsStringAsync().Result;
-                    var dbcustomer = Newtonsoft.Json.JsonConvert.DeserializeObject<CustomerDto>(result);
-                    DbUpdateConcurrencyException dbu = new DbUpdateConcurrencyException();
-                    dbu.Data.Add("dbvalue", dbcustomer);
-                    throw dbu;
+                    response.EnsureSuccessStatusCode();
                 }
-                throw;
-            }
+                catch (Exception)
+                {
+                    if (response.StatusCode == HttpStatusCode.Conflict)
+                    {
+                        var result = response.Content.ReadAsStringAsync().Result;
+                        var dbcustomer = Newtonsoft.Json.JsonConvert.DeserializeObject<CustomerDto>(result);
+                        DbUpdateConcurrencyException dbu = new DbUpdateConcurrencyException();
+                        dbu.Data.Add("dbvalue", dbcustomer);
+                        throw dbu;
+                    }
+                else
+                {
+                    throw;
+                }
+                   
+                }
+            
+            
+
         }
 
         async Task ICustomerService.AddAsync(int id, int projectid)
@@ -164,7 +172,7 @@ namespace Raunstrup.UI.Services
             return await JsonSerializer.DeserializeAsync<CustomerDiscountTypeDto>(stream, options).ConfigureAwait(false);
         }
 
-        public async Task< IEnumerable<CustomerDto>> GetChosenCustomers(string searchString)
+        public async Task<IEnumerable<CustomerDto>> GetChosenCustomers(string searchString)
         {
             if (!String.IsNullOrEmpty(searchString))
             {

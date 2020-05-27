@@ -17,7 +17,7 @@ using System.Net.Http;
 
 namespace Raunstrup.UI.Controllers
 {
-    [Authorize(Roles = "Admin,SuperUser")]
+    [Authorize(Roles = "SuperUser")]
     public class CustomerController : Controller
     {
         private readonly ViewModelContext _context;
@@ -36,54 +36,71 @@ namespace Raunstrup.UI.Controllers
 
         public async Task<IActionResult> Index(string searchString)
         {
+            try
+            {
+                IEnumerable<CustomerDto> customerDtos = await _customerService.GetChosenCustomers(searchString);
 
-            IEnumerable<CustomerDto> customerDtos = await _customerService.GetChosenCustomers(searchString);
+                return View(CustomerMapper.Map(customerDtos));
 
-            return View(CustomerMapper.Map(customerDtos));
-          
+            }
+            catch(Exception )
+            {
+                throw;
+            }
+
         }
 
 
         // GET: Customer/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var customerViewModel = await _customerService.GetCustomerAsync(id.Value).ConfigureAwait(false);
+
+
+                if (customerViewModel == null)
+                {
+                    return NotFound();
+                }
+
+                CustomerDetailsViewModel customerDetailsViewModel = CustomerDetailsMapper.Map(customerViewModel);
+
+
+                IEnumerable<ProjectDto> Projects = await _projectService.GetProjectsByCustomerId(id.Value);
+
+
+                customerDetailsViewModel.Projects = ProjectMapper.Map(Projects);
+
+                return View(customerDetailsViewModel);
             }
-
-            var customerViewModel = await _customerService.GetCustomerAsync(id.Value).ConfigureAwait(false);
-            
-
-            if (customerViewModel == null)
+            catch (Exception)
             {
-                return NotFound();
+                throw;
             }
-
-            CustomerDetailsViewModel customerDetailsViewModel = CustomerDetailsMapper.Map(customerViewModel);
-
-            
-            IEnumerable<ProjectDto> Projects = await _projectService.GetProjectsByCustomerId(id.Value);
-
-          
-            customerDetailsViewModel.Projects = ProjectMapper.Map(Projects);
-
-            return View(customerDetailsViewModel);
         }
 
         // GET: Customer/Create
         public async Task<IActionResult> Create()
         {
-            
-            CECustomerViewModel cECustomerViewModel = new CECustomerViewModel();
+            try
+            {
+                CECustomerViewModel cECustomerViewModel = new CECustomerViewModel();
 
-           var customerDiscountTypeDtos = await _customerService.GetAllCustomerDiscountType().ConfigureAwait(false);
+                var customerDiscountTypeDtos = await _customerService.GetAllCustomerDiscountType().ConfigureAwait(false);
 
-            IEnumerable<CustomerDiscountTypeViewModel> customerDiscountTypeViewModels= CustomerMapper.Map(customerDiscountTypeDtos);
+                IEnumerable<CustomerDiscountTypeViewModel> customerDiscountTypeViewModels = CustomerMapper.Map(customerDiscountTypeDtos);
 
-            cECustomerViewModel.CustomerDiscountTypeViewModels = customerDiscountTypeViewModels.ToList();
+                cECustomerViewModel.CustomerDiscountTypeViewModels = customerDiscountTypeViewModels.ToList();
 
-            return View(cECustomerViewModel);
+                return View(cECustomerViewModel);
+            }
+            catch (Exception) { throw; }
         }
 
         // POST: Customer/Create
@@ -108,7 +125,7 @@ namespace Raunstrup.UI.Controllers
                     return RedirectToAction(nameof(Index));
 
                 }
-                catch (Exception dbe)
+                catch (Exception)
                 {
                     
                     var dbcustomer = CustomerMapper.Map((customerViewModel));
@@ -131,20 +148,25 @@ namespace Raunstrup.UI.Controllers
         // GET: Customer/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            var customerViewModel = await _customerService.GetCustomerAsync(id).ConfigureAwait(false);
-            customerViewModel.Id = id;
-
-            CECustomerViewModel cECustomerViewModel = CustomerMapper.MaptoCE(customerViewModel);
-            var customerDiscountTypeDtos = await _customerService.GetAllCustomerDiscountType().ConfigureAwait(false);
-            IEnumerable<CustomerDiscountTypeViewModel> customerDiscountTypeViewModels = CustomerMapper.Map(customerDiscountTypeDtos);
-
-            cECustomerViewModel.CustomerDiscountTypeViewModels = customerDiscountTypeViewModels.ToList();
-
-            if (customerViewModel == null)
+            try
             {
-                return NotFound();
+                var customerViewModel = await _customerService.GetCustomerAsync(id).ConfigureAwait(false);
+                customerViewModel.Id = id;
+
+                CECustomerViewModel cECustomerViewModel = CustomerMapper.MaptoCE(customerViewModel);
+                var customerDiscountTypeDtos = await _customerService.GetAllCustomerDiscountType().ConfigureAwait(false);
+                IEnumerable<CustomerDiscountTypeViewModel> customerDiscountTypeViewModels = CustomerMapper.Map(customerDiscountTypeDtos);
+
+                cECustomerViewModel.CustomerDiscountTypeViewModels = customerDiscountTypeViewModels.ToList();
+
+                if (customerViewModel == null)
+                {
+                    return NotFound();
+                }
+                return View(cECustomerViewModel);
             }
-            return View(cECustomerViewModel);
+            catch (Exception) { throw; }
+            
 
         }
 
@@ -155,7 +177,7 @@ namespace Raunstrup.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Phone,Address,Email,Active,Rowversion,SelectedCustomerDiscountViewModel")] CECustomerViewModel cEcustomerViewModel)
         {
-           
+            
 
             if (id != cEcustomerViewModel.Id)
             {
@@ -165,49 +187,78 @@ namespace Raunstrup.UI.Controllers
             
             if (ModelState.IsValid)
             {
-                try
-                {
 
-                    await _customerService.UpdateAsync(id, CustomerMapper.Map(customerViewModel)).ConfigureAwait(false);
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (DbUpdateConcurrencyException dbu)
-                {
-                   
-                    
+                    try
+                    {
+                        await _customerService.UpdateAsync(id, CustomerMapper.Map(customerViewModel)).ConfigureAwait(false);
+                        return RedirectToAction(nameof(Index));
+
+                    }
+
+                    catch (DbUpdateConcurrencyException dbu)
+                    {
+
                         var dbcustomer = CustomerMapper.Map((CustomerDto)dbu.Data["dbvalue"]);
-                        if(cEcustomerViewModel.Phone != dbcustomer.Phone) 
+
+                        if (cEcustomerViewModel.Phone != dbcustomer.Phone)
                         {
                             ModelState.AddModelError("Phone", "telefonnummeret er opdateret af en anden person");
                         }
-                    if (cEcustomerViewModel.Name != dbcustomer.Name)
-                    {
-                        ModelState.AddModelError("Name", "Navnet er opdateret af en anden person");
-                    }
-                    if (cEcustomerViewModel.Address != dbcustomer.Address)
-                    {
-                        ModelState.AddModelError("Address", "Addressen er opdateret af en anden person");
-                    }
-                    if (cEcustomerViewModel.Email != dbcustomer.Email)
-                    {
-                        ModelState.AddModelError("Email", "E-mailen er opdateret af en anden person");
-                    }
-                    if (cEcustomerViewModel.CustomerDiscountType != dbcustomer.CustomerDiscountType)
-                    {
-                        ModelState.AddModelError("SelectedCustomerDiscountViewModel", "Kundetypen er opdateret af en anden person");
-                    }
 
+
+                        if (cEcustomerViewModel.Name != dbcustomer.Name)
+                        {
+                            ModelState.AddModelError("Name", "Navnet er opdateret af en anden person");
+                        }
+                        if (cEcustomerViewModel.Address != dbcustomer.Address)
+                        {
+                            ModelState.AddModelError("Address", "Addressen er opdateret af en anden person");
+                        }
+                        if (cEcustomerViewModel.Email != dbcustomer.Email)
+                        {
+                            ModelState.AddModelError("Email", "E-mailen er opdateret af en anden person");
+                        }
+                        if (cEcustomerViewModel.CustomerDiscountType != dbcustomer.CustomerDiscountType)
+                        {
+                            ModelState.AddModelError("SelectedCustomerDiscountViewModel", "Kundetypen er opdateret af en anden person");
+                        }
+
+                        var customerDiscountTypeDtos = await _customerService.GetAllCustomerDiscountType().ConfigureAwait(false);
+                        IEnumerable<CustomerDiscountTypeViewModel> customerDiscountTypeViewModels = CustomerMapper.Map(customerDiscountTypeDtos);
+
+                        cEcustomerViewModel.CustomerDiscountTypeViewModels = customerDiscountTypeViewModels.ToList();
+
+                        cEcustomerViewModel.CustomerDiscountType = dbcustomer.CustomerDiscountType;
+                        ModelState.AddModelError(string.Empty, "Denne kunde er blevet opdateret af en anden bruger, tryk gem for at overskrive");
+                        cEcustomerViewModel.Rowversion = dbcustomer.Rowversion;
+                        ModelState.Remove("Rowversion");
+                        return View("Edit", cEcustomerViewModel);
+                    }
+                catch (Exception)
+                {
+
+                    var dbcustomer = CustomerMapper.Map((customerViewModel));
                     var customerDiscountTypeDtos = await _customerService.GetAllCustomerDiscountType().ConfigureAwait(false);
+
                     IEnumerable<CustomerDiscountTypeViewModel> customerDiscountTypeViewModels = CustomerMapper.Map(customerDiscountTypeDtos);
+
 
                     cEcustomerViewModel.CustomerDiscountTypeViewModels = customerDiscountTypeViewModels.ToList();
 
-                    cEcustomerViewModel.CustomerDiscountType = dbcustomer.CustomerDiscountType;
-                    ModelState.AddModelError(string.Empty, "Denne kunde er blevet opdateret af en anden bruger, tryk gem for at overskrive");
-                    cEcustomerViewModel.Rowversion = dbcustomer.Rowversion;
-                    ModelState.Remove("Rowversion");
-                    return View("Edit",cEcustomerViewModel);
+
+                    int selectedCustomerDiscountViewModel = cEcustomerViewModel.SelectedCustomerDiscountViewModel;
+
+                    var customerDiscountType = await _customerService.GetCustomerDiscountTypeAsync(selectedCustomerDiscountViewModel);
+
+                    cEcustomerViewModel.CustomerDiscountType= CustomerDiscountTypeMapper.Map( customerDiscountType);
+
+
+                    ModelState.AddModelError(string.Empty, "Email eller telefonnummer er brut af en anden");
+                    return View(cEcustomerViewModel);
+
+
                 }
+              
             }
             return View(cEcustomerViewModel);
         }
@@ -215,19 +266,24 @@ namespace Raunstrup.UI.Controllers
         // GET: Customer/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var customer = await _customerService.GetCustomerAsync(id.Value).ConfigureAwait(false);
-              //  .FirstOrDefaultAsync(m => m.Id == id);
-            if (customer== null)
-            {
-                return NotFound();
-            }
+                var customer = await _customerService.GetCustomerAsync(id.Value).ConfigureAwait(false);
 
-            return View(CustomerMapper.Map(customer));
+                if (customer == null)
+                {
+                    return NotFound();
+                }
+
+                return View(CustomerMapper.Map(customer));
+            }
+            catch (Exception) { throw; }
+            
         }
 
         // POST: Customer/Delete/5
@@ -235,43 +291,53 @@ namespace Raunstrup.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _customerService.RemoveAsync(id).ConfigureAwait(false);
+            try
+            {
+                await _customerService.RemoveAsync(id).ConfigureAwait(false);
 
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
 
-            //var customerViewModel = await _context.customers.FindAsync(id);
-
-            //_context.customers.Remove(customerViewModel);
-            //await _context.SaveChangesAsync();
-            //return RedirectToAction(nameof(Index));
+            }
+            catch (Exception) { throw; }
         }
 
         private bool CustomerViewModelExists(int id)
         {
-            return _context.customers.Any(e => e.Id == id);
+            try
+            {
+                return _context.customers.Any(e => e.Id == id);
+            }
+            catch (Exception) { throw; }
+            
         }
 
         public async Task<IActionResult> AddProjectCustomer(int id, string searchString)
         {
-            IEnumerable<CustomerDto> customerDtos = await _customerService.GetChosenCustomers(searchString);
+            try
+            {
+                IEnumerable<CustomerDto> customerDtos = await _customerService.GetChosenCustomers(searchString);
 
-            return View(CustomerMapper.Map(customerDtos));
+                return View(CustomerMapper.Map(customerDtos));
 
-         
+            }
+            catch (Exception) { throw; }
+
+
 
         }
         public async Task<ActionResult> AddProjectCustomerToProject(int id, int projectid)
         {
-            if (ModelState.IsValid)
+            try
             {
-                 await _customerService.AddAsync(id, projectid).ConfigureAwait(false);
+                if (ModelState.IsValid)
+                {
+                    await _customerService.AddAsync(id, projectid).ConfigureAwait(false);
 
+                }
+
+                return RedirectToAction("Details", "Project", new { id = projectid });
             }
-
-          
-            return RedirectToAction("Details", "Project", new { id = projectid });
-
-       
+            catch(Exception) { throw; }
             
         }
      

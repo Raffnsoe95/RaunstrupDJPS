@@ -38,25 +38,7 @@
             @Html.DisplayFor(model => model.Email)
         </dd>
 
-        @*<dt class="col-sm-2">
-            Tilknyttede projekter
-        </dt>
-        <dd class="col-sm-10">
-            @foreach (var project in Model.Projects)
-            {
-            <div>
-                <a href="/../project/Details/@project.Id"> @project.Description</a>
-            <br />
-            </div>
-                    }
-        </dd>*@
-
-        @*<dt class="col-sm-2">
-            Aktiv
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Active)
-        </dd>*@
+      
         <dt class="col-sm-2">
             Kundetype
         </dt>
@@ -84,14 +66,7 @@
             <th>
                 Slutdato
             </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.Active)
-                </th>*@
-
-
-            @*<th>
-                    @Html.DisplayNameFor(model => model.Rowversion)
-                </th>*@
+          
             <th></th>
         </tr>
     </thead>
@@ -110,19 +85,7 @@
                     @Html.DisplayFor(modelItem => item.EndDate)
                 </td>
                 <td>
-                    @*@Html.DisplayFor(modelItem => item.Price)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ESTdriving)
-                        </td>*@
-
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.Active)
-                        </td>*@
-
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.Rowversion)
-                        </td>*@
+                  
                 <td>
 
                     <a asp-action="Details" asp-controller="Project" asp-route-id="@item.Id">Detaljer</a>

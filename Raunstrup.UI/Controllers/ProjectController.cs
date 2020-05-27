@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.CodeAnalysis;
 using Raunstrup.Contakt.Service.Interface;
+using System.IO;
 
 namespace Raunstrup.UI.Controllers
 {
@@ -23,25 +24,33 @@ namespace Raunstrup.UI.Controllers
         private readonly ViewModelContext _context;
         private readonly IProjectService _projectService;
         private readonly IPDFService _PDFService;
+        private readonly IContactService _contactService;
 
-
-
-        public ProjectController(ViewModelContext context, IProjectService projectService, IPDFService pdfService)
+        public ProjectController(ViewModelContext context, IProjectService projectService, IPDFService pdfService, IContactService contactService)
         {
             _context = context;
             _projectService = projectService;
             _PDFService = pdfService;
+            _contactService = contactService;
         }
 
         // GET: Project
         public async Task<IActionResult> Index()
         {
-            var userId = User.FindFirstValue(ClaimTypes.Name);
-            var userRole = User.FindFirstValue(ClaimTypes.Role);
+            try
+            {
+                var userId = User.FindFirstValue(ClaimTypes.Name);
+                var userRole = User.FindFirstValue(ClaimTypes.Role);
 
-            var projectDtos = await _projectService.GetProjectAsync(userId, userRole).ConfigureAwait(false);
-            return View(ProjectMapper.Map(projectDtos));
-            //return View(await _context.Projects.ToListAsync());
+                var projectDtos = await _projectService.GetProjectAsync(userId, userRole).ConfigureAwait(false);
+                return View(ProjectMapper.Map(projectDtos));
+            }
+            catch (Exception)
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Projekterne blev ikke fundet!" };
+                return View("Error", model);
+            }
+
         }
 
         // GET: Project/Details/5
@@ -53,18 +62,26 @@ namespace Raunstrup.UI.Controllers
                 return NotFound();
             }
 
-            var projectViewModel = await _projectService.GetProjectAsync(id.Value).ConfigureAwait(false);
-
-            if (projectViewModel == null)
+            try
             {
-                return NotFound();
+                var projectViewModel = await _projectService.GetProjectAsync(id.Value).ConfigureAwait(false);
+
+                if (projectViewModel == null)
+                {
+                    return NotFound();
+                }
+
+                return View(ProjectDetailsMapper.Map(projectViewModel));
             }
-            //var project2 = ProjectDetailsMapper.Map(projectViewModel);
-            //var project3 = ProjectDetailsMapper.MapToDetailsDto(projectViewModel);
-            return View(ProjectDetailsMapper.Map(projectViewModel));
+            catch (Exception)
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Projektet blev ikke fundet!" };
+                return View("Error", model);
+            }
+
         }
 
-        [Authorize(Roles = "Admin,SuperUser")]
+        [Authorize(Roles = "SuperUser")]
         // GET: Project/Create
         public IActionResult Create()
         {
@@ -77,31 +94,47 @@ namespace Raunstrup.UI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StartDate,EndDate,Price,Description,Active,IsFixedPrice,IsAccepted,IsDone,Rowversion")] ProjectViewModel projectViewModel)
+        public async Task<IActionResult> Create([Bind("Id,StartDate,EndDate,Price,Description,Active,IsFixedPrice,IsAccepted,IsDone,Rowversion,ESTdriving")] ProjectViewModel projectViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                await _projectService.AddAsync(ProjectMapper.Map(projectViewModel)).ConfigureAwait(false);
+                if (ModelState.IsValid)
+                {
+                    await _projectService.AddAsync(ProjectMapper.Map(projectViewModel)).ConfigureAwait(false);
 
-                return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index));
 
+                }
+                return View(projectViewModel);
             }
-            return View(projectViewModel);
+            catch (Exception)
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Projektet blev ikke oprettet!" };
+                return View("Error", model);
+            }
         }
 
-        [Authorize(Roles = "Admin,SuperUser")]
+        [Authorize(Roles = "SuperUser")]
         // GET: Project/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            var projectViewModel = await _projectService.GetProjectAsync(id).ConfigureAwait(false);
-            if (projectViewModel == null)
+            try
             {
-                return NotFound();
+                var projectViewModel = await _projectService.GetProjectAsync(id).ConfigureAwait(false);
+                if (projectViewModel == null)
+                {
+                    return NotFound();
+                }
+                return View(ProjectMapper.Map(projectViewModel));
             }
-            return View(ProjectMapper.Map(projectViewModel));
+            catch (Exception)
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Projektet blev ikke fundet!" };
+                return View("Error", model);
+            }
         }
 
-        [Authorize(Roles = "Admin,SuperUser")]
+        [Authorize(Roles = "SuperUser")]
         // POST: Project/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -179,7 +212,7 @@ namespace Raunstrup.UI.Controllers
             return View(projectViewModel);
         }
 
-        [Authorize(Roles = "Admin,SuperUser")]
+        [Authorize(Roles = "SuperUser")]
         // GET: Project/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -188,24 +221,40 @@ namespace Raunstrup.UI.Controllers
                 return NotFound();
             }
 
-            var projectViewModel = await _projectService.GetProjectAsync(id.Value).ConfigureAwait(false);
-            if (projectViewModel == null)
+            try
             {
-                return NotFound();
-            }
+                var projectViewModel = await _projectService.GetProjectAsync(id.Value).ConfigureAwait(false);
+                if (projectViewModel == null)
+                {
+                    return NotFound();
+                }
 
-            return View(ProjectMapper.Map(projectViewModel));
+                return View(ProjectMapper.Map(projectViewModel));
+            }
+            catch (Exception)
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Projektet blev ikke fundet!" };
+                return View("Error", model);
+            }
         }
 
-        [Authorize(Roles = "Admin,SuperUser")]
+        [Authorize(Roles = "SuperUser")]
         // POST: Project/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _projectService.RemoveAsync(id).ConfigureAwait(false);
+            try
+            {
+                await _projectService.RemoveAsync(id).ConfigureAwait(false);
 
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Projektet blev ikke slettet!" };
+                return View("Error", model);
+            }
         }
 
         private bool ProjectViewModelExists(int id)
@@ -214,9 +263,33 @@ namespace Raunstrup.UI.Controllers
         }
         public async Task<IActionResult> CreatePDF(int id)
         {
-            var projectViewModel = await _projectService.GetProjectAsync(id).ConfigureAwait(false);
-            _PDFService.CreatePDF(ProjectDetailsMapper.MapToDetailsDto(projectViewModel));
-            return RedirectToAction("Index");
+            try
+            {
+                var projectViewModel = await _projectService.GetProjectAsync(id).ConfigureAwait(false);
+                _PDFService.CreatePDF(ProjectDetailsMapper.MapToDetailsDto(projectViewModel));
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "PDF'en kunne ikke laves!" };
+                return View("Error", model);
+            }
+        }
+
+        public async Task<IActionResult> SendPDF(int id)
+        {
+            try
+            {
+                var projectViewModel = await _projectService.GetProjectAsync(id);
+                string pDFOffer = _PDFService.CreatePDF(ProjectDetailsMapper.MapToDetailsDto(projectViewModel));
+                _contactService.SendOffer(pDFOffer, "jens_christ@hotmail.com");
+                return RedirectToAction("Details", new { id = id });
+            }
+            catch
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Tilbuddet blev ikke sendt!" };
+                return View("Error", model);
+            }
         }
 
     }

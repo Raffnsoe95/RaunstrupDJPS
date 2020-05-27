@@ -12,7 +12,7 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Amount" class="control-label"></label>
+                Antal
                 <input asp-for="Amount" class="form-control" />
                 <span asp-validation-for="Amount" class="text-danger"></span>
             </div>
@@ -33,14 +33,14 @@
                 @*<span asp-validation-for="ProjectId" class="text-danger"></span>
             </div>*@
             <div class="form-group">
-                <input type="submit" value="Gem" class="btn btn-primary" />
+                <input type="submit" value="Indberet" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Details" asp-controller="Project" asp-route-id="@Model.ProjectId">Tilbage</a>
+    <a asp-action="Details" asp-controller="Project" asp-route-id="@Model.ProjectId">Tilbage til projektet</a>
 </div>
 
 @section Scripts {
