@@ -129,26 +129,18 @@ namespace Raunstrup.Api.Controllers
         [HttpGet("GetAllCustomerDiscountType")]
         public IEnumerable<CustomerDiscountTypeDto> GetAllCustomerDiscountType()
         {
-            try
-            {
-                return _customerService.GetAllCustomerDiscountType().Select(a => CustomerMapper.Map(a));
-
-            }
-            catch (Exception){ throw; }
+            return _customerService.GetAllCustomerDiscountType().Select(a => CustomerMapper.Map(a));
+          
         }
 
         [HttpGet("getcustomerdiscounttype/{Id}", Name = "getcustomerdiscounttype")]
         public CustomerDiscountTypeDto CustomerDiscountType(int id)
         {
-            try
-            {
+            
                 return CustomerMapper.Map(_customerService.GetCustomerDiscountType(id));
 
-            }
-            catch(Exception)
-            {
-                throw;
-            }
+            
+          
             }
     }
 }
