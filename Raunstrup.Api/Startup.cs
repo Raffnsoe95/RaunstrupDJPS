@@ -33,11 +33,8 @@ namespace Raunstrup.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            //Try'n Erro
-
+            
             bool isTest = Convert.ToBoolean(Configuration["IsTest"]);
-            // bool isTest = Convert.ToBoolean(Configuration["IsTest"]);
-            //bool isTest = true;
 
             if(isTest == false)
             {
@@ -50,8 +47,6 @@ namespace Raunstrup.Api
                   options.UseInMemoryDatabase(databaseName: "RaunstrupDBAPIInMemory"));
             }
 
-            //options.UseSqlite(Configuration.GetConnectionString("MvcMovieContext")));
-
             services.AddScoped<IItemService, ItemService>();
             services.AddScoped<IProjectService, ProjectService>();
             services.AddScoped<ICustomerService, CustomerService>();
@@ -59,7 +54,6 @@ namespace Raunstrup.Api
             services.AddScoped<IWorkingHoursService, WorkingHoursService>();
             services.AddApiVersioningAndExplorer();
             services.AddSwaggerGeneration();
-            //--------------------------------------------------
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

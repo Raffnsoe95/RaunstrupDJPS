@@ -5,10 +5,10 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<h1>Kontaks Os</h1>
+<h1>Kontakt os</h1>
 <br />
 
-<section>
+<section style="width:40%;">
 
     <form asp-action="CreateEmail">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -20,7 +20,7 @@
 
                 <p class="md-form mb-0">
                     <label asp-for="Name" class="">Dit Navn</label>
-                    <input asp-for="Name" type="text" id="contact-name" class="form-control" placeholder="Hans">
+                    <input asp-for="Name" type="text" id="contact-name" class="form-control" placeholder="Hans" >
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </p>
 
@@ -83,24 +83,6 @@
 
 </section>
 
-
-
-@*@Ajax.ActionLink("Open popup", "SomeAction", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "result", InsertionMode = InsertionMode.Replace, OnSuccess = "openPopup" })
-<br />
-
-<div id="result" style="display:none;"></div>*@
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#result").dialog({
-            autoOpen: false,
-            title: 'Title',
-            width: 500,
-            height: 'auto',
-            modal: true
-        });
-    });
-    function openPopup() {
-        $("#result").dialog("open");
-    }
-</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

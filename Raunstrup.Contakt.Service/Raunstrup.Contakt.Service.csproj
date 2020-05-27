@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="PDFdocuments\**" />
+    <EmbeddedResource Remove="PDFdocuments\**" />
+    <None Remove="PDFdocuments\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MailKit" Version="2.6.0" />
     <PackageReference Include="MimeKit" Version="2.6.0" />
     <PackageReference Include="PDFsharpNetStandard2" Version="1.51.4845" />
@@ -12,10 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Raunstrup.Contract\Raunstrup.Contract.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="PDFdocuments\" />
   </ItemGroup>
 
 </Project>

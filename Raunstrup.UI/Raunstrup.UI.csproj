@@ -6,6 +6,13 @@
     <UserSecretsId>aspnet-Raunstrup.UI-0DB23880-7E14-4FF4-8D29-6C5246A0A337</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="PDFdocuments\**" />
+    <Content Remove="PDFdocuments\**" />
+    <EmbeddedResource Remove="PDFdocuments\**" />
+    <None Remove="PDFdocuments\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     
@@ -27,11 +34,6 @@
     <ProjectReference Include="..\Raunstrup.BusinessLogic\Raunstrup.BusinessLogic.csproj" />
     <ProjectReference Include="..\Raunstrup.Contakt.Service\Raunstrup.Contakt.Service.csproj" />
     <ProjectReference Include="..\Raunstrup.Contract\Raunstrup.Contract.csproj" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="PDFdocuments\" />
   </ItemGroup>
 
 </Project>
