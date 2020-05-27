@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Raunstrup.Contract\Raunstrup.Contract.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="PDFdocuments\" />
+  </ItemGroup>
+
 </Project>

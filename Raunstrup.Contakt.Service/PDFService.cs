@@ -72,13 +72,6 @@ namespace Raunstrup.Contakt.Service
                new XRect(80, -150, page.Width, page.Height),
                XStringFormats.CenterLeft);
 
-           
-
-
-            //Billede af Firmallogo---------------------------------------------------------------------------------------
-            //Mangler
-
-
             //Firma informationer----------------------------------------------------------------------------------------------------------------------------
             gfx.DrawString("Raunstrup A/S", companyAndDebtor, XBrushes.Black,
                 new XRect(-60, -300, page.Width, page.Height),
@@ -91,28 +84,6 @@ namespace Raunstrup.Contakt.Service
             gfx.DrawString("7100 Vejle", companyAndDebtor, XBrushes.Black,
                 new XRect(-60, -280, page.Width, page.Height),
                 XStringFormats.CenterRight);
-
-
-            ////BankOplysninger------------------------------------------------------------------------------------------------------------------------------
-            //gfx.DrawString("Bank ", companyAndDebtor, XBrushes.Black,
-            //    new XRect(-60, -250, page.Width, page.Height),
-            //    XStringFormats.CenterRight);
-
-            //gfx.DrawString("Reg. Nr:3141", companyAndDebtor, XBrushes.Black,
-            //    new XRect(-60, -240, page.Width, page.Height),
-            //    XStringFormats.CenterRight);
-
-            //gfx.DrawString("Konto Nr:5926535897932384 ", companyAndDebtor, XBrushes.Black,
-            //    new XRect(-60, -230, page.Width, page.Height),
-            //    XStringFormats.CenterRight);
-
-            //gfx.DrawString("Ordrenummer "+sale.saleID.ToString(), companyAndDebtor, XBrushes.Black,
-            //   new XRect(-60, -180, page.Width, page.Height),
-            //   XStringFormats.CenterRight);
-
-            //gfx.DrawString("Dato " + sale.salesDay.ToString("dd-MM-yyyy"), companyAndDebtor, XBrushes.Black,
-            //  new XRect(-60, -170, page.Width, page.Height),
-            //  XStringFormats.CenterRight);
 
             //Navn på vare antal pris beløb-------------------------------------------------------------------------------------------------------------
             //varens navn
@@ -256,6 +227,7 @@ namespace Raunstrup.Contakt.Service
             //Dette er til at gemme pdf
             
             document.Save(filename);
+            return filename;
           
 
             
