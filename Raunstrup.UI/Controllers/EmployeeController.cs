@@ -18,13 +18,11 @@ namespace Raunstrup.UI.Controllers
     [Authorize(Roles = "SuperUser")]
     public class EmployeeController : Controller
     {
-        private readonly ViewModelContext _context;
         private readonly IEmployeeservice _employeeService;
         private readonly IProjectService _projectService;
 
-        public EmployeeController(ViewModelContext context, IEmployeeservice employeeService, IProjectService projectService)
+        public EmployeeController(IEmployeeservice employeeService, IProjectService projectService)
         {
-            _context = context;
             _employeeService = employeeService;
             _projectService = projectService;
         }
@@ -110,25 +108,25 @@ namespace Raunstrup.UI.Controllers
         }
 
         // GET: Employee/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            try
-            {
+        //public async Task<IActionResult> Edit(int? id)
+        //{
+        //    try
+        //    {
 
-                //if (id == null)
-                //{
-                //    return NotFound();
-                //}
+        //        //if (id == null)
+        //        //{
+        //        //    return NotFound();
+        //        //}
 
-                var employeeViewModel = await _context.Employees.FindAsync(id);
-                if (employeeViewModel == null)
-                {
-                    return NotFound();
-                }
-                return View(employeeViewModel);
-            }
-            catch (Exception){ throw; }
-        }
+        //        var employeeViewModel = await _context.Employees.FindAsync(id);
+        //        if (employeeViewModel == null)
+        //        {
+        //            return NotFound();
+        //        }
+        //        return View(employeeViewModel);
+        //    }
+        //    catch (Exception){ throw; }
+        //}
 
         //    var employeeViewModel = await _context.Employees.FindAsync(id);
         //    if (employeeViewModel == null)
@@ -141,41 +139,41 @@ namespace Raunstrup.UI.Controllers
         // POST: Employee/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Phone,Salary,Active")] EmployeeViewModel employeeViewModel)
-        {
-            try
-            {
-                if (id != employeeViewModel.Id)
-                {
-                    return NotFound();
-                }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Phone,Salary,Active")] EmployeeViewModel employeeViewModel)
+        //{
+        //    try
+        //    {
+        //        if (id != employeeViewModel.Id)
+        //        {
+        //            return NotFound();
+        //        }
 
-                if (ModelState.IsValid)
-                {
-                    try
-                    {
-                        await _employeeService.UpdateAsync(id, EmployeeMapper.Map(employeeViewModel)).ConfigureAwait(false);
-                        return RedirectToAction(nameof(Index));
-                    }
-                    catch (DbUpdateConcurrencyException)
-                    {
-                        if (!EmployeeViewModelExists(employeeViewModel.Id))
-                        {
-                            return NotFound();
-                        }
-                        else
-                        {
-                            throw;
-                        }
-                    }
-                }
-                return View(employeeViewModel);
-            }
-            catch (Exception) { throw; }
+        //        if (ModelState.IsValid)
+        //        {
+        //            try
+        //            {
+        //                await _employeeService.UpdateAsync(id, EmployeeMapper.Map(employeeViewModel)).ConfigureAwait(false);
+        //                return RedirectToAction(nameof(Index));
+        //            }
+        //            catch (DbUpdateConcurrencyException)
+        //            {
+        //                if (!EmployeeViewModelExists(employeeViewModel.Id))
+        //                {
+        //                    return NotFound();
+        //                }
+        //                else
+        //                {
+        //                    throw;
+        //                }
+        //            }
+        //        }
+        //        return View(employeeViewModel);
+        //    }
+        //    catch (Exception) { throw; }
             
-        }
+        //}
 
         // GET: Employee/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -214,15 +212,15 @@ namespace Raunstrup.UI.Controllers
             catch (Exception) { throw; }
         }
 
-        private bool EmployeeViewModelExists(int id)
-        {
-            try
-            {
-                return _context.Employees.Any(e => e.Id == id);
+        //private bool EmployeeViewModelExists(int id)
+        //{
+        //    try
+        //    {
+        //        return _context.Employees.Any(e => e.Id == id);
 
-            }
-            catch (Exception) { throw; }
-        }
+        //    }
+        //    catch (Exception) { throw; }
+        //}
         // GET: Employee 
         public async Task<IActionResult> AddProjectEmployee(int id, string searchString)
         {

@@ -20,20 +20,16 @@ namespace Raunstrup.UI.Controllers
     [Authorize(Roles = "SuperUser")]
     public class CustomerController : Controller
     {
-        private readonly ViewModelContext _context;
         private readonly ICustomerService _customerService;
         private readonly IProjectService _projectService;
 
-        public CustomerController(ViewModelContext context, ICustomerService customerService, IProjectService projectService)
+        public CustomerController(ICustomerService customerService, IProjectService projectService)
         {
-            _context = context;
             _customerService = customerService;
             _projectService = projectService;
         }
 
         // GET: Customer
-      
-
         public async Task<IActionResult> Index(string searchString)
         {
             try
@@ -308,18 +304,18 @@ namespace Raunstrup.UI.Controllers
             }
         }
 
-        private bool CustomerViewModelExists(int id)
-        {
-            try
-            {
-                return _context.customers.Any(e => e.Id == id);
-            }
-            catch (Exception) 
-            {
-                throw;
-            }
+        //private bool CustomerViewModelExists(int id)
+        //{
+        //    try
+        //    {
+        //        return _context.customers.Any(e => e.Id == id);
+        //    }
+        //    catch (Exception) 
+        //    {
+        //        throw;
+        //    }
             
-        }
+        //}
 
         public async Task<IActionResult> AddProjectCustomer(int id, string searchString)
         {

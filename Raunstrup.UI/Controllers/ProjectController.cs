@@ -21,14 +21,12 @@ namespace Raunstrup.UI.Controllers
     [Authorize(Roles = "SuperUser,User")]
     public class ProjectController : Controller
     {
-        private readonly ViewModelContext _context;
         private readonly IProjectService _projectService;
         private readonly IPDFService _PDFService;
         private readonly IContactService _contactService;
 
-        public ProjectController(ViewModelContext context, IProjectService projectService, IPDFService pdfService, IContactService contactService)
+        public ProjectController(IProjectService projectService, IPDFService pdfService, IContactService contactService)
         {
-            _context = context;
             _projectService = projectService;
             _PDFService = pdfService;
             _contactService = contactService;
@@ -257,10 +255,10 @@ namespace Raunstrup.UI.Controllers
             }
         }
 
-        private bool ProjectViewModelExists(int id)
-        {
-            return _context.Projects.Any(e => e.Id == id);
-        }
+        //private bool ProjectViewModelExists(int id)
+        //{
+        //    return _context.Projects.Any(e => e.Id == id);
+        //}
         public async Task<IActionResult> CreatePDF(int id)
         {
             try

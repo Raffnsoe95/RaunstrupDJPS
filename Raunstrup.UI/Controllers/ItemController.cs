@@ -15,13 +15,12 @@ namespace Raunstrup.UI.Controllers
 {
     public class ItemController : Controller
     {
-        private readonly ViewModelContext _context;
+        //private readonly ViewModelContext _context;
 
         private readonly IItemService _itemService;
 
-        public ItemController(ViewModelContext context, IItemService itemService)
+        public ItemController(IItemService itemService)
         {
-            _context = context;
             _itemService = itemService;
         }
 
