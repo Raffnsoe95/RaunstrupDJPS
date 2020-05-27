@@ -8,8 +8,6 @@ using System.Linq;
 using Raunstrup.DataAccess.Model;
 using Microsoft.EntityFrameworkCore.Internal;
 
-
-
 namespace Raunstrup.DataAccess.DBInitializer
 {
     public static class DbInitializer
