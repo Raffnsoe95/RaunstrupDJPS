@@ -61,20 +61,21 @@ namespace Raunstrup.UI.Controllers
         // POST: ProjectDriving/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("Amount,EmployeeId,UnitPrice,ProjectId")] ProjectDrivingViewModel projectDrivingViewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        //_context.Add(projectDrivingViewModel);
-        //        //await _context.SaveChangesAsync();
-        //        await _employeeService.AddAsync(ProjectDrivingMapper.Map(projectDrivingViewModel));
-        //        return RedirectToAction("details", "project", new { id = projectDrivingViewModel.ProjectId });
-        //    }
-        //    ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", projectDrivingViewModel.EmployeeId);
-        //    return View(projectDrivingViewModel);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Amount,EmployeeId,UnitPrice,ProjectId")] ProjectDrivingViewModel projectDrivingViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                //_context.Add(projectDrivingViewModel);
+                //await _context.SaveChangesAsync();
+                await _employeeService.AddAsync(ProjectDrivingMapper.Map(projectDrivingViewModel));
+                return RedirectToAction("details", "project", new { id = projectDrivingViewModel.ProjectId });
+            }
+            //ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", projectDrivingViewModel.EmployeeId);
+
+            return RedirectToAction("details", "project", new { id = projectDrivingViewModel.ProjectId });
+        }
 
         //// GET: ProjectDriving/Edit/5
         //public async Task<IActionResult> Edit(int? id)
