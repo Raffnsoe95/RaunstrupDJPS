@@ -39,7 +39,10 @@ namespace Raunstrup.UI.Controllers
                 return View(WorkingHoursMapper.Map(WorkingHoursDtos));
 
             }
-            catch (Exception) { throw; }
+            catch (Exception) {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke vise oversigt" };
+                return View("Error", model);
+            }
         }
 
         // GET: WorkingHours/Details/5
@@ -61,7 +64,10 @@ namespace Raunstrup.UI.Controllers
 
                 return View(WorkingHoursMapper.Map(workingHoursViewModel));
             }
-            catch (Exception) { throw; }
+            catch (Exception) {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke vise detaljer" };
+                return View("Error", model);
+            }
 
         }
 
@@ -74,7 +80,11 @@ namespace Raunstrup.UI.Controllers
                 return View(WorkingHours);
 
             }
-            catch (Exception) { throw; }
+            catch (Exception) 
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke danne side" };
+                return View("Error", model);
+            }
         }
 
 
@@ -96,7 +106,11 @@ namespace Raunstrup.UI.Controllers
 
                 return View(workingHoursViewModel);
             }
-            catch (Exception) { throw; }
+            catch (Exception)
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke indberette arbejdstimer" };
+                return View("Error", model);
+            }
 
         }
 
@@ -112,7 +126,10 @@ namespace Raunstrup.UI.Controllers
                 }
                 return View(WorkingHoursMapper.Map(WorkingHoursViewModel));
             }
-            catch (Exception) { throw; }
+            catch (Exception) {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke redigere arbejdstimer" };
+                return View("Error", model);
+            }
 
         }
 
@@ -153,7 +170,10 @@ namespace Raunstrup.UI.Controllers
 
                 return View(workingHoursViewModel);
             }
-            catch (Exception) { throw; }
+            catch (Exception) {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke rette arbejdstimer" };
+                return View("Error", model);
+            }
 
         }
 
@@ -177,8 +197,12 @@ namespace Raunstrup.UI.Controllers
 
                 return View(workingHours);
             }
-            catch (Exception) { throw; }
+            catch (Exception) { 
+            
             }
+            ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke slette arbejdstimer" };
+            return View("Error", model);
+        }
         
            
 
@@ -195,7 +219,11 @@ namespace Raunstrup.UI.Controllers
                 return RedirectToAction(nameof(Index));
 
             }
-            catch (Exception) { throw; }
+            catch (Exception) 
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke slette arbejdstimer" };
+                return View("Error", model);
+            }
 
         }
 
@@ -220,7 +248,11 @@ namespace Raunstrup.UI.Controllers
                 return View(workingHours);
 
             }
-            catch (Exception) { throw; }
+            catch (Exception) 
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke danne side" };
+                return View("Error", model);
+            }
 
         }
     }
