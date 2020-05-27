@@ -105,8 +105,17 @@
         <a asp-action="AddProjectCustomer" asp-route-id="@Model.Id" asp-controller="Customer">Tilknyt Kunde</a> <span>|</span>
         <a asp-action="AddAssignedProjectItem" asp-route-id="@Model.Id" asp-controller="Item">Tilknyt materialer</a> <span>|</span>
 
-        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> <span>|</span>
-        <a asp-action="createPDF" asp-route-id="@Model.Id" asp-controller="Project">Udskriv PDF</a><span>|</span>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Ret</a> <span>|</span>
+
+       @if(Model.CustomerId != null)
+        {
+        <a asp-action="createPDF" asp-route-id="@Model.Id" asp-controller="Project">Udskriv PDF</a>
+        }
+        
+
+
+        <span>|</span>
+
 
     }
 

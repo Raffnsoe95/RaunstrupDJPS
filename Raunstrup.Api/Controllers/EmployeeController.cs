@@ -30,19 +30,34 @@ namespace Raunstrup.Api.Controllers
             
         }
 
-        // GET: api/Movies
+        // GET: api/Employees
         [HttpGet]
         public IEnumerable<EmployeeDto> Get()
         {
-            return _employeeService.GetAll().Select(a => EmployeeMapper.Map(a));
+            try
+            {
+                return _employeeService.GetAll().Select(a => EmployeeMapper.Map(a));
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+            
         }
 
-        // GET: api/Movies/5
+        // GET: api/Employees/5
         [HttpGet("{id}")]
         //[ApiVersion("1.1")]
         public EmployeeDto Get(int id)
         {
-            return EmployeeMapper.Map(_employeeService.Get(id));
+            try
+            {
+                return EmployeeMapper.Map(_employeeService.Get(id));
+            }
+            catch(Exception)
+            {
+                throw;
+            }
         }
 
         // POST: api/Movies
@@ -69,6 +84,7 @@ namespace Raunstrup.Api.Controllers
         [HttpPost("AddProjectEmployeeToProject", Name = "AddProjectEmployeeToProject")]
         public void AddProjectEmployeeToProject([FromBody] ProjectEmployeeDto value)
         {
+
             _employeeService.CreateProjectEmployee(ProjectEmployeeMapper.Map(value));
         }
 

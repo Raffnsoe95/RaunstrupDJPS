@@ -33,6 +33,7 @@ namespace Raunstrup.Api.Controllers
         [HttpGet]
         public IEnumerable<CustomerDto> Get()
         {
+
             return _customerService.GetAll().Select(a => CustomerMapper.Map(a));
         }
 
