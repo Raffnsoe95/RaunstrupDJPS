@@ -35,22 +35,14 @@ namespace Raunstrup.Api.Controllers
         [HttpGet]
         public IEnumerable<CustomerDto> Get()
         {
-            try
-            {
-                return _customerService.GetAll().Select(a => CustomerMapper.Map(a));
-            }
-            catch (Exception) { throw; }
+            return _customerService.GetAll().Select(a => CustomerMapper.Map(a));
         }
 
         // GET: api/Customer/5
         [HttpGet("{id}")]
         public CustomerDto Get(int id)
         {
-            try
-            {
-                return CustomerMapper.Map(_customerService.Get(id));
-            }
-            catch (Exception) { throw; }
+            return CustomerMapper.Map(_customerService.Get(id));
         }
 
         // POST: api/Customer
@@ -96,33 +88,19 @@ namespace Raunstrup.Api.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            try
-            {
-                _customerService.Delete(id);
-            }
-            catch (Exception) { throw; }
+            _customerService.Delete(id);
         }
 
         [HttpPut("AddCustomerToProject", Name = "AddCustomerToProject")]
         public void AddCustomerToProject([FromBody] ProjectDto value)
         {
-            try
-            {
-                _projectService.AddCustomerToProject(ProjectMapper.Map(value));
-
-            }
-            catch (Exception) { throw; }
+            _projectService.AddCustomerToProject(ProjectMapper.Map(value));
         }
 
         [HttpGet("search/{searchString}", Name = "GetFilteredCustomers")]
         public IEnumerable<CustomerDto> GetFilteredCustomers(string searchString)
         {
-            try
-            {
-                return _customerService.GetFilteredCustomers(searchString).Select(a => CustomerMapper.Map(a));
-
-            }
-            catch (Exception) { throw; }
+            return _customerService.GetFilteredCustomers(searchString).Select(a => CustomerMapper.Map(a));
         }
 
         

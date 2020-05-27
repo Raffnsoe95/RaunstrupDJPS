@@ -45,7 +45,8 @@ namespace Raunstrup.UI.Controllers
             }
             catch(Exception )
             {
-                throw;
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke finde kunder" };
+                return View("Error", model);
             }
 
         }
@@ -81,7 +82,8 @@ namespace Raunstrup.UI.Controllers
             }
             catch (Exception)
             {
-                throw;
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kundens detajler kunne ikke vises" };
+                return View("Error", model);
             }
         }
 
@@ -100,7 +102,11 @@ namespace Raunstrup.UI.Controllers
 
                 return View(cECustomerViewModel);
             }
-            catch (Exception) { throw; }
+            catch (Exception) 
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunden kunne ikke skabes" };
+                return View("Error", model);
+            }
         }
 
         // POST: Customer/Create
@@ -165,7 +171,11 @@ namespace Raunstrup.UI.Controllers
                 }
                 return View(cECustomerViewModel);
             }
-            catch (Exception) { throw; }
+            catch (Exception)
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunden kunne ikke rettes" };
+                return View("Error", model);
+            }
             
 
         }
@@ -282,7 +292,11 @@ namespace Raunstrup.UI.Controllers
 
                 return View(CustomerMapper.Map(customer));
             }
-            catch (Exception) { throw; }
+            catch (Exception)
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunden kunne ikke slettes" };
+                return View("Error", model);
+            }
             
         }
 
@@ -298,7 +312,11 @@ namespace Raunstrup.UI.Controllers
                 return RedirectToAction(nameof(Index));
 
             }
-            catch (Exception) { throw; }
+            catch (Exception) {
+
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunden kunne ikke hentes" };
+                return View("Error", model);
+            }
         }
 
         private bool CustomerViewModelExists(int id)
@@ -307,7 +325,10 @@ namespace Raunstrup.UI.Controllers
             {
                 return _context.customers.Any(e => e.Id == id);
             }
-            catch (Exception) { throw; }
+            catch (Exception) 
+            {
+                throw;
+            }
             
         }
 
@@ -320,7 +341,11 @@ namespace Raunstrup.UI.Controllers
                 return View(CustomerMapper.Map(customerDtos));
 
             }
-            catch (Exception) { throw; }
+            catch (Exception) 
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke finde kunder" };
+                return View("Error", model);
+            }
 
 
 
@@ -337,7 +362,11 @@ namespace Raunstrup.UI.Controllers
 
                 return RedirectToAction("Details", "Project", new { id = projectid });
             }
-            catch(Exception) { throw; }
+            catch(Exception) 
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Kunne ikke tilføje kunde til projekt" };
+                return View("Error", model);
+            }
             
         }
      

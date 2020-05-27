@@ -27,75 +27,36 @@ namespace Raunstrup.Api.Controllers
         [HttpGet]
         public IEnumerable<WorkingHoursDto> Get()
         {
-            try
-            {
-                return _workinghoursService.GetAll().Select(a => WorkingHoursMapper.Map(a)).ToList();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            return _workinghoursService.GetAll().Select(a => WorkingHoursMapper.Map(a)).ToList();
         }
 
         // GET: api/WorkingHours/5
         [HttpGet("{id}")]
         public WorkingHoursDto Get(int id)
         {
-            try
-            {
-                //den skal aflevere en dto
-                //ud fra en rigtig model, vel
-                return WorkingHoursMapper.Map(_workinghoursService.Get(id));
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            return WorkingHoursMapper.Map(_workinghoursService.Get(id));
         }
 
         // POST: api/WorkingHours
         [HttpPost]
         public void Post([FromBody] WorkingHoursDto value)
         {
-            try
-            {
-                _workinghoursService.Create(WorkingHoursMapper.Map(value));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            _workinghoursService.Create(WorkingHoursMapper.Map(value));
         }
 
         // PUT: api/Customer/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] WorkingHoursDto value)
         {
-            try
-            {
-                _workinghoursService.Update(WorkingHoursMapper.Map(value));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            
+            _workinghoursService.Update(WorkingHoursMapper.Map(value));
+
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            try
-            {
-                _workinghoursService.Delete(id);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            _workinghoursService.Delete(id);
         }
     }
 }
