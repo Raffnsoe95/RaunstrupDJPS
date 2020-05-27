@@ -33,9 +33,7 @@ namespace Raunstrup.UI.Models
 
         [Required(ErrorMessage = "Skal udfyldes")]
         [EmailAddress(ErrorMessage ="Ikke gyldig email-adresse")]
-        // [Remote("ValidateEmail", "CustomerController", ErrorMessage = "The User Exists")]
-
-      //  [Remote("ValidateEmail", "CustomerController", HttpMethod = "POST", ErrorMessage = "EmailId already exists in database.")]
+        [Remote("ValidateEmail", "CustomerController", HttpMethod = "POST", ErrorMessage = "Emailen er allerede i brug")]
         public string Email { get; set; }
 
         public bool Active { get; set; }

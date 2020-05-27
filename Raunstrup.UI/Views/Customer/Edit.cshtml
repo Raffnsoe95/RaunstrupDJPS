@@ -34,20 +34,16 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <select id="mySelect" asp-for="SelectedCustomerDiscountViewModel" Value="@Model.CustomerDiscountType.Id" asp-items="@(new SelectList(Model.CustomerDiscountTypeViewModels, "Id", "Name"))">
-                @*<option disabled selected>Vælg kundetype</option>*@
+             
 
             </select>
             <div class="form-group form-check">
-                @*<label class="form-check-label">*@
+              
                     <input class="form-check-input" Checked hidden asp-for="Active" />
-                @*</label>*@
+              
             </div>
             <input asp-for="Rowversion" class="form-control" type="hidden"/>
-            @*<div class="form-group">
-            <label asp-for="Rowversion" class="control-label"></label>
-
-            <span asp-validation-for="Rowversion" class="text-danger"></span>
-        </div>*@
+         
             <div class="form-group">
                 <input type="submit" value="Gem" class="btn btn-primary" />
             </div>

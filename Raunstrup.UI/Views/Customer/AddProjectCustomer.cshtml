@@ -11,9 +11,7 @@
         <input type="submit" value="Søg" />
     </p>
     </form>
-    @*<p>
-        <a asp-action="Create">Create New</a>
-    </p>*@
+ 
     <table class="table">
         <thead>
             <tr>
@@ -29,9 +27,7 @@
                 <th>
                    Email
                 </th>
-                @*<th>
-                    @Html.DisplayNameFor(model => model.Active)
-                </th>*@
+              
                 <th></th>
             </tr>
         </thead>
@@ -51,9 +47,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Email)
                     </td>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.Active)
-                    </td>*@
+                 
                     <td>
                         <a asp-action="AddProjectCustomerToProject" asp-route-id="@item.Id" asp-route-projectid="@ViewContext.ModelState["id"].AttemptedValue" asp-controller="Customer">Tilknyt</a> |
 

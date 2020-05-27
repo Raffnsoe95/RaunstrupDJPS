@@ -45,7 +45,7 @@ namespace Raunstrup.UI.Services
             catch(Exception dbe)
             {
                 dbe.Data.Add("dbvalue", customer);
-             //   dbe.Data.Add("Errortype", "phone");
+             
                 throw dbe ;
             }
         }
@@ -111,7 +111,7 @@ namespace Raunstrup.UI.Services
                 {
                     throw;
                 }
-                   // throw;
+                   
                 }
             
             
