@@ -250,13 +250,14 @@ namespace Raunstrup.Contakt.Service
           
 
             //Her Laves navnet på filen
-            string filename = "Tilbud" + project.Id.ToString() + DateTime.Now.ToShortDateString()+ ".pdf";
+            string filename = "Tilbud" + project.Id.ToString() + DateTime.Now.ToString("yyyy-MM-dd")+ ".pdf";
 
             
             //Dette er til at gemme pdf
             
             document.Save(filename);
-          
+            System.Threading.Thread.Sleep(500);
+            return filename;
 
             
         }
