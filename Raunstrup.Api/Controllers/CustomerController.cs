@@ -73,18 +73,16 @@ namespace Raunstrup.Api.Controllers
         [HttpPut("{id}")]
         public ActionResult<CustomerDto> Put(int id, [FromBody] CustomerDto value)
         {
-            
-                try
-                {
-                    _customerService.Update(CustomerMapper.Map(value));
-                    return value;
-                }
-                catch (DbUpdateConcurrencyException dbu)
-                {
-                    Customer customer = (Customer)dbu.Data["dbvalue"];
-                    return Conflict(CustomerMapper.Map(customer));
-                }
-            
+            try
+            {
+                _customerService.Update(CustomerMapper.Map(value));
+                return value;
+            }
+            catch (DbUpdateConcurrencyException dbu)
+            {
+                Customer customer = (Customer)dbu.Data["dbvalue"];
+                return Conflict(CustomerMapper.Map(customer));
+            }
             catch (Exception dbe)
             {
                 Customer customer = (Customer)dbe.Data["dbvalue"];

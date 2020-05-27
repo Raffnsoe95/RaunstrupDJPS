@@ -92,30 +92,25 @@ namespace Raunstrup.UI.Services
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await Client.PutAsync($"{_customerRequestUri}/{id}", data).ConfigureAwait(false);
 
-           
-                try
+            try
+            {
+                response.EnsureSuccessStatusCode();
+            }
+            catch (Exception)
+            {
+                if (response.StatusCode == HttpStatusCode.Conflict)
                 {
-                    response.EnsureSuccessStatusCode();
+                    var result = response.Content.ReadAsStringAsync().Result;
+                    var dbcustomer = Newtonsoft.Json.JsonConvert.DeserializeObject<CustomerDto>(result);
+                    DbUpdateConcurrencyException dbu = new DbUpdateConcurrencyException();
+                    dbu.Data.Add("dbvalue", dbcustomer);
+                    throw dbu;
                 }
-                catch (Exception)
-                {
-                    if (response.StatusCode == HttpStatusCode.Conflict)
-                    {
-                        var result = response.Content.ReadAsStringAsync().Result;
-                        var dbcustomer = Newtonsoft.Json.JsonConvert.DeserializeObject<CustomerDto>(result);
-                        DbUpdateConcurrencyException dbu = new DbUpdateConcurrencyException();
-                        dbu.Data.Add("dbvalue", dbcustomer);
-                        throw dbu;
-                    }
                 else
                 {
                     throw;
                 }
-                   
-                }
-            
-            
-
+            }
         }
 
         async Task ICustomerService.AddAsync(int id, int projectid)

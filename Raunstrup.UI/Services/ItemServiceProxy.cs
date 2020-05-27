@@ -101,7 +101,7 @@ namespace Raunstrup.UI.Services
             }
         }
 
-       public async Task<IEnumerable<ItemDto>> GetFilteredItemsAsync(string searchString)
+        public async Task<IEnumerable<ItemDto>> GetFilteredItemsAsync(string searchString)
         {
             var response = await Client.GetAsync(_itemsRequestUri + $"/search/{searchString}").ConfigureAwait(false);
             response.EnsureSuccessStatusCode();

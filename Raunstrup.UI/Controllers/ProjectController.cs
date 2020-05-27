@@ -285,13 +285,12 @@ namespace Raunstrup.UI.Controllers
                 _contactService.SendOffer(pDFOffer, "jens095w@edu.ucl.dk");
                 return RedirectToAction("Details", new { id = id });
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ErrorViewModel model = new ErrorViewModel { RequestId = "Tilbuddet blev ikke sendt!" };
                 return View("Error", model);
             }
         }
-
     }
 }
 
