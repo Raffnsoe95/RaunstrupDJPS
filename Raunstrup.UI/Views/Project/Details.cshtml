@@ -101,20 +101,21 @@
     <a asp-action="Create" asp-route-id="@Model.Id" asp-controller="WorkingHours">Indberet arbejdstimer</a> |
     @if (User.IsInRole("SuperUser"))
     {
-        <a asp-action="AddProjectEmployee" asp-route-id="@Model.Id" asp-controller="Employee">Tilknyt medarbejder</a> <span>|</span>
-        <a asp-action="AddProjectCustomer" asp-route-id="@Model.Id" asp-controller="Customer">Tilknyt Kunde</a> <span>|</span>
-        <a asp-action="AddAssignedProjectItem" asp-route-id="@Model.Id" asp-controller="Item">Tilknyt materialer</a> <span>|</span>
+    <a asp-action="AddProjectEmployee" asp-route-id="@Model.Id" asp-controller="Employee">Tilknyt medarbejder</a>  <span>|</span>
+    <a asp-action="AddProjectCustomer" asp-route-id="@Model.Id" asp-controller="Customer">Tilknyt Kunde</a>  <span>|</span>
+    <a asp-action="AddAssignedProjectItem" asp-route-id="@Model.Id" asp-controller="Item">Tilknyt materialer</a>  <span>|</span>
 
-        <a asp-action="Edit" asp-route-id="@Model.Id">Ret</a> <span>|</span>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Ret</a>
 
-       @if(Model.CustomerId != null)
+    @if(Model.CustomerId != null)
         {
-        <a asp-action="SendPDF" asp-route-id="@Model.Id" asp-controller="Project">Send tilbud</a>
+    <span>|</span>
+    <a asp-action="SendPDF" asp-route-id="@Model.Id" asp-controller="Project">Send tilbud</a>
         }
-        
 
 
-        <span>|</span>
+
+    <span>|</span>
 
 
     }

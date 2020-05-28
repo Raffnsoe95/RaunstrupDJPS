@@ -280,7 +280,7 @@ namespace Raunstrup.UI.Controllers
             {
                 var projectViewModel = await _projectService.GetProjectAsync(id);
                 string pDFOffer = _PDFService.CreatePDF(ProjectDetailsMapper.MapToDetailsDto(projectViewModel));
-                _contactService.SendOffer(pDFOffer, "jens095w@edu.ucl.dk");
+                _contactService.SendOffer(pDFOffer, projectViewModel.CustomerDto.Email);
                 return RedirectToAction("Details", new { id = id });
             }
             catch (Exception)
