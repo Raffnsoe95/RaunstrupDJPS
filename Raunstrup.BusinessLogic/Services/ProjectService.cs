@@ -35,7 +35,7 @@ namespace Raunstrup.BusinessLogic.Services
         }
 
         Project IProjectService.Get(int id)
-            {
+        {
             return _context.Projects
             .Include(w => w.WorkingHours)
             .ThenInclude(e => e.Employee).ThenInclude(e => e.Type)
