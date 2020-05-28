@@ -138,7 +138,7 @@ namespace Raunstrup.UI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,StartDate,EndDate,Price,Description,Active,IsFixedPrice,IsAccepted,IsDone,Rowversion")] ProjectViewModel projectViewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,StartDate,EndDate,Price,Description,Active,IsFixedPrice,IsAccepted,IsDone,ESTdriving,Rowversion")] ProjectViewModel projectViewModel)
         {
             if (id != projectViewModel.Id)
             {
