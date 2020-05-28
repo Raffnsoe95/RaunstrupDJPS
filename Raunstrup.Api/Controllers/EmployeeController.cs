@@ -20,9 +20,6 @@ namespace Raunstrup.Api.Controllers
     {
         private readonly IEmployeeService _employeeService;
         private readonly IProjectService _projectService;
-
-
-
         public EmployeeController(IEmployeeService employeeService, IProjectService projectService)
         {
             _projectService = projectService;
@@ -34,15 +31,7 @@ namespace Raunstrup.Api.Controllers
         [HttpGet]
         public IEnumerable<EmployeeDto> Get()
         {
-            try
-            {
-                return _employeeService.GetAll().Select(a => EmployeeMapper.Map(a));
-            }
-            catch(Exception)
-            {
-                throw;
-            }
-            
+            return _employeeService.GetAll().Select(a => EmployeeMapper.Map(a));
         }
 
         // GET: api/Employees/5
@@ -50,84 +39,46 @@ namespace Raunstrup.Api.Controllers
         //[ApiVersion("1.1")]
         public EmployeeDto Get(int id)
         {
-            try
-            {
-                return EmployeeMapper.Map(_employeeService.Get(id));
-            }
-            catch(Exception)
-            {
-                throw;
-            }
+            return EmployeeMapper.Map(_employeeService.Get(id));
         }
 
         // POST: api/Movies
         [HttpPost]
         public void Post([FromBody] EmployeeDto value)
         {
-            try
-            {
-                _employeeService.Create(EmployeeMapper.Map(value));
-            }
-            catch (Exception) { throw; }
+            _employeeService.Create(EmployeeMapper.Map(value));
         }
 
         // PUT: api/Movies/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] EmployeeDto value)
         {
-            try
-            {
-                _employeeService.Update(EmployeeMapper.Map(value));
-
-            }
-            catch (Exception) { throw; }
-                    }
+            _employeeService.Update(EmployeeMapper.Map(value));
+        }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            try
-            {
-                _employeeService.Delete(id);
-            }
-            catch (Exception) { throw; }
+            _employeeService.Delete(id);
         }
 
         [HttpPost("AddProjectEmployeeToProject", Name = "AddProjectEmployeeToProject")]
         public void AddProjectEmployeeToProject([FromBody] ProjectEmployeeDto value)
         {
-            try
-            {
-                _employeeService.CreateProjectEmployee(ProjectEmployeeMapper.Map(value));
-
-            }
-            catch (Exception) { throw; }
+            _employeeService.CreateProjectEmployee(ProjectEmployeeMapper.Map(value));
         }
 
         [HttpPost("AddProjectDrivingToProject", Name = "AddProjectDrivingToProject")]
         public void AddProjectDrivingToProject([FromBody] ProjectDrivingDto value)
         {
-            try
-            {
-                _employeeService.Create(ProjectDrivingMapper.Map(value));
-
-            }
-            catch (Exception) { throw; }
+            _employeeService.Create(ProjectDrivingMapper.Map(value));
         }
 
         [HttpGet("search/{searchString}", Name = "GetFilteredEmployees")]
         public IEnumerable<EmployeeDto> GetFilteredCustomers(string searchString)
         {
-            try
-            {
-                return _employeeService.GetFilteredEmployees(searchString).Select(a => EmployeeMapper.Map(a));
-
-            }
-            catch (Exception) { throw; }
-        }
-
-       
-
+            return _employeeService.GetFilteredEmployees(searchString).Select(a => EmployeeMapper.Map(a));
+        }    
     }
 }

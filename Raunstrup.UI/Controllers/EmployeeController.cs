@@ -28,7 +28,6 @@ namespace Raunstrup.UI.Controllers
             _employeeService = employeeService;
             _projectService = projectService;
         }
-
         // GET: Employee
         public async Task<IActionResult> Index(string searchString)
         {
@@ -38,11 +37,14 @@ namespace Raunstrup.UI.Controllers
                 return View(EmployeeMapper.Map(employeeDtos));
 
             }
-            catch (Exception) { throw; }
+            catch (Exception)
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Søgningen kunne ikke gennemføres" };
+                return View("Error", model);
+            }
 
 
         }
-
         // GET: Employee/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -69,9 +71,12 @@ namespace Raunstrup.UI.Controllers
 
                 return View(employeeDetailsViewModel);
             }
-            catch (Exception) { throw; }
+            catch (Exception)
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Medarbejderen kunne ikke vises" };
+                return View("Error", model);
+            }
         }
-
         // GET: Employee/Create
         public IActionResult Create()
         {
@@ -81,7 +86,6 @@ namespace Raunstrup.UI.Controllers
             }
             catch { throw; }
         }
-
         // POST: Employee/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -106,15 +110,17 @@ namespace Raunstrup.UI.Controllers
                 }
                 return View(employeeViewModel);
             }
-            catch (Exception) { throw; }
+            catch (Exception)
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Medarbejderen kunne ikke oprettes" };
+                return View("Error", model);
+            }
         }
-
         // GET: Employee/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             try
             {
-
                 //if (id == null)
                 //{
                 //    return NotFound();
@@ -127,17 +133,12 @@ namespace Raunstrup.UI.Controllers
                 }
                 return View(employeeViewModel);
             }
-            catch (Exception){ throw; }
+            catch (Exception)
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Medarbejderen kunne ikke rettes" };
+                return View("Error", model);
+            }
         }
-
-        //    var employeeViewModel = await _context.Employees.FindAsync(id);
-        //    if (employeeViewModel == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(employeeViewModel);
-        //}
-
         // POST: Employee/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -173,10 +174,12 @@ namespace Raunstrup.UI.Controllers
                 }
                 return View(employeeViewModel);
             }
-            catch (Exception) { throw; }
-            
+            catch (Exception)
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Medarbejderen kunne ikke rettes" };
+                return View("Error", model);
+            }
         }
-
         // GET: Employee/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -195,10 +198,12 @@ namespace Raunstrup.UI.Controllers
 
                 return View(employeeViewModel);
             }
-            catch (Exception) { throw; }
-            
+            catch (Exception)
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Medarbejderen kunne ikke slettes" };
+                return View("Error", model);
+            }
         }
-
         // POST: Employee/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -211,9 +216,12 @@ namespace Raunstrup.UI.Controllers
                 return RedirectToAction(nameof(Index));
 
             }
-            catch (Exception) { throw; }
+            catch (Exception) 
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Medarbejderen kunne ikke slettes" };
+                return View("Error", model);
+            }
         }
-
         private bool EmployeeViewModelExists(int id)
         {
             try
@@ -233,27 +241,14 @@ namespace Raunstrup.UI.Controllers
                 return View(EmployeeMapper.MapEst(employeeDtos).Select(x => { x.ProjectId = id; return x; }).ToList());
 
             }
-            catch (Exception) { throw; }
-
-
-        }
-        //public async Task<IActionResult> AddProjectEmployeeToProject(int id, int projectid)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        await _employeeService.AddAsync(id,projectid).ConfigureAwait(false);
-
-
-        //        //_context.Add(employeeViewModel);
-        //        //await _context.SaveChangesAsync();
-        //        //return RedirectToAction(nameof(Index));
-        //    }
-        //    return RedirectToAction("AddProjectEmployee",new {id=projectid});
-        //}
-
-
-        public async Task<IActionResult> AddProjectEmployees(int id) 
+            catch (Exception)
             {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Medarbejderen kunne ikke vises" };
+                return View("Error", model);
+            }
+        }
+        public async Task<IActionResult> AddProjectEmployees(int id)
+        {
             try
             {
                 var employeeDtos = await _employeeService.GetEmployeeAsync().ConfigureAwait(false);
@@ -262,29 +257,14 @@ namespace Raunstrup.UI.Controllers
                 return View(EmployeeMapper.MapEst(employeeDtos).Select(x => { x.ProjectId = id; return x; }).ToList());
 
             }
-            catch (Exception) { throw; }
-                }
-
-            //public async Task<IActionResult> AddProjectEmployeeToProject(List<EstWorkingHoursEmployeeViewModel> items)
-            //{
-            //    var projectEmployees = items.Where(x => x.EstWorkingHours > 0).Select(x => new ProjectEmployeeViewModel()
-            //    {
-            //        Id =x.Id,
-            //        EstWorkingHours =x.EstWorkingHours,
-            //        ProjectId =x.projectId
-
-
-            //    });
-
-
-            //    if (ModelState.IsValid)
-            //    {
-            //        await _employeeService.AddProjectEmployeeAsync(ProjectEmployeeMapper.Map(projectEmployees).ToList()).ConfigureAwait(false);
-            //    }
-            //    return RedirectToAction("AddProjectEmployeeToProject", new { id = items[0].projectId });
-            //}
-            public async Task<IActionResult> AddProjectEmployeeToProject(List<EstWorkingHoursEmployeeViewModel> items)
+            catch (Exception) 
             {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Medarbejderen kunne ikke tilknyttes projektet" };
+                return View("Error", model);
+            }
+        }
+        public async Task<IActionResult> AddProjectEmployeeToProject(List<EstWorkingHoursEmployeeViewModel> items)
+        {
             try
             {
                 var projectEmployees = items.Where(x => x.EstWorkingHours > 0).Select(x => new ProjectEmployeeViewModel()
@@ -298,13 +278,12 @@ namespace Raunstrup.UI.Controllers
 
                 return RedirectToAction("details", "project", new { id = items[0].ProjectId });
             }
-            catch (Exception){ throw; }
-
-
-                
+            catch (Exception) 
+            {
+                ErrorViewModel model = new ErrorViewModel { RequestId = "Medarbejderen kunne ikke tilknyttes projektet" };
+                return View("Error", model);
             }
-
-
         }
-    } 
+    }
+} 
 
