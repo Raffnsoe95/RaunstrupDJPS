@@ -33,6 +33,7 @@ namespace Raunstrup.UI.Models
 
         [DataType(DataType.Text)]
         [Required(ErrorMessage = "Skal udfyldes")]
+       
         [RegularExpression(@"^[0-9\.,]+$", ErrorMessage = "Indtast venligst et nummer")]
         public decimal Price { get; set; }
 
