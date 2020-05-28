@@ -32,10 +32,6 @@ namespace Raunstrup.UI.UserManagement
             //var userId = await EnsureUserAsync(serviceProvider, userEmail, userPw).ConfigureAwait(false);
             //await EnsureRoleAsync(serviceProvider, userId, "User").ConfigureAwait(false);
 
-
-            var userId1 = await EnsureUserAsync(serviceProvider,"1", "bruger1").ConfigureAwait(false);
-            await EnsureRoleAsync(serviceProvider, userId1, "User").ConfigureAwait(false);
-
             var userId2 = await EnsureUserAsync(serviceProvider, "2", "bruger2").ConfigureAwait(false);
             await EnsureRoleAsync(serviceProvider, userId2, "User").ConfigureAwait(false);
 
