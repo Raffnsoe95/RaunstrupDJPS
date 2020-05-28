@@ -31,6 +31,7 @@ namespace Raunstrup.UI.Models
         [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime EndDate { get; set; }
 
+        [DataType(DataType.Text)]
         [Required(ErrorMessage = "Skal udfyldes")]
        
         [RegularExpression(@"^[0-9\.,]+$", ErrorMessage = "Indtast venligst et nummer")]
