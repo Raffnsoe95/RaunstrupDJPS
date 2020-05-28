@@ -18,7 +18,14 @@ namespace Raunstrup.Api.Models
             }
 
             return new Item
-            { Id = dto.Id, Name = dto.Name, Price = dto.Price, Active = dto.Active, Discount = ItemDiscountTypeMapper.Map(dto.Discounts), RowVersion = dto.RowVision };
+            { 
+                Id = dto.Id, 
+                Name = dto.Name, 
+                Price = dto.Price, 
+                Active = dto.Active, 
+                Discount = ItemDiscountTypeMapper.Map(dto.Discounts), 
+                RowVersion = dto.RowVision 
+            };
         }
 
         public static IEnumerable<ItemDto> Map(IEnumerable<Item> model)
@@ -33,7 +40,14 @@ namespace Raunstrup.Api.Models
                 return null;
             }
             return new ItemDto
-            { Id = model.Id, Name = model.Name, Price = model.Price, Active = model.Active, Discounts = ItemDiscountTypeMapper.Map(model.Discount), RowVision = model.RowVersion };
+            { 
+                Id = model.Id, 
+                Name = model.Name, 
+                Price = model.Price, 
+                Active = model.Active, 
+                Discounts = ItemDiscountTypeMapper.Map(model.Discount), 
+                RowVision = model.RowVersion 
+            };
         }
     }
 }

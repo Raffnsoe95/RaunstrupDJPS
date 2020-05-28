@@ -15,7 +15,5 @@ namespace Raunstrup.DataAccess.Model
         public DateTime EndDate { get; set; }
 
         public int Amount { get; set; }
-
-      //  public int ItemId { get; set; }
     }
 }

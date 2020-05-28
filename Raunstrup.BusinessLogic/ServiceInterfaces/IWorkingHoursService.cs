@@ -6,12 +6,16 @@ using Raunstrup.DataAccess.Model;
 
 namespace Raunstrup.BusinessLogic.ServiceInterfaces
 {
-   public interface IWorkingHoursService
+    public interface IWorkingHoursService
     {
         IEnumerable<WorkingHours> GetAll();
+
         WorkingHours Get(int id);
+
         void Create(WorkingHours workingHours);
+
         void Update(WorkingHours workingHours);
+
         void Delete(int id);
     }
 }

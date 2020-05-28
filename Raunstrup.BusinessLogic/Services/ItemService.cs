@@ -20,18 +20,15 @@ namespace Raunstrup.BusinessLogic.Services
         }
 
         IEnumerable<Item> IItemService.GetAll()
-        {
-
+        { 
             return _context.Items
                 .Where(a => a.Active == true)
                 .Include(e => e.Discount).ToList();
-
         }
 
         Item IItemService.Get(int id)
         {
             return _context.Items.Find(id);
-            
         }
 
         void IItemService.Create(Item item)
@@ -64,16 +61,12 @@ namespace Raunstrup.BusinessLogic.Services
             _context.SaveChanges();
         }
 
-
         IEnumerable<Item> IItemService.GetFilteredItems(string searchString)
         {
-
             return _context.Items
                 .Where(a=>a.Active==true)
                 .Where(f=>f.Name.ToUpper().Contains(searchString.ToUpper()))
                 .Include(e => e.Discount).ToList();
-
-
         }
     }
 }

@@ -24,7 +24,6 @@ namespace Raunstrup.BusinessLogic.Services
             IEnumerable<Project> IProjectService.GetAll()
             {
                 return _context.Projects.Where( p => p.Active == true)
-              
                 .ToList();
             
             }
@@ -32,7 +31,6 @@ namespace Raunstrup.BusinessLogic.Services
         IEnumerable<Project> IProjectService.GetAll(int employeeId)
         {
             return _context.Projects.Where(e => e.ProjectEmployees.Any(f => f.EmployeeID == employeeId) && e.Active)
-               
                 .ToList();
         }
 
@@ -113,14 +111,13 @@ namespace Raunstrup.BusinessLogic.Services
         IEnumerable<Project> IProjectService.GetProjectsByCustomerId(int customerID)
         {
             return _context.Projects
-                .Where(c => c.CustomerID == customerID);
-                
+                .Where(c => c.CustomerID == customerID);    
         }
+
         void IProjectService.CreatePDF(Project project)
         {
 
         }
-
     }
 }
 

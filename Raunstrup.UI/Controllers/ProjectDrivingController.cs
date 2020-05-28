@@ -16,12 +16,10 @@ namespace Raunstrup.UI.Controllers
     [Authorize(Roles = "SuperUser,User")]
     public class ProjectDrivingController : Controller
     {
-        private readonly ViewModelContext _context;
         private readonly IEmployeeservice _employeeService;
 
-        public ProjectDrivingController(ViewModelContext context, IEmployeeservice employeeService)
+        public ProjectDrivingController(IEmployeeservice employeeService)
         {
-            _context = context;
             _employeeService = employeeService;
         }
 
@@ -74,8 +72,9 @@ namespace Raunstrup.UI.Controllers
                 await _employeeService.AddAsync(ProjectDrivingMapper.Map(projectDrivingViewModel));
                 return RedirectToAction("details", "project", new { id = projectDrivingViewModel.ProjectId });
             }
-            ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", projectDrivingViewModel.EmployeeId);
-            return View(projectDrivingViewModel);
+            //ViewData["EmployeeId"] = new SelectList(_context.Employees, "Id", "Id", projectDrivingViewModel.EmployeeId);
+
+            return RedirectToAction("details", "project", new { id = projectDrivingViewModel.ProjectId });
         }
 
         //// GET: ProjectDriving/Edit/5

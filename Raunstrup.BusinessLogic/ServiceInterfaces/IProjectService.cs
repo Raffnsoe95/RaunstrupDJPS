@@ -24,7 +24,5 @@ namespace Raunstrup.BusinessLogic.ServiceInterfaces
         void CreatePDF(Project project);
 
         IEnumerable<Project> GetProjectsByCustomerId(int customerId);
-
-       
     }
 }

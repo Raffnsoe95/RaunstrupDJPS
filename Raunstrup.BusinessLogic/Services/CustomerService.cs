@@ -58,8 +58,9 @@ namespace Raunstrup.BusinessLogic.Services
             }
             }
 
-            void ICustomerService.Update(Customer customer)
-            {
+
+        void ICustomerService.Update(Customer customer)
+        {
             CustomerDiscountType customerDiscountType = _context.CustomerDiscountTypes.Find(customer.CustomerDiscountTypeID);
 
             try
@@ -71,7 +72,6 @@ namespace Raunstrup.BusinessLogic.Services
                     _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException dbu)
-
                 {
                     var exceptionEntry = dbu.Entries.Single();
                     var databaseEntry = exceptionEntry.GetDatabaseValues();
@@ -82,25 +82,20 @@ namespace Raunstrup.BusinessLogic.Services
 
                 }
             }
-            catch
-            (Exception dbe)
-            { throw dbe; }
-           
-
-
-            
+            catch(Exception dbe)
+            { 
+                throw dbe; 
             }
+        }
 
-            void ICustomerService.Delete(int id)
-            {
-            
-
+        void ICustomerService.Delete(int id)
+        {
             Customer tmpCustomer=_context.Customers.Find(id);
 
             tmpCustomer.Active = false;
             _context.Customers.Update(tmpCustomer);
             _context.SaveChanges();
-            }
+        }
 
 
         void ICustomerService.AddCustomerToProject(Customer Customer)

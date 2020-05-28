@@ -50,7 +50,7 @@ namespace Raunstrup.UI.Services
             return await JsonSerializer.DeserializeAsync<ItemDto>(stream, options).ConfigureAwait(false);
         }
 
-       public async Task<IEnumerable<ItemDto>> GetItemsAsync()
+        public async Task<IEnumerable<ItemDto>> GetItemsAsync()
         {
             var response = await Client.GetAsync(_itemsRequestUri).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
@@ -101,7 +101,7 @@ namespace Raunstrup.UI.Services
             }
         }
 
-       public async Task<IEnumerable<ItemDto>> GetFilteredItemsAsync(string searchString)
+        public async Task<IEnumerable<ItemDto>> GetFilteredItemsAsync(string searchString)
         {
             var response = await Client.GetAsync(_itemsRequestUri + $"/search/{searchString}").ConfigureAwait(false);
             response.EnsureSuccessStatusCode();

@@ -7,9 +7,7 @@ namespace Raunstrup.UI.Models
 {
     public class EstWorkingHoursEmployeeViewModel
     {
-       
         public int Id { get; set; }
-
 
         public int ProjectId { get; set; }
 
@@ -18,10 +16,5 @@ namespace Raunstrup.UI.Models
         public int? EmployeeID { get; set; }
 
         public EmployeeViewModel Employee { get; set; }
-
-       
-
-
-
     }
 }

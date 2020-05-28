@@ -54,7 +54,7 @@ namespace Raunstrup.UI
                 client.BaseAddress = new Uri(Configuration["BaseUrl"]);
             });
                         
-            services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase(databaseName: "RaunstrupDBVieModelInMemory"));
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase(databaseName: "RaunstrupDBVieModelInMemory"));
 
             services.AddControllersWithViews();
 
@@ -80,15 +80,7 @@ namespace Raunstrup.UI
 
 
             services.AddRazorPages();
-
-            ////SqlDb
-            services.AddDbContext<ViewModelContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            ////SqlDb
-
-            //InMemDB
-            //services.AddDbContext<ViewModelContext>(options => options.UseInMemoryDatabase(databaseName: "RaunstrupInMeme"));
-            //InMemDB
-
+            
             services.AddScoped<IContactService, ContactService>();
             services.AddScoped<IPDFService, PDFservice>();
         }

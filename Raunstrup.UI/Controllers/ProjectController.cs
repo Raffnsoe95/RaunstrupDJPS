@@ -21,14 +21,12 @@ namespace Raunstrup.UI.Controllers
     [Authorize(Roles = "SuperUser,User")]
     public class ProjectController : Controller
     {
-        private readonly ViewModelContext _context;
         private readonly IProjectService _projectService;
         private readonly IPDFService _PDFService;
         private readonly IContactService _contactService;
 
-        public ProjectController(ViewModelContext context, IProjectService projectService, IPDFService pdfService, IContactService contactService)
+        public ProjectController(IProjectService projectService, IPDFService pdfService, IContactService contactService)
         {
-            _context = context;
             _projectService = projectService;
             _PDFService = pdfService;
             _contactService = contactService;
@@ -140,7 +138,7 @@ namespace Raunstrup.UI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,StartDate,EndDate,Price,Description,Active,IsFixedPrice,IsAccepted,IsDone,Rowversion")] ProjectViewModel projectViewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,StartDate,EndDate,Price,Description,Active,IsFixedPrice,IsAccepted,IsDone,ESTdriving,Rowversion")] ProjectViewModel projectViewModel)
         {
             if (id != projectViewModel.Id)
             {
@@ -257,10 +255,10 @@ namespace Raunstrup.UI.Controllers
             }
         }
 
-        private bool ProjectViewModelExists(int id)
-        {
-            return _context.Projects.Any(e => e.Id == id);
-        }
+        //private bool ProjectViewModelExists(int id)
+        //{
+        //    return _context.Projects.Any(e => e.Id == id);
+        //}
         public async Task<IActionResult> CreatePDF(int id)
         {
             try
@@ -282,16 +280,15 @@ namespace Raunstrup.UI.Controllers
             {
                 var projectViewModel = await _projectService.GetProjectAsync(id);
                 string pDFOffer = _PDFService.CreatePDF(ProjectDetailsMapper.MapToDetailsDto(projectViewModel));
-                _contactService.SendOffer(pDFOffer, "jens_christ@hotmail.com");
+                _contactService.SendOffer(pDFOffer, "jens095w@edu.ucl.dk");
                 return RedirectToAction("Details", new { id = id });
             }
-            catch
+            catch (Exception)
             {
                 ErrorViewModel model = new ErrorViewModel { RequestId = "Tilbuddet blev ikke sendt!" };
                 return View("Error", model);
             }
         }
-
     }
 }
 
